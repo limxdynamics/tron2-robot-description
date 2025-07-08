@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="ARM_TRON2A">
+  
+  <link
+    name="base_Link">
+    <inertial>
+      <origin
+        xyz="16.961E-03 -0.397E-03 77.46E-03"
+        rpy="0 0 0" />
+      <mass
+        value="8.653" />
+      <inertia
+        ixx="2785730.989E-06"
+        ixy="148.503E-06"
+        ixz="2203.296E-06"
+        iyy="2769879.550E-06"
+        iyz="92.132E-06"
+        izz="1126417.781E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="chassis_Link">
+    <inertial>
+      <origin
+        xyz="16.961E-03 -0.397E-03 77.46E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/base_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/base_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="chassis_Joint"
+    type="fixed">
+    <origin
+      xyz="-0.44E-03 0 -80.6E-03"
+      rpy="0 0 0" />
+    <parent
+      link="base_Link" />
+    <child
+      link="chassis_Link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="shelf_Link">
+    <inertial>
+      <origin
+        xyz="16.961E-03 -0.397E-03 77.46E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/base_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/base_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="shelf_Joint"
+    type="fixed">
+    <origin
+      xyz="0 0 -0.809"
+      rpy="0 0 0" />
+    <parent
+      link="chassis_Link" />
+    <child
+      link="shelf_Link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="abad_L_Link">
+    <inertial>
+      <origin
+        xyz="4.328E-03 59.604E-03 -0.25E-03"
+        rpy="0 0 0" />
+      <mass
+        value="1.764" />
+      <inertia
+        ixx="2808.399E-06"
+        ixy="-67.050E-06"
+        ixz="-20.150E-06"
+        iyy="2198.082E-06"
+        iyz="-13.057E-06"
+        izz="2485.914E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/abad_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/abad_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="abad_L_Joint"
+    type="revolute">
+    <origin
+      xyz="-0.44E-03 136.89E-03 68.45E-03"
+      rpy="0 0 0" />
+    <parent
+      link="base_Link" />
+    <child
+      link="abad_L_Link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.66519142919"
+      upper="1.57079632679"
+      effort="80"
+      velocity="15" />
+  </joint>
+  <link
+    name="hip_L_Link">
+    <inertial>
+      <origin
+        xyz="-35.886E-03 -3.18E-03 -63.123E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.413" />
+      <inertia
+        ixx="897.440E-06"
+        ixy="-1.126E-06"
+        ixz="-22.130E-06"
+        iyy="1224.426E-06"
+        iyz="-49.649E-06"
+        izz="683.188E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/SHOULDER_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/SHOULDER_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="hip_L_Joint"
+    type="revolute">
+    <origin
+      xyz="36.3E-03 64E-03 0"
+      rpy="0 0 0" />
+    <parent
+      link="abad_L_Link" />
+    <child
+      link="hip_L_Link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.2617993878"
+      upper="3.40339204139"
+      effort="80"
+      velocity="15" />
+  </joint>
+  <link
+    name="yaw_L_Link">
+    <inertial>
+      <origin
+        xyz="0.572E-03 14.096E-03 -131.376E-03"
+        rpy="0 0 0" />
+      <mass
+        value="3.101" />
+      <inertia
+        ixx="37400.868E-06"
+        ixy="4.458E-06"
+        ixz="-84.228E-06"
+        iyy="37193.152E-06"
+        iyz="2323.005E-06"
+        izz="4503.090E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Bigarm_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Bigarm_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="yaw_L_Joint"
+    type="revolute">
+    <origin
+      xyz="-36.3E-03 0 -111.2E-03"
+      rpy="0 0 0" />
+    <parent
+      link="hip_L_Link" />
+    <child
+      link="yaw_L_Link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.500983157"
+      upper="2.70526034059"
+      effort="80"
+      velocity="15" />
+  </joint>
+  <link
+    name="knee_L_Link">
+    <inertial>
+      <origin
+        xyz="0.026E-03 6.046E-03  -119.299E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.961" />
+      <inertia
+        ixx="4390.957E-06"
+        ixy="0.223E-06"
+        ixz="1.631E-06"
+        iyy="4533.139E-06"
+        iyz="374.938E-06"
+        izz="507.698E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Rotatearm1_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Rotatearm1_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="knee_L_Joint"
+    type="revolute">
+    <origin
+      xyz="0 -11E-03 -238.8E-03"
+      rpy="0 0 0" />
+    <parent
+      link="yaw_L_Link" />
+    <child
+      link="knee_L_Link" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-2.64679181065"
+      upper="2.64679181065"
+      effort="80"
+      velocity="15" />
+  </joint>
+  <link
+    name="wrist_yaw_L_Link">
+    <inertial>
+      <origin
+        xyz="1.245E-03 -0.075E-03  -36.098E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.645" />
+      <inertia
+        ixx="337.793E-06"
+        ixy="-0.770E-06"
+        ixz="-4.677E-06"
+        iyy="405.077E-06"
+        iyz="0.828E-06"
+        izz="355.688E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm1_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm1_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wrist_yaw_L_Joint"
+    type="revolute">
+    <origin
+      xyz="0 11E-03 -195.9E-03"
+      rpy="0 0 0" />
+    <parent
+      link="knee_L_Link" />
+    <child
+      link="wrist_yaw_L_Link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.84488668075"
+      upper="2.84488668075"
+      effort="20"
+      velocity="15" />
+  </joint>
+  <link
+    name="wrist_pitch_L_Link">
+    <inertial>
+      <origin
+        xyz="27.405E-03 0.039E-03 -66.890E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.649" />
+      <inertia
+        ixx="640.181E-06"
+        ixy="-0.444E-06"
+        ixz="140.348E-06"
+        iyy="700.187E-06"
+        iyz="0.683E-06"
+        izz="349.720E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm2_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm2_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wrist_pitch_L_Joint"
+    type="revolute">
+    <origin
+      xyz="-31E-03 0 -39.5E-03"
+      rpy="0 0 0" />
+    <parent
+      link="wrist_yaw_L_Link" />
+    <child
+      link="wrist_pitch_L_Link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.71042266695"
+      upper="1.71042266695"
+      effort="20"
+      velocity="15" />
+  </joint>
+  <link
+    name="wrist_roll_L_Link">
+    <inertial>
+      <origin
+        xyz="0.148E-03 0.041E-03 -43.056E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.615" />
+      <inertia
+        ixx="391.225E-06"
+        ixy="-0.349E-06"
+        ixz="-0.358E-06"
+        iyy="391.703E-06"
+        iyz="0.566E-06"
+        izz="275.940E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm3_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm3_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wrist_roll_L_Joint"
+    type="revolute">
+    <origin
+      xyz="0.031 0 -0.1059"
+      rpy="0 0 0" />
+    <parent
+      link="wrist_pitch_L_Link" />
+    <child
+      link="wrist_roll_L_Link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.87979326579"
+      upper="2.87979326579"
+      effort="20"
+      velocity="15" />
+  </joint>
+  <link
+    name="grasper_L_Link">
+    <inertial>
+      <origin
+        xyz="0.002E-03 0 -18.454E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.271" />
+      <inertia
+        ixx="338.522E-06"
+        ixy="1.241E-06"
+        ixz="0.036E-06"
+        iyy="126.530E-06"
+        iyz="0E-06"
+        izz="337.538E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm4_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm4_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="grasper_L_Joint"
+    type="revolute">
+    <origin
+      xyz="0 0 -0.0775"
+      rpy="0 0 0" />
+    <parent
+      link="wrist_roll_L_Link" />
+    <child
+      link="grasper_L_Link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="1.83259571459"
+      effort="20"
+      velocity="15" />
+  </joint>
+  <link
+    name="abad_R_Link">
+    <inertial>
+      <origin
+        xyz="4.328E-03 -59.604E-03 -0.25E-03"
+        rpy="0 0 0" />
+      <mass
+        value="1.764" />
+      <inertia
+        ixx="2808.399E-06"
+        ixy="67.050E-06"
+        ixz="-20.150E-06"
+        iyy="2198.082E-06"
+        iyz="13.057E-06"
+        izz="2485.914E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/abad_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/abad_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="abad_R_Joint"
+    type="revolute">
+    <origin
+      xyz="-0.44E-03 -136.89E-03 68.45E-03"
+      rpy="0 0 0" />
+    <parent
+      link="base_Link" />
+    <child
+      link="abad_R_Link" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57079632679"
+      upper="3.66519142919"
+      effort="80"
+      velocity="15" />
+  </joint>
+  <link
+    name="hip_R_Link">
+    <inertial>
+      <origin
+        xyz="-35.886E-03 3.18E-03 -63.123E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.413" />
+      <inertia
+        ixx="897.440E-06"
+        ixy="1.126E-06"
+        ixz="-22.130E-06"
+        iyy="1224.426E-06"
+        iyz="49.649E-06"
+        izz="683.188E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/SHOULDER_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/SHOULDER_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="hip_R_Joint"
+    type="revolute">
+    <origin
+      xyz="36.3E-03 -64E-03 0"
+      rpy="0 0 0" />
+    <parent
+      link="abad_R_Link" />
+    <child
+      link="hip_R_Link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-3.40339204139"
+      upper="0.2617993878"
+      effort="80"
+      velocity="15" />
+  </joint>
+  <link
+    name="yaw_R_Link">
+    <inertial>
+      <origin
+        xyz="0.572E-03 -14.096E-03 -131.376E-03"
+        rpy="0 0 0" />
+      <mass
+        value="3.101" />
+      <inertia
+        ixx="37400.868E-06"
+        ixy="-4.458E-06"
+        ixz="-84.228E-06"
+        iyy="37193.152E-06"
+        iyz="-2323.005E-06"
+        izz="4503.090E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Bigarm_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Bigarm_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="yaw_R_Joint"
+    type="revolute">
+    <origin
+      xyz="-36.3E-03 0 -111.2E-03"
+      rpy="0 0 0" />
+    <parent
+      link="hip_R_Link" />
+    <child
+      link="yaw_R_Link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-2.70526034059"
+      upper="1.500983157"
+      effort="80"
+      velocity="15" />
+  </joint>
+  <link
+    name="knee_R_Link">
+    <inertial>
+      <origin
+        xyz="0.026E-03 -6.046E-03  -119.299E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.961" />
+      <inertia
+        ixx="4390.957E-06"
+        ixy="-0.223E-06"
+        ixz="1.631E-06"
+        iyy="4533.139E-06"
+        iyz="-374.938E-06"
+        izz="507.698E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Rotatearm1_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Rotatearm1_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="knee_R_Joint"
+    type="revolute">
+    <origin
+      xyz="0 11E-03 -238.8E-03"
+      rpy="0 0 0" />
+    <parent
+      link="yaw_R_Link" />
+    <child
+      link="knee_R_Link" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-2.64679181065"
+      upper="2.64679181065"
+      effort="80"
+      velocity="15" />
+  </joint>
+  <link
+    name="wrist_yaw_R_Link">
+    <inertial>
+      <origin
+        xyz="1.245E-03 0.075E-03 -36.098E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.645" />
+      <inertia
+        ixx="337.793E-06"
+        ixy="0.770E-06"
+        ixz="-4.677E-06"
+        iyy="405.077E-06"
+        iyz="-0.828E-06"
+        izz="355.688E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm1_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm1_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wrist_yaw_R_Joint"
+    type="revolute">
+    <origin
+      xyz="0 -11E-03 -195.9E-03"
+      rpy="0 0 0" />
+    <parent
+      link="knee_R_Link" />
+    <child
+      link="wrist_yaw_R_Link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.84488668075"
+      upper="2.84488668075"
+      effort="20"
+      velocity="15" />
+  </joint>
+  <link
+    name="wrist_pitch_R_Link">
+    <inertial>
+      <origin
+        xyz="27.405E-03 -0.039E-03 -66.890E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.649" />
+      <inertia
+        ixx="640.181E-06"
+        ixy="0.444E-06"
+        ixz="140.348E-06"
+        iyy="700.187E-06"
+        iyz="-0.683E-06"
+        izz="349.720E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm2_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm2_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wrist_pitch_R_Joint"
+    type="revolute">
+    <origin
+      xyz="-31E-03 0 -39.5E-03"
+      rpy="0 0 0" />
+    <parent
+      link="wrist_yaw_R_Link" />
+    <child
+      link="wrist_pitch_R_Link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.71042266695"
+      upper="1.71042266695"
+      effort="20"
+      velocity="15" />
+  </joint>
+  <link
+    name="wrist_roll_R_Link">
+    <inertial>
+      <origin
+        xyz="0.148E-03 0.041E-03 -43.056E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.615" />
+      <inertia
+        ixx="391.225E-06"
+        ixy="0.349E-06"
+        ixz="-0.358E-06"
+        iyy="391.703E-06"
+        iyz="-0.566E-06"
+        izz="275.940E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm3_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm3_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wrist_roll_R_Joint"
+    type="revolute">
+    <origin
+      xyz="0.031 0 -0.1059"
+      rpy="0 0 0" />
+    <parent
+      link="wrist_pitch_R_Link" />
+    <child
+      link="wrist_roll_R_Link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.87979326579"
+      upper="2.87979326579"
+      effort="20"
+      velocity="15" />
+  </joint>
+  <link
+    name="grasper_R_Link">
+    <inertial>
+      <origin
+        xyz="0.002E-03 0 -18.454E-03"
+        rpy="0 0 0" />
+      <mass
+        value="0.271" />
+      <inertia
+        ixx="338.522E-06"
+        ixy="-1.241E-06"
+        ixz="0.036E-06"
+        iyy="126.530E-06"
+        iyz="-0E-06"
+        izz="337.538E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm4_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/pointfoot/ARM_TRON2A3/meshes/Forearm4_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="grasper_R_Joint"
+    type="revolute">
+    <origin
+      xyz="0 0 -0.0775"
+      rpy="0 0 0" />
+    <parent
+      link="wrist_roll_R_Link" />
+    <child
+      link="grasper_R_Link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="1.83259571459"
+      effort="20"
+      velocity="15" />
+  </joint>
+</robot>
