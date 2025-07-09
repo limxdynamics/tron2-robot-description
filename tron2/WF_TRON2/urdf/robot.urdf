@@ -211,7 +211,7 @@
                 link="hip_L_Link"/>
         <axis
                 xyz="0.9114 0 -0.411521615"/>
-        <limit effort="100.0" lower="-0.260577657323" upper="3.40339204139" velocity="15.0"/>
+        <limit effort="80.0" lower="-0.260577657323" upper="3.40339204139" velocity="15.0"/>
     </joint>
     <link
             name="yaw_L_Link">
@@ -538,7 +538,7 @@
                 link="yaw_R_Link"/>
         <axis
                 xyz="0.41151 0 0.9114"/>
-        <limit effort="20.0" lower="-1.50098315672" upper="2.70526034059" velocity="15.0"/>
+        <limit effort="80.0" lower="-1.50098315672" upper="2.70526034059" velocity="15.0"/>
     </joint>
     <link
             name="knee_R_Link">
