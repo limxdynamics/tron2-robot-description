@@ -557,7 +557,7 @@
       effort="20"
       velocity="15" />
   </joint>
-  <link
+  <!-- <link
     name="grasper_L_Link">
     <inertial>
       <origin
@@ -614,7 +614,7 @@
       upper="1.83259571459"
       effort="20"
       velocity="15" />
-  </joint>
+  </joint> -->
   <link
     name="abad_R_Link">
     <inertial>
@@ -1021,7 +1021,7 @@
       effort="20"
       velocity="15" />
   </joint>
-  <link
+  <!-- <link
     name="grasper_R_Link">
     <inertial>
       <origin
@@ -1078,5 +1078,5 @@
       upper="1.83259571459"
       effort="20"
       velocity="15" />
-  </joint>
+  </joint> -->
 </robot>
