@@ -557,6 +557,37 @@
       effort="20"
       velocity="15" />
   </joint>
+  <!-- left hand contact -->
+  <joint name="left_hand_contact_joint" type="fixed">
+    <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+    <parent link="wrist_roll_L_Link" />
+    <child link="left_hand_contact" />
+  </joint>
+
+  <link name="left_hand_contact">
+      <inertial>
+          <origin xyz=".0 .0 .0" rpy="0 0 0" />
+          <mass value="0.00000001" />
+          <inertia
+              ixx="0.0000001"
+              ixy="0.0"
+              ixz="0.0"
+              iyy="0.0000001"
+              iyz="0.0"
+              izz="0.0000001" />
+      </inertial>
+      <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+              <box size="0.001 0.001 0.001" />
+          </geometry>
+          <material name="">
+              <color rgba="1 0 0 1" />
+          </material>
+      </visual>
+  </link>
   <!-- <link
     name="grasper_L_Link">
     <inertial>
@@ -1021,6 +1052,37 @@
       effort="20"
       velocity="15" />
   </joint>
+  <!-- right hand contact -->
+  <joint name="right_hand_contact_joint" type="fixed">
+    <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+    <parent link="wrist_roll_R_Link" />
+    <child link="right_hand_contact" />
+</joint>
+
+<link name="right_hand_contact">
+    <inertial>
+        <origin xyz=".0 .0 .0" rpy="0 0 0" />
+        <mass value="0.00000001" />
+        <inertia
+            ixx="0.0000001"
+            ixy="0.0"
+            ixz="0.0"
+            iyy="0.0000001"
+            iyz="0.0"
+            izz="0.0000001" />
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="0.001 0.001 0.001" />
+        </geometry>
+        <material name="">
+            <color rgba="1 0 0 1" />
+        </material>
+    </visual>
+</link>
   <!-- <link
     name="grasper_R_Link">
     <inertial>
