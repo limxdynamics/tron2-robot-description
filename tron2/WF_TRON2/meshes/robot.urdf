@@ -46,14 +46,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/base_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/base_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/base_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/base_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -68,14 +68,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/abad_L_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/abad_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/abad_L_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/abad_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -90,14 +90,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/hip_L_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/hip_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/hip_L_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/hip_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -112,14 +112,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/yaw_L_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/yaw_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/yaw_L_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/yaw_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -134,14 +134,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/knee_L_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/knee_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/knee_L_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/knee_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -156,14 +156,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/wheel_L_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/wheel_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/wheel_L_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/wheel_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -178,14 +178,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/abad_R_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/abad_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/abad_R_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/abad_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -200,14 +200,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/hip_R_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/hip_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/hip_R_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/hip_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -222,36 +222,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/yaw_R_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/yaw_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/yaw_R_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <link name="wheel_R_Link">
-    <inertial>
-      <origin xyz="0.00012 -0.004 -0.00064" rpy="0 0 0"/>
-      <mass value="0.75"/>
-      <inertia ixx="0.00236" ixy="-0.0" ixz="1e-05"
-               iyy="0.00447" iyz="-0.0" izz="0.00231"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://wf_robot/meshes/wheel_R_Link.STL"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://wf_robot/meshes/wheel_R_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/yaw_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -266,14 +244,36 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/knee_R_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/knee_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://wf_robot/meshes/knee_R_Link.STL"/>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/knee_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wheel_R_Link">
+    <inertial>
+      <origin xyz="0.00012 -0.004 -0.00064" rpy="0 0 0"/>
+      <mass value="0.75"/>
+      <inertia ixx="0.00236" ixy="-0.0" ixz="1e-05"
+               iyy="0.00447" iyz="-0.0" izz="0.00231"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/wheel_R_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/wen/robot/urdf/transfer/output/WF_TRON2/urdf/meshes/wheel_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -299,7 +299,7 @@
     <origin xyz="-0.0936 0.0 -0.08006" rpy="0 0 0"/>
     <parent link="hip_L_Link"/>
     <child link="yaw_L_Link"/>
-    <axis xyz="-0.43303 0 0.90138"/>
+    <axis xyz="0.43303 0 0.90138"/>
     <limit lower="-1.4835298641951802" upper="2.705260340591211" effort="40" velocity="31.83"/>
   </joint>
 
@@ -332,23 +332,15 @@
     <parent link="abad_R_Link"/>
     <child link="hip_R_Link"/>
     <axis xyz="0.90138 0 -0.43303"/>
-    <limit lower="-0.2605776573227534" upper="2.1131489961203007" effort="140" velocity="12.57"/>
+    <limit lower="-2.1131489961203007" upper="0.2605776573227534" effort="140" velocity="12.57"/>
   </joint>
 
   <joint name="yaw_R_Joint" type="revolute">
     <origin xyz="-0.004 0.0 -0.12311" rpy="0 0 0"/>
     <parent link="hip_R_Link"/>
     <child link="yaw_R_Link"/>
-    <axis xyz="-0.43303 0 0.90138"/>
+    <axis xyz="0.43303 0 0.90138"/>
     <limit lower="-1.4835298641951802" upper="2.705260340591211" effort="40" velocity="31.83"/>
-  </joint>
-
-  <joint name="knee_R_Joint" type="revolute">
-    <origin xyz="-0.10276 0.04115 -0.21389" rpy="0 0 0"/>
-    <parent link="yaw_R_Link"/>
-    <child link="knee_R_Link"/>
-    <axis xyz="0 1 0"/>
-    <limit lower="-1.7221163729428048" upper="2.7693139241394027" effort="140" velocity="12.57"/>
   </joint>
 
   <joint name="wheel_R_Joint" type="revolute">
@@ -359,6 +351,14 @@
     <limit lower="-1745329.2519943293" upper="1745329.2519943293" effort="22" velocity="41.89"/>
   </joint>
 
+  <joint name="knee_R_Joint" type="revolute">
+    <origin xyz="-0.10276 0.04115 -0.21389" rpy="0 0 0"/>
+    <parent link="yaw_R_Link"/>
+    <child link="knee_R_Link"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.7221163729428048" upper="2.7693139241394027" effort="140" velocity="12.57"/>
+  </joint>
+
   <!-- Gazebo Plugins -->
   <gazebo>
     <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
@@ -367,6 +367,72 @@
   </gazebo>
 
   <!-- Transmissions -->
+  <transmission name="hip_R_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="hip_R_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="hip_R_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="abad_R_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="abad_R_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="abad_R_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="abad_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="abad_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="abad_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="yaw_R_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="yaw_R_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="yaw_R_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="wheel_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wheel_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wheel_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="knee_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="knee_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="knee_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
   <transmission name="hip_L_Joint_trans">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="hip_L_Joint">
@@ -384,72 +450,6 @@
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="yaw_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="abad_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="abad_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="abad_R_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="yaw_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="yaw_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="yaw_R_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="abad_L_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="abad_L_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="abad_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="knee_L_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="knee_L_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="knee_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="wheel_L_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="wheel_L_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="wheel_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="hip_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="hip_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="hip_R_Joint_motor">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>

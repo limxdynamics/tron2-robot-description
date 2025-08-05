@@ -1,0 +1,779 @@
+<?xml version="1.0"?>
+<robot name="bipedal_robot">
+
+  <!-- Materials -->
+  <material name="grey">
+    <color rgba="1 1 1 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
+
+  <material name="orange">
+    <color rgba="1.0 0.423 0.039 1.0"/>
+  </material>
+
+  <!-- Links -->
+  <!-- IMU Link -->
+  <joint name="limx_imu_joint" type="fixed">
+    <origin rpy="0. 0. 0." xyz="0. 0. 0."/>
+    <parent link="base_Link"/>
+    <child link="limx_imu"/>
+  </joint>
+
+  <link name="limx_imu">
+    <inertial>
+      <mass value="0.01"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.015 0.004"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <link name="base_Link">
+    <inertial>
+      <origin xyz="7.013E-03 0.040E-03 100.262E-03" rpy="0 0 0"/>
+      <mass value="8.041"/>
+      <inertia ixx="65206.281E-06" ixy="263.326E-06" ixz="1546.898E-06"
+               iyy="67132.292E-06" iyz="-8.654E-06" izz="58274.035E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/base_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/base_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="abad_L_Link">
+    <inertial>
+      <origin xyz="10.597E-03 59.042E-03 -0.086E-03" rpy="0 0 0"/>
+      <mass value="2.426"/>
+      <inertia ixx="3858.889E-06" ixy="-86.387E-06" ixz="-9.506E-06"
+               iyy="4137.575E-06" iyz="-0.429E-06" izz="4077.094E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/abad_L_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/abad_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="hip_L_Link">
+    <inertial>
+      <origin xyz="-47.813E-03 0.265E-03 -58.577E-03" rpy="0 0 0"/>
+      <mass value="0.503"/>
+      <inertia ixx="1254.656E-06" ixy="-2.958E-06" ixz="-20.051E-06"
+               iyy="2046.419E-06" iyz="6.867E-06" izz="1300.557E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/hip_L_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/hip_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="yaw_L_Link">
+    <inertial>
+      <origin xyz="0.048E-03 -5.739E-03 -169.935E-03" rpy="0 0 0"/>
+      <mass value="3.436"/>
+      <inertia ixx="35177.279E-06" ixy="-8.837E-06" ixz="35.725E-06"
+               iyy="35265.280E-06" iyz="-379.998E-06" izz="4712.777E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/yaw_L_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/yaw_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="knee_L_Link">
+    <inertial>
+      <origin xyz="0.007E-03 29.496E-03 -111.270E-03" rpy="0 0 0"/>
+      <mass value="1.192"/>
+      <inertia ixx="5004.847E-06" ixy="-0.362E-06" ixz="-3.512E-06"
+               iyy="4709.215E-06" iyz="1138.592E-06" izz="1142.402E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/knee_L_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/knee_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wrist_yaw1_L_Link">
+    <inertial>
+      <origin xyz="-0.069E-03 4.349E-03 -34.875E-03" rpy="0 0 0"/>
+      <mass value="0.639"/>
+      <inertia ixx="524.851E-06" ixy="1.091E-06" ixz="-0.270E-06"
+               iyy="456.736E-06" iyz="-1.249E-06" izz="473.489E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/wrist_yaw1_L_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/wrist_yaw1_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wrist_roll_L_Link">
+    <inertial>
+      <origin xyz="0.068E-03 27.310E-03 -66.262E-03" rpy="0 0 0"/>
+      <mass value="0.643"/>
+      <inertia ixx="810.706E-06" ixy="-0.029E-06" ixz="-0.798E-06"
+               iyy="745.238E-06" iyz="138.208E-06" izz="472.366E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/wrist_roll_L_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/wrist_roll_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wrist_yaw2_L_Link">
+    <inertial>
+      <origin xyz="-0.053E-03 0.442E-03 -3.729E-03" rpy="0 0 0"/>
+      <mass value="0.033"/>
+      <inertia ixx="8.375E-06" ixy="-0.036E-06" ixz="-0.003E-06"
+               iyy="7.966E-06" iyz="0.068E-06" izz="15.814E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/wrist_yaw2_L_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/wrist_yaw2_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- <link name="grasper_L_Link">
+    <inertial>
+      <origin xyz="0.085E-03 0.196E-03 -88.324E-03" rpy="0 0 0"/>
+      <mass value="0.700"/>
+      <inertia ixx="1875.821E-06" ixy="0.660E-06" ixz="-3.075E-06"
+               iyy="1630.119E-06" iyz="-9.094E-06" izz="454.771E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/grasper_L_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/grasper_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link> -->
+
+  <link name="abad_R_Link">
+    <inertial>
+      <origin xyz="-10.597E-03 -59.042E-03 -0.086E-03" rpy="0 0 0"/>
+      <mass value="2.426"/>
+      <inertia ixx="3858.889E-06" ixy="-86.387E-06" ixz="9.506E-06"
+               iyy="4137.575E-06" iyz="0.429E-06" izz="4077.094E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/abad_R_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/abad_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="hip_R_Link">
+    <inertial>
+      <origin xyz="47.813E-03 -0.265E-03 -58.577E-03" rpy="0 0 0"/>
+      <mass value="0.503"/>
+      <inertia ixx="1254.656E-06" ixy="-2.958E-06" ixz="20.051E-06"
+               iyy="2046.419E-06" iyz="-6.867E-06" izz="1300.557E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/hip_R_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/hip_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="base_2_Link">
+    <inertial>
+      <origin xyz="16.961E-03  -0.397E-03 77.46E-03" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0" ixy="0" ixz="0"
+               iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/base_2_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/base_2_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="base_3_Link">
+    <inertial>
+      <origin xyz="16.961E-03  -0.397E-03 77.46E-03" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0" ixy="0" ixz="0"
+               iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/base_3_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/base_3_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wrist_roll_R_Link">
+    <inertial>
+      <origin xyz="6.8e-05 -0.02731 -0.066262" rpy="0 0 0"/>
+      <mass value="0.643"/>
+      <inertia ixx="0.000810706" ixy="2.9e-08" ixz="-7.98e-07"
+               iyy="0.000745238" iyz="-0.000138208" izz="0.000472366"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/wrist_roll_R_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/wrist_roll_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="knee_R_Link">
+    <inertial>
+      <origin xyz="7e-06 -0.029496 -0.11127" rpy="0 0 0"/>
+      <mass value="1.192"/>
+      <inertia ixx="0.005004847" ixy="3.62e-07" ixz="-3.512e-06"
+               iyy="0.004709215" iyz="-0.001138592" izz="0.001142402"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/knee_R_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/knee_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- <link name="grasper_R_Link">
+    <inertial>
+      <origin xyz="8.5e-05 -0.000196 -0.088324" rpy="0 0 0"/>
+      <mass value="0.700"/>
+      <inertia ixx="0.001875821" ixy="-6.6e-07" ixz="-3.075e-06"
+               iyy="0.001630119" iyz="9.094e-06" izz="0.000454771"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/grasper_R_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/grasper_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link> -->
+
+  <link name="wrist_yaw1_R_Link">
+    <inertial>
+      <origin xyz="-6.9e-05 -0.004349 -0.034875" rpy="0 0 0"/>
+      <mass value="0.639"/>
+      <inertia ixx="0.000524851" ixy="-1.091e-06" ixz="-2.7e-07"
+               iyy="0.000456736" iyz="1.249e-06" izz="0.000473489"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/wrist_yaw1_R_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/wrist_yaw1_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wrist_yaw2_R_Link">
+    <inertial>
+      <origin xyz="-5.3e-05 -0.000442 -0.003729" rpy="0 0 0"/>
+      <mass value="0.033"/>
+      <inertia ixx="8.375e-06" ixy="3.6e-08" ixz="-3e-09"
+               iyy="7.966e-06" iyz="-6.8e-08" izz="1.5814e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/wrist_yaw2_R_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/wrist_yaw2_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="yaw_R_Link">
+    <inertial>
+      <origin xyz="4.8e-05 0.005739 -0.169935" rpy="0 0 0"/>
+      <mass value="3.436"/>
+      <inertia ixx="0.035177279" ixy="8.837e-06" ixz="3.5725e-05"
+               iyy="0.03526528" iyz="0.000379998" izz="0.004712777"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/yaw_R_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://daul_arm_robot/meshes/yaw_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Joints -->
+  <joint name="abad_L_Joint" type="revolute">
+    <origin xyz="-0.00049 0.10649 0.0586" rpy="0 0 0"/>
+    <parent link="base_Link"/>
+    <child link="abad_L_Link"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="130" velocity="12.57"/>
+  </joint>
+
+  <joint name="hip_L_Joint" type="revolute">
+    <origin xyz="0.0497 0.062 0.0" rpy="0 0 0"/>
+    <parent link="abad_L_Link"/>
+    <child link="hip_L_Link"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.2605776573227534" upper="2.1131489961203007" effort="130" velocity="12.57"/>
+  </joint>
+
+  <joint name="yaw_L_Joint" type="revolute">
+    <origin xyz="-0.0497 0.0 -0.1127" rpy="0 0 0"/>
+    <parent link="hip_L_Link"/>
+    <child link="yaw_L_Link"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.4835298641951802" upper="2.705260340591211" effort="40" velocity="31.83"/>
+  </joint>
+
+  <joint name="knee_L_Joint" type="revolute">
+    <origin xyz="0.0 -0.04115 -0.2373" rpy="0 0 0"/>
+    <parent link="yaw_L_Link"/>
+    <child link="knee_L_Link"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.6179938779914944" upper="2.6179938779914944" effort="130" velocity="12.57"/>
+  </joint>
+
+  <joint name="wrist_yaw1_L_Joint" type="revolute">
+    <origin xyz="0.0 0.04115 -0.1963" rpy="0 0 0"/>
+    <parent link="knee_L_Link"/>
+    <child link="wrist_yaw1_L_Link"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.844886680750757" upper="2.844886680750757" effort="20" velocity="17.8"/>
+  </joint>
+
+  <joint name="wrist_roll_L_Joint" type="revolute">
+    <origin xyz="0.0 -0.031 -0.038" rpy="0 0 0"/>
+    <parent link="wrist_yaw1_L_Link"/>
+    <child link="wrist_roll_L_Link"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.710422666954443" upper="1.710422666954443" effort="20" velocity="17.8"/>
+  </joint>
+
+  <joint name="wrist_yaw2_L_Joint" type="revolute">
+    <origin xyz="0.0 0.031 -0.1083" rpy="0 0 0"/>
+    <parent link="wrist_roll_L_Link"/>
+    <child link="wrist_yaw2_L_Link"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.8797932657906435" upper="2.8797932657906435" effort="20" velocity="17.8"/>
+  </joint>
+
+  <!-- <joint name="grasper_L_Joint" type="fixed">
+    <origin xyz="0.0 0.0 -0.0046" rpy="0 0 0"/>
+    <parent link="wrist_yaw2_L_Link"/>
+    <child link="grasper_L_Link"/>
+  </joint> -->
+  <!-- left hand contact -->
+  <joint name="left_hand_contact_joint" type="fixed">
+    <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+    <parent link="wrist_roll_L_Link" />
+    <child link="left_hand_contact" />
+  </joint>
+
+  <link name="left_hand_contact">
+      <inertial>
+          <origin xyz=".0 .0 .0" rpy="0 0 0" />
+          <mass value="0.00000001" />
+          <inertia
+              ixx="0.0000001"
+              ixy="0.0"
+              ixz="0.0"
+              iyy="0.0000001"
+              iyz="0.0"
+              izz="0.0000001" />
+      </inertial>
+      <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+              <box size="0.001 0.001 0.001" />
+          </geometry>
+          <material name="">
+              <color rgba="1 0 0 1" />
+          </material>
+      </visual>
+  </link>
+
+
+  <joint name="abad_R_Joint" type="revolute">
+    <origin xyz="0.00049 -0.10631 0.0586" rpy="0 0 0"/>
+    <parent link="base_Link"/>
+    <child link="abad_R_Link"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="130" velocity="12.57"/>
+  </joint>
+
+  <joint name="hip_R_Joint" type="revolute">
+    <origin xyz="-0.0497 -0.062 0.0" rpy="0 0 0"/>
+    <parent link="abad_R_Link"/>
+    <child link="hip_R_Link"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-2.1131489961203007" upper="0.2605776573227534" effort="130" velocity="12.57"/>
+  </joint>
+
+  <joint name="yaw_R_Joint" type="revolute">
+    <origin xyz="0.0497 0.0 -0.1127" rpy="0 0 0"/>
+    <parent link="hip_R_Link"/>
+    <child link="yaw_R_Link"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.4835298641951802" upper="2.705260340591211" effort="40" velocity="31.83"/>
+  </joint>
+
+  <joint name="base_2_Joint" type="fixed">
+    <origin xyz="-0.00044 9e-05 -0.08605" rpy="0 0 0"/>
+    <parent link="base_Link"/>
+    <child link="base_2_Link"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+
+  <joint name="base_3_joint" type="fixed">
+    <origin xyz="0.0 0.0 -0.809" rpy="0 0 0"/>
+    <parent link="base_2_Link"/>
+    <child link="base_3_Link"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+
+  <!-- <joint name="grasper_R_Joint" type="fixed">
+    <origin xyz="0 0 -0.0046" rpy="0 0 0"/>
+    <parent link="wrist_yaw2_R_Link"/>
+    <child link="grasper_R_Link"/>
+  </joint> -->
+
+  <joint name="knee_R_Joint" type="revolute">
+    <origin xyz="0 0.04115 -0.2373" rpy="0 0 0"/>
+    <parent link="yaw_R_Link"/>
+    <child link="knee_R_Link"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.6179938779914944" upper="2.6179938779914944" effort="130" velocity="12.57"/>
+  </joint>
+
+  <joint name="wrist_roll_R_Joint" type="revolute">
+    <origin xyz="0 0.031 -0.038" rpy="0 0 0"/>
+    <parent link="wrist_yaw1_R_Link"/>
+    <child link="wrist_roll_R_Link"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.710422666954443" upper="1.710422666954443" effort="20" velocity="17.8"/>
+  </joint>
+
+  <joint name="wrist_yaw2_R_Joint" type="revolute">
+    <origin xyz="0 -0.031 -0.1083" rpy="0 0 0"/>
+    <parent link="wrist_roll_R_Link"/>
+    <child link="wrist_yaw2_R_Link"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.8797932657906435" upper="2.8797932657906435" effort="20" velocity="17.8"/>
+  </joint>
+
+  <joint name="wrist_yaw1_R_Joint" type="revolute">
+    <origin xyz="0 -0.04115 -0.1963" rpy="0 0 0"/>
+    <parent link="knee_R_Link"/>
+    <child link="wrist_yaw1_R_Link"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.844886680750757" upper="2.844886680750757" effort="20" velocity="17.8"/>
+  </joint>
+
+  <!-- right hand contact -->
+  <joint name="right_hand_contact_joint" type="fixed">
+    <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+    <parent link="wrist_roll_R_Link" />
+    <child link="right_hand_contact" />
+  </joint>
+
+  <link name="right_hand_contact">
+      <inertial>
+          <origin xyz=".0 .0 .0" rpy="0 0 0" />
+          <mass value="0.00000001" />
+          <inertia
+              ixx="0.0000001"
+              ixy="0.0"
+              ixz="0.0"
+              iyy="0.0000001"
+              iyz="0.0"
+              izz="0.0000001" />
+      </inertial>
+      <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+              <box size="0.001 0.001 0.001" />
+          </geometry>
+          <material name="">
+              <color rgba="1 0 0 1" />
+          </material>
+      </visual>
+  </link>
+
+
+  <!-- Gazebo Plugins -->
+  <gazebo>
+    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <!-- Transmissions -->
+  <transmission name="yaw_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="yaw_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="yaw_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="knee_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="knee_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="knee_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="abad_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="abad_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="abad_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="hip_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="hip_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="hip_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="wrist_roll_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wrist_roll_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wrist_roll_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="abad_R_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="abad_R_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="abad_R_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="wrist_yaw2_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wrist_yaw2_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wrist_yaw2_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="yaw_R_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="yaw_R_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="yaw_R_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="wrist_yaw1_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wrist_yaw1_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wrist_yaw1_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="hip_R_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="hip_R_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="hip_R_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+</robot>
