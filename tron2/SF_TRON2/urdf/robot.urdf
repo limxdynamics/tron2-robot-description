@@ -316,7 +316,7 @@
     <parent link="knee_L_Link"/>
     <child link="foot_L_Link"/>
     <axis xyz="0 1 0"/>
-    <limit lower="1.2482594810263443" upper="-2.230356251123554" effort="40" velocity="31.83"/>
+    <limit lower="-1.2482594810263443" upper="2.230356251123554" effort="40" velocity="31.83"/>
   </joint>
 
   <joint name="abad_R_Joint" type="revolute">
@@ -348,7 +348,7 @@
     <parent link="knee_R_Link"/>
     <child link="foot_R_Link"/>
     <axis xyz="0 1 0"/>
-    <limit lower="1.2482594810263443" upper="-2.230356251123554" effort="40" velocity="31.83"/>
+    <limit lower="-1.2482594810263443" upper="2.230356251123554" effort="40" velocity="31.83"/>
   </joint>
 
   <joint name="knee_R_Joint" type="revolute">
