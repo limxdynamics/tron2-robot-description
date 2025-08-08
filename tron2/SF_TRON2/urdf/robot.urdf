@@ -308,7 +308,7 @@
     <parent link="yaw_L_Link"/>
     <child link="knee_L_Link"/>
     <axis xyz="0 1 0"/>
-    <limit lower="-1.6938420390604967" upper="2.7410395902570945" effort="140" velocity="12.57"/>
+    <limit lower="-3.5421457169224917" upper="1.6938420390604967" effort="140" velocity="12.57"/>
   </joint>
 
   <joint name="foot_L_Joint" type="revolute">
@@ -356,7 +356,7 @@
     <parent link="yaw_R_Link"/>
     <child link="knee_R_Link"/>
     <axis xyz="0 1 0"/>
-    <limit lower="-1.6938420390604967" upper="2.7410395902570945" effort="140" velocity="12.57"/>
+    <limit lower="-3.5421457169224917" upper="1.6938420390604967" effort="140" velocity="12.57"/>
   </joint>
 
   <!-- Gazebo Plugins -->
@@ -367,6 +367,39 @@
   </gazebo>
 
   <!-- Transmissions -->
+  <transmission name="hip_R_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="hip_R_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="hip_R_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="yaw_R_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="yaw_R_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="yaw_R_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="foot_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="foot_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="foot_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
   <transmission name="foot_R_Joint_trans">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="foot_R_Joint">
@@ -400,23 +433,12 @@
     </actuator>
   </transmission>
 
-  <transmission name="hip_R_Joint_trans">
+  <transmission name="knee_R_Joint_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="hip_R_Joint">
+    <joint name="knee_R_Joint">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
-    <actuator name="hip_R_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="hip_L_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="hip_L_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="hip_L_Joint_motor">
+    <actuator name="knee_R_Joint_motor">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -433,23 +455,12 @@
     </actuator>
   </transmission>
 
-  <transmission name="foot_L_Joint_trans">
+  <transmission name="hip_L_Joint_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="foot_L_Joint">
+    <joint name="hip_L_Joint">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
-    <actuator name="foot_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="yaw_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="yaw_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="yaw_R_Joint_motor">
+    <actuator name="hip_L_Joint_motor">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>

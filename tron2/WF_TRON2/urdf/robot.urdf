@@ -299,7 +299,7 @@
     <origin xyz="-0.0936 0.0 -0.08006" rpy="0 0 0"/>
     <parent link="hip_L_Link"/>
     <child link="yaw_L_Link"/>
-    <axis xyz="-0.43303 0 0.90138"/>
+    <axis xyz="0.43303 0 0.90138"/>
     <limit lower="-1.4835298641951802" upper="2.705260340591211" effort="40" velocity="31.83"/>
   </joint>
 
@@ -308,7 +308,7 @@
     <parent link="yaw_L_Link"/>
     <child link="knee_L_Link"/>
     <axis xyz="0 1 0"/>
-    <limit lower="-1.7221163729428048" upper="2.7693139241394027" effort="140" velocity="12.57"/>
+    <limit lower="-1.7221163729428048" upper="3.5138713830401835" effort="140" velocity="12.57"/>
   </joint>
 
   <joint name="wheel_L_Joint" type="revolute">
@@ -332,23 +332,15 @@
     <parent link="abad_R_Link"/>
     <child link="hip_R_Link"/>
     <axis xyz="0.90138 0 -0.43303"/>
-    <limit lower="-0.2605776573227534" upper="2.1131489961203007" effort="140" velocity="12.57"/>
+    <limit lower="-2.1131489961203007" upper="0.2605776573227534" effort="140" velocity="12.57"/>
   </joint>
 
   <joint name="yaw_R_Joint" type="revolute">
     <origin xyz="-0.004 0.0 -0.12311" rpy="0 0 0"/>
     <parent link="hip_R_Link"/>
     <child link="yaw_R_Link"/>
-    <axis xyz="-0.43303 0 0.90138"/>
+    <axis xyz="0.43303 0 0.90138"/>
     <limit lower="-1.4835298641951802" upper="2.705260340591211" effort="40" velocity="31.83"/>
-  </joint>
-
-  <joint name="knee_R_Joint" type="revolute">
-    <origin xyz="-0.10276 0.04115 -0.21389" rpy="0 0 0"/>
-    <parent link="yaw_R_Link"/>
-    <child link="knee_R_Link"/>
-    <axis xyz="0 1 0"/>
-    <limit lower="-1.7221163729428048" upper="2.7693139241394027" effort="140" velocity="12.57"/>
   </joint>
 
   <joint name="wheel_R_Joint" type="revolute">
@@ -357,6 +349,14 @@
     <child link="wheel_R_Link"/>
     <axis xyz="0 1 0"/>
     <limit lower="-1745329.2519943293" upper="1745329.2519943293" effort="22" velocity="41.89"/>
+  </joint>
+
+  <joint name="knee_R_Joint" type="revolute">
+    <origin xyz="-0.10276 0.04115 -0.21389" rpy="0 0 0"/>
+    <parent link="yaw_R_Link"/>
+    <child link="knee_R_Link"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.7221163729428048" upper="3.5138713830401835" effort="140" velocity="12.57"/>
   </joint>
 
   <!-- Gazebo Plugins -->
@@ -378,12 +378,12 @@
     </actuator>
   </transmission>
 
-  <transmission name="yaw_L_Joint_trans">
+  <transmission name="wheel_R_Joint_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="yaw_L_Joint">
+    <joint name="wheel_R_Joint">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
-    <actuator name="yaw_L_Joint_motor">
+    <actuator name="wheel_R_Joint_motor">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -400,17 +400,6 @@
     </actuator>
   </transmission>
 
-  <transmission name="yaw_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="yaw_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="yaw_R_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
   <transmission name="abad_L_Joint_trans">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="abad_L_Joint">
@@ -422,12 +411,12 @@
     </actuator>
   </transmission>
 
-  <transmission name="knee_L_Joint_trans">
+  <transmission name="knee_R_Joint_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="knee_L_Joint">
+    <joint name="knee_R_Joint">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
-    <actuator name="knee_L_Joint_motor">
+    <actuator name="knee_R_Joint_motor">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -450,6 +439,39 @@
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="hip_R_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="yaw_R_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="yaw_R_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="yaw_R_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="knee_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="knee_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="knee_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="yaw_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="yaw_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="yaw_L_Joint_motor">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
