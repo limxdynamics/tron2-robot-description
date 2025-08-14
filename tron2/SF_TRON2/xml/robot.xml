@@ -31,8 +31,7 @@
   </asset>
 
   <worldbody>
-    <light directional="true" diffuse="0.4 0.4 0.4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false" />
-    <light directional="true" diffuse="0.6 0.6 0.6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1" />
+    <light directional="true" diffuse="0.6 0.6 0.6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1" castshadow="false" />
     <geom name="ground" type="plane" pos="0 0 0" size="100 100 0.001" quat="1 0 0 0" material="matplane" condim="3" conaffinity="15" />
     <camera name="fixed" pos="0 -3.0 1.2263862818127802" xyaxes="1 0 0 0 0 1" />
     <camera name="track" mode="trackcom" pos="0 -3.0 1.2263862818127802" xyaxes="1 0 0 0 0 1" />
