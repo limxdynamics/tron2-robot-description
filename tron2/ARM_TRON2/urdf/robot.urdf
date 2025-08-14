@@ -476,7 +476,7 @@
     <parent link="hip_L_Link"/>
     <child link="yaw_L_Link"/>
     <axis xyz="0 0 1"/>
-    <limit lower="-1.4835298641951802" upper="2.705260340591211" effort="40" velocity="31.83"/>
+    <limit lower="-2.705260340591211" upper="1.4835298641951802" effort="40" velocity="31.83"/>
   </joint>
 
   <joint name="knee_L_Joint" type="revolute">
