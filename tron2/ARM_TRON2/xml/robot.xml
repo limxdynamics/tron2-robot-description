@@ -1,0 +1,206 @@
+<mujoco model="bipedal_robot">
+  <option iterations="50" timestep="0.001" solver="PGS" gravity="0 0 -9.81" />
+
+  <compiler angle="radian" meshdir="../meshes" eulerseq="zyx" autolimits="true" />
+
+  <default>
+    <joint limited="true" damping="0.01" armature="0.01" frictionloss="0.01" />
+    <geom condim="4" contype="1" conaffinity="15" friction="0.9 0.2 0.2" solref="0.001 2" />
+    <motor ctrllimited="true" />
+    <equality solref="0.001 2" />
+    <default class="visualgeom">
+      <geom material="visualgeom" condim="1" contype="0" conaffinity="0" />
+    </default>
+  </default>
+
+  <asset>
+    <mesh name="base_Link" file="base_Link.STL" />
+    <mesh name="abad_L_Link" file="abad_L_Link.STL" />
+    <mesh name="hip_L_Link" file="hip_L_Link.STL" />
+    <mesh name="yaw_L_Link" file="yaw_L_Link.STL" />
+    <mesh name="knee_L_Link" file="knee_L_Link.STL" />
+    <mesh name="wrist_yaw1_L_Link" file="wrist_yaw1_L_Link.STL" />
+    <mesh name="wrist_roll_L_Link" file="wrist_roll_L_Link.STL" />
+    <mesh name="wrist_yaw2_L_Link" file="wrist_yaw2_L_Link.STL" />
+    <mesh name="abad_R_Link" file="abad_R_Link.STL" />
+    <mesh name="hip_R_Link" file="hip_R_Link.STL" />
+    <mesh name="base_2_Link" file="base_2_Link.STL" />
+    <mesh name="base_3_Link" file="base_3_Link.STL" />
+    <mesh name="yaw_R_Link" file="yaw_R_Link.STL" />
+    <mesh name="wrist_yaw1_R_Link" file="wrist_yaw1_R_Link.STL" />
+    <mesh name="knee_R_Link" file="knee_R_Link.STL" />
+    <mesh name="wrist_yaw2_R_Link" file="wrist_yaw2_R_Link.STL" />
+    <mesh name="wrist_roll_R_Link" file="wrist_roll_R_Link.STL" />
+    <material name="visualgeom" rgba="0.5 0.9 0.2 1" />
+    <texture name="texplane" type="2d" builtin="checker" rgb1="0.35 0.35 0.35" rgb2="0.55 0.55 0.55" width="512" height="512" mark="cross" markrgb=".8 .8 .8"/>
+    <material name="matplane" reflectance="0.0" texture="texplane" texrepeat="1 1" texuniform="true"/>
+  </asset>
+
+  <worldbody>
+    <light directional="true" diffuse="0.4 0.4 0.4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false" />
+    <light directional="true" diffuse="0.6 0.6 0.6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1" />
+    <geom name="ground" type="plane" pos="0 0 0" size="100 100 0.001" quat="1 0 0 0" material="matplane" condim="3" conaffinity="15" />
+    <camera name="fixed" pos="0 -3.0 1.752444793451236" xyaxes="1 0 0 0 0 1" />
+    <camera name="track" mode="trackcom" pos="0 -3.0 1.752444793451236" xyaxes="1 0 0 0 0 1" />
+    <body name="root" pos="0 0 1.252444793451236" quat="1 0 0 0">
+      <freejoint name="root" />
+      <site name="imu" size="0.01" pos="0 0 0" />
+      <geom type="mesh" rgba="1 1 1 1" mesh="base_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+      <geom type="mesh" rgba="1 1 1 1" mesh="base_Link" />
+      <geom pos="-0.00044 9e-05 -0.08605" quat="1 0 0 0" type="mesh" rgba="1 1 1 1" mesh="base_2_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+      <geom type="mesh" rgba="1 1 1 1" mesh="base_2_Link" pos="-0.00044 9e-05 -0.08605" quat="1 0 0 0" />
+      <geom pos="-0.00044 9e-05 -0.89505" quat="1 0 0 0" type="mesh" rgba="1 1 1 1" mesh="base_3_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+      <geom type="mesh" rgba="1 1 1 1" mesh="base_3_Link" pos="-0.00044 9e-05 -0.89505" quat="1 0 0 0" />
+      <body name="abad_L_Link" pos="-0.00049 0.10649 0.0586">
+        <inertial pos="0.010597 0.059042 -8.6e-05" quat="0.42669 0.425045 0.548005 0.580486" mass="2.426" diaginertia="0.00416224 0.00407739 0.00383393" />
+        <joint name="abad_L_Joint" pos="0 0 0" axis="0 1 0" range="-3.14159 2.60054" actuatorfrcrange="-130 130" />
+        <geom type="mesh" rgba="1 1 1 1" mesh="abad_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+        <geom type="mesh" rgba="1 1 1 1" mesh="abad_L_Link" />
+        <body name="hip_L_Link" pos="0.0497 0.062 0">
+          <inertial pos="-0.047813 0.000265 -0.058577" quat="0.578195 0.404605 0.400792 0.584253" mass="0.503" diaginertia="0.00204649 0.00130801 0.00124713" />
+          <joint name="hip_L_Joint" pos="0 0 0" axis="1 0 0" range="-0.260578 2.11315" actuatorfrcrange="-130 130" />
+          <geom type="mesh" rgba="1 1 1 1" mesh="hip_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+          <geom type="mesh" rgba="1 1 1 1" mesh="hip_L_Link" />
+          <body name="yaw_L_Link" pos="-0.0497 0 -0.1127">
+            <inertial pos="4.8e-05 -0.005739 -0.169935" quat="0.671303 -0.00460702 0.00421587 0.741157" mass="3.436" diaginertia="0.0352709 0.0351764 0.00470801" />
+            <joint name="yaw_L_Joint" pos="0 0 0" axis="0 0 1" range="-1.48353 2.70526" actuatorfrcrange="-40 40" />
+            <geom type="mesh" rgba="1 1 1 1" mesh="yaw_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+            <geom type="mesh" rgba="1 1 1 1" mesh="yaw_L_Link" />
+            <body name="knee_L_Link" pos="0 -0.04115 -0.2373">
+              <inertial pos="7e-06 0.029496 -0.11127" quat="0.687198 0.0985624 -0.10163 0.712541" mass="1.192" diaginertia="0.00504173 0.0050048 0.00080993" />
+              <joint name="knee_L_Joint" pos="0 0 0" axis="0 1 0" range="-2.61799 2.61799" actuatorfrcrange="-130 130" />
+              <geom type="mesh" rgba="1 1 1 1" mesh="knee_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+              <geom type="mesh" rgba="1 1 1 1" mesh="knee_L_Link" />
+              <body name="wrist_yaw1_L_Link" pos="0 0.04115 -0.1963">
+                <inertial pos="-6.9e-05 0.004349 -0.034875" quat="0.680576 0.732628 0.00782462 0.00341562" mass="0.639" diaginertia="0.00052487 0.000473579 0.000456627" />
+                <joint name="wrist_yaw1_L_Joint" pos="0 0 0" axis="0 0 1" range="-2.84489 2.84489" actuatorfrcrange="-20 20" />
+                <geom type="mesh" rgba="1 1 1 1" mesh="wrist_yaw1_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+                <geom type="mesh" rgba="1 1 1 1" mesh="wrist_yaw1_L_Link" />
+                <body name="wrist_roll_L_Link" pos="0 -0.031 -0.038">
+                  <inertial pos="6.8e-05 0.02731 -0.066262" quat="0.980243 0.196606 0.00515897 -0.0210662" mass="0.643" diaginertia="0.000810822 0.000803094 0.000414694" />
+                  <joint name="wrist_roll_L_Joint" pos="0 0 0" axis="0 1 0" range="-1.71042 1.71042" actuatorfrcrange="-20 20" />
+                  <geom type="mesh" rgba="1 1 1 1" mesh="wrist_roll_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+                  <geom type="mesh" rgba="1 1 1 1" mesh="wrist_roll_L_Link" />
+                  <body name="wrist_yaw2_L_Link" pos="0 0.031 -0.1083">
+                    <inertial pos="-5.3e-05 0.000442 -0.003729" quat="0.523205 0.475431 -0.519296 0.480161" mass="0.033" diaginertia="1.58146e-05 8.37813e-06 7.96228e-06" />
+                    <joint name="wrist_yaw2_L_Joint" pos="0 0 0" axis="0 0 1" range="-2.87979 2.87979" actuatorfrcrange="-20 20" />
+                    <geom type="mesh" rgba="1 1 1 1" mesh="wrist_yaw2_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+                    <geom type="mesh" rgba="1 1 1 1" mesh="wrist_yaw2_L_Link" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="abad_R_Link" pos="0.00049 -0.10631 0.0586">
+        <inertial pos="-0.010597 -0.059042 -8.6e-05" quat="0.425045 0.42669 0.580486 0.548005" mass="2.426" diaginertia="0.00416224 0.00407739 0.00383393" />
+        <joint name="abad_R_Joint" pos="0 0 0" axis="0 1 0" range="-3.14159 2.60054" actuatorfrcrange="-130 130" />
+        <geom type="mesh" rgba="1 1 1 1" mesh="abad_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+        <geom type="mesh" rgba="1 1 1 1" mesh="abad_R_Link" />
+        <body name="hip_R_Link" pos="-0.0497 -0.062 0">
+          <inertial pos="0.047813 -0.000265 -0.058577" quat="0.404605 0.578195 0.584253 0.400792" mass="0.503" diaginertia="0.00204649 0.00130801 0.00124713" />
+          <joint name="hip_R_Joint" pos="0 0 0" axis="1 0 0" range="-2.11315 0.260578" actuatorfrcrange="-130 130" />
+          <geom type="mesh" rgba="1 1 1 1" mesh="hip_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+          <geom type="mesh" rgba="1 1 1 1" mesh="hip_R_Link" />
+          <body name="yaw_R_Link" pos="0.0497 0 -0.1127">
+            <inertial pos="4.8e-05 0.005739 -0.169935" quat="0.741157 0.00421587 -0.00460702 0.671303" mass="3.436" diaginertia="0.0352709 0.0351764 0.00470801" />
+            <joint name="yaw_R_Joint" pos="0 0 0" axis="0 0 1" range="-1.48353 2.70526" actuatorfrcrange="-40 40" />
+            <geom type="mesh" rgba="1 1 1 1" mesh="yaw_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+            <geom type="mesh" rgba="1 1 1 1" mesh="yaw_R_Link" />
+            <body name="knee_R_Link" pos="0 0.04115 -0.2373">
+              <inertial pos="7e-06 -0.029496 -0.11127" quat="0.712541 -0.10163 0.0985624 0.687198" mass="1.192" diaginertia="0.00504173 0.0050048 0.00080993" />
+              <joint name="knee_R_Joint" pos="0 0 0" axis="0 1 0" range="-2.61799 2.61799" actuatorfrcrange="-130 130" />
+              <geom type="mesh" rgba="1 1 1 1" mesh="knee_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+              <geom type="mesh" rgba="1 1 1 1" mesh="knee_R_Link" />
+              <body name="wrist_yaw1_R_Link" pos="0 -0.04115 -0.1963">
+                <inertial pos="-6.9e-05 -0.004349 -0.034875" quat="0.732628 0.680576 -0.00341562 -0.00782462" mass="0.639" diaginertia="0.00052487 0.000473579 0.000456627" />
+                <joint name="wrist_yaw1_R_Joint" pos="0 0 0" axis="0 0 1" range="-2.84489 2.84489" actuatorfrcrange="-20 20" />
+                <geom type="mesh" rgba="1 1 1 1" mesh="wrist_yaw1_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+                <geom type="mesh" rgba="1 1 1 1" mesh="wrist_yaw1_R_Link" />
+                <body name="wrist_roll_R_Link" pos="0 0.031 -0.038">
+                  <inertial pos="6.8e-05 -0.02731 -0.066262" quat="0.980243 -0.196606 0.00515897 0.0210662" mass="0.643" diaginertia="0.000810822 0.000803094 0.000414694" />
+                  <joint name="wrist_roll_R_Joint" pos="0 0 0" axis="0 1 0" range="-1.71042 1.71042" actuatorfrcrange="-20 20" />
+                  <geom type="mesh" rgba="1 1 1 1" mesh="wrist_roll_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+                  <geom type="mesh" rgba="1 1 1 1" mesh="wrist_roll_R_Link" />
+                  <body name="wrist_yaw2_R_Link" pos="0 -0.031 -0.1083">
+                    <inertial pos="-5.3e-05 -0.000442 -0.003729" quat="0.475431 0.523205 -0.480161 0.519296" mass="0.033" diaginertia="1.58146e-05 8.37813e-06 7.96228e-06" />
+                    <joint name="wrist_yaw2_R_Joint" pos="0 0 0" axis="0 0 1" range="-2.87979 2.87979" actuatorfrcrange="-20 20" />
+                    <geom type="mesh" rgba="1 1 1 1" mesh="wrist_yaw2_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
+                    <geom type="mesh" rgba="1 1 1 1" mesh="wrist_yaw2_R_Link" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="abad_L_Joint" joint="abad_L_Joint" ctrllimited="true" ctrlrange="-130 130" gear="1" />
+    <motor name="hip_L_Joint" joint="hip_L_Joint" ctrllimited="true" ctrlrange="-130 130" gear="1" />
+    <motor name="yaw_L_Joint" joint="yaw_L_Joint" ctrllimited="true" ctrlrange="-40 40" gear="1" />
+    <motor name="knee_L_Joint" joint="knee_L_Joint" ctrllimited="true" ctrlrange="-130 130" gear="1" />
+    <motor name="wrist_yaw1_L_Joint" joint="wrist_yaw1_L_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1" />
+    <motor name="wrist_roll_L_Joint" joint="wrist_roll_L_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1" />
+    <motor name="wrist_yaw2_L_Joint" joint="wrist_yaw2_L_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1" />
+    <motor name="abad_R_Joint" joint="abad_R_Joint" ctrllimited="true" ctrlrange="-130 130" gear="1" />
+    <motor name="hip_R_Joint" joint="hip_R_Joint" ctrllimited="true" ctrlrange="-130 130" gear="1" />
+    <motor name="yaw_R_Joint" joint="yaw_R_Joint" ctrllimited="true" ctrlrange="-40 40" gear="1" />
+    <motor name="knee_R_Joint" joint="knee_R_Joint" ctrllimited="true" ctrlrange="-130 130" gear="1" />
+    <motor name="wrist_yaw1_R_Joint" joint="wrist_yaw1_R_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1" />
+    <motor name="wrist_roll_R_Joint" joint="wrist_roll_R_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1" />
+    <motor name="wrist_yaw2_R_Joint" joint="wrist_yaw2_R_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1" />
+  </actuator>
+
+  <sensor>
+    <actuatorpos name="abad_L_Joint_p" actuator="abad_L_Joint" />
+    <actuatorvel name="abad_L_Joint_v" actuator="abad_L_Joint" />
+    <actuatorfrc name="abad_L_Joint_f" actuator="abad_L_Joint" noise="0.001" />
+    <actuatorpos name="hip_L_Joint_p" actuator="hip_L_Joint" />
+    <actuatorvel name="hip_L_Joint_v" actuator="hip_L_Joint" />
+    <actuatorfrc name="hip_L_Joint_f" actuator="hip_L_Joint" noise="0.001" />
+    <actuatorpos name="yaw_L_Joint_p" actuator="yaw_L_Joint" />
+    <actuatorvel name="yaw_L_Joint_v" actuator="yaw_L_Joint" />
+    <actuatorfrc name="yaw_L_Joint_f" actuator="yaw_L_Joint" noise="0.001" />
+    <actuatorpos name="knee_L_Joint_p" actuator="knee_L_Joint" />
+    <actuatorvel name="knee_L_Joint_v" actuator="knee_L_Joint" />
+    <actuatorfrc name="knee_L_Joint_f" actuator="knee_L_Joint" noise="0.001" />
+    <actuatorpos name="wrist_yaw1_L_Joint_p" actuator="wrist_yaw1_L_Joint" />
+    <actuatorvel name="wrist_yaw1_L_Joint_v" actuator="wrist_yaw1_L_Joint" />
+    <actuatorfrc name="wrist_yaw1_L_Joint_f" actuator="wrist_yaw1_L_Joint" noise="0.001" />
+    <actuatorpos name="wrist_roll_L_Joint_p" actuator="wrist_roll_L_Joint" />
+    <actuatorvel name="wrist_roll_L_Joint_v" actuator="wrist_roll_L_Joint" />
+    <actuatorfrc name="wrist_roll_L_Joint_f" actuator="wrist_roll_L_Joint" noise="0.001" />
+    <actuatorpos name="wrist_yaw2_L_Joint_p" actuator="wrist_yaw2_L_Joint" />
+    <actuatorvel name="wrist_yaw2_L_Joint_v" actuator="wrist_yaw2_L_Joint" />
+    <actuatorfrc name="wrist_yaw2_L_Joint_f" actuator="wrist_yaw2_L_Joint" noise="0.001" />
+    <actuatorpos name="abad_R_Joint_p" actuator="abad_R_Joint" />
+    <actuatorvel name="abad_R_Joint_v" actuator="abad_R_Joint" />
+    <actuatorfrc name="abad_R_Joint_f" actuator="abad_R_Joint" noise="0.001" />
+    <actuatorpos name="hip_R_Joint_p" actuator="hip_R_Joint" />
+    <actuatorvel name="hip_R_Joint_v" actuator="hip_R_Joint" />
+    <actuatorfrc name="hip_R_Joint_f" actuator="hip_R_Joint" noise="0.001" />
+    <actuatorpos name="yaw_R_Joint_p" actuator="yaw_R_Joint" />
+    <actuatorvel name="yaw_R_Joint_v" actuator="yaw_R_Joint" />
+    <actuatorfrc name="yaw_R_Joint_f" actuator="yaw_R_Joint" noise="0.001" />
+    <actuatorpos name="knee_R_Joint_p" actuator="knee_R_Joint" />
+    <actuatorvel name="knee_R_Joint_v" actuator="knee_R_Joint" />
+    <actuatorfrc name="knee_R_Joint_f" actuator="knee_R_Joint" noise="0.001" />
+    <actuatorpos name="wrist_yaw1_R_Joint_p" actuator="wrist_yaw1_R_Joint" />
+    <actuatorvel name="wrist_yaw1_R_Joint_v" actuator="wrist_yaw1_R_Joint" />
+    <actuatorfrc name="wrist_yaw1_R_Joint_f" actuator="wrist_yaw1_R_Joint" noise="0.001" />
+    <actuatorpos name="wrist_roll_R_Joint_p" actuator="wrist_roll_R_Joint" />
+    <actuatorvel name="wrist_roll_R_Joint_v" actuator="wrist_roll_R_Joint" />
+    <actuatorfrc name="wrist_roll_R_Joint_f" actuator="wrist_roll_R_Joint" noise="0.001" />
+    <actuatorpos name="wrist_yaw2_R_Joint_p" actuator="wrist_yaw2_R_Joint" />
+    <actuatorvel name="wrist_yaw2_R_Joint_v" actuator="wrist_yaw2_R_Joint" />
+    <actuatorfrc name="wrist_yaw2_R_Joint_f" actuator="wrist_yaw2_R_Joint" noise="0.001" />
+
+    <framequat name="quat" objtype="site" noise="0.001" objname="imu" />
+    <gyro name="gyro" site="imu" noise="0.005" cutoff="34.9" />
+    <accelerometer name="acc" site="imu"/>
+  </sensor>
+</mujoco>
