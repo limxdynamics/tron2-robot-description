@@ -36,6 +36,10 @@
     </visual>
   </link>
 
+  <gazebo reference="limx_imu_joint">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+  
   <link name="base_Link">
     <inertial>
       <origin xyz="0.00701 4e-05 0.10026" rpy="0 0 0"/>
@@ -361,8 +365,10 @@
 
   <!-- Gazebo Plugins -->
   <gazebo>
-    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+    <plugin filename="libtron2_hw_sim.so" name="gazebo_ros_control">
       <robotNamespace>/</robotNamespace>
+      <robotParam>robot_description</robotParam>
+      <robotSimType>tron2_gazebo/Tron2HWSim</robotSimType>
     </plugin>
   </gazebo>
 
