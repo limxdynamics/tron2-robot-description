@@ -13,6 +13,28 @@
     <color rgba="1.0 0.423 0.039 1.0"/>
   </material>
 
+<!-- ros_control plugin -->
+  <gazebo>
+    <plugin filename="libtron2_hw_sim.so" name="gazebo_ros_control">
+      <robotNamespace>/</robotNamespace>
+      <robotParam>robot_description</robotParam>
+      <robotSimType>tron2_gazebo/Tron2HWSim</robotSimType>
+    </plugin>
+  </gazebo>
+
+  <!-- Ground truth pose plugin -->
+  <gazebo>
+    <plugin filename="libgazebo_ros_p3d.so" name="p3d_base_controller">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>1000.0</updateRate>
+      <bodyName>base_Link</bodyName>
+      <topicName>ground_truth/state</topicName>
+      <gaussianNoise>0</gaussianNoise>
+      <frameName>world</frameName>
+      <xyzOffsets>0 0 0</xyzOffsets>
+      <rpyOffsets>0 0 0</rpyOffsets>
+    </plugin>
+  </gazebo>
   <!-- Links -->
   <!-- IMU Link -->
   <joint name="limx_imu_joint" type="fixed">
@@ -39,7 +61,7 @@
   <gazebo reference="limx_imu_joint">
     <disableFixedJointLumping>true</disableFixedJointLumping>
   </gazebo>
-  
+
   <link name="base_Link">
     <inertial>
       <origin xyz="0.00701 4e-05 0.10026" rpy="0 0 0"/>
@@ -238,28 +260,6 @@
     </collision>
   </link>
 
-  <link name="wheel_R_Link">
-    <inertial>
-      <origin xyz="0.00012 -0.004 -0.00064" rpy="0 0 0"/>
-      <mass value="0.75"/>
-      <inertia ixx="0.00236" ixy="-0.0" ixz="1e-05"
-               iyy="0.00447" iyz="-0.0" izz="0.00231"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2/meshes/wheel_R_Link.STL"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2/meshes/wheel_R_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
   <link name="knee_R_Link">
     <inertial>
       <origin xyz="0.10281 -0.04222 -0.21372" rpy="0 0 0"/>
@@ -278,6 +278,28 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://robot_description/tron2/WF_TRON2/meshes/knee_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wheel_R_Link">
+    <inertial>
+      <origin xyz="0.00012 -0.004 -0.00064" rpy="0 0 0"/>
+      <mass value="0.75"/>
+      <inertia ixx="0.00236" ixy="-0.0" ixz="1e-05"
+               iyy="0.00447" iyz="-0.0" izz="0.00231"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/meshes/wheel_R_Link.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/meshes/wheel_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -304,7 +326,7 @@
     <parent link="hip_L_Link"/>
     <child link="yaw_L_Link"/>
     <axis xyz="0.43303 0 0.90138"/>
-    <limit lower="-1.4835298641951802" upper="2.705260340591211" effort="40" velocity="31.83"/>
+    <limit lower="-2.705260340591211" upper="1.4835298641951802" effort="40" velocity="31.83"/>
   </joint>
 
   <joint name="knee_L_Joint" type="revolute">
@@ -347,14 +369,6 @@
     <limit lower="-1.4835298641951802" upper="2.705260340591211" effort="40" velocity="31.83"/>
   </joint>
 
-  <joint name="wheel_R_Joint" type="revolute">
-    <origin xyz="0.15161 -0.09165 -0.31546" rpy="0 0 0"/>
-    <parent link="knee_R_Link"/>
-    <child link="wheel_R_Link"/>
-    <axis xyz="0 1 0"/>
-    <limit lower="-1745329.2519943293" upper="1745329.2519943293" effort="22" velocity="41.89"/>
-  </joint>
-
   <joint name="knee_R_Joint" type="revolute">
     <origin xyz="-0.10276 0.04115 -0.21389" rpy="0 0 0"/>
     <parent link="yaw_R_Link"/>
@@ -363,88 +377,93 @@
     <limit lower="-1.7221163729428048" upper="3.5138713830401835" effort="140" velocity="12.57"/>
   </joint>
 
-  <!-- Gazebo Plugins -->
-  <gazebo>
-    <plugin filename="libtron2_hw_sim.so" name="gazebo_ros_control">
-      <robotNamespace>/</robotNamespace>
-      <robotParam>robot_description</robotParam>
-      <robotSimType>tron2_gazebo/Tron2HWSim</robotSimType>
-    </plugin>
+  <joint name="wheel_R_Joint" type="revolute">
+    <origin xyz="0.15161 -0.09165 -0.31546" rpy="0 0 0"/>
+    <parent link="knee_R_Link"/>
+    <child link="wheel_R_Link"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1745329.2519943293" upper="1745329.2519943293" effort="22" velocity="41.89"/>
+  </joint>
+
+  <gazebo reference="wheel_R_Link">
+    <mu1>2.0</mu1>
+    <mu2>2.0</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+
+  <gazebo reference="yaw_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="hip_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="knee_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+
+  <gazebo reference="yaw_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="abad_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="knee_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+
+  <gazebo reference="hip_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="wheel_L_Link">
+    <mu1>2.0</mu1>
+    <mu2>2.0</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+
+  <gazebo reference="abad_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
   </gazebo>
 
   <!-- Transmissions -->
-  <transmission name="hip_L_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="hip_L_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="hip_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
   <transmission name="wheel_R_Joint_trans">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="wheel_R_Joint">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="wheel_R_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="abad_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="abad_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="abad_R_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="abad_L_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="abad_L_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="abad_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="knee_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="knee_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="knee_R_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="wheel_L_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="wheel_L_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="wheel_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="hip_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="hip_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="hip_R_Joint_motor">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -472,12 +491,78 @@
     </actuator>
   </transmission>
 
+  <transmission name="hip_R_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="hip_R_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="hip_R_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
   <transmission name="yaw_L_Joint_trans">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="yaw_L_Joint">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="yaw_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="abad_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="abad_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="abad_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="hip_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="hip_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="hip_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="wheel_L_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wheel_L_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wheel_L_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="knee_R_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="knee_R_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="knee_R_Joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="abad_R_Joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="abad_R_Joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="abad_R_Joint_motor">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
