@@ -53,7 +53,7 @@
           <geom type="mesh" rgba="1 1 1 1" mesh="hip_L_Link" />
           <body name="yaw_L_Link" pos="0.00577 0 -0.12304">
             <inertial pos="0.07581 -0.00574 -0.15209" quat="0.658035 -0.173446 -0.15059 0.717097" mass="3.43624" diaginertia="0.0352754 0.0351752 0.00470938" />
-            <joint name="yaw_L_Joint" pos="0 0 0" axis="-0.445889 0 0.895088" range="-1.48353 2.70526" actuatorfrcrange="-40 40" />
+            <joint name="yaw_L_Joint" pos="0 0 0" axis="-0.445889 0 0.895088" range="-2.70526 1.48353" actuatorfrcrange="-40 40" />
             <geom type="mesh" rgba="1 1 1 1" mesh="yaw_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
             <geom type="mesh" rgba="1 1 1 1" mesh="yaw_L_Link" />
             <body name="knee_L_Link" pos="0.10581 -0.04115 -0.2124">
