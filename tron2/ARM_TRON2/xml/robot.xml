@@ -37,14 +37,13 @@
   </asset>
 
   <worldbody>
-    <light directional="true" diffuse="0.4 0.4 0.4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false" />
-    <light directional="true" diffuse="0.6 0.6 0.6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1" />
+    <light directional="true" diffuse="0.6 0.6 0.6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1" castshadow="false" />
     <geom name="ground" type="plane" pos="0 0 0" size="100 100 0.001" quat="1 0 0 0" material="matplane" condim="3" conaffinity="15" />
     <camera name="fixed" pos="0 -3.0 1.752444793451236" xyaxes="1 0 0 0 0 1" />
     <camera name="track" mode="trackcom" pos="0 -3.0 1.752444793451236" xyaxes="1 0 0 0 0 1" />
-    <body name="root" pos="0 0 1.252444793451236" quat="1 0 0 0">
-      <freejoint name="root" />
-      <site name="imu" size="0.01" pos="0 0 0" />
+    <body name="root" pos="0 0 1" quat="1 0 0 0">
+      <joint name="floating_base_joint" type="free" damping="100000001" stiffness="1000000001"/>
+      <site name="imu" size="0.00001" pos="0 0 0" />
       <geom type="mesh" rgba="1 1 1 1" mesh="base_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
       <geom type="mesh" rgba="1 1 1 1" mesh="base_Link" />
       <geom pos="-0.00044 9e-05 -0.08605" quat="1 0 0 0" type="mesh" rgba="1 1 1 1" mesh="base_2_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
@@ -63,7 +62,7 @@
           <geom type="mesh" rgba="1 1 1 1" mesh="hip_L_Link" />
           <body name="yaw_L_Link" pos="-0.0497 0 -0.1127">
             <inertial pos="4.8e-05 -0.005739 -0.169935" quat="0.671303 -0.00460702 0.00421587 0.741157" mass="3.436" diaginertia="0.0352709 0.0351764 0.00470801" />
-            <joint name="yaw_L_Joint" pos="0 0 0" axis="0 0 1" range="-1.48353 2.70526" actuatorfrcrange="-40 40" />
+            <joint name="yaw_L_Joint" pos="0 0 0" axis="0 0 1" range="-2.70526 1.48353" actuatorfrcrange="-40 40" />
             <geom type="mesh" rgba="1 1 1 1" mesh="yaw_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
             <geom type="mesh" rgba="1 1 1 1" mesh="yaw_L_Link" />
             <body name="knee_L_Link" pos="0 -0.04115 -0.2373">
