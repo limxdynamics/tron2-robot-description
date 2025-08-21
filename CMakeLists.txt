@@ -25,7 +25,7 @@ if(DEFINED ENV{ROS_VERSION})
 
     find_package(ament_cmake REQUIRED)
 
-    install(DIRECTORY tron2 share/${PROJECT_NAME})
+    install(DIRECTORY tron2 DESTINATION share/${PROJECT_NAME})
 
     ament_package()
   else()
