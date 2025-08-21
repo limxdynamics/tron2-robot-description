@@ -28,6 +28,7 @@
       <alwaysOn>true</alwaysOn>
       <updateRate>1000.0</updateRate>
       <bodyName>base_Link</bodyName>
+      <body_name>base_Link</body_name>
       <topicName>ground_truth/state</topicName>
       <gaussianNoise>0</gaussianNoise>
       <frameName>world</frameName>
