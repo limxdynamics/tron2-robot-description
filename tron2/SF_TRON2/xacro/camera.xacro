@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- ****************************************** D435 Camera ******************************************************** -->
+    
+    <!-- Main camera link -->
+    <link name="d435_Link">
+        <visual>
+            <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0.0149 -0.0175 0"/>
+            <geometry>
+                <box size="0.01 0.01 0.01"/>
+            </geometry>
+        </visual>
+    </link>
+    
+    <!-- Camera mount joint -->
+    <joint name="d435_joint" type="fixed">
+        <origin rpy="0 1.063778179 0" xyz="0.13223 0.0222 -0.26826"/>
+        <parent link="base_Link"/>
+        <child link="d435_Link"/>
+    </joint>
+
+    <!-- Camera optical frame -->
+    <joint name="d435_optical_joint" type="fixed">
+        <origin rpy="-1.5708 0 -1.5708" xyz="0 0 0"/>
+        <parent link="d435_Link"/>
+        <child link="d435_optical_frame"/>
+    </joint>
+    <link name="d435_optical_frame"/>
+
+    <!-- Gazebo sensor configuration -->
+    <gazebo reference="d435_Link">
+        <sensor type="depth" name="d435_camera_sensor">
+            <pose>0 0 0 0 0 0</pose>
+            <update_rate>5.0</update_rate>
+            <visualize>true</visualize>
+            <camera>
+                <horizontal_fov>1.57</horizontal_fov>
+                <image>
+                    <format>B8G8R8</format>
+                    <width>848</width>
+                    <height>480</height>
+                </image>
+                <clip>
+                    <near>0.1</near>
+                    <far>10.0</far>
+                </clip>
+            </camera>
+            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                <frame_name>d435_frame_Link</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <!-- ****************************************** D435 Camera END ******************************************************** -->
+    
+</robot> 
