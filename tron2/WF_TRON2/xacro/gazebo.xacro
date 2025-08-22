@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<robot>
+    <!-- Gazebo control plugin -->
+    <gazebo>
+        <plugin filename="libtron2_hw_sim.so" name="gazebo_ros_control">
+            <robotNamespace>/</robotNamespace>
+            <robotParam>robot_description</robotParam>
+            <robotSimType>tron2_gazebo/Tron2HWSim</robotSimType>
+        </plugin>
+    </gazebo>
+
+    <!-- Ground truth pose plugin -->
+    <gazebo>
+        <plugin filename="libgazebo_ros_p3d.so" name="p3d_base_controller">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>1000.0</updateRate>
+            <bodyName>base_Link</bodyName>
+            <topicName>ground_truth/state</topicName>
+            <gaussianNoise>0</gaussianNoise>
+            <frameName>world</frameName>
+            <xyzOffsets>0 0 0</xyzOffsets>
+            <rpyOffsets>0 0 0</rpyOffsets>
+        </plugin>
+    </gazebo>
+
+    <!-- IMU sensor configuration -->
+    <gazebo reference="limx_imu">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="limx_imu_joint">
+        <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+    <!-- Base Link -->
+    <gazebo reference="base_Link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/White</material>
+    </gazebo>
+
+    <!-- Left Leg Links -->
+    <gazebo reference="abad_L_Link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/DarkGrey</material>
+    </gazebo>
+
+    <gazebo reference="hip_L_Link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/DarkGrey</material>
+    </gazebo>
+
+    <gazebo reference="yaw_L_Link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/White</material>
+    </gazebo>
+
+    <gazebo reference="knee_L_Link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <self_collide>0</self_collide>
+        <material>Gazebo/DarkGrey</material>
+        <kp value="1000000.0"/>
+        <kd value="100.0"/>
+    </gazebo>
+
+    <gazebo reference="wheel_L_Link">
+        <mu1>2.0</mu1>
+        <mu2>2.0</mu2>
+        <self_collide>1</self_collide>
+        <material>Gazebo/DarkGrey</material>
+        <kp value="1000000.0"/>
+        <kd value="100.0"/>
+    </gazebo>
+
+    <!-- Right Leg Links -->
+    <gazebo reference="abad_R_Link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/DarkGrey</material>
+    </gazebo>
+
+    <gazebo reference="hip_R_Link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/DarkGrey</material>
+    </gazebo>
+
+    <gazebo reference="yaw_R_Link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/White</material>
+    </gazebo>
+
+    <gazebo reference="knee_R_Link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <self_collide>0</self_collide>
+        <material>Gazebo/DarkGrey</material>
+        <kp value="1000000.0"/>
+        <kd value="100.0"/>
+    </gazebo>
+
+    <gazebo reference="wheel_R_Link">
+        <mu1>2.0</mu1>
+        <mu2>2.0</mu2>
+        <self_collide>1</self_collide>
+        <material>Gazebo/DarkGrey</material>
+        <kp value="1000000.0"/>
+        <kd value="100.0"/>
+    </gazebo>
+
+</robot> 
