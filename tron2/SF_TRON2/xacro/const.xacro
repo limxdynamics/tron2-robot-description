@@ -108,6 +108,7 @@
     <!-- Foot joint position -->
     <xacro:property name="foot_offset_x" value="-0.15601"/>
     <xacro:property name="foot_offset_y" value="0.07805"/>
+    <xacro:property name="foot_R_offset_y" value="-0.00425"/>
     <xacro:property name="foot_offset_z" value="-0.31331"/>
 
     <!-- Joint limits -->
