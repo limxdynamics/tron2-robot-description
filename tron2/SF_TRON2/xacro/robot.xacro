@@ -8,6 +8,7 @@
     <xacro:include filename="$(find robot_description)/tron2/SF_TRON2/xacro/const.xacro"/>
     <xacro:include filename="$(find robot_description)/tron2/SF_TRON2/xacro/materials.xacro"/>
     <xacro:include filename="$(find robot_description)/tron2/SF_TRON2/xacro/leg.xacro"/>
+    <xacro:include filename="$(find robot_description)/tron2/SF_TRON2/xacro/camera.xacro"/>
     <xacro:include filename="$(find robot_description)/tron2/SF_TRON2/xacro/gazebo.xacro"/>
     <xacro:include filename="$(find robot_description)/tron2/SF_TRON2/xacro/ros2_control_interface.xacro"/>
 
