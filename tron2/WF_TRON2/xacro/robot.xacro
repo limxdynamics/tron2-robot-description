@@ -64,6 +64,12 @@
             </geometry>
             <material name="orange"/>
         </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size=".001 .001 .001"/>
+            </geometry>
+        </collision>
     </link>
 
 
