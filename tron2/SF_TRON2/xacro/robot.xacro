@@ -101,7 +101,7 @@
         <gazebo>
             <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
                 <robot_sim_type>tron2_gazebo/Tron2HWSim</robot_sim_type>
-                <parameters>$(find-pkg-share tron2_gazebo)/config/default_tron2.yaml</parameters>
+                <parameters>$(find tron2_gazebo)/config/default_tron2.yaml</parameters>
             </plugin>
         </gazebo> 
     </xacro:if>
