@@ -24,14 +24,14 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://robot_description/tron2/SF_TRON2/meshes/abad_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/abad_${name}_Link.STL"/>
                 </geometry>
                 <material name="grey"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://robot_description/tron2/SF_TRON2/meshes/abad_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/abad_${name}_Link.STL"/>
                 </geometry>
             </collision>
         </link>
@@ -59,14 +59,14 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://robot_description/tron2/SF_TRON2/meshes/hip_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/hip_${name}_Link.STL"/>
                 </geometry>
                 <material name="grey"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://robot_description/tron2/SF_TRON2/meshes/hip_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/hip_${name}_Link.STL"/>
                 </geometry>
             </collision>
         </link>
@@ -94,14 +94,14 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://robot_description/tron2/SF_TRON2/meshes/yaw_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/yaw_${name}_Link.STL"/>
                 </geometry>
                 <material name="grey"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://robot_description/tron2/SF_TRON2/meshes/yaw_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/yaw_${name}_Link.STL"/>
                 </geometry>
             </collision>
         </link>
@@ -124,20 +124,25 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://robot_description/tron2/SF_TRON2/meshes/knee_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/knee_${name}_Link.STL"/>
                 </geometry>
                 <material name="grey"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://robot_description/tron2/SF_TRON2/meshes/knee_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/knee_${name}_Link.STL"/>
                 </geometry>
             </collision>
         </link>
 
         <joint name="foot_${name}_Joint" type="revolute">
-            <origin xyz="${foot_offset_x} ${foot_offset_y*mirror} ${foot_offset_z}" rpy="0 0 0"/>
+            <xacro:if value="${name == 'L'}">
+                <origin xyz="${foot_offset_x} ${foot_offset_y} ${foot_offset_z}" rpy="0 0 0"/>
+            </xacro:if>
+            <xacro:if value="${name == 'R'}">
+                <origin xyz="${foot_offset_x} ${foot_R_offset_y} ${foot_offset_z}" rpy="0 0 0"/>
+            </xacro:if>
             <parent link="knee_${name}_Link"/>
             <child link="foot_${name}_Link"/>
             <axis xyz="0 1 0"/>
@@ -154,14 +159,14 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://robot_description/tron2/SF_TRON2/meshes/foot_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/foot_${name}_Link.STL"/>
                 </geometry>
                 <material name="grey"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://robot_description/tron2/SF_TRON2/meshes/foot_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/foot_${name}_Link.STL"/>
                 </geometry>
             </collision>
         </link>
