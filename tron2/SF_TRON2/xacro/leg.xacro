@@ -7,7 +7,12 @@
     <xacro:macro name="leg" params="name mirror *origin">
 
         <joint name="abad_${name}_Joint" type="revolute">
-            <origin xyz="${abad_offset_x} ${abad_offset_y*mirror} ${abad_offset_z}" rpy="0 0 0"/>
+            <xacro:if value="${name == 'L'}">
+                <origin xyz="${abad_offset_x} ${abad_offset_y} ${abad_offset_z}" rpy="0 0 0"/>
+            </xacro:if>
+            <xacro:if value="${name == 'R'}">
+                <origin xyz="${abad_R_offset_x} ${abad_R_offset_y} ${abad_R_offset_z}" rpy="0 0 0"/>
+            </xacro:if>
             <parent link="base_Link"/>
             <child link="abad_${name}_Link"/>
             <axis xyz="0 1 0"/>
@@ -37,7 +42,12 @@
         </link>
 
         <joint name="hip_${name}_Joint" type="revolute">
-            <origin xyz="${hip_offset_x} ${hip_offset_y*mirror} ${hip_offset_z}" rpy="0 0 0"/>
+            <xacro:if value="${name == 'L'}">
+                <origin xyz="${hip_offset_x} ${hip_offset_y} ${hip_offset_z}" rpy="0 0 0"/>
+            </xacro:if>
+            <xacro:if value="${name == 'R'}">
+                <origin xyz="${hip_R_offset_x} ${hip_R_offset_y} ${hip_R_offset_z}" rpy="0 0 0"/>
+            </xacro:if>
             <parent link="abad_${name}_Link"/>
             <child link="hip_${name}_Link"/>
             <axis xyz="${hip_axis_x} ${hip_axis_y} ${hip_axis_z}"/>
@@ -72,7 +82,12 @@
         </link>
 
         <joint name="yaw_${name}_Joint" type="revolute">
-            <origin xyz="${yaw_offset_x} ${yaw_offset_y*mirror} ${yaw_offset_z}" rpy="0 0 0"/>
+            <xacro:if value="${name == 'L'}">
+                <origin xyz="${yaw_offset_x} ${yaw_offset_y} ${yaw_offset_z}" rpy="0 0 0"/>
+            </xacro:if>
+            <xacro:if value="${name == 'R'}">
+                <origin xyz="${yaw_R_offset_x} ${yaw_R_offset_y} ${yaw_R_offset_z}" rpy="0 0 0"/>
+            </xacro:if>
             <parent link="hip_${name}_Link"/>
             <child link="yaw_${name}_Link"/>
             <axis xyz="${yaw_axis_x} ${yaw_axis_y} ${yaw_axis_z}"/>
