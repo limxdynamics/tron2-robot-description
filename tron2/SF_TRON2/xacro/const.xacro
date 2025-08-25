@@ -89,16 +89,25 @@
     <xacro:property name="abad_offset_x" value="0.00049"/>
     <xacro:property name="abad_offset_y" value="0.10649"/>
     <xacro:property name="abad_offset_z" value="0.0586"/>
+    <xacro:property name="abad_R_offset_x" value="-0.00049"/>
+    <xacro:property name="abad_R_offset_y" value="-0.10631"/>
+    <xacro:property name="abad_R_offset_z" value="0.0586"/>
 
     <!-- Hip joint position -->
     <xacro:property name="hip_offset_x" value="0.04449"/>
     <xacro:property name="hip_offset_y" value="0.062"/>
     <xacro:property name="hip_offset_z" value="0.02216"/>
+    <xacro:property name="hip_R_offset_x" value="-0.04449"/>
+    <xacro:property name="hip_R_offset_y" value="-0.062"/>
+    <xacro:property name="hip_R_offset_z" value="-0.02216"/>
 
     <!-- Yaw joint position -->
     <xacro:property name="yaw_offset_x" value="0.00577"/>
     <xacro:property name="yaw_offset_y" value="0.0"/>
     <xacro:property name="yaw_offset_z" value="-0.12304"/>
+    <xacro:property name="yaw_R_offset_x" value="0.09474"/>
+    <xacro:property name="yaw_R_offset_y" value="0.0"/>
+    <xacro:property name="yaw_R_offset_z" value="-0.07872"/>
 
     <!-- Knee joint position -->
     <xacro:property name="knee_offset_x" value="0.10581"/>
