@@ -1,0 +1,819 @@
+<?xml version="1.0"?>
+<robot name="bipedal_robot">
+
+    <!-- Materials -->
+    <material name="grey">
+        <color rgba="1 1 1 1" />
+    </material>
+    <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0" />
+    </material>
+
+    <material name="orange">
+        <color rgba="1.0 0.423 0.039 1.0" />
+    </material>
+
+    <!-- Links -->
+    <!-- IMU Link -->
+    <joint name="limx_imu_joint" type="fixed">
+        <origin rpy="0. 0. 0." xyz="0. 0. 0." />
+        <parent link="base_Link" />
+        <child link="limx_imu" />
+    </joint>
+
+    <link name="limx_imu">
+        <inertial>
+            <mass value="0.01" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001" />
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <box size="0.015 0.015 0.004" />
+            </geometry>
+            <material name="orange" />
+        </visual>
+    </link>
+
+    <gazebo>
+        <selfCollide>true</selfCollide>
+        <maxContacts>20</maxContacts>
+    </gazebo>
+
+    <gazebo reference="limx_imu_joint">
+        <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+    <link name="world" />
+
+    <joint name="base_fixed_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="world" />
+        <child link="base_Link" />
+    </joint>
+
+    <gazebo reference="base_fixed_joint">
+        <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+    <link name="base_Link">
+        <inertial>
+            <origin xyz="6.70E-03 1.00E-03 119.76E-03" rpy="0 0 0" />
+            <mass value="10.92" />
+            <inertia ixx="106769.12E-06" ixy="706.97E-06" ixz="1659.93E-06" iyy="110487.77E-06" iyz="1095.98E-06" izz="79809.99E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/base_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/base_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- Allow self collisions for base and arm links -->
+    <gazebo reference="base_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="abad_L_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="hip_L_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="yaw_L_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="knee_L_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="wrist_yaw_L_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="wrist_pitch_L_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="wrist_roll_L_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="grasper_L_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="abad_R_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="hip_R_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="yaw_R_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="knee_R_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="wrist_yaw_R_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="wrist_pitch_R_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="wrist_roll_R_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="grasper_R_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="base_2_Link"><selfCollide>true</selfCollide></gazebo>
+    <gazebo reference="base_3_Link"><selfCollide>true</selfCollide></gazebo>
+
+    <link name="abad_L_Link">
+        <inertial>
+            <origin xyz="3.82E-03 65.80E-03 0.24E-03" rpy="0 0 0" />
+            <mass value="2.15" />
+            <inertia ixx="4552.82E-06" ixy="-30.68E-06" ixz="-0.99E-06" iyy="3688.23E-06" iyz="-6.18E-06" izz="3726.79E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/abad_L_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/abad_L_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="hip_L_Link">
+        <inertial>
+            <origin xyz="-40.48E-03 0.11E-03 -52.35E-03" rpy="0 0 0" />
+            <mass value="0.65" />
+            <inertia ixx="1744.55E-06" ixy="-6.34E-06" ixz="30.90E-06" iyy="2526.19E-06" iyz="7.28E-06" izz="1729.29E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/hip_L_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/hip_L_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="yaw_L_Link">
+        <inertial>
+            <origin xyz="0.06E-03 10.51E-03 -66.65E-03" rpy="0 0 0" />
+            <mass value="1.58" />
+            <inertia ixx="10722.18E-06" ixy="0.57E-06" ixz="-5.73E-06" iyy="10452.44E-06" iyz="1979.42E-06" izz="2177.35E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/yaw_L_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/yaw_L_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="knee_L_Link">
+        <inertial>
+            <origin xyz="-0.02E-03 -34.20E-03 -48.04E-03" rpy="0 0 0" />
+            <mass value="3.20" />
+            <inertia ixx="18619.13E-06" ixy="-1.01E-06" ixz="3.47E-06" iyy="18917.72E-06" iyz="437.60E-06" izz="4218.06E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/knee_L_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/knee_L_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="wrist_yaw_L_Link">
+        <inertial>
+            <origin xyz="-0.04E-03 2.20E-03 -44.07E-03" rpy="0 0 0" />
+            <mass value="0.90" />
+            <inertia ixx="1206.56E-06" ixy="-2.05E-06" ixz="-1.04E-06" iyy="1067.64E-06" iyz="9.00E-06" izz="848.50E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/wrist_yaw_L_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/wrist_yaw_L_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="wrist_pitch_L_Link">
+        <inertial>
+            <origin xyz="5.38E-03 -30.32E-03 -0.11E-03" rpy="0 0 0" />
+            <mass value="0.70" />
+            <inertia ixx="531.43E-06" ixy="2.47E-06" ixz="-0.40E-06" iyy="513.10E-06" iyz="2.78E-06" izz="511.09E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/wrist_pitch_L_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/wrist_pitch_L_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="wrist_roll_L_Link">
+        <inertial>
+            <origin xyz="-29.90E-03 -0.02E-03 -41.21E-03" rpy="0 0 0" />
+            <mass value="0.26" />
+            <inertia ixx="280.77E-06" ixy="-0.90E-06" ixz="-25.59E-06" iyy="463.49E-06" iyz="1.16E-06" izz="329.29E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/wrist_roll_L_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/wrist_roll_L_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="grasper_L_Link">
+        <inertial>
+            <origin xyz="-0.25E-03 -0.01E-03 -60.89E-03" rpy="0 0 0" />
+            <mass value="0.66" />
+            <inertia ixx="1131.46E-06" ixy="-0.34E-06" ixz="-0.78E-06" iyy="992.45E-06" iyz="0.36E-06" izz="384.99E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/grasper_L_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/grasper_L_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="base_2_Link">
+        <inertial>
+            <origin xyz="-0.06E-03 0.09E-03 -646.35E-03" rpy="0 0 0" />
+            <mass value="0.1" />
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/base_2_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/base_2_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="base_3_Link">
+        <inertial>
+            <origin xyz="-5.27E-03 0E-03 -1005.51E-03" rpy="0 0 0" />
+            <mass value="0.1" />
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/base_3_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/base_3_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="wrist_pitch_R_Link">
+        <inertial>
+            <origin xyz="0.00538 0.03032 -0.00011" rpy="0 0 0" />
+            <mass value="0.70" />
+            <inertia ixx="0.00053143" ixy="-2.47e-06" ixz="-4e-07" iyy="0.0005131" iyz="-2.78e-06" izz="0.00051109" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/wrist_pitch_R_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/wrist_pitch_R_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="wrist_yaw_R_Link">
+        <inertial>
+            <origin xyz="-4e-05 -0.0022 -0.04407" rpy="0 0 0" />
+            <mass value="0.90" />
+            <inertia ixx="0.00120656" ixy="2.05e-06" ixz="-1.04e-06" iyy="0.00106764" iyz="-9e-06" izz="0.0008485" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/wrist_yaw_R_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/wrist_yaw_R_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="grasper_R_Link">
+        <inertial>
+            <origin xyz="-0.00025 1e-05 -0.06089" rpy="0 0 0" />
+            <mass value="0.66" />
+            <inertia ixx="0.00113146" ixy="3.4e-07" ixz="-7.8e-07" iyy="0.00099245" iyz="-3.6e-07" izz="0.00038499" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/grasper_R_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/grasper_R_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="wrist_roll_R_Link">
+        <inertial>
+            <origin xyz="-0.0299 2e-05 -0.04121" rpy="0 0 0" />
+            <mass value="0.26" />
+            <inertia ixx="0.00028077" ixy="9e-07" ixz="-2.559e-05" iyy="0.00046349" iyz="-1.16e-06" izz="0.00032929" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/wrist_roll_R_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/wrist_roll_R_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="abad_R_Link">
+        <inertial>
+            <origin xyz="0.00382 -0.0658 0.00024" rpy="0 0 0" />
+            <mass value="2.15" />
+            <inertia ixx="0.00455282" ixy="3.068e-05" ixz="-9.9e-07" iyy="0.00368823" iyz="6.18e-06" izz="0.00372679" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/abad_R_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/abad_R_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="yaw_R_Link">
+        <inertial>
+            <origin xyz="6e-05 -0.01051 -0.06665" rpy="0 0 0" />
+            <mass value="1.58" />
+            <inertia ixx="0.01072218" ixy="-5.7e-07" ixz="-5.73e-06" iyy="0.01045244" iyz="-0.00197942" izz="0.00217735" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/yaw_R_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/yaw_R_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="hip_R_Link">
+        <inertial>
+            <origin xyz="-0.04048 -0.00011 -0.05235" rpy="0 0 0" />
+            <mass value="0.65" />
+            <inertia ixx="0.00174455" ixy="6.34e-06" ixz="3.09e-05" iyy="0.00252619" iyz="-7.28e-06" izz="0.00172929" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/hip_R_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/hip_R_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="knee_R_Link">
+        <inertial>
+            <origin xyz="-2e-05 0.0342 -0.04804" rpy="0 0 0" />
+            <mass value="3.20" />
+            <inertia ixx="0.01861913" ixy="1.01e-06" ixz="3.47e-06" iyy="0.01891772" iyz="-0.0004376" izz="0.00421806" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/knee_R_Link.STL" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/tron2/DA_TRON2A/urdf/meshes/knee_R_Link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="L_ee_Link">
+        <inertial>
+            <origin xyz=".0 .0 .0" rpy="0 0 0" />
+            <mass value="0.00000001" />
+            <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.001 0.001 0.001" />
+            </geometry>
+            <material name="">
+                <color rgba="1 0 0 1" />
+            </material>
+        </visual>
+    </link>
+
+    <link name="R_ee_Link">
+        <inertial>
+            <origin xyz=".0 .0 .0" rpy="0 0 0" />
+            <mass value="0.00000001" />
+            <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.001 0.001 0.001" />
+            </geometry>
+            <material name="">
+                <color rgba="1 0 0 1" />
+            </material>
+        </visual>
+    </link>
+    <!-- Joints -->
+    <joint name="abad_L_Joint" type="revolute">
+        <origin xyz="-0.00045 0.09949 0.06046" rpy="0 0 0" />
+        <parent link="base_Link" />
+        <child link="abad_L_Link" />
+        <axis xyz="0 1 0" />
+        <limit lower="-3.141592653589793" upper="2.600540585471551" effort="130" velocity="12.57" />
+    </joint>
+
+    <joint name="hip_L_Joint" type="revolute">
+        <origin xyz="0.04164 0.0681 0.0" rpy="0 0 0" />
+        <parent link="abad_L_Link" />
+        <child link="hip_L_Link" />
+        <axis xyz="1 0 0" />
+        <limit lower="-0.2617993877991494" upper="2.9670597283903604" effort="130" velocity="12.57" />
+    </joint>
+
+    <joint name="yaw_L_Joint" type="revolute">
+        <origin xyz="-0.0416 0.0 -0.1142" rpy="0 0 0" />
+        <parent link="hip_L_Link" />
+        <child link="yaw_L_Link" />
+        <axis xyz="0 0 1" />
+        <limit lower="-2.705260340591211" upper="1.4835298641951802" effort="40" velocity="31.83" />
+    </joint>
+
+    <joint name="knee_L_Joint" type="revolute">
+        <origin xyz="0.0 0.0305 -0.2358" rpy="0 0 0" />
+        <parent link="yaw_L_Link" />
+        <child link="knee_L_Link" />
+        <axis xyz="0 1 0" />
+        <limit lower="-2.5656340004316647" upper="2.5656340004316647" effort="130" velocity="12.57" />
+    </joint>
+
+    <joint name="wrist_yaw_L_Joint" type="revolute">
+        <origin xyz="0.0 -0.0305 -0.1912" rpy="0 0 0" />
+        <parent link="knee_L_Link" />
+        <child link="wrist_yaw_L_Link" />
+        <axis xyz="0 0 1" />
+        <limit lower="-2.356194490192345" upper="0.7853981633974483" effort="20" velocity="17.8" />
+    </joint>
+
+    <joint name="wrist_pitch_L_Joint" type="revolute">
+        <origin xyz="0.0 0.0307 -0.1231" rpy="0 0 0" />
+        <parent link="wrist_yaw_L_Link" />
+        <child link="wrist_pitch_L_Link" />
+        <axis xyz="0 1 0" />
+        <limit lower="-0.7853981633974483" upper="0.7853981633974483" effort="20" velocity="17.8" />
+    </joint>
+
+    <joint name="wrist_roll_L_Joint" type="revolute">
+        <origin xyz="0.0338 -0.0304 0.0" rpy="0 0 0" />
+        <parent link="wrist_pitch_L_Link" />
+        <child link="wrist_roll_L_Link" />
+        <axis xyz="1 0 0" />
+        <limit lower="-1.7453292519943295" upper="1.7453292519943295" effort="20" velocity="17.8" />
+    </joint>
+
+    <joint name="grasper_L_joint" type="fixed">
+        <origin xyz="-0.0338 0.0 -0.0825" rpy="0 0 0" />
+        <parent link="wrist_roll_L_Link" />
+        <child link="grasper_L_Link" />
+    </joint>
+
+    <joint name="base_2_Joint" type="fixed">
+        <origin xyz="0.0048 9e-05 -0.09005" rpy="0 0 0" />
+        <parent link="base_Link" />
+        <child link="base_2_Link" />
+    </joint>
+
+    <gazebo reference="base_2_Joint">
+        <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+    <joint name="base_3_joint" type="fixed">
+        <origin xyz="-0.00524 0.0 -0.95" rpy="0 0 0" />
+        <parent link="base_2_Link" />
+        <child link="base_3_Link" />
+    </joint>
+
+    <gazebo reference="base_3_joint">
+        <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+    <joint name="wrist_pitch_R_Joint" type="revolute">
+        <origin xyz="0 -0.0307 -0.1231" rpy="0 0 0" />
+        <parent link="wrist_yaw_R_Link" />
+        <child link="wrist_pitch_R_Link" />
+        <axis xyz="0 1 0" />
+        <limit lower="-0.7853981633974483" upper="0.7853981633974483" effort="20" velocity="17.8" />
+    </joint>
+
+    <joint name="abad_R_Joint" type="revolute">
+        <origin xyz="-0.00045 -0.09949 0.06046" rpy="0 0 0" />
+        <parent link="base_Link" />
+        <child link="abad_R_Link" />
+        <axis xyz="0 1 0" />
+        <limit lower="-3.141592653589793" upper="2.600540585471551" effort="130" velocity="12.57" />
+    </joint>
+
+    <joint name="knee_R_Joint" type="revolute">
+        <origin xyz="0 -0.0305 -0.2358" rpy="0 0 0" />
+        <parent link="yaw_R_Link" />
+        <child link="knee_R_Link" />
+        <axis xyz="0 1 0" />
+        <limit lower="-2.5656340004316647" upper="2.5656340004316647" effort="130" velocity="12.57" />
+    </joint>
+
+    <joint name="wrist_yaw_R_Joint" type="revolute">
+        <origin xyz="0 0.0305 -0.1912" rpy="0 0 0" />
+        <parent link="knee_R_Link" />
+        <child link="wrist_yaw_R_Link" />
+        <axis xyz="0 0 1" />
+        <limit lower="-0.7853981633974483" upper="2.356194490192345" effort="20" velocity="17.8" />
+    </joint>
+
+    <joint name="yaw_R_Joint" type="revolute">
+        <origin xyz="-0.0416 0 -0.1142" rpy="0 0 0" />
+        <parent link="hip_R_Link" />
+        <child link="yaw_R_Link" />
+        <axis xyz="0 0 1" />
+        <limit lower="-1.4835298641951802" upper="2.705260340591211" effort="40" velocity="31.83" />
+    </joint>
+
+    <joint name="hip_R_Joint" type="revolute">
+        <origin xyz="0.04164 -0.0681 0" rpy="0 0 0" />
+        <parent link="abad_R_Link" />
+        <child link="hip_R_Link" />
+        <axis xyz="1 0 0" />
+        <limit lower="-2.9670597283903604" upper="0.2617993877991494" effort="130" velocity="12.57" />
+    </joint>
+
+    <joint name="wrist_roll_R_Joint" type="revolute">
+        <origin xyz="0.0338 0.0304 0" rpy="0 0 0" />
+        <parent link="wrist_pitch_R_Link" />
+        <child link="wrist_roll_R_Link" />
+        <axis xyz="1 0 0" />
+        <limit lower="-1.7453292519943295" upper="1.7453292519943295" effort="20" velocity="17.8" />
+    </joint>
+
+    <joint name="grasper_R_Joint" type="fixed">
+        <origin xyz="-0.0338 0 -0.0825" rpy="0 0 0" />
+        <parent link="wrist_roll_R_Link" />
+        <child link="grasper_R_Link" />
+    </joint>
+
+    <joint name="R_ee_Joint" type="fixed">
+        <origin xyz="-0.0338 0 -0.2125" rpy="0 0 0" />
+        <parent link="wrist_roll_R_Link" />
+        <child link="R_ee_Link" />
+    </joint>
+
+    <joint name="L_ee_Joint" type="fixed">
+        <origin xyz="-0.0338 0.0 -0.2125" rpy="0 0 0" />
+        <parent link="wrist_roll_L_Link" />
+        <child link="L_ee_Link" />
+    </joint>
+
+    <gazebo>
+        <plugin filename="libtron2_hw_sim.so" name="gazebo_ros_control">
+        <robotNamespace>/</robotNamespace>
+        <robotParam>robot_description</robotParam>
+        <robotSimType>tron2_gazebo/Tron2HWSim</robotSimType>
+        </plugin>
+    </gazebo>
+
+    <transmission name="abad_L_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="abad_L_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="abad_L_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="hip_L_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="hip_L_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="hip_L_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="yaw_L_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="yaw_L_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="yaw_L_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="knee_L_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="knee_L_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="knee_L_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="wrist_yaw_L_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="wrist_yaw_L_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="wrist_yaw_L_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="wrist_pitch_L_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="wrist_pitch_L_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="wrist_pitch_L_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="wrist_roll_L_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="wrist_roll_L_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="wrist_roll_L_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="abad_R_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="abad_R_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="abad_R_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="hip_R_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="hip_R_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="hip_R_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="yaw_R_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="yaw_R_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="yaw_R_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="knee_R_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="knee_R_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="knee_R_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="wrist_yaw_R_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="wrist_yaw_R_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="wrist_yaw_R_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="wrist_pitch_R_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="wrist_pitch_R_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="wrist_pitch_R_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="wrist_roll_R_Joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="wrist_roll_R_Joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="wrist_roll_R_Joint_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+</robot>
