@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- ****************************************** D435 Camera ******************************************************** -->
+
+    <!-- Main camera link -->
+    <link name="d435_Link">
+        <visual>
+            <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0.0 -0.0 0"/>
+            <geometry>
+                <box size="0.01 0.01 0.001"/>
+            </geometry>
+            <material name="camera_red">
+                <color rgba="1.0 0.0 0.0 1.0"/>
+            </material>
+        </visual>
+    </link>
+
+    <!-- Camera mount joint -->
+    <joint name="d435_joint" type="fixed">
+        <origin rpy="0 1.5707963267948966 0" xyz="0.12213 0.0 -0.03085"/>
+        <parent link="imu_Link"/>
+        <child link="d435_Link"/>
+    </joint>
+
+    <!-- Camera optical frame -->
+    <joint name="d435_optical_joint" type="fixed">
+        <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0"/>
+        <parent link="d435_Link"/>
+        <child link="d435_optical_frame"/>
+    </joint>
+    <link name="d435_optical_frame"/>
+
+    <!-- Gazebo sensor configuration -->
+    <gazebo reference="d435_Link">
+        <sensor type="depth" name="d435_camera_sensor">
+            <pose>0 0 0 0 0 0</pose>
+            <update_rate>30</update_rate>
+            <visualize>false</visualize>
+            <camera>
+                <horizontal_fov>1.5177</horizontal_fov>
+                <image>
+                    <format>B8G8R8</format>
+                    <width>848</width>
+                    <height>480</height>
+                </image>
+                <clip>
+                    <near>0.1</near>
+                    <far>1.8</far>
+                </clip>
+            </camera>
+            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                <frame_name>d435_optical_frame</frame_name>
+                <min_depth>0.1</min_depth>
+                <max_depth>1.8</max_depth>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <!-- ****************************************** D435 Camera END ******************************************************** -->
+
+</robot>
