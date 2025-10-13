@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+
+<robot name="sf_tron2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Constants for robot dimensions -->
+    <xacro:property name="PI" value="3.1415926535897931"/>
+
+    <!-- joint limits -->
+    <xacro:property name="damping" value="0.0"/>
+    <xacro:property name="friction" value="0.0"/>
+
+    <!-- IMU parameters -->
+    <xacro:property name="imu_mass" value="0.01"/>
+
+    <!-- Base Link parameters -->
+    <xacro:property name="base_mass" value="10.92"/>
+    <xacro:property name="base_com_x" value="0.0067"/>
+    <xacro:property name="base_com_y" value="0.001"/>
+    <xacro:property name="base_com_z" value="0.11976"/>
+    <xacro:property name="base_ixx" value="0.10676912"/>
+    <xacro:property name="base_ixy" value="0.00070697"/>
+    <xacro:property name="base_ixz" value="0.00165993"/>
+    <xacro:property name="base_iyy" value="0.11048777"/>
+    <xacro:property name="base_iyz" value="0.00109598"/>
+    <xacro:property name="base_izz" value="0.07980999"/>
+
+    <!-- Abad Link parameters (left) -->
+    <xacro:property name="abad_mass" value="2.15"/>
+    <xacro:property name="abad_com_x" value="0.00382"/>
+    <xacro:property name="abad_com_y" value="0.0658"/>
+    <xacro:property name="abad_com_z" value="0.00024"/>
+    <xacro:property name="abad_ixx" value="0.00455282"/>
+    <xacro:property name="abad_ixy" value="-0.00003068"/>
+    <xacro:property name="abad_ixz" value="-0.00000099"/>
+    <xacro:property name="abad_iyy" value="0.00368823"/>
+    <xacro:property name="abad_iyz" value="-0.00000618"/>
+    <xacro:property name="abad_izz" value="0.00372679"/>
+
+    <!-- Hip Link parameters (left) -->
+    <xacro:property name="hip_mass" value="0.65"/>
+    <xacro:property name="hip_com_x" value="-0.04048"/>
+    <xacro:property name="hip_com_y" value="0.00011"/>
+    <xacro:property name="hip_com_z" value="-0.05235"/>
+    <xacro:property name="hip_ixx" value="0.00174455"/>
+    <xacro:property name="hip_ixy" value="-0.00000634"/>
+    <xacro:property name="hip_ixz" value="0.00003090"/>
+    <xacro:property name="hip_iyy" value="0.00252619"/>
+    <xacro:property name="hip_iyz" value="0.00000728"/>
+    <xacro:property name="hip_izz" value="0.00172929"/>
+
+    <!-- Yaw Link parameters (left) -->
+    <xacro:property name="yaw_mass" value="1.58"/>
+    <xacro:property name="yaw_com_x" value="0.00006"/>
+    <xacro:property name="yaw_com_y" value="0.01051"/>
+    <xacro:property name="yaw_com_z" value="-0.06665"/>
+    <xacro:property name="yaw_ixx" value="0.01072218"/>
+    <xacro:property name="yaw_ixy" value="0.00000079"/>
+    <xacro:property name="yaw_ixz" value="-0.00000667"/>
+    <xacro:property name="yaw_iyy" value="0.01045244"/>
+    <xacro:property name="yaw_iyz" value="0.00197942"/>
+    <xacro:property name="yaw_izz" value="0.00217735"/>
+
+    <!-- Knee Link parameters (left) -->
+    <xacro:property name="knee_mass" value="3.92"/>
+    <xacro:property name="knee_com_x" value="-0.00009"/>
+    <xacro:property name="knee_com_y" value="-0.03303"/>
+    <xacro:property name="knee_com_z" value="-0.12123"/>
+    <xacro:property name="knee_ixx" value="0.09179022"/>
+    <xacro:property name="knee_ixy" value="0.00000828"/>
+    <xacro:property name="knee_ixz" value="0.00011012"/>
+    <xacro:property name="knee_iyy" value="0.09202670"/>
+    <xacro:property name="knee_iyz" value="0.00154530"/>
+    <xacro:property name="knee_izz" value="0.00521320"/>
+
+    <!-- Foot Link parameters -->
+    <xacro:property name="foot_mass" value="0.9"/>
+    <xacro:property name="foot_com_x" value="0.01691"/>
+    <xacro:property name="foot_com_y" value="-0.03589"/>
+    <xacro:property name="foot_com_z" value="-0.04454"/>
+    <xacro:property name="foot_ixx" value="0.00125165"/>
+    <xacro:property name="foot_ixy" value="0.00001843"/>
+    <xacro:property name="foot_ixz" value="0.00014741"/>
+    <xacro:property name="foot_iyy" value="0.00296403"/>
+    <xacro:property name="foot_iyz" value="-0.00008693"/>
+    <xacro:property name="foot_izz" value="0.00334669"/>
+
+    <!-- Joint positions and orientations -->
+    <!-- Abad joint position -->
+    <xacro:property name="abad_offset_x" value="-0.00045"/>
+    <xacro:property name="abad_offset_y" value="0.09949"/>
+    <xacro:property name="abad_offset_z" value="0.06046"/>
+    <xacro:property name="abad_R_offset_x" value="-0.00045"/>
+    <xacro:property name="abad_R_offset_y" value="-0.09949"/>
+    <xacro:property name="abad_R_offset_z" value="0.06046"/>
+
+    <!-- Hip joint position -->
+    <xacro:property name="hip_offset_x" value="0.04164"/>
+    <xacro:property name="hip_offset_y" value="0.0681"/>
+    <xacro:property name="hip_offset_z" value="0.0"/>
+    <xacro:property name="hip_R_offset_x" value="0.04164"/>
+    <xacro:property name="hip_R_offset_y" value="-0.0681"/>
+    <xacro:property name="hip_R_offset_z" value="0.0"/>
+
+    <!-- Yaw joint position -->
+    <xacro:property name="yaw_offset_x" value="-0.0416"/>
+    <xacro:property name="yaw_offset_y" value="0.0"/>
+    <xacro:property name="yaw_offset_z" value="-0.1142"/>
+    <xacro:property name="yaw_R_offset_x" value="-0.0416"/>
+    <xacro:property name="yaw_R_offset_y" value="0.0"/>
+    <xacro:property name="yaw_R_offset_z" value="-0.1142"/>
+
+    <!-- Knee joint position -->
+    <xacro:property name="knee_offset_x" value="0.0"/>
+    <xacro:property name="knee_offset_y" value="0.0305"/>
+    <xacro:property name="knee_offset_z" value="-0.2358"/>
+
+    <!-- Foot joint position -->
+    <xacro:property name="foot_offset_x" value="0.0"/>
+    <xacro:property name="foot_offset_y" value="0.0065"/>
+    <xacro:property name="foot_R_offset_y" value="-0.0065"/>
+    <xacro:property name="foot_offset_z" value="-0.35"/>
+
+    <!-- Joint limits -->
+    <!-- Abad joint limits -->
+    <xacro:property name="abad_lower" value="-3.141592653589793"/>
+    <xacro:property name="abad_upper" value="2.600540585471551"/>
+    <xacro:property name="abad_effort" value="130"/>
+    <xacro:property name="abad_velocity" value="12.57"/>
+
+    <!-- Hip joint limits -->
+    <xacro:property name="hip_L_lower" value="-0.2617993877991494"/>
+    <xacro:property name="hip_L_upper" value="2.792526803190927"/>
+    <xacro:property name="hip_R_lower" value="-2.792526803190927"/>
+    <xacro:property name="hip_R_upper" value="0.2617993877991494"/>
+    <xacro:property name="hip_effort" value="130"/>
+    <xacro:property name="hip_velocity" value="12.57"/>
+
+    <!-- Yaw joint limits -->
+    <xacro:property name="yaw_L_lower" value="-2.705260340591211"/>
+    <xacro:property name="yaw_L_upper" value="1.4835298641951802"/>
+    <xacro:property name="yaw_R_lower" value="-1.4835298641951802"/>
+    <xacro:property name="yaw_R_upper" value="2.705260340591211"/>
+    <xacro:property name="yaw_effort" value="60"/>
+    <xacro:property name="yaw_velocity" value="14.66"/>
+
+    <!-- Knee joint limits -->
+    <xacro:property name="knee_lower" value="-2.5656340004316647"/>
+    <xacro:property name="knee_upper" value="2.5656340004316647"/>
+    <xacro:property name="knee_effort" value="130"/>
+    <xacro:property name="knee_velocity" value="12.57"/>
+
+    <!-- Foot joint limits -->
+    <xacro:property name="foot_lower" value="-1.6929693744344996"/>
+    <xacro:property name="foot_upper" value="1.6929693744344996"/>
+    <xacro:property name="foot_effort" value="40"/>
+    <xacro:property name="foot_velocity" value="31.83"/>
+
+    <!-- Hip joint axis for left and right legs -->
+    <xacro:property name="hip_axis_x" value="1"/>
+    <xacro:property name="hip_axis_y" value="0"/>
+    <xacro:property name="hip_axis_z" value="0"/>
+
+    <!-- Yaw joint axis for left and right legs -->
+    <xacro:property name="yaw_axis_x" value="0"/>
+    <xacro:property name="yaw_axis_y" value="0"/>
+    <xacro:property name="yaw_axis_z" value="1"/>
+
+</robot> 

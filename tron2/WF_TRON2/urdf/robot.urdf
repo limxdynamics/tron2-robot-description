@@ -72,14 +72,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/base_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/base_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -94,14 +94,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/abad_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/abad_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/abad_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/abad_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -116,14 +116,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/hip_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/hip_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/hip_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/hip_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -138,14 +138,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/yaw_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/yaw_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/yaw_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/yaw_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -160,14 +160,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/knee_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/knee_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/knee_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/knee_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -182,7 +182,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/wheel_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/wheel_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
@@ -204,14 +204,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/abad_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/abad_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/abad_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/abad_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -226,14 +226,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/yaw_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/yaw_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/yaw_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/yaw_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -248,7 +248,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/wheel_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/wheel_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
@@ -270,14 +270,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/hip_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/hip_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/hip_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/hip_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -292,14 +292,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/knee_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/knee_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/meshes_wf_v3/meshes/knee_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2/WF_TRON2/urdf/meshes/knee_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
