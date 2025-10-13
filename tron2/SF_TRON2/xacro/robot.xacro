@@ -12,18 +12,6 @@
     <xacro:include filename="$(find robot_description)/tron2/SF_TRON2/xacro/gazebo.xacro"/>
     <xacro:include filename="$(find robot_description)/tron2/SF_TRON2/xacro/ros2_control_interface.xacro"/>
 
-    <!-- 支撑关节 - 将机器人悬挂在0.8米高度 -->
-    <!-- 世界固定点 -->
-    <link name="world"/>
-    
-    <!-- 悬挂关节 -->
-    <joint name="world_to_base" type="fixed">
-        <origin xyz="0 0 1.5" rpy="0 0 0"/>
-        <parent link="world"/>
-        <child link="base_Link"/>
-    </joint>
-
-
 
     <!-- Base Link -->
     <link name="base_Link">
