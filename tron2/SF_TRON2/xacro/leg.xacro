@@ -29,14 +29,14 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/urdf/meshes/abad_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/abad_${name}_Link.STL"/>
                 </geometry>
                 <material name="grey"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/urdf/meshes/abad_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/abad_${name}_Link.STL"/>
                 </geometry>
             </collision>
         </link>
@@ -69,14 +69,14 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/urdf/meshes/hip_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/hip_${name}_Link.STL"/>
                 </geometry>
                 <material name="grey"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/urdf/meshes/hip_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/hip_${name}_Link.STL"/>
                 </geometry>
             </collision>
         </link>
@@ -109,14 +109,14 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/urdf/meshes/yaw_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/yaw_${name}_Link.STL"/>
                 </geometry>
                 <material name="grey"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/urdf/meshes/yaw_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/yaw_${name}_Link.STL"/>
                 </geometry>
             </collision>
         </link>
@@ -139,14 +139,14 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/urdf/meshes/knee_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/knee_${name}_Link.STL"/>
                 </geometry>
                 <material name="grey"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/urdf/meshes/knee_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/knee_${name}_Link.STL"/>
                 </geometry>
             </collision>
         </link>
@@ -174,14 +174,14 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/urdf/meshes/foot_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/foot_${name}_Link.STL"/>
                 </geometry>
                 <material name="grey"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/urdf/meshes/foot_${name}_Link.STL"/>
+                    <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/foot_${name}_Link.STL"/>
                 </geometry>
             </collision>
         </link>

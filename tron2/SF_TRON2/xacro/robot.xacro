@@ -24,14 +24,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="$(find robot_description)/tron2/SF_TRON2/urdf/meshes/base_Link.STL"/>
+                <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/base_Link.STL"/>
             </geometry>
             <material name="grey"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="$(find robot_description)/tron2/SF_TRON2/urdf/meshes/base_Link.STL"/>
+                <mesh filename="$(find robot_description)/tron2/SF_TRON2/meshes/base_Link.STL"/>
             </geometry>
         </collision>
     </link>
