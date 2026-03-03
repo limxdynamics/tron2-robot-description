@@ -309,7 +309,7 @@
     <origin xyz="-0.00044 0.09178 0.05474" rpy="0 0 0"/>
     <parent link="base_Link"/>
     <child link="proximal_pitch_L_Link"/>
-    <axis xyz="0 1 0"/>
+    <axis xyz="0 0.99619 -0.087155"/>
     <limit lower="-3.141592653589793" upper="2.600540585471551" effort="200" velocity="18.3"/>
   </joint>
 
@@ -357,7 +357,7 @@
     <origin xyz="0.004 -0.06775 -0.35" rpy="0 0 0"/>
     <parent link="knee_R_Link"/>
     <child link="ankle_pitch_R_Link"/>
-    <axis xyz="0 1 0"/>
+    <axis xyz="0 0.99619 0.087155"/>
     <limit lower="-1.6231562043547263" upper="1.6231562043547263" effort="70" velocity="22.52"/>
   </joint>
 
