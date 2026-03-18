@@ -72,14 +72,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/base_Link.STL"/>
+        <mesh filename="../meshes/base_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/base_Link.STL"/>
+        <mesh filename="../meshes/base_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -94,14 +94,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
+        <mesh filename="../meshes/proximal_pitch_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
+        <mesh filename="../meshes/proximal_pitch_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -116,14 +116,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/proximal_roll_L_Link.STL"/>
+        <mesh filename="../meshes/proximal_roll_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/proximal_roll_L_Link.STL"/>
+        <mesh filename="../meshes/proximal_roll_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -138,14 +138,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
+        <mesh filename="../meshes/proximal_yaw_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
+        <mesh filename="../meshes/proximal_yaw_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -160,14 +160,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/elbow_L_Link.STL"/>
+        <mesh filename="../meshes/elbow_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/elbow_L_Link.STL"/>
+        <mesh filename="../meshes/elbow_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -182,14 +182,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/wrist_yaw_L_Link.STL"/>
+        <mesh filename="../meshes/wrist_yaw_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/wrist_yaw_L_Link.STL"/>
+        <mesh filename="../meshes/wrist_yaw_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -204,14 +204,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/wrist_pitch_L_Link.STL"/>
+        <mesh filename="../meshes/wrist_pitch_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/wrist_pitch_L_Link.STL"/>
+        <mesh filename="../meshes/wrist_pitch_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -226,14 +226,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/wrist_roll_L_Link.STL"/>
+        <mesh filename="../meshes/wrist_roll_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/wrist_roll_L_Link.STL"/>
+        <mesh filename="../meshes/wrist_roll_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -248,14 +248,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/grasper_L_Link.STL"/>
+        <mesh filename="../meshes/grasper_L_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/grasper_L_Link.STL"/>
+        <mesh filename="../meshes/grasper_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -270,14 +270,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/base_2_Link.STL"/>
+        <mesh filename="../meshes/base_2_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/base_2_Link.STL"/>
+        <mesh filename="../meshes/base_2_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -292,14 +292,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/base_3_Link.STL"/>
+        <mesh filename="../meshes/base_3_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/base_3_Link.STL"/>
+        <mesh filename="../meshes/base_3_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -314,14 +314,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/wrist_pitch_R_Link.STL"/>
+        <mesh filename="../meshes/wrist_pitch_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/wrist_pitch_R_Link.STL"/>
+        <mesh filename="../meshes/wrist_pitch_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -336,14 +336,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/elbow_R_Link.STL"/>
+        <mesh filename="../meshes/elbow_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/elbow_R_Link.STL"/>
+        <mesh filename="../meshes/elbow_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -358,14 +358,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/wrist_yaw_R_Link.STL"/>
+        <mesh filename="../meshes/wrist_yaw_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/wrist_yaw_R_Link.STL"/>
+        <mesh filename="../meshes/wrist_yaw_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -380,14 +380,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/proximal_roll_R_Link.STL"/>
+        <mesh filename="../meshes/proximal_roll_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/proximal_roll_R_Link.STL"/>
+        <mesh filename="../meshes/proximal_roll_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -402,14 +402,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
+        <mesh filename="../meshes/proximal_pitch_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
+        <mesh filename="../meshes/proximal_pitch_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -424,14 +424,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/wrist_roll_R_Link.STL"/>
+        <mesh filename="../meshes/wrist_roll_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/wrist_roll_R_Link.STL"/>
+        <mesh filename="../meshes/wrist_roll_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -446,14 +446,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
+        <mesh filename="../meshes/proximal_yaw_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
+        <mesh filename="../meshes/proximal_yaw_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -468,14 +468,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/grasper_R_Link.STL"/>
+        <mesh filename="../meshes/grasper_R_Link.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DA_TRON2A/meshes/grasper_R_Link.STL"/>
+        <mesh filename="../meshes/grasper_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
