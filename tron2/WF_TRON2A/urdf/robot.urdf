@@ -13,26 +13,160 @@
     <color rgba="1.0 0.423 0.039 1.0"/>
   </material>
 
-<!-- ros_control plugin -->
+  <!-- ros2_control plugin -->
   <gazebo>
-    <plugin filename="libtron2_hw_sim.so" name="gazebo_ros_control">
-      <robotNamespace>/</robotNamespace>
-      <robotParam>robot_description</robotParam>
-      <robotSimType>tron2_gazebo/Tron2HWSim</robotSimType>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <parameters>$(find tron2_gazebo)/config/default_tron2.yaml</parameters>
     </plugin>
+  </gazebo>
+
+  <ros2_control name="Tron2GazeboSystem" type="system">
+    <hardware>
+      <plugin>tron2_gazebo/Tron2HWSim</plugin>
+    </hardware>
+
+    <joint name="proximal_pitch_L_Joint">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+
+    <joint name="proximal_roll_L_Joint">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+
+    <joint name="proximal_yaw_L_Joint">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+
+    <joint name="knee_L_Joint">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+
+    <joint name="wheel_L_Joint">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+
+    <joint name="proximal_pitch_R_Joint">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+
+    <joint name="proximal_roll_R_Joint">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+
+    <joint name="proximal_yaw_R_Joint">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+
+    <joint name="knee_R_Joint">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+
+    <joint name="wheel_R_Joint">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+
+    <sensor name="limx_imu_sensor">
+      <state_interface name="orientation.x" />
+      <state_interface name="orientation.y" />
+      <state_interface name="orientation.z" />
+      <state_interface name="orientation.w" />
+      <state_interface name="angular_velocity.x" />
+      <state_interface name="angular_velocity.y" />
+      <state_interface name="angular_velocity.z" />
+      <state_interface name="linear_acceleration.x" />
+      <state_interface name="linear_acceleration.y" />
+      <state_interface name="linear_acceleration.z" />
+    </sensor>
+  </ros2_control>
+
+  <gazebo reference="limx_imu">
+    <sensor type="imu" name="limx_imu_sensor">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <ros>
+          <namespace></namespace>
+          <remapping>~/out:=imu</remapping>
+        </ros>
+        <initial_orientation_as_reference>false</initial_orientation_as_reference>
+      </plugin>
+    </sensor>
   </gazebo>
 
   <!-- Ground truth pose plugin -->
   <gazebo>
     <plugin filename="libgazebo_ros_p3d.so" name="p3d_base_controller">
-      <alwaysOn>true</alwaysOn>
-      <updateRate>1000.0</updateRate>
-      <bodyName>base_Link</bodyName>
-      <topicName>ground_truth/state</topicName>
-      <gaussianNoise>0</gaussianNoise>
-      <frameName>world</frameName>
-      <xyzOffsets>0 0 0</xyzOffsets>
-      <rpyOffsets>0 0 0</rpyOffsets>
+      <ros>
+        <remapping>odom:=ground_truth/state</remapping>
+      </ros>
+
+      <update_rate>1000.0</update_rate>
+      <body_name>base_Link</body_name>
+      <frame_name>world</frame_name>
+      <gaussian_noise>0.0</gaussian_noise>
+      <xyz_offset>0 0 0</xyz_offset>
+      <rpy_offset>0 0 0</rpy_offset>
     </plugin>
   </gazebo>
   <!-- Links -->
@@ -61,6 +195,14 @@
   <gazebo reference="limx_imu_joint">
     <disableFixedJointLumping>true</disableFixedJointLumping>
   </gazebo>
+
+  <!-- <link name="world"/>
+
+  <joint name="fixed_to_world" type="fixed">
+    <parent link="world"/>
+    <child link="base_Link"/>
+    <origin xyz="0 0 1.5" rpy="0 0 0"/> 
+  </joint> -->
 
   <link name="base_Link">
     <inertial>
@@ -187,9 +329,9 @@
       <material name="grey"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0.003 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/wheel_L_Link.STL"/>
+          <cylinder length="0.045" radius="0.1" />
       </geometry>
     </collision>
   </link>
@@ -253,9 +395,9 @@
       <material name="grey"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 -0.003 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/wheel_R_Link.STL"/>
+          <cylinder length="0.045" radius="0.1" />
       </geometry>
     </collision>
   </link>
@@ -456,116 +598,5 @@
     <kp value="1000000.0"/>
     <kd value="100.0"/>
   </gazebo>
-
-  <!-- Transmissions -->
-  <transmission name="knee_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="knee_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="knee_R_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="proximal_pitch_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="proximal_pitch_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="proximal_pitch_R_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="wheel_L_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="wheel_L_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="wheel_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="proximal_roll_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="proximal_roll_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="proximal_roll_R_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="proximal_pitch_L_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="proximal_pitch_L_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="proximal_pitch_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="proximal_roll_L_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="proximal_roll_L_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="proximal_roll_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="knee_L_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="knee_L_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="knee_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="proximal_yaw_L_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="proximal_yaw_L_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="proximal_yaw_L_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="wheel_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="wheel_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="wheel_R_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="proximal_yaw_R_Joint_trans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="proximal_yaw_R_Joint">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="proximal_yaw_R_Joint_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
 
 </robot>
