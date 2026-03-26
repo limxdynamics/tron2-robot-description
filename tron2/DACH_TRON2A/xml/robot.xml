@@ -83,7 +83,7 @@
                                     <geom type="mesh" rgba="1 1 1 1" mesh="wrist_pitch_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
                                     <body name="wrist_roll_L_Link" pos="0.0317 -0.0367 0">
                                         <inertial pos="-0.0308134 -6.36286e-05 -0.112951" quat="0.69832 0.0090612 0.00900701 0.715672" mass="0.77" diaginertia="0.00291163 0.00290473 0.000612428" />
-                                        <joint name="wrist_roll_L_Joint" pos="0 0 0" axis="1 0 0" range="-0.78540 0.78540" actuatorfrcrange="-20 20" />
+                                        <joint name="wrist_roll_L_Joint" pos="0 0 0" axis="1 0 0" range="-1.5708 1.5708" actuatorfrcrange="-20 20" />
                                         <geom type="mesh" rgba="1 1 1 1" mesh="wrist_roll_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
                                         <geom pos="-0.0317 0 -0.0812" type="mesh" rgba="1 1 1 1" mesh="grasper_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
                                         <body name="L_ee_link" pos="-0.0338 0.0 -0.2125">
@@ -126,7 +126,7 @@
                                     <geom type="mesh" rgba="1 1 1 1" mesh="wrist_pitch_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
                                     <body name="wrist_roll_R_Link" pos="0.0317 0.0367 0">
                                         <inertial pos="-0.0308134 6.36286e-05 -0.112951" quat="0.715672 0.00900701 0.0090612 0.69832" mass="0.77" diaginertia="0.00291163 0.00290473 0.000612428" />
-                                        <joint name="wrist_roll_R_Joint" pos="0 0 0" axis="1 0 0" range="-0.78540 0.78540" actuatorfrcrange="-20 20" />
+                                        <joint name="wrist_roll_R_Joint" pos="0 0 0" axis="1 0 0" range="-1.5708 1.5708" actuatorfrcrange="-20 20" />
                                         <geom type="mesh" rgba="1 1 1 1" mesh="wrist_roll_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
                                         <geom pos="-0.0317 0 -0.0812" type="mesh" rgba="1 1 1 1" mesh="grasper_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
                                         <body name="R_ee_link" pos="-0.0338 0 -0.2125">
