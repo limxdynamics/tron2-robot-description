@@ -1,0 +1,1052 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<robot name="bipedal_robot">
+
+  <!-- base -->
+  <link name="base_Link">
+    <inertial>
+      <origin xyz="-0.00205 -0.0001 0.11304" rpy="0.0 0.0 0.0"/>
+      <mass value="11.07"/>
+      <inertia ixx="0.10445703" ixy="3.354e-05" ixz="0.00721853" iyy="0.12093021" iyz="8.419e-05" izz="0.08893163"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/base_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/base_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="proximal_pitch_R_Link">
+    <inertial>
+      <origin xyz="-0.00522 -0.06976 -0.00608" rpy="-0.0 0.0 -0.0"/>
+      <mass value="2.07"/>
+      <inertia ixx="0.00415453" ixy="1.4e-05" ixz="1.841e-05" iyy="0.00292229" iyz="-5.196e-05" izz="0.00333339"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_pitch_R_Joint" type="revolute">
+    <origin xyz="-0.00044 -0.09178 0.05474" rpy="-0.0 0.0 -0.0"/>
+    <parent link="base_Link"/>
+    <child link="proximal_pitch_R_Link"/>
+    <axis xyz="-0.0 0.9961947268929313 0.0871554135479712"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="200.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_roll_R_Link">
+    <inertial>
+      <origin xyz="0.03124 -0.00035 -0.08414" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.74"/>
+      <inertia ixx="0.00476933" ixy="1.172e-05" ixz="3.271e-05" iyy="0.00545584" iyz="2.946e-05" izz="0.00305316"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_roll_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_roll_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_roll_R_Joint" type="revolute">
+    <origin xyz="-0.032 -0.0758 -0.00663" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_pitch_R_Link"/>
+    <child link="proximal_roll_R_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-3.2288591161895095" upper="0.2617993877991494" effort="200.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_yaw_R_Link">
+    <inertial>
+      <origin xyz="0.00276 0.00164 -0.11148" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.56"/>
+      <inertia ixx="0.01503966" ixy="3.86e-06" ixz="-0.00026664" iyy="0.01434141" iyz="6.594e-05" izz="0.00375785"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_yaw_R_Joint" type="revolute">
+    <origin xyz="0.032 -0.0 -0.1374" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_roll_R_Link"/>
+    <child link="proximal_yaw_R_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-4.625122517784973" upper="0.5235987755982988" effort="70.0" velocity="22.52"/>
+  </joint>
+  <link name="knee_R_Link">
+    <inertial>
+      <origin xyz="0.00217 -0.02964 -0.12834" rpy="-0.0 0.0 -0.0"/>
+      <mass value="4.25"/>
+      <inertia ixx="0.09615017" ixy="3.746e-05" ixz="0.00092779" iyy="0.09699426" iyz="-0.00286736" izz="0.00528618"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/knee_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/knee_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="knee_R_Joint" type="revolute">
+    <origin xyz="-0.004 0.032 -0.2126" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_yaw_R_Link"/>
+    <child link="knee_R_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.2617993877991494" upper="2.6179938779914944" effort="200.0" velocity="18.3"/>
+  </joint>
+  <link name="ankle_pitch_R_Link">
+    <inertial>
+      <origin xyz="0.01525 0.03542 -0.04668" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.02"/>
+      <inertia ixx="0.0014433" ixy="-3.545e-05" ixz="0.00014515" iyy="0.00346181" iyz="6.835e-05" izz="0.00394199"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/ankle_pitch_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/ankle_pitch_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="ankle_pitch_R_Joint" type="revolute">
+    <origin xyz="0.004 -0.06775 -0.35" rpy="-0.0 0.0 -0.0"/>
+    <parent link="knee_R_Link"/>
+    <child link="ankle_pitch_R_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-1.6231562043547265" upper="1.6231562043547265" effort="70.0" velocity="22.52"/>
+  </joint>
+
+  <!-- proximal pitch L Link -->
+  <link name="proximal_pitch_L_Link">
+    <inertial>
+      <origin xyz="-0.00522 0.06976 -0.00608" rpy="0.0 0.0 0.0"/>
+      <mass value="2.07"/>
+      <inertia ixx="0.00415453" ixy="-1.4e-05" ixz="1.841e-05" iyy="0.00292229" iyz="5.196e-05" izz="0.00333339"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_pitch_L_Joint" type="revolute">
+    <origin xyz="-0.00044 0.09178 0.05474" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="proximal_pitch_L_Link"/>
+    <axis xyz="0.0 0.9961947268929313 -0.0871554135479712"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="200.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_roll_L_Link">
+    <inertial>
+      <origin xyz="0.03124 0.00035 -0.08414" rpy="0.0 0.0 0.0"/>
+      <mass value="1.74"/>
+      <inertia ixx="0.00476933" ixy="-1.172e-05" ixz="3.271e-05" iyy="0.00545584" iyz="-2.946e-05" izz="0.00305316"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_roll_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_roll_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_roll_L_Joint" type="revolute">
+    <origin xyz="-0.032 0.0758 -0.00663" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_pitch_L_Link"/>
+    <child link="proximal_roll_L_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-0.2617993877991494" upper="3.2288591161895095" effort="200.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_yaw_L_Link">
+    <inertial>
+      <origin xyz="0.00276 -0.00164 -0.11148" rpy="0.0 0.0 0.0"/>
+      <mass value="1.56"/>
+      <inertia ixx="0.01503966" ixy="-3.86e-06" ixz="-0.00026664" iyy="0.01434141" iyz="-6.594e-05" izz="0.00375785"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_yaw_L_Joint" type="revolute">
+    <origin xyz="0.032 0.0 -0.1374" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_roll_L_Link"/>
+    <child link="proximal_yaw_L_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-0.5235987755982988" upper="4.625122517784973" effort="70.0" velocity="22.52"/>
+  </joint>
+  <link name="knee_L_Link">
+    <inertial>
+      <origin xyz="0.00217 0.02964 -0.12834" rpy="0.0 0.0 0.0"/>
+      <mass value="4.25"/>
+      <inertia ixx="0.09615017" ixy="-3.746e-05" ixz="0.00092779" iyy="0.09699426" iyz="0.00286736" izz="0.00528618"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/knee_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/knee_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="knee_L_Joint" type="revolute">
+    <origin xyz="-0.004 -0.032 -0.2126" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_yaw_L_Link"/>
+    <child link="knee_L_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.2617993877991494" upper="2.6179938779914944" effort="200.0" velocity="18.3"/>
+  </joint>
+  <link name="ankle_pitch_L_Link">
+    <inertial>
+      <origin xyz="0.01525 -0.03542 -0.04668" rpy="0.0 0.0 0.0"/>
+      <mass value="1.02"/>
+      <inertia ixx="0.0014433" ixy="3.545e-05" ixz="0.00014515" iyy="0.00346181" iyz="-6.835e-05" izz="0.00394199"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/ankle_pitch_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/ankle_pitch_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="ankle_pitch_L_Joint" type="revolute">
+    <origin xyz="0.004 0.06775 -0.35" rpy="0.0 0.0 0.0"/>
+    <parent link="knee_L_Link"/>
+    <child link="ankle_pitch_L_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-1.6231562043547265" upper="1.6231562043547265" effort="70.0" velocity="22.52"/>
+  </joint>
+
+  <!-- transition Link -->
+  <link name="transition_Link">
+    <inertial>
+      <origin xyz="-0.00039 0.0 -0.00283" rpy="0.0 0.0 0.0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.00067994" ixy="0.0" ixz="-1e-07" iyy="0.00028515" iyz="0.0" izz="0.0009611"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/transition_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/transition_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="transition_Joint" type="fixed">
+    <origin xyz="0.0055 0.0 0.26897" rpy="0.0 0.0 3.1415926"/>
+    <parent link="base_Link"/>
+    <child link="transition_Link"/>
+  </joint>
+  <link name="arm_base_Link">
+    <inertial>
+      <origin xyz="-0.00319 -5e-05 0.04322" rpy="0.0 0.0 0.0"/>
+      <mass value="1.06"/>
+      <inertia ixx="0.0010266" ixy="1.86e-06" ixz="-2.95e-06" iyy="0.00114399" iyz="-7.9e-07" izz="0.00090873"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm_base_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm_base_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="arm_base_Joint" type="fixed">
+    <origin xyz="0.006 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="transition_Link"/>
+    <child link="arm_base_Link"/>
+  </joint>
+  <link name="arm1_Link">
+    <inertial>
+      <origin xyz="-0.00077 -6e-05 -0.00686" rpy="0.0 0.0 0.0"/>
+      <mass value="0.77"/>
+      <inertia ixx="0.0006669" ixy="2.74e-06" ixz="1.463e-05" iyy="0.00054501" iyz="1.83e-06" izz="0.00051509"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm1_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm1_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="arm1_Joint" type="revolute">
+    <origin xyz="0.0 0.0 0.138" rpy="0.0 0.0 0.0"/>
+    <parent link="arm_base_Link"/>
+    <child link="arm1_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-2.705260340591211" upper="2.705260340591211" effort="100.0" velocity="5.0"/>
+  </joint>
+  <link name="arm2_Link">
+    <inertial>
+      <origin xyz="0.0008 -0.0789 0.00112" rpy="0.0 0.0 0.0"/>
+      <mass value="0.69"/>
+      <inertia ixx="0.00201094" ixy="-2.399e-05" ixz="-7.3e-07" iyy="0.00063544" iyz="5.831e-05" izz="0.00181944"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm2_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm2_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="arm2_Joint" type="revolute">
+    <origin xyz="0.0 0.0 0.0" rpy="1.5707963 3.1415926 0.0"/>
+    <parent link="arm1_Link"/>
+    <child link="arm2_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-1.739918731313147" upper="1.739918731313147" effort="100.0" velocity="5.0"/>
+  </joint>
+  <link name="arm3_Link">
+    <inertial>
+      <origin xyz="0.00015 -0.00121 -0.04861" rpy="0.0 0.0 0.0"/>
+      <mass value="0.67"/>
+      <inertia ixx="0.0034323" ixy="-2.7e-07" ixz="3.05e-06" iyy="0.00338663" iyz="-3.55e-05" izz="0.00028854"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm3_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm3_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="arm3_Joint" type="revolute">
+    <origin xyz="0.0 -0.31 0.0" rpy="-1.5707963 0.0 3.1415926926"/>
+    <parent link="arm2_Link"/>
+    <child link="arm3_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-2.7499407694422655" upper="2.7499407694422655" effort="100.0" velocity="5.0"/>
+  </joint>
+  <link name="arm4_Link">
+    <inertial>
+      <origin xyz="-0.00031 -0.05675 0.00076" rpy="0.0 0.0 0.0"/>
+      <mass value="0.48"/>
+      <inertia ixx="0.00050387" ixy="-5.3e-06" ixz="6e-08" iyy="0.00023502" iyz="1.816e-05" izz="0.0004015"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm4_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm4_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="arm4_Joint" type="revolute">
+    <origin xyz="0.0 0.0 0.0" rpy="-1.5707963 0.0 3.1415926926"/>
+    <parent link="arm3_Link"/>
+    <child link="arm4_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-1.0100220381291185" upper="2.1399481958702475" effort="100.0" velocity="5.0"/>
+  </joint>
+  <link name="arm5_Link">
+    <inertial>
+      <origin xyz="0.00266 0.00201 -0.11621" rpy="0.0 0.0 0.0"/>
+      <mass value="0.58"/>
+      <inertia ixx="0.00089538" ixy="6.48e-06" ixz="-1.463e-05" iyy="0.00085866" iyz="-4.035e-05" izz="0.00021775"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm5_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm5_Link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="arm5_Joint" type="revolute">
+    <origin xyz="0.0 -0.27001 0.0" rpy="1.5707963 -1.5707963 0.0"/>
+    <parent link="arm4_Link"/>
+    <child link="arm5_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-2.7499407694422655" upper="2.7499407694422655" effort="100.0" velocity="5.0"/>
+  </joint>
+  <link name="arm6_Link">
+    <inertial>
+      <origin xyz="0.0001 0.00108 -0.00019" rpy="0.0 0.0 0.0"/>
+      <mass value="0.31"/>
+      <inertia ixx="6.027e-05" ixy="-2.5e-07" ixz="1.6e-07" iyy="4.7e-05" iyz="4e-08" izz="5.757e-05"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm6_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm6_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="arm6_Joint" type="revolute">
+    <origin xyz="0.0 0.0 0.0" rpy="1.5707963 -1.5707963 0.0"/>
+    <parent link="arm5_Link"/>
+    <child link="arm6_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-0.730071226109228" upper="0.9499827118605135" effort="100.0" velocity="5.0"/>
+  </joint>
+  <link name="arm7_Link">
+    <inertial>
+      <origin xyz="-0.00014 -0.0001 -0.00275" rpy="0.0 0.0 0.0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1.1e-07" ixy="0.0" ixz="0.0" iyy="1.1e-07" iyz="0.0" izz="2e-07"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm7_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/arm7_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="arm7_Joint" type="revolute">
+    <origin xyz="0.0 -0.0235 0.0" rpy="1.5707963 0.0 0.0"/>
+    <parent link="arm6_Link"/>
+    <child link="arm7_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-1.5707963267948966" upper="1.5707963267948966" effort="100.0" velocity="5.0"/>
+  </joint>
+  <link name="gripper_flange_Link">
+    <inertial>
+      <origin xyz="0.0 0.0 -0.00032" rpy="0.0 0.0 0.0"/>
+      <mass value="0.05"/>
+      <inertia ixx="2.697e-05" ixy="0.0" ixz="0.0" iyy="4.311e-05" iyz="0.0" izz="2.479e-05"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/gripper_flange_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/gripper_flange_Link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="gripper_flange_Joint" type="fixed">
+    <origin xyz="0.032 0.0 -0.0235" rpy="-1.5708 0.0 -1.5708"/>
+    <parent link="arm7_Link"/>
+    <child link="gripper_flange_Link"/>
+  </joint>
+  <link name="gripper_base_Link">
+    <inertial>
+      <origin xyz="-0.00018 8e-05 0.03214" rpy="0.0 0.0 0.0"/>
+      <mass value="0.45"/>
+      <inertia ixx="0.00092934" ixy="3.4e-07" ixz="-7.38e-06" iyy="0.00071447" iyz="5e-08" izz="0.00039442"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/gripper_base_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/gripper_base_Link_collision1.STL"/>
+      </geometry>
+    </collision>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/gripper_base_Link_collision2.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="gripper_base_Joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0055" rpy="0.0 0.0 0.0"/>
+    <parent link="gripper_flange_Link"/>
+    <child link="gripper_base_Link"/>
+  </joint>
+  <link name="gripper1_Link">
+    <inertial>
+      <origin xyz="0.00065 -0.04919 0.00972" rpy="0.0 0.0 0.0"/>
+      <mass value="0.03"/>
+      <inertia ixx="7.371e-05" ixy="-1.13e-06" ixz="2.1e-07" iyy="7.81e-06" iyz="-1.372e-05" izz="7.47e-05"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/gripper1_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/gripper1_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="gripper1_Joint" type="prismatic">
+    <origin xyz="0.0 0.0 0.1358" rpy="1.5707963 0.0 3.1415926"/>
+    <parent link="gripper_base_Link"/>
+    <child link="gripper1_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="0.0" upper="0.04991641660703782" effort="10.0" velocity="3.0"/>
+  </joint>
+  <link name="gripper2_Link">
+    <inertial>
+      <origin xyz="0.00065 -0.04919 0.00972" rpy="0.0 0.0 0.0"/>
+      <mass value="0.03"/>
+      <inertia ixx="7.371e-05" ixy="-1.13e-06" ixz="2.1e-07" iyy="7.81e-06" iyz="-1.372e-05" izz="7.47e-05"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/gripper2_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/gripper2_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="gripper2_Joint" type="prismatic">
+    <origin xyz="0.0 0.0 0.1358" rpy="1.5707963 0.0 0.0"/>
+    <parent link="gripper_base_Link"/>
+    <child link="gripper2_Link"/>
+    <axis xyz="-0.0 -0.0 1.0"/>
+    <limit lower="-0.04991641660703782" upper="0.0" effort="10.0" velocity="3.0"/>
+  </joint>
+
+  <!-- ros2_control plugin -->
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <parameters>$(find tron2_gazebo)/config/default_tron2.yaml</parameters>
+    </plugin>
+  </gazebo>
+  <ros2_control name="bipedal_robotGazeboSystem" type="system">
+    <hardware>
+      <plugin>tron2_gazebo/Tron2HWSim</plugin>
+    </hardware>
+    <joint name="proximal_pitch_L_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="proximal_roll_L_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="proximal_yaw_L_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="knee_L_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="ankle_pitch_L_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="arm1_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="arm2_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="arm3_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="arm4_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="arm5_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="arm6_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="arm7_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="gripper1_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="gripper2_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="proximal_pitch_R_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="proximal_roll_R_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="proximal_yaw_R_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="knee_R_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="ankle_pitch_R_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <sensor name="limx_imu_sensor">
+      <state_interface name="orientation.x"/>
+      <state_interface name="orientation.y"/>
+      <state_interface name="orientation.z"/>
+      <state_interface name="orientation.w"/>
+      <state_interface name="angular_velocity.x"/>
+      <state_interface name="angular_velocity.y"/>
+      <state_interface name="angular_velocity.z"/>
+      <state_interface name="linear_acceleration.x"/>
+      <state_interface name="linear_acceleration.y"/>
+      <state_interface name="linear_acceleration.z"/>
+    </sensor>
+  </ros2_control>
+  <gazebo reference="limx_imu">
+    <sensor type="imu" name="limx_imu_sensor">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <ros>
+          <namespace/>
+          <remapping>~/out:=imu</remapping>
+        </ros>
+        <initial_orientation_as_reference>false</initial_orientation_as_reference>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- Ground truth pose plugin -->
+  <gazebo>
+    <plugin filename="libgazebo_ros_p3d.so" name="p3d_base_controller">
+      <ros>
+        <remapping>odom:=ground_truth/state</remapping>
+      </ros>
+      <update_rate>1000.0</update_rate>
+      <body_name>base_Link</body_name>
+      <frame_name>world</frame_name>
+      <gaussian_noise>0.0</gaussian_noise>
+      <xyz_offset>0 0 0</xyz_offset>
+      <rpy_offset>0 0 0</rpy_offset>
+    </plugin>
+  </gazebo>
+
+  <!-- IMU Link -->
+  <joint name="limx_imu_joint" type="fixed">
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="limx_imu"/>
+  </joint>
+  <link name="limx_imu">
+    <inertial>
+      <mass value="0.01"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.015 0.004"/>
+      </geometry>
+      <material name="orange">
+        <color rgba="1.0 0.423 0.039 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <gazebo reference="limx_imu_joint">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+
+  <!-- Camera -->
+  <link name="d435_Link">
+    <visual>
+      <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0.0 -0.0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="d435_joint" type="fixed">
+    <origin rpy="0.0 1.063778179 0.0" xyz="0.12213 0.01759 0.00599"/>
+    <parent link="limx_imu"/>
+    <child link="d435_Link"/>
+  </joint>
+  <joint name="d435_optical_joint" type="fixed">
+    <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0"/>
+    <parent link="d435_Link"/>
+    <child link="d435_optical_frame"/>
+  </joint>
+  <link name="d435_optical_frame"/>
+  <gazebo reference="d435_Link">
+    <sensor type="depth" name="d435_camera_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <update_rate>60</update_rate>
+      <visualize>false</visualize>
+      <camera>
+        <horizontal_fov>1.5177</horizontal_fov>
+        <image>
+          <format>B8G8R8</format>
+          <width>64</width>
+          <height>48</height>
+        </image>
+        <clip>
+          <near>0.1</near>
+          <far>1.8</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <ros>
+          <namespace>d435</namespace>
+        </ros>
+        <camera_name>d435_camera</camera_name>
+        <frame_name>d435_optical_frame</frame_name>
+        <min_depth>0.1</min_depth>
+        <max_depth>1.8</max_depth>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- Gazebo link physics -->
+  <gazebo reference="base_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="proximal_pitch_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="proximal_roll_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="proximal_yaw_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="knee_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="ankle_pitch_L_Link">
+    <mu1>2.0</mu1>
+    <mu2>2.0</mu2>
+    <material>Gazebo/DarkGrey</material>
+    <self_collide>1</self_collide>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+  <gazebo reference="transition_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm_base_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm1_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm2_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm3_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm4_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm5_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm6_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm7_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="gripper_flange_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="gripper_base_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="gripper1_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="gripper2_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="proximal_pitch_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="proximal_roll_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="proximal_yaw_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="knee_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="ankle_pitch_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+</robot>
