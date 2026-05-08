@@ -56,17 +56,17 @@
       <geom type="mesh" rgba="1 1 1 1" mesh="base_3_Link" pos="0.00056 -9e-05 -1.00235" quat="1 0 0 0" />
       <body name="proximal_pitch_L_Link" pos="-0.00044 0.09178 0.05474">
         <inertial pos="-0.00522 0.06976 -0.00608" quat="0.749652 0.661722 -0.011603 0.00328095" mass="2.07" diaginertia="0.00415508 0.00333952 0.00291561" />
-        <joint name="proximal_pitch_L_Joint" pos="0 0 0" axis="0 0.996195 -0.0871554" range="-3.14159 2.60054" actuatorfrcrange="-200 200" />
+        <joint name="proximal_pitch_L_Joint" pos="0 0 0" axis="0 0.996195 -0.0871554" range="-3.14159 2.60054" actuatorfrcrange="-150 150" />
         <geom type="mesh" rgba="1 1 1 1" mesh="proximal_pitch_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
         <!-- <geom type="mesh" rgba="1 1 1 1" mesh="proximal_pitch_L_Link" /> -->
         <body name="proximal_roll_L_Link" pos="-0.032 0.0758 -0.00663">
           <inertial pos="0.03124 0.00035 -0.08414" quat="0.700753 -0.0110253 -0.00230623 0.713315" mass="1.74" diaginertia="0.00545642 0.00476973 0.00305218" />
-          <joint name="proximal_roll_L_Joint" pos="0 0 0" axis="1 0 0" range="-0.261799 3.22886" actuatorfrcrange="-200 200" />
+          <joint name="proximal_roll_L_Joint" pos="0 0 0" axis="1 0 0" range="-0.261799 3.19395248" actuatorfrcrange="-150 150" />
           <geom type="mesh" rgba="1 1 1 1" mesh="proximal_roll_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
           <!-- <geom type="mesh" rgba="1 1 1 1" mesh="proximal_roll_L_Link" /> -->
           <body name="proximal_yaw_L_Link" pos="0.032 0 -0.1374">
             <inertial pos="-0.00428 0.00216 -0.09174" quat="0.999861 0.014434 5.56061e-05 0.00830807" mass="1.15" diaginertia="0.00994191 0.00955689 0.00229096" />
-            <joint name="proximal_yaw_L_Joint" pos="0 0 0" axis="0 0 1" range="-3.66519 1.48353" actuatorfrcrange="-70 70" />
+            <joint name="proximal_yaw_L_Joint" pos="0 0 0" axis="0 0 1" range="-3.66519 1.48353" actuatorfrcrange="-60 60" />
             <geom type="mesh" rgba="1 1 1 1" mesh="proximal_yaw_L_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
             <!-- <geom type="mesh" rgba="1 1 1 1" mesh="proximal_yaw_L_Link" /> -->
             <body name="elbow_L_Link" pos="0.004 0.02972 -0.2126">
@@ -107,17 +107,17 @@
       </body>
       <body name="proximal_pitch_R_Link" pos="-0.00044 -0.09178 0.05474">
         <inertial pos="-0.00522 -0.06976 -0.00608" quat="0.661722 0.749652 -0.00328095 0.011603" mass="2.07" diaginertia="0.00415508 0.00333952 0.00291561" />
-        <joint name="proximal_pitch_R_Joint" pos="0 0 0" axis="0 0.996195 0.0871554" range="-3.14159 2.60054" actuatorfrcrange="-200 200" />
+        <joint name="proximal_pitch_R_Joint" pos="0 0 0" axis="0 0.996195 0.0871554" range="-3.14159 2.60054" actuatorfrcrange="-150 150" />
         <geom type="mesh" rgba="1 1 1 1" mesh="proximal_pitch_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
         <!-- <geom type="mesh" rgba="1 1 1 1" mesh="proximal_pitch_R_Link" /> -->
         <body name="proximal_roll_R_Link" pos="-0.032 -0.0758 -0.00663">
           <inertial pos="0.03124 -0.00035 -0.08414" quat="0.713315 -0.00230623 -0.0110253 0.700753" mass="1.74" diaginertia="0.00545642 0.00476973 0.00305218" />
-          <joint name="proximal_roll_R_Joint" pos="0 0 0" axis="1 0 0" range="-3.22886 0.261799" actuatorfrcrange="-200 200" />
+          <joint name="proximal_roll_R_Joint" pos="0 0 0" axis="1 0 0" range="-3.19395248 0.261799" actuatorfrcrange="-150 150" />
           <geom type="mesh" rgba="1 1 1 1" mesh="proximal_roll_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
           <!-- <geom type="mesh" rgba="1 1 1 1" mesh="proximal_roll_R_Link" /> -->
           <body name="proximal_yaw_R_Link" pos="0.032 0 -0.1374">
             <inertial pos="-0.00428 -0.00216 -0.09174" quat="0.999861 -0.014434 5.56061e-05 -0.00830807" mass="1.15" diaginertia="0.00994191 0.00955689 0.00229096" />
-            <joint name="proximal_yaw_R_Joint" pos="0 0 0" axis="0 0 1" range="-1.48353 3.66519" actuatorfrcrange="-70 70" />
+            <joint name="proximal_yaw_R_Joint" pos="0 0 0" axis="0 0 1" range="-1.48353 3.66519" actuatorfrcrange="-60 60" />
             <geom type="mesh" rgba="1 1 1 1" mesh="proximal_yaw_R_Link" contype="1" conaffinity="0" density="0" group="1" class="visualgeom" />
             <!-- <geom type="mesh" rgba="1 1 1 1" mesh="proximal_yaw_R_Link" /> -->
             <body name="elbow_R_Link" pos="0.004 -0.02972 -0.2126">
@@ -178,16 +178,16 @@
   </worldbody>
 
   <actuator>
-    <motor name="proximal_pitch_L_Joint" joint="proximal_pitch_L_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1" />
-    <motor name="proximal_roll_L_Joint" joint="proximal_roll_L_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1" />
-    <motor name="proximal_yaw_L_Joint" joint="proximal_yaw_L_Joint" ctrllimited="true" ctrlrange="-70 70" gear="1" />
+    <motor name="proximal_pitch_L_Joint" joint="proximal_pitch_L_Joint" ctrllimited="true" ctrlrange="-150 150" gear="1" />
+    <motor name="proximal_roll_L_Joint" joint="proximal_roll_L_Joint" ctrllimited="true" ctrlrange="-150 150" gear="1" />
+    <motor name="proximal_yaw_L_Joint" joint="proximal_yaw_L_Joint" ctrllimited="true" ctrlrange="-60 60" gear="1" />
     <motor name="elbow_L_Joint" joint="elbow_L_Joint" ctrllimited="true" ctrlrange="-70 70" gear="1" />
     <motor name="wrist_yaw_L_Joint" joint="wrist_yaw_L_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1" />
     <motor name="wrist_pitch_L_Joint" joint="wrist_pitch_L_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1" />
     <motor name="wrist_roll_L_Joint" joint="wrist_roll_L_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1" />
-    <motor name="proximal_pitch_R_Joint" joint="proximal_pitch_R_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1" />
-    <motor name="proximal_roll_R_Joint" joint="proximal_roll_R_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1" />
-    <motor name="proximal_yaw_R_Joint" joint="proximal_yaw_R_Joint" ctrllimited="true" ctrlrange="-70 70" gear="1" />
+    <motor name="proximal_pitch_R_Joint" joint="proximal_pitch_R_Joint" ctrllimited="true" ctrlrange="-150 150" gear="1" />
+    <motor name="proximal_roll_R_Joint" joint="proximal_roll_R_Joint" ctrllimited="true" ctrlrange="-150 150" gear="1" />
+    <motor name="proximal_yaw_R_Joint" joint="proximal_yaw_R_Joint" ctrllimited="true" ctrlrange="-60 60" gear="1" />
     <motor name="elbow_R_Joint" joint="elbow_R_Joint" ctrllimited="true" ctrlrange="-70 70" gear="1" />
     <motor name="wrist_yaw_R_Joint" joint="wrist_yaw_R_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1" />
     <motor name="wrist_pitch_R_Joint" joint="wrist_pitch_R_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1" />

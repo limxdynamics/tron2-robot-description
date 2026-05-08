@@ -63,7 +63,7 @@
     <parent link="base_Link"/>
     <child link="proximal_pitch_R_Link"/>
     <axis xyz="-0.0 0.9961947268929313 0.0871554135479712"/>
-    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="200.0" velocity="18.3"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3"/>
   </joint>
   <link name="proximal_roll_R_Link">
     <inertial>
@@ -87,7 +87,7 @@
     <parent link="proximal_pitch_R_Link"/>
     <child link="proximal_roll_R_Link"/>
     <axis xyz="1.0 0.0 0.0"/>
-    <limit lower="-3.2288591161895095" upper="0.2617993877991494" effort="200.0" velocity="18.3"/>
+    <limit lower="-3.19395248" upper="0.2617993877991494" effort="150" velocity="18.3"/>
   </joint>
   <link name="proximal_yaw_R_Link">
     <inertial>
@@ -111,7 +111,7 @@
     <parent link="proximal_roll_R_Link"/>
     <child link="proximal_yaw_R_Link"/>
     <axis xyz="0.0 0.0 1.0"/>
-    <limit lower="-1.4835298641951802" upper="3.6651914291880923" effort="70.0" velocity="22.52"/>
+    <limit lower="-1.4835298641951802" upper="3.6651914291880923" effort="60" velocity="22.52"/>
   </joint>
   <link name="knee_R_Link">
     <inertial>
@@ -135,7 +135,7 @@
     <parent link="proximal_yaw_R_Link"/>
     <child link="knee_R_Link"/>
     <axis xyz="0.0 1.0 0.0"/>
-    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="200.0" velocity="18.3"/>
+    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150" velocity="18.3"/>
   </joint>
   <link name="wheel_R_Link">
     <inertial>
@@ -185,7 +185,7 @@
     <parent link="base_Link"/>
     <child link="proximal_pitch_L_Link"/>
     <axis xyz="0.0 0.9961947268929313 -0.0871554135479712"/>
-    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="200.0" velocity="18.3"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3"/>
   </joint>
   <link name="proximal_roll_L_Link">
     <inertial>
@@ -209,7 +209,7 @@
     <parent link="proximal_pitch_L_Link"/>
     <child link="proximal_roll_L_Link"/>
     <axis xyz="1.0 0.0 0.0"/>
-    <limit lower="-0.2617993877991494" upper="3.2288591161895095" effort="200.0" velocity="18.3"/>
+    <limit lower="-0.2617993877991494" upper="3.19395248" effort="150" velocity="18.3"/>
   </joint>
   <link name="proximal_yaw_L_Link">
     <inertial>
@@ -233,7 +233,7 @@
     <parent link="proximal_roll_L_Link"/>
     <child link="proximal_yaw_L_Link"/>
     <axis xyz="0.0 0.0 1.0"/>
-    <limit lower="-3.6651914291880923" upper="1.4835298641951802" effort="70.0" velocity="22.52"/>
+    <limit lower="-3.6651914291880923" upper="1.4835298641951802" effort="60" velocity="22.52"/>
   </joint>
   <link name="knee_L_Link">
     <inertial>
@@ -257,7 +257,7 @@
     <parent link="proximal_yaw_L_Link"/>
     <child link="knee_L_Link"/>
     <axis xyz="0.0 1.0 0.0"/>
-    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="200.0" velocity="18.3"/>
+    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150" velocity="18.3"/>
   </joint>
   <link name="wheel_L_Link">
     <inertial>
