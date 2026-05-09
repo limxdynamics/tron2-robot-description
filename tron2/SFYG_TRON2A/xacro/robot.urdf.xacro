@@ -18,13 +18,13 @@
   </material>
 
   <!-- IMU Link -->
-  <joint name="limx_imu_joint" type="fixed">
+  <joint name="base_imu_joint" type="fixed">
     <origin rpy="0. 0. 0." xyz="0. 0. 0." />
     <parent link="base_Link" />
-    <child link="limx_imu" />
+    <child link="base_imu" />
   </joint>
 
-  <link name="limx_imu">
+  <link name="base_imu">
     <inertial>
       <mass value="0.01" />
       <origin rpy="0 0 0" xyz="0 0 0" />
@@ -39,7 +39,7 @@
     </visual>
   </link>
 
-  <gazebo reference="limx_imu_joint">
+  <gazebo reference="base_imu_joint">
     <disableFixedJointLumping>true</disableFixedJointLumping>
   </gazebo>
 
@@ -788,7 +788,7 @@
 
   <joint name="d435_joint" type="fixed">
     <origin rpy="0 1.063778179 0" xyz="0.12213 0.01759 0.00599" />
-    <parent link="limx_imu" />
+    <parent link="base_imu" />
     <child link="d435_Link" />
   </joint>
 

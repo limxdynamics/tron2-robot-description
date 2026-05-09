@@ -278,7 +278,7 @@
         <state_interface name="effort" />
       </joint>
 
-      <sensor name="limx_imu_sensor">
+      <sensor name="base_imu_sensor">
         <state_interface name="orientation.x" />
         <state_interface name="orientation.y" />
         <state_interface name="orientation.z" />
@@ -293,8 +293,8 @@
     </ros2_control>
 
     <!-- IMU Gazebo sensor plugin (ROS2) -->
-    <gazebo reference="limx_imu">
-      <sensor type="imu" name="limx_imu_sensor">
+    <gazebo reference="base_imu">
+      <sensor type="imu" name="base_imu_sensor">
         <always_on>true</always_on>
         <update_rate>100</update_rate>
         <visualize>true</visualize>
