@@ -2,7 +2,7 @@
 <robot name="bipedal_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:arg name="ros_version" default="$(optenv ROS_VERSION 2)" />
-  <xacro:arg name="use_primitive_collision" default="true" />
+  <xacro:arg name="use_primitive_collision" default="false" />
   <xacro:property name="ros_version" value="$(arg ros_version)" />
   <xacro:property name="use_primitive" value="$(arg use_primitive_collision)" />
 
