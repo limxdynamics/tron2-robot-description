@@ -56,12 +56,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/base_Link.STL" />
+        <mesh filename="package://robot_description/tron2/WFYG_TRON2A/meshes/base_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/base_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WFYG_TRON2A/meshes/base_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -81,12 +81,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_L_Link.STL" />
+        <mesh filename="package://robot_description/tron2/WFYG_TRON2A/meshes/proximal_pitch_L_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_L_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WFYG_TRON2A/meshes/proximal_pitch_L_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -106,12 +106,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_L_Link.STL" />
+        <mesh filename="package://robot_description/tron2/WFYG_TRON2A/meshes/proximal_roll_L_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_L_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WFYG_TRON2A/meshes/proximal_roll_L_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -131,12 +131,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_L_Link.STL" />
+        <mesh filename="package://robot_description/tron2/WFYG_TRON2A/meshes/proximal_yaw_L_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_L_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WFYG_TRON2A/meshes/proximal_yaw_L_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -156,12 +156,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_L_Link.STL" />
+        <mesh filename="package://robot_description/tron2/WFYG_TRON2A/meshes/knee_L_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_L_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WFYG_TRON2A/meshes/knee_L_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -181,7 +181,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/wheel_L_Link.STL" />
+        <mesh filename="package://robot_description/tron2/WFYG_TRON2A/meshes/wheel_L_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
@@ -203,12 +203,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_R_Link.STL" />
+        <mesh filename="package://robot_description/tron2/WFYG_TRON2A/meshes/proximal_pitch_R_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_R_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WFYG_TRON2A/meshes/proximal_pitch_R_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -228,12 +228,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_R_Link.STL" />
+        <mesh filename="package://robot_description/tron2/WFYG_TRON2A/meshes/proximal_roll_R_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_R_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WFYG_TRON2A/meshes/proximal_roll_R_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -253,12 +253,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_R_Link.STL" />
+        <mesh filename="package://robot_description/tron2/WFYG_TRON2A/meshes/proximal_yaw_R_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_R_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WFYG_TRON2A/meshes/proximal_yaw_R_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -278,12 +278,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_R_Link.STL" />
+        <mesh filename="package://robot_description/tron2/WFYG_TRON2A/meshes/knee_R_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_R_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WFYG_TRON2A/meshes/knee_R_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -303,7 +303,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/wheel_R_Link.STL" />
+        <mesh filename="package://robot_description/tron2/WFYG_TRON2A/meshes/wheel_R_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
@@ -320,8 +320,8 @@
     <origin xyz="-0.00044 0.09178 0.05474" rpy="0 0 0" />
     <parent link="base_Link" />
     <child link="proximal_pitch_L_Link" />
-    <axis xyz="0 0.99619 -0.087155" />
-    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3" />
+    <axis xyz="0.0 0.996194726892931 -0.0871554135479712" />
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="200" velocity="18.3" />
   </joint>
 
   <joint name="proximal_roll_L_Joint" type="revolute">
@@ -329,7 +329,7 @@
     <parent link="proximal_pitch_L_Link" />
     <child link="proximal_roll_L_Link" />
     <axis xyz="1 0 0" />
-    <limit lower="-0.2617993877991494" upper="3.19395248" effort="150" velocity="18.3" />
+    <limit lower="-0.2617993877991494" upper="3.2288591161895095" effort="200" velocity="18.3" />
   </joint>
 
   <joint name="proximal_yaw_L_Joint" type="revolute">
@@ -337,7 +337,7 @@
     <parent link="proximal_roll_L_Link" />
     <child link="proximal_yaw_L_Link" />
     <axis xyz="0 0 1" />
-    <limit lower="-3.6651914291880923" upper="1.4835298641951802" effort="60" velocity="22.52" />
+    <limit lower="-3.6651914291880923" upper="1.4835298641951802" effort="70" velocity="22.52" />
   </joint>
 
   <joint name="knee_L_Joint" type="revolute">
@@ -345,7 +345,7 @@
     <parent link="proximal_yaw_L_Link" />
     <child link="knee_L_Link" />
     <axis xyz="0 1 0" />
-    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150" velocity="18.3" />
+    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="200" velocity="18.3" />
   </joint>
 
   <joint name="wheel_L_Joint" type="revolute">
@@ -353,15 +353,15 @@
     <parent link="knee_L_Link" />
     <child link="wheel_L_Link" />
     <axis xyz="0 1 0" />
-    <limit lower="-1745329.2519943293" upper="1745329.2519943293" effort="22" velocity="41.89" />
+    <limit lower="-1745329.2519943295" upper="1745329.2519943295" effort="22" velocity="41.89" />
   </joint>
 
   <joint name="proximal_pitch_R_Joint" type="revolute">
     <origin xyz="-0.00044 -0.09178 0.05474" rpy="0 0 0" />
     <parent link="base_Link" />
     <child link="proximal_pitch_R_Link" />
-    <axis xyz="0 0.99619 0.087155" />
-    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3" />
+    <axis xyz="-0.0 0.996194726892931 0.0871554135479712" />
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="200" velocity="18.3" />
   </joint>
 
   <joint name="proximal_roll_R_Joint" type="revolute">
@@ -369,7 +369,7 @@
     <parent link="proximal_pitch_R_Link" />
     <child link="proximal_roll_R_Link" />
     <axis xyz="1 0 0" />
-    <limit lower="-3.19395248" upper="0.2617993877991494" effort="150" velocity="18.3" />
+    <limit lower="-3.2288591161895095" upper="0.2617993877991494" effort="200" velocity="18.3" />
   </joint>
 
   <joint name="proximal_yaw_R_Joint" type="revolute">
@@ -377,7 +377,7 @@
     <parent link="proximal_roll_R_Link" />
     <child link="proximal_yaw_R_Link" />
     <axis xyz="0 0 1" />
-    <limit lower="-1.4835298641951802" upper="3.6651914291880923" effort="60" velocity="22.52" />
+    <limit lower="-1.4835298641951802" upper="3.6651914291880923" effort="70" velocity="22.52" />
   </joint>
 
   <joint name="knee_R_Joint" type="revolute">
@@ -385,7 +385,7 @@
     <parent link="proximal_yaw_R_Link" />
     <child link="knee_R_Link" />
     <axis xyz="0 1 0" />
-    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150" velocity="18.3" />
+    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="200" velocity="18.3" />
   </joint>
 
   <joint name="wheel_R_Joint" type="revolute">
@@ -393,7 +393,7 @@
     <parent link="knee_R_Link" />
     <child link="wheel_R_Link" />
     <axis xyz="0 1 0" />
-    <limit lower="-1745329.2519943293" upper="1745329.2519943293" effort="22" velocity="41.89" />
+    <limit lower="-1745329.2519943295" upper="1745329.2519943295" effort="22" velocity="41.89" />
   </joint>
 
   <!-- Gazebo Material / Friction (shared) -->
