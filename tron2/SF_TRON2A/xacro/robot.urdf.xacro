@@ -112,10 +112,10 @@
 
   <link name="proximal_yaw_L_Link">
     <inertial>
-      <origin xyz="2.76E-03 -1.64E-03 -111.48E-03" rpy="0 0 0" />
+      <origin xyz="-2.76E-03 1.64E-03 -111.48E-03" rpy="0 0 0" />
       <mass value="1.56" />
-      <inertia ixx="15039.66E-06" ixy="-3.86E-06" ixz="-266.64E-06"
-        iyy="14341.41E-06" iyz="-65.94E-06" izz="3757.85E-06" />
+      <inertia ixx="15039.66E-06" ixy="-3.86E-06" ixz="266.64E-06"
+        iyy="14341.41E-06" iyz="65.94E-06" izz="3757.85E-06" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -134,10 +134,10 @@
 
   <link name="knee_L_Link">
     <inertial>
-      <origin xyz="2.17E-03 29.64E-03 -128.34E-03" rpy="0 0 0" />
+      <origin xyz="-2.17E-03 -29.64E-03 -128.34E-03" rpy="0 0 0" />
       <mass value="4.25" />
-      <inertia ixx="96150.17E-06" ixy="-37.46E-06" ixz="927.79E-06"
-        iyy="96994.26E-06" iyz="2867.36E-06" izz="5286.18E-06" />
+      <inertia ixx="96150.17E-06" ixy="-37.45E-06" ixz="-927.74E-06"
+        iyy="96994.27E-06" iyz="-2867.36E-06" izz="5286.18E-06" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -156,10 +156,10 @@
 
   <link name="ankle_pitch_L_Link">
     <inertial>
-      <origin xyz="15.25E-03 -35.42E-03 -46.68E-03" rpy="0 0 0" />
+      <origin xyz="-15.25E-03 35.42E-03 -46.68E-03" rpy="0 0 0" />
       <mass value="1.02" />
-      <inertia ixx="1443.30E-06" ixy="35.45E-06" ixz="145.15E-06"
-        iyy="3461.81E-06" iyz="-68.35E-06" izz="3941.99E-06" />
+      <inertia ixx="1443.30E-06" ixy="35.45E-06" ixz="-145.15E-06"
+        iyy="3461.81E-06" iyz="68.35E-06" izz="3941.99E-06" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -222,10 +222,10 @@
 
   <link name="proximal_yaw_R_Link">
     <inertial>
-      <origin xyz="0.00276 0.00164 -0.11148" rpy="0 0 0" />
+      <origin xyz="-0.00276 -0.00164 -0.11148" rpy="0 0 0" />
       <mass value="1.56" />
-      <inertia ixx="0.01503966" ixy="3.86e-06" ixz="-0.00026664"
-        iyy="0.01434141" iyz="6.594e-05" izz="0.00375785" />
+      <inertia ixx="0.01503966" ixy="3.86e-06" ixz="0.00026664"
+        iyy="0.01434141" iyz="-6.594e-05" izz="0.00375785" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -244,10 +244,10 @@
 
   <link name="knee_R_Link">
     <inertial>
-      <origin xyz="0.00217 -0.02964 -0.12834" rpy="0 0 0" />
+      <origin xyz="-0.00217 0.02964 -0.12834" rpy="0 0 0" />
       <mass value="4.25" />
-      <inertia ixx="0.09615017" ixy="3.746e-05" ixz="0.00092779"
-        iyy="0.09699426" iyz="-0.00286736" izz="0.00528618" />
+      <inertia ixx="0.09615017" ixy="3.745e-05" ixz="-0.00092774"
+        iyy="0.09699427" iyz="0.00286736" izz="0.00528618" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -266,10 +266,10 @@
 
   <link name="ankle_pitch_R_Link">
     <inertial>
-      <origin xyz="0.01525 0.03542 -0.04668" rpy="0 0 0" />
+      <origin xyz="-0.01525 -0.03542 -0.04668" rpy="0 0 0" />
       <mass value="1.02" />
-      <inertia ixx="0.0014433" ixy="-3.545e-05" ixz="0.00014515"
-        iyy="0.00346181" iyz="6.835e-05" izz="0.00394199" />
+      <inertia ixx="0.0014433" ixy="-3.545e-05" ixz="-0.00014515"
+        iyy="0.00346181" iyz="-6.835e-05" izz="0.00394199" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -317,7 +317,7 @@
     <origin xyz="-0.00044 0.09178 0.05474" rpy="0 0 0" />
     <parent link="base_Link" />
     <child link="proximal_pitch_L_Link" />
-    <axis xyz="0 0.99619 -0.087155" />
+    <axis xyz="0.0 0.9961947268929313 -0.0871554135479712" />
     <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3" />
   </joint>
 
@@ -334,19 +334,19 @@
     <parent link="proximal_roll_L_Link" />
     <child link="proximal_yaw_L_Link" />
     <axis xyz="0 0 1" />
-    <limit lower="-0.5235987755982988" upper="4.625122517784973" effort="60" velocity="22.52" />
+    <limit lower="-3.6651914291880923" upper="1.4835298641951802" effort="60" velocity="22.52" />
   </joint>
 
   <joint name="knee_L_Joint" type="revolute">
-    <origin xyz="-0.004 -0.032 -0.2126" rpy="0 0 0" />
+    <origin xyz="0.004 0.032 -0.2126" rpy="0 0 0" />
     <parent link="proximal_yaw_L_Link" />
     <child link="knee_L_Link" />
     <axis xyz="0 1 0" />
-    <limit lower="-0.2617993877991494" upper="2.6179938779914944" effort="150" velocity="18.3" />
+    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150" velocity="18.3" />
   </joint>
 
   <joint name="ankle_pitch_L_Joint" type="revolute">
-    <origin xyz="0.004 0.06775 -0.35" rpy="0 0 0" />
+    <origin xyz="-0.004 -0.06775 -0.35" rpy="0 0 0" />
     <parent link="knee_L_Link" />
     <child link="ankle_pitch_L_Link" />
     <axis xyz="0 1 0" />
@@ -357,7 +357,7 @@
     <origin xyz="-0.00044 -0.09178 0.05474" rpy="0 0 0" />
     <parent link="base_Link" />
     <child link="proximal_pitch_R_Link" />
-    <axis xyz="0 0.99619 0.087155" />
+    <axis xyz="0.0 0.9961947268929313 0.0871554135479712" />
     <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3" />
   </joint>
 
@@ -374,19 +374,19 @@
     <parent link="proximal_roll_R_Link" />
     <child link="proximal_yaw_R_Link" />
     <axis xyz="0 0 1" />
-    <limit lower="-4.625122517784973" upper="0.5235987755982988" effort="60" velocity="22.52" />
+    <limit lower="-1.4835298641951802" upper="3.6651914291880923" effort="60" velocity="22.52" />
   </joint>
 
   <joint name="knee_R_Joint" type="revolute">
-    <origin xyz="-0.004 0.032 -0.2126" rpy="0 0 0" />
+    <origin xyz="0.004 -0.032 -0.2126" rpy="0 0 0" />
     <parent link="proximal_yaw_R_Link" />
     <child link="knee_R_Link" />
     <axis xyz="0 1 0" />
-    <limit lower="-0.2617993877991494" upper="2.6179938779914944" effort="150" velocity="18.3" />
+    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150" velocity="18.3" />
   </joint>
 
   <joint name="ankle_pitch_R_Joint" type="revolute">
-    <origin xyz="0.004 -0.06775 -0.35" rpy="0 0 0" />
+    <origin xyz="-0.004 0.06775 -0.35" rpy="0 0 0" />
     <parent link="knee_R_Link" />
     <child link="ankle_pitch_R_Link" />
     <axis xyz="0 1 0" />
