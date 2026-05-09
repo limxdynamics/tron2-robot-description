@@ -1,17 +1,320 @@
-<?xml version="1.0"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <robot name="bipedal_robot">
+  <mujoco>
+    <compiler meshdir="../meshes"/>
+  </mujoco>
 
-  <!-- Materials -->
-  <material name="grey">
-    <color rgba="1 1 1 1"/>
-  </material>
-  <material name="white">
-    <color rgba="1.0 1.0 1.0 1.0"/>
-  </material>
+  <!-- base -->
+  <link name="base_Link">
+    <inertial>
+      <origin xyz="-0.00205 -0.0001 0.11304" rpy="0.0 0.0 0.0"/>
+      <mass value="11.07"/>
+      <inertia ixx="0.10445703" ixy="3.354e-05" ixz="0.00721853" iyy="0.12093021" iyz="8.419e-05" izz="0.08893163"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/base_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/base_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
 
-  <material name="orange">
-    <color rgba="1.0 0.423 0.039 1.0"/>
-  </material>
+  <!-- base imu -->
+  <link name="base_imu">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+    </inertial>
+  </link>
+  <joint name="base_imu_Joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="base_imu"/>
+  </joint>
+
+  <!-- proximal pitch L Link -->
+  <link name="proximal_pitch_L_Link">
+    <inertial>
+      <origin xyz="-0.00522 0.06976 -0.00608" rpy="0.0 0.0 0.0"/>
+      <mass value="2.07"/>
+      <inertia ixx="0.00415453" ixy="-1.4e-05" ixz="1.841e-05" iyy="0.00292229" iyz="5.196e-05" izz="0.00333339"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_pitch_L_Joint" type="revolute">
+    <origin xyz="-0.00044 0.09178 0.05474" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="proximal_pitch_L_Link"/>
+    <axis xyz="0.0 0.9961947268929313 -0.0871554135479712"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_roll_L_Link">
+    <inertial>
+      <origin xyz="0.03124 0.00035 -0.08414" rpy="0.0 0.0 0.0"/>
+      <mass value="1.74"/>
+      <inertia ixx="0.00476933" ixy="-1.172e-05" ixz="3.271e-05" iyy="0.00545584" iyz="-2.946e-05" izz="0.00305316"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_roll_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_roll_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_roll_L_Joint" type="revolute">
+    <origin xyz="-0.032 0.0758 -0.00663" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_pitch_L_Link"/>
+    <child link="proximal_roll_L_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-0.2617993877991494" upper="3.1939524787897455" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_yaw_L_Link">
+    <inertial>
+      <origin xyz="-0.00276 0.00164 -0.11148" rpy="0.0 0.0 0.0"/>
+      <mass value="1.56"/>
+      <inertia ixx="0.01503966" ixy="-3.86e-06" ixz="0.00026664" iyy="0.01434141" iyz="6.594e-05" izz="0.00375785"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_yaw_L_Joint" type="revolute">
+    <origin xyz="0.032 0.0 -0.1374" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_roll_L_Link"/>
+    <child link="proximal_yaw_L_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-3.6651914291880923" upper="1.4835298641951802" effort="60.0" velocity="22.52"/>
+  </joint>
+  <link name="knee_L_Link">
+    <inertial>
+      <origin xyz="-0.00217 -0.02432 -0.13739" rpy="0.0 0.0 0.0"/>
+      <mass value="4.42"/>
+      <inertia ixx="0.10528872" ixy="5.13e-06" ixz="-0.00091671" iyy="0.10654351" iyz="0.00147664" izz="0.00557556"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/knee_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/knee_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="knee_L_Joint" type="revolute">
+    <origin xyz="0.004 0.032 -0.2126" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_yaw_L_Link"/>
+    <child link="knee_L_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="wheel_L_Link">
+    <inertial>
+      <origin xyz="0.00054 0.004 0.00034" rpy="0.0 0.0 0.0"/>
+      <mass value="0.75"/>
+      <inertia ixx="0.00232283" ixy="3.6e-07" ixz="-2.135e-05" iyy="0.00446439" iyz="1.8e-07" izz="0.00235088"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/wheel_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0.003 0"/>
+      <geometry>
+          <cylinder length="0.045" radius="0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wheel_L_Joint" type="revolute">
+    <origin xyz="-0.004 0.013 -0.35" rpy="0.0 0.0 0.0"/>
+    <parent link="knee_L_Link"/>
+    <child link="wheel_L_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-1745329.2519943295" upper="1745329.2519943295" effort="22.0" velocity="41.89"/>
+  </joint>
+
+  <!-- proximal pitch R Link -->
+  <link name="proximal_pitch_R_Link">
+    <inertial>
+      <origin xyz="-0.00522 -0.06976 -0.00608" rpy="0.0 0.0 0.0"/>
+      <mass value="2.07"/>
+      <inertia ixx="0.00415453" ixy="1.4e-05" ixz="1.841e-05" iyy="0.00292229" iyz="-5.196e-05" izz="0.00333339"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_pitch_R_Joint" type="revolute">
+    <origin xyz="-0.00044 -0.09178 0.05474" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="proximal_pitch_R_Link"/>
+    <axis xyz="0.0 0.9961947268929313 0.0871554135479712"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_roll_R_Link">
+    <inertial>
+      <origin xyz="0.03124 -0.00035 -0.08414" rpy="0.0 0.0 0.0"/>
+      <mass value="1.74"/>
+      <inertia ixx="0.00476933" ixy="1.172e-05" ixz="3.271e-05" iyy="0.00545584" iyz="2.946e-05" izz="0.00305316"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_roll_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_roll_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_roll_R_Joint" type="revolute">
+    <origin xyz="-0.032 -0.0758 -0.00663" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_pitch_R_Link"/>
+    <child link="proximal_roll_R_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-3.1939524787897455" upper="0.2617993877991494" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_yaw_R_Link">
+    <inertial>
+      <origin xyz="-0.00276 -0.00164 -0.11148" rpy="0.0 0.0 0.0"/>
+      <mass value="1.56"/>
+      <inertia ixx="0.01503966" ixy="3.86e-06" ixz="0.00026664" iyy="0.01434141" iyz="-6.594e-05" izz="0.00375785"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_yaw_R_Joint" type="revolute">
+    <origin xyz="0.032 -0.0 -0.1374" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_roll_R_Link"/>
+    <child link="proximal_yaw_R_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-1.4835298641951802" upper="3.6651914291880923" effort="60.0" velocity="22.52"/>
+  </joint>
+  <link name="knee_R_Link">
+    <inertial>
+      <origin xyz="-0.00217 0.02432 -0.13739" rpy="0.0 0.0 0.0"/>
+      <mass value="4.42"/>
+      <inertia ixx="0.10528872" ixy="-5.13e-06" ixz="-0.00091671" iyy="0.10654351" iyz="-0.00147664" izz="0.00557556"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/knee_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/knee_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="knee_R_Joint" type="revolute">
+    <origin xyz="0.004 -0.032 -0.2126" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_yaw_R_Link"/>
+    <child link="knee_R_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="wheel_R_Link">
+    <inertial>
+      <origin xyz="0.00054 -0.004 0.00034" rpy="0.0 0.0 0.0"/>
+      <mass value="0.75"/>
+      <inertia ixx="0.00232283" ixy="-3.6e-07" ixz="-2.135e-05" iyy="0.00446439" iyz="-1.8e-07" izz="0.00235088"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/wheel_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 -0.003 0"/>
+      <geometry>
+          <cylinder length="0.045" radius="0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wheel_R_Joint" type="revolute">
+    <origin xyz="-0.004 -0.013 -0.35" rpy="0.0 0.0 0.0"/>
+    <parent link="knee_R_Link"/>
+    <child link="wheel_R_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-1745329.2519943295" upper="1745329.2519943295" effort="22.0" velocity="41.89"/>
+  </joint>
 
   <!-- ros2_control plugin -->
   <gazebo>
@@ -19,126 +322,103 @@
       <parameters>$(find tron2_gazebo)/config/default_tron2.yaml</parameters>
     </plugin>
   </gazebo>
-
-  <ros2_control name="Tron2GazeboSystem" type="system">
+  <ros2_control name="bipedal_robotGazeboSystem" type="system">
     <hardware>
       <plugin>tron2_gazebo/Tron2HWSim</plugin>
     </hardware>
-
     <joint name="proximal_pitch_L_Joint">
-      <command_interface name="position" />
-      <command_interface name="velocity" />
-      <command_interface name="effort" />
-
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
     </joint>
-
     <joint name="proximal_roll_L_Joint">
-      <command_interface name="position" />
-      <command_interface name="velocity" />
-      <command_interface name="effort" />
-
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
     </joint>
-
     <joint name="proximal_yaw_L_Joint">
-      <command_interface name="position" />
-      <command_interface name="velocity" />
-      <command_interface name="effort" />
-
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
     </joint>
-
     <joint name="knee_L_Joint">
-      <command_interface name="position" />
-      <command_interface name="velocity" />
-      <command_interface name="effort" />
-
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
     </joint>
-
     <joint name="wheel_L_Joint">
-      <command_interface name="position" />
-      <command_interface name="velocity" />
-      <command_interface name="effort" />
-
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
     </joint>
-
     <joint name="proximal_pitch_R_Joint">
-      <command_interface name="position" />
-      <command_interface name="velocity" />
-      <command_interface name="effort" />
-
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
     </joint>
-
-    <joint name="proximal_roll_R_Joint">
-      <command_interface name="position" />
-      <command_interface name="velocity" />
-      <command_interface name="effort" />
-
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
-    </joint>
-
-    <joint name="proximal_yaw_R_Joint">
-      <command_interface name="position" />
-      <command_interface name="velocity" />
-      <command_interface name="effort" />
-
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
-    </joint>
-
-    <joint name="knee_R_Joint">
-      <command_interface name="position" />
-      <command_interface name="velocity" />
-      <command_interface name="effort" />
-
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
-    </joint>
-
     <joint name="wheel_R_Joint">
-      <command_interface name="position" />
-      <command_interface name="velocity" />
-      <command_interface name="effort" />
-
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
     </joint>
-
+    <joint name="proximal_roll_R_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="knee_R_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="proximal_yaw_R_Joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
     <sensor name="limx_imu_sensor">
-      <state_interface name="orientation.x" />
-      <state_interface name="orientation.y" />
-      <state_interface name="orientation.z" />
-      <state_interface name="orientation.w" />
-      <state_interface name="angular_velocity.x" />
-      <state_interface name="angular_velocity.y" />
-      <state_interface name="angular_velocity.z" />
-      <state_interface name="linear_acceleration.x" />
-      <state_interface name="linear_acceleration.y" />
-      <state_interface name="linear_acceleration.z" />
+      <state_interface name="orientation.x"/>
+      <state_interface name="orientation.y"/>
+      <state_interface name="orientation.z"/>
+      <state_interface name="orientation.w"/>
+      <state_interface name="angular_velocity.x"/>
+      <state_interface name="angular_velocity.y"/>
+      <state_interface name="angular_velocity.z"/>
+      <state_interface name="linear_acceleration.x"/>
+      <state_interface name="linear_acceleration.y"/>
+      <state_interface name="linear_acceleration.z"/>
     </sensor>
   </ros2_control>
-
   <gazebo reference="limx_imu">
     <sensor type="imu" name="limx_imu_sensor">
       <always_on>true</always_on>
@@ -146,7 +426,7 @@
       <visualize>true</visualize>
       <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
         <ros>
-          <namespace></namespace>
+          <namespace/>
           <remapping>~/out:=imu</remapping>
         </ros>
         <initial_orientation_as_reference>false</initial_orientation_as_reference>
@@ -160,7 +440,6 @@
       <ros>
         <remapping>odom:=ground_truth/state</remapping>
       </ros>
-
       <update_rate>1000.0</update_rate>
       <body_name>base_Link</body_name>
       <frame_name>world</frame_name>
@@ -169,14 +448,13 @@
       <rpy_offset>0 0 0</rpy_offset>
     </plugin>
   </gazebo>
-  <!-- Links -->
+
   <!-- IMU Link -->
   <joint name="limx_imu_joint" type="fixed">
-    <origin rpy="0. 0. 0." xyz="0. 0. 0."/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
     <parent link="base_Link"/>
     <child link="limx_imu"/>
   </joint>
-
   <link name="limx_imu">
     <inertial>
       <mass value="0.01"/>
@@ -188,415 +466,123 @@
       <geometry>
         <box size="0.015 0.015 0.004"/>
       </geometry>
-      <material name="orange"/>
+      <material name="orange">
+        <color rgba="1.0 0.423 0.039 1.0"/>
+      </material>
     </visual>
   </link>
-
   <gazebo reference="limx_imu_joint">
     <disableFixedJointLumping>true</disableFixedJointLumping>
   </gazebo>
 
-  <!-- <link name="world"/>
-
-  <joint name="fixed_to_world" type="fixed">
-    <parent link="world"/>
-    <child link="base_Link"/>
-    <origin xyz="0 0 1.5" rpy="0 0 0"/> 
-  </joint> -->
-
-  <link name="base_Link">
-    <inertial>
-      <origin xyz="-2.05E-03 -0.10E-03 113.04E-03" rpy="0 0 0"/>
-      <mass value="11.07"/>
-      <inertia ixx="104457.03E-06" ixy="33.54E-06" ixz="7218.53E-06"
-               iyy="120930.21E-06" iyz="84.19E-06" izz="88931.63E-06"/>
-    </inertial>
+  <!-- Camera -->
+  <link name="d435_Link">
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0.0 -0.0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/base_Link.STL"/>
+        <box size="0.01 0.01 0.001"/>
       </geometry>
-      <material name="grey"/>
     </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/base_Link.STL"/>
-      </geometry>
-    </collision>
   </link>
-
-  <link name="proximal_pitch_L_Link">
-    <inertial>
-      <origin xyz="-5.22E-03 69.76E-03 -6.08E-03" rpy="0 0 0"/>
-      <mass value="2.07"/>
-      <inertia ixx="4154.53E-06" ixy="-14.00E-06" ixz="18.41E-06"
-               iyy="2922.29E-06" iyz="51.96E-06" izz="3333.39E-06"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <link name="proximal_roll_L_Link">
-    <inertial>
-      <origin xyz="31.24E-03 0.35E-03 -84.14E-03" rpy="0 0 0"/>
-      <mass value="1.74"/>
-      <inertia ixx="4769.33E-06" ixy="-11.72E-06" ixz="32.71E-06"
-               iyy="5455.84E-06" iyz="-29.46E-06" izz="3053.16E-06"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_L_Link.STL"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_L_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <link name="proximal_yaw_L_Link">
-    <inertial>
-      <origin xyz="-2.76E-03 1.64E-03 -111.48E-03" rpy="0 0 0"/>
-      <mass value="1.56"/>
-      <inertia ixx="15039.66E-06" ixy="-3.86E-06" ixz="266.64E-06"
-               iyy="14341.41E-06" iyz="65.94E-06" izz="3757.85E-06"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <link name="knee_L_Link">
-    <inertial>
-      <origin xyz="-2.17E-03 -24.32E-03 -137.39E-03" rpy="0 0 0"/>
-      <mass value="4.42"/>
-      <inertia ixx="105288.72E-06" ixy="5.13E-06" ixz="-916.71E-06"
-               iyy="106543.51E-06" iyz="1476.64E-06" izz="5575.56E-06"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_L_Link.STL"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_L_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <link name="wheel_L_Link">
-    <inertial>
-      <origin xyz="0.54E-03 4.00E-03 0.34E-03" rpy="0 0 0"/>
-      <mass value="0.75"/>
-      <inertia ixx="2322.83E-06" ixy="0.36E-06" ixz="-21.35E-06"
-               iyy="4464.39E-06" iyz="0.18E-06" izz="2350.88E-06"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/wheel_L_Link.STL"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <collision>
-      <origin rpy="1.5707963267948966 0 0" xyz="0 0.003 0" />
-      <geometry>
-          <cylinder length="0.045" radius="0.1" />
-      </geometry>
-    </collision>
-  </link>
-
-  <link name="proximal_roll_R_Link">
-    <inertial>
-      <origin xyz="0.03124 -0.00035 -0.08414" rpy="0 0 0"/>
-      <mass value="1.74"/>
-      <inertia ixx="0.00476933" ixy="1.172e-05" ixz="3.271e-05"
-               iyy="0.00545584" iyz="2.946e-05" izz="0.00305316"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_R_Link.STL"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_R_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <link name="proximal_pitch_R_Link">
-    <inertial>
-      <origin xyz="-0.00522 -0.06976 -0.00608" rpy="0 0 0"/>
-      <mass value="2.07"/>
-      <inertia ixx="0.00415453" ixy="1.4e-05" ixz="1.841e-05"
-               iyy="0.00292229" iyz="-5.196e-05" izz="0.00333339"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <link name="wheel_R_Link">
-    <inertial>
-      <origin xyz="0.00054 -0.004 0.00034" rpy="0 0 0"/>
-      <mass value="0.75"/>
-      <inertia ixx="0.00232283" ixy="-3.6e-07" ixz="-2.135e-05"
-               iyy="0.00446439" iyz="-1.8e-07" izz="0.00235088"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/wheel_R_Link.STL"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <collision>
-      <origin rpy="1.5707963267948966 0 0" xyz="0 -0.003 0" />
-      <geometry>
-          <cylinder length="0.045" radius="0.1" />
-      </geometry>
-    </collision>
-  </link>
-
-  <link name="proximal_yaw_R_Link">
-    <inertial>
-      <origin xyz="-0.00276 -0.00164 -0.11148" rpy="0 0 0"/>
-      <mass value="1.56"/>
-      <inertia ixx="0.01503966" ixy="3.86e-06" ixz="0.00026664"
-               iyy="0.01434141" iyz="-6.594e-05" izz="0.00375785"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <link name="knee_R_Link">
-    <inertial>
-      <origin xyz="-0.00217 0.02432 -0.13739" rpy="0 0 0"/>
-      <mass value="4.42"/>
-      <inertia ixx="0.10528872" ixy="-5.13e-06" ixz="-0.00091671"
-               iyy="0.10654351" iyz="-0.00147664" izz="0.00557556"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_R_Link.STL"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_R_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <!-- Joints -->
-  <joint name="proximal_pitch_L_Joint" type="revolute">
-    <origin xyz="-0.00044 0.09178 0.05474" rpy="0 0 0"/>
-    <parent link="base_Link"/>
-    <child link="proximal_pitch_L_Link"/>
-    <axis xyz="0 0.99619 -0.087155"/>
-    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3"/>
+  <joint name="d435_joint" type="fixed">
+    <origin rpy="0.0 1.063778179 0.0" xyz="0.12213 0.01759 0.00599"/>
+    <parent link="limx_imu"/>
+    <child link="d435_Link"/>
   </joint>
-
-  <joint name="proximal_roll_L_Joint" type="revolute">
-    <origin xyz="-0.032 0.0758 -0.00663" rpy="0 0 0"/>
-    <parent link="proximal_pitch_L_Link"/>
-    <child link="proximal_roll_L_Link"/>
-    <axis xyz="1 0 0"/>
-    <limit lower="-0.2617993877991494" upper="3.19395248" effort="150" velocity="18.3"/>
+  <joint name="d435_optical_joint" type="fixed">
+    <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0"/>
+    <parent link="d435_Link"/>
+    <child link="d435_optical_frame"/>
   </joint>
-
-  <joint name="proximal_yaw_L_Joint" type="revolute">
-    <origin xyz="0.032 0.0 -0.1374" rpy="0 0 0"/>
-    <parent link="proximal_roll_L_Link"/>
-    <child link="proximal_yaw_L_Link"/>
-    <axis xyz="0 0 1"/>
-    <limit lower="-3.6651914291880923" upper="1.4835298641951802" effort="60" velocity="22.52"/>
-  </joint>
-
-  <joint name="knee_L_Joint" type="revolute">
-    <origin xyz="0.004 0.032 -0.2126" rpy="0 0 0"/>
-    <parent link="proximal_yaw_L_Link"/>
-    <child link="knee_L_Link"/>
-    <axis xyz="0 1 0"/>
-    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150" velocity="18.3"/>
-  </joint>
-
-  <joint name="wheel_L_Joint" type="revolute">
-    <origin xyz="-0.004 0.013 -0.35" rpy="0 0 0"/>
-    <parent link="knee_L_Link"/>
-    <child link="wheel_L_Link"/>
-    <axis xyz="0 1 0"/>
-    <limit lower="-1745329.2519943293" upper="1745329.2519943293" effort="22" velocity="41.89"/>
-  </joint>
-
-  <joint name="proximal_pitch_R_Joint" type="revolute">
-    <origin xyz="-0.00044 -0.09178 0.05474" rpy="0 0 0"/>
-    <parent link="base_Link"/>
-    <child link="proximal_pitch_R_Link"/>
-    <axis xyz="0 0.99619 0.087155"/>
-    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3"/>
-  </joint>
-
-  <joint name="wheel_R_Joint" type="revolute">
-    <origin xyz="-0.004 -0.013 -0.35" rpy="0 0 0"/>
-    <parent link="knee_R_Link"/>
-    <child link="wheel_R_Link"/>
-    <axis xyz="0 1 0"/>
-    <limit lower="-1745329.2519943293" upper="1745329.2519943293" effort="22" velocity="41.89"/>
-  </joint>
-
-  <joint name="proximal_roll_R_Joint" type="revolute">
-    <origin xyz="-0.032 -0.0758 -0.00663" rpy="0 0 0"/>
-    <parent link="proximal_pitch_R_Link"/>
-    <child link="proximal_roll_R_Link"/>
-    <axis xyz="1 0 0"/>
-    <limit lower="-3.19395248" upper="0.2617993877991494" effort="150" velocity="18.3"/>
-  </joint>
-
-  <joint name="knee_R_Joint" type="revolute">
-    <origin xyz="0.004 -0.032 -0.2126" rpy="0 0 0"/>
-    <parent link="proximal_yaw_R_Link"/>
-    <child link="knee_R_Link"/>
-    <axis xyz="0 1 0"/>
-    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150" velocity="18.3"/>
-  </joint>
-
-  <joint name="proximal_yaw_R_Joint" type="revolute">
-    <origin xyz="0.032 -0.0 -0.1374" rpy="0 0 0"/>
-    <parent link="proximal_roll_R_Link"/>
-    <child link="proximal_yaw_R_Link"/>
-    <axis xyz="0 0 1"/>
-    <limit lower="-1.4835298641951802" upper="3.6651914291880923" effort="60" velocity="22.52"/>
-  </joint>
-
-  <gazebo reference="proximal_yaw_R_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/White</material>
+  <link name="d435_optical_frame"/>
+  <gazebo reference="d435_Link">
+    <sensor type="depth" name="d435_camera_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <update_rate>60</update_rate>
+      <visualize>false</visualize>
+      <camera>
+        <horizontal_fov>1.5177</horizontal_fov>
+        <image>
+          <format>B8G8R8</format>
+          <width>64</width>
+          <height>48</height>
+        </image>
+        <clip>
+          <near>0.1</near>
+          <far>1.8</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <ros>
+          <namespace>d435</namespace>
+        </ros>
+        <camera_name>d435_camera</camera_name>
+        <frame_name>d435_optical_frame</frame_name>
+        <min_depth>0.1</min_depth>
+        <max_depth>1.8</max_depth>
+      </plugin>
+    </sensor>
   </gazebo>
 
-  <gazebo reference="proximal_roll_L_Link">
+  <!-- Gazebo link physics -->
+  <gazebo reference="base_imu">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <material>Gazebo/DarkGrey</material>
   </gazebo>
-
+  <gazebo reference="base_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
   <gazebo reference="proximal_pitch_L_Link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <material>Gazebo/DarkGrey</material>
   </gazebo>
-
+  <gazebo reference="proximal_roll_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="proximal_yaw_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="knee_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="wheel_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
   <gazebo reference="proximal_roll_R_Link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <material>Gazebo/DarkGrey</material>
   </gazebo>
-
   <gazebo reference="proximal_pitch_R_Link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <material>Gazebo/DarkGrey</material>
   </gazebo>
-
-  <gazebo reference="wheel_L_Link">
-    <mu1>2.0</mu1>
-    <mu2>2.0</mu2>
-    <self_collide>1</self_collide>
-    <material>Gazebo/DarkGrey</material>
-    <kp value="1000000.0"/>
-    <kd value="100.0"/>
-  </gazebo>
-
-  <gazebo reference="proximal_yaw_L_Link">
+  <gazebo reference="wheel_R_Link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/White</material>
+    <material>Gazebo/DarkGrey</material>
   </gazebo>
-
-  <gazebo reference="knee_L_Link">
+  <gazebo reference="proximal_yaw_R_Link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <self_collide>0</self_collide>
     <material>Gazebo/DarkGrey</material>
-    <kp value="1000000.0"/>
-    <kd value="100.0"/>
   </gazebo>
-
   <gazebo reference="knee_R_Link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <self_collide>0</self_collide>
     <material>Gazebo/DarkGrey</material>
-    <kp value="1000000.0"/>
-    <kd value="100.0"/>
   </gazebo>
-
-  <gazebo reference="wheel_R_Link">
-    <mu1>2.0</mu1>
-    <mu2>2.0</mu2>
-    <self_collide>1</self_collide>
-    <material>Gazebo/DarkGrey</material>
-    <kp value="1000000.0"/>
-    <kd value="100.0"/>
-  </gazebo>
-
 </robot>
