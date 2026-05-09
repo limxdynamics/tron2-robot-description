@@ -46,6 +46,75 @@
       </plugin>
     </gazebo>
 
+    <!-- D435 Camera ROS1 Plugin: split into two sensors instead of using
+         libgazebo_ros_openni_kinect.so. The openni_kinect plugin deadlocks
+         with gazebo_ros_control on Load() and prevents Tron2HWSim::initSim
+         from being called. -->
+    <gazebo reference="d435_Link">
+      <sensor type="camera" name="d435_color_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>60</update_rate>
+        <visualize>false</visualize>
+        <camera>
+          <horizontal_fov>1.5177</horizontal_fov>
+          <image>
+            <format>B8G8R8</format>
+            <width>64</width>
+            <height>48</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>1.8</far>
+          </clip>
+        </camera>
+        <plugin name="d435_color_controller" filename="libgazebo_ros_camera.so">
+          <robotNamespace>d435</robotNamespace>
+          <cameraName>color</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>d435_optical_frame</frameName>
+        </plugin>
+      </sensor>
+
+      <sensor type="depth" name="d435_depth_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>60</update_rate>
+        <visualize>false</visualize>
+        <camera>
+          <horizontal_fov>1.5177</horizontal_fov>
+          <image>
+            <format>R8G8B8</format>
+            <width>64</width>
+            <height>48</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>1.8</far>
+          </clip>
+        </camera>
+        <plugin name="d435_depth_controller" filename="libgazebo_ros_depth_camera.so">
+          <robotNamespace>d435</robotNamespace>
+          <!-- cameraName must differ from the color sensor; otherwise both
+               plugins share the same set_camera_info / set_parameters
+               services and Gazebo logs "Tried to advertise a service that
+               is already advertised" on the second one. -->
+          <cameraName>depth</cameraName>
+          <!-- imageTopicName / cameraInfoTopicName publish the IR/grayscale
+               frame from libgazebo_ros_depth_camera.so. Route them under
+               infra/ so they don't collide with depthImageTopicName /
+               depthImageCameraInfoTopicName (the real depth stream). -->
+          <imageTopicName>infra/image_raw</imageTopicName>
+          <cameraInfoTopicName>infra/camera_info</cameraInfoTopicName>
+          <depthImageTopicName>image_raw</depthImageTopicName>
+          <depthImageCameraInfoTopicName>camera_info</depthImageCameraInfoTopicName>
+          <pointCloudTopicName>points</pointCloudTopicName>
+          <frameName>d435_optical_frame</frameName>
+          <pointCloudCutoff>0.1</pointCloudCutoff>
+          <pointCloudCutoffMax>1.8</pointCloudCutoffMax>
+        </plugin>
+      </sensor>
+    </gazebo>
+
     <!-- Transmissions (ROS1) -->
     <transmission name="proximal_pitch_L_Joint_trans">
       <type>transmission_interface/SimpleTransmission</type>
@@ -152,6 +221,95 @@
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="wheel_R_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+
+    <transmission name="arm1_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="arm1_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="arm1_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="arm2_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="arm2_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="arm2_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="arm3_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="arm3_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="arm3_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="arm4_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="arm4_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="arm4_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="arm5_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="arm5_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="arm5_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="arm6_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="arm6_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="arm6_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="gripper1_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="gripper1_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="gripper1_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="gripper2_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="gripper2_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="gripper2_Joint_motor">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
@@ -265,6 +423,78 @@
         <state_interface name="effort" />
       </joint>
 
+      <joint name="arm1_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="arm2_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="arm3_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="arm4_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="arm5_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="arm6_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="gripper1_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="gripper2_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
       <sensor name="base_imu_sensor">
         <state_interface name="orientation.x" />
         <state_interface name="orientation.y" />
@@ -308,6 +538,37 @@
         <xyz_offset>0 0 0</xyz_offset>
         <rpy_offset>0 0 0</rpy_offset>
       </plugin>
+    </gazebo>
+
+
+    <!-- D435 Camera ROS2 Plugin -->
+    <gazebo reference="d435_Link">
+      <sensor type="depth" name="d435_camera_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>60</update_rate>
+        <visualize>false</visualize>
+        <camera>
+          <horizontal_fov>1.5177</horizontal_fov>
+          <image>
+            <format>B8G8R8</format>
+            <width>64</width>
+            <height>48</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>1.8</far>
+          </clip>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <ros>
+            <namespace>d435</namespace>
+          </ros>
+          <camera_name>d435_camera</camera_name>
+          <frame_name>d435_optical_frame</frame_name>
+          <min_depth>0.1</min_depth>
+          <max_depth>1.8</max_depth>
+        </plugin>
+      </sensor>
     </gazebo>
 
   </xacro:macro>
