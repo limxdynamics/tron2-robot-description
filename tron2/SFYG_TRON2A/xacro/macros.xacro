@@ -170,6 +170,94 @@
       </actuator>
     </transmission>
 
+    <transmission name="arm1_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="arm1_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="arm1_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="arm2_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="arm2_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="arm2_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="arm3_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="arm3_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="arm3_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="arm4_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="arm4_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="arm4_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="arm5_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="arm5_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="arm5_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="arm6_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="arm6_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="arm6_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="gripper1_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="gripper1_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="gripper1_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="gripper2_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="gripper2_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="gripper2_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
   </xacro:macro>
 
   <!-- ==================== ROS2 Gazebo Macro ==================== -->
@@ -270,6 +358,78 @@
       </joint>
 
       <joint name="ankle_pitch_R_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="arm1_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="arm2_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="arm3_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="arm4_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="arm5_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="arm6_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="gripper1_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="gripper2_Joint">
         <command_interface name="position" />
         <command_interface name="velocity" />
         <command_interface name="effort" />
