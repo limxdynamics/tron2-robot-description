@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <robot name="bipedal_robot">
+  <mujoco>
+    <compiler meshdir="../meshes"/>
+  </mujoco>
 
   <!-- base -->
   <link name="base_Link">

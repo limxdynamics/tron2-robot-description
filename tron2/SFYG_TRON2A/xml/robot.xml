@@ -7,7 +7,10 @@
     <light castshadow="false" diffuse="1 1 1"/>
     <camera fovy="60"/>
     <default class="visual">
-      <geom contype="0" conaffinity="0" group="1" type="mesh" rgba="0.8 0.8 0.8 1.0"/>
+      <geom contype="0" conaffinity="0" group="1" type="mesh" density="0" rgba="0.8 0.8 0.8 1.0"/>
+    </default>
+    <default class="collision">
+      <geom type="mesh" density="0" rgba="0.8 0.8 0.8 0.3"/>
     </default>
     <joint damping="0.01" margin="0.0001" solreflimit="0.002 1"/>
     <geom contype="1" conaffinity="1" friction="1.0 0.3 0.3" rgba="0.5 0.6 0.7 0.5" margin="0.001" group="0" solref="0.01 1"/>
@@ -71,35 +74,35 @@
     <body name="base_Link" pos="0.0 0.0 1.0">
       <inertial pos="-0.00205 -0.0001 0.11304" quat="0.696197 -0.130687 -0.132604 0.693287" mass="11.07" diaginertia="0.120931 0.107294 0.0860939"/>
       <joint type="free" stiffness="1e-09" damping="1e-08"/>
-      <geom type="mesh" density="0" rgba="1 1 1 1" mesh="base_Link" class="visual"/>
-      <geom type="mesh" rgba="1 1 1 1" mesh="base_Link"/>
+      <geom mesh="base_Link" class="visual"/>
+      <geom mesh="base_Link" class="collision"/>
       <site name="base_imu" pos="0 0 0"/>
 
       <!-- proximal pitch L Link -->
       <body name="proximal_pitch_L_Link" pos="-0.00044 0.09178 0.05474">
         <inertial pos="-0.00522 0.06976 -0.00608" quat="0.749652 0.661722 -0.011603 0.00328095" mass="2.07" diaginertia="0.00415508 0.00333952 0.00291561"/>
         <joint name="proximal_pitch_L_Joint" pos="0 0 0" axis="0 0.996195 -0.0871554" range="-3.14159 2.60054" actuatorfrcrange="-150 150" armature="0.0685894"/>
-        <geom type="mesh" density="0" rgba="1 1 1 1" mesh="proximal_pitch_L_Link" class="visual"/>
-        <geom type="mesh" rgba="1 1 1 1" mesh="proximal_pitch_L_Link"/>
+        <geom mesh="proximal_pitch_L_Link" class="visual"/>
+        <geom mesh="proximal_pitch_L_Link" class="collision"/>
         <body name="proximal_roll_L_Link" pos="-0.032 0.0758 -0.00663">
           <inertial pos="0.03124 0.00035 -0.08414" quat="0.700753 -0.0110253 -0.00230623 0.713315" mass="1.74" diaginertia="0.00545642 0.00476973 0.00305218"/>
           <joint name="proximal_roll_L_Joint" pos="0 0 0" axis="1 0 0" range="-0.261799 3.19395" actuatorfrcrange="-150 150" armature="0.0685894"/>
-          <geom type="mesh" density="0" rgba="1 1 1 1" mesh="proximal_roll_L_Link" class="visual"/>
-          <geom type="mesh" rgba="1 1 1 1" mesh="proximal_roll_L_Link"/>
+          <geom mesh="proximal_roll_L_Link" class="visual"/>
+          <geom mesh="proximal_roll_L_Link" class="collision"/>
           <body name="proximal_yaw_L_Link" pos="0.032 0 -0.1374">
             <inertial pos="-0.00276 0.00164 -0.11148" quat="0.999924 0.0031357 -0.011803 -0.00159748" mass="1.56" diaginertia="0.015046 0.0143418 0.00375114"/>
             <joint name="proximal_yaw_L_Joint" pos="0 0 0" axis="0 0 1" range="-3.66519 1.48353" actuatorfrcrange="-60 60" armature="0.0169834"/>
-            <geom type="mesh" density="0" rgba="1 1 1 1" mesh="proximal_yaw_L_Link" class="visual"/>
-            <geom type="mesh" rgba="1 1 1 1" mesh="proximal_yaw_L_Link"/>
+            <geom mesh="proximal_yaw_L_Link" class="visual"/>
+            <geom mesh="proximal_yaw_L_Link" class="collision"/>
             <body name="knee_L_Link" pos="0.004 0.032 -0.2126">
               <inertial pos="-0.00217 -0.02964 -0.12834" quat="0.703822 -0.007364 0.0146813 0.710186" mass="4.25" diaginertia="0.0970839 0.0961596 0.00518714"/>
               <joint name="knee_L_Joint" pos="0 0 0" axis="0 1 0" range="-2.61799 0.261799" actuatorfrcrange="-150 150" armature="0.0685894"/>
-              <geom type="mesh" density="0" rgba="1 1 1 1" mesh="knee_L_Link" class="visual"/>
-              <geom type="mesh" rgba="1 1 1 1" mesh="knee_L_Link"/>
+              <geom mesh="knee_L_Link" class="visual"/>
+              <geom mesh="knee_L_Link" class="collision"/>
               <body name="ankle_pitch_L_Link" pos="-0.004 -0.06775 -0.35">
                 <inertial pos="-0.01525 0.03542 -0.04668" quat="0.0547922 0.685112 0.0383688 0.72536" mass="1.02" diaginertia="0.00395921 0.00345376 0.00143413"/>
                 <joint name="ankle_pitch_L_Joint" pos="0 0 0" axis="0 1 0" range="-1.62316 1.62316" actuatorfrcrange="-60 60" armature="0.0169834"/>
-                <geom type="mesh" density="0" rgba="1 1 1 1" mesh="ankle_pitch_L_Link" class="visual"/>
+                <geom mesh="ankle_pitch_L_Link" class="visual"/>
                 <geom size="0.07 0.03 0.0125" pos="-0.0144255 0.0358488 -0.0502743" type="box" rgba="1 1 1 1"/>
                 <geom size="0.0025" pos="-0.119096 0.0635431 -0.07124" rgba="1 1 1 1"/>
                 <geom size="0.0025" pos="-0.100494 0.00387358 -0.07124" rgba="1 1 1 1"/>
@@ -121,27 +124,27 @@
       <body name="proximal_pitch_R_Link" pos="-0.00044 -0.09178 0.05474">
         <inertial pos="-0.00522 -0.06976 -0.00608" quat="0.661722 0.749652 -0.00328095 0.011603" mass="2.07" diaginertia="0.00415508 0.00333952 0.00291561"/>
         <joint name="proximal_pitch_R_Joint" pos="0 0 0" axis="0 0.996195 0.0871554" range="-3.14159 2.60054" actuatorfrcrange="-150 150" armature="0.0685894"/>
-        <geom type="mesh" density="0" rgba="1 1 1 1" mesh="proximal_pitch_R_Link" class="visual"/>
-        <geom type="mesh" rgba="1 1 1 1" mesh="proximal_pitch_R_Link"/>
+        <geom mesh="proximal_pitch_R_Link" class="visual"/>
+        <geom mesh="proximal_pitch_R_Link" class="collision"/>
         <body name="proximal_roll_R_Link" pos="-0.032 -0.0758 -0.00663">
           <inertial pos="0.03124 -0.00035 -0.08414" quat="0.713315 -0.00230623 -0.0110253 0.700753" mass="1.74" diaginertia="0.00545642 0.00476973 0.00305218"/>
           <joint name="proximal_roll_R_Joint" pos="0 0 0" axis="1 0 0" range="-3.19395 0.261799" actuatorfrcrange="-150 150" armature="0.0685894"/>
-          <geom type="mesh" density="0" rgba="1 1 1 1" mesh="proximal_roll_R_Link" class="visual"/>
-          <geom type="mesh" rgba="1 1 1 1" mesh="proximal_roll_R_Link"/>
+          <geom mesh="proximal_roll_R_Link" class="visual"/>
+          <geom mesh="proximal_roll_R_Link" class="collision"/>
           <body name="proximal_yaw_R_Link" pos="0.032 0 -0.1374">
             <inertial pos="-0.00276 -0.00164 -0.11148" quat="0.999924 -0.0031357 -0.011803 0.00159748" mass="1.56" diaginertia="0.015046 0.0143418 0.00375114"/>
             <joint name="proximal_yaw_R_Joint" pos="0 0 0" axis="0 0 1" range="-1.48353 3.66519" actuatorfrcrange="-60 60" armature="0.0169834"/>
-            <geom type="mesh" density="0" rgba="1 1 1 1" mesh="proximal_yaw_R_Link" class="visual"/>
-            <geom type="mesh" rgba="1 1 1 1" mesh="proximal_yaw_R_Link"/>
+            <geom mesh="proximal_yaw_R_Link" class="visual"/>
+            <geom mesh="proximal_yaw_R_Link" class="collision"/>
             <body name="knee_R_Link" pos="0.004 -0.032 -0.2126">
               <inertial pos="-0.00217 0.02964 -0.12834" quat="0.710186 0.0146813 -0.007364 0.703822" mass="4.25" diaginertia="0.0970839 0.0961596 0.00518714"/>
               <joint name="knee_R_Joint" pos="0 0 0" axis="0 1 0" range="-2.61799 0.261799" actuatorfrcrange="-150 150" armature="0.0685894"/>
-              <geom type="mesh" density="0" rgba="1 1 1 1" mesh="knee_R_Link" class="visual"/>
-              <geom type="mesh" rgba="1 1 1 1" mesh="knee_R_Link"/>
+              <geom mesh="knee_R_Link" class="visual"/>
+              <geom mesh="knee_R_Link" class="collision"/>
               <body name="ankle_pitch_R_Link" pos="-0.004 0.06775 -0.35">
                 <inertial pos="-0.01525 -0.03542 -0.04668" quat="-0.0547922 0.685112 -0.0383688 0.72536" mass="1.02" diaginertia="0.00395921 0.00345376 0.00143413"/>
                 <joint name="ankle_pitch_R_Joint" pos="0 0 0" axis="0 1 0" range="-1.62316 1.62316" actuatorfrcrange="-60 60" armature="0.0169834"/>
-                <geom type="mesh" density="0" rgba="1 1 1 1" mesh="ankle_pitch_R_Link" class="visual"/>
+                <geom mesh="ankle_pitch_R_Link" class="visual"/>
                 <geom size="0.07 0.03 0.0125" pos="-0.0144255 -0.0358488 -0.0502743" type="box" rgba="1 1 1 1"/>
                 <geom size="0.0025" pos="-0.119096 -0.0635431 -0.07124" rgba="1 1 1 1"/>
                 <geom size="0.0025" pos="-0.100494 -0.00387358 -0.07124" rgba="1 1 1 1"/>
@@ -162,61 +165,61 @@
       <!-- transition Link -->
       <body name="transition_Link" pos="0.01 0 0.26915">
         <inertial pos="-0.111727 0.000317 0.014516" quat="0.0036137 0.764736 -0.00818638 0.644282" mass="1.117" diaginertia="0.00804641 0.00687302 0.00258069"/>
-        <geom type="mesh" density="0" rgba="1 1 1 1" mesh="transition_Link" class="visual"/>
-        <geom type="mesh" rgba="1 1 1 1" mesh="transition_Link_collision"/>
+        <geom mesh="transition_Link" class="visual"/>
+        <geom mesh="transition_Link_collision" class="collision"/>
         <body name="arm_base_Link" pos="0.006 0 0">
           <inertial pos="-0.00473641 2.5683e-05 0.0414515" quat="0.70428 0.034288 0.0339756 0.708279" mass="1.02" diaginertia="0.00282612 0.00269117 0.000879394"/>
-          <geom type="mesh" density="0" rgba="1 1 1 1" mesh="arm_base_Link" class="visual"/>
-          <geom type="mesh" rgba="1 1 1 1" mesh="arm_base_Link"/>
+          <geom mesh="arm_base_Link" class="visual"/>
+          <geom mesh="arm_base_Link" class="collision"/>
           <body name="arm1_Link" pos="0 0 0.123" quat="2.67949e-08 0 0 1">
             <inertial pos="0.00053 -0.00039 -0.00315" quat="0.737007 0.671914 -0.0484837 0.0547877" mass="0.71" diaginertia="0.0005012 0.00045752 0.00040836"/>
             <joint name="arm1_Joint" pos="0 0 0" axis="0 0 1" range="-2.61799 2.61799" actuatorfrcrange="-100 100"/>
-            <geom type="mesh" density="0" rgba="1 1 1 1" mesh="arm1_Link" class="visual"/>
-            <geom type="mesh" rgba="1 1 1 1" mesh="arm1_Link"/>
+            <geom mesh="arm1_Link" class="visual"/>
+            <geom mesh="arm1_Link" class="collision"/>
             <body name="arm2_Link" quat="-0.705478 -0.705478 0.0479709 -0.047971">
               <inertial pos="0.21856 -0.00859 0.00227" quat="0.479919 0.532436 0.466857 0.517913" mass="1.16" diaginertia="0.0676841 0.0675582 0.00106833"/>
               <joint name="arm2_Joint" pos="0 0 0" axis="0 0 1" range="0 3.14159" actuatorfrcrange="-100 100"/>
-              <geom type="mesh" density="0" rgba="1 1 1 1" mesh="arm2_Link" class="visual"/>
-              <geom type="mesh" rgba="1 1 1 1" mesh="arm2_Link_collision1"/>
-              <geom type="mesh" rgba="1 1 1 1" mesh="arm2_Link_collision2"/>
+              <geom mesh="arm2_Link" class="visual"/>
+              <geom mesh="arm2_Link_collision1" class="collision"/>
+              <geom mesh="arm2_Link_collision2" class="collision"/>
               <body name="arm3_Link" pos="0.28503 0 0" quat="0.151175 0 0 0.988507">
                 <inertial pos="0.2014 -0.00418 -0.00141" quat="0.489607 0.514215 0.487521 0.508126" mass="0.67" diaginertia="0.0336064 0.0335699 0.000331954"/>
                 <joint name="arm3_Joint" pos="0 0 0" axis="0 0 1" range="-2.96706 0" actuatorfrcrange="-100 100"/>
-                <geom type="mesh" density="0" rgba="1 1 1 1" mesh="arm3_Link" class="visual"/>
-                <geom type="mesh" rgba="1 1 1 1" mesh="arm3_Link_collision1"/>
-                <geom type="mesh" rgba="1 1 1 1" mesh="arm3_Link_collision2"/>
+                <geom mesh="arm3_Link" class="visual"/>
+                <geom mesh="arm3_Link_collision1" class="collision"/>
+                <geom mesh="arm3_Link_collision2" class="collision"/>
                 <body name="arm4_Link" pos="0.27364 0 0" quat="0.999187 0 0 0.0403062">
                   <inertial pos="0.059 -0.05831 0.002" quat="0.564777 0.676972 0.20773 0.423773" mass="0.39" diaginertia="0.00310241 0.00307501 0.000195685"/>
                   <joint name="arm4_Joint" pos="0 0 0" axis="0 0 1" range="-1.55334 1.55334" actuatorfrcrange="-100 100"/>
-                  <geom type="mesh" density="0" rgba="1 1 1 1" mesh="arm4_Link" class="visual"/>
-                  <geom type="mesh" rgba="1 1 1 1" mesh="arm4_Link_collision1"/>
-                  <geom type="mesh" rgba="1 1 1 1" mesh="arm4_Link_collision2"/>
+                  <geom mesh="arm4_Link" class="visual"/>
+                  <geom mesh="arm4_Link_collision1" class="collision"/>
+                  <geom mesh="arm4_Link_collision2" class="collision"/>
                   <body name="arm5_Link" pos="0.07466 0 0" quat="0.5 -0.5 0.5 0.5">
                     <inertial pos="5e-05 -0.01282 -0.00429" quat="0.724649 0.689115 0.000743367 0.00197726" mass="0.35" diaginertia="0.000226601 0.000194293 0.000177357"/>
                     <joint name="arm5_Joint" pos="0 0 0" axis="0 0 1" range="-1.55334 1.55334" actuatorfrcrange="-100 100"/>
-                    <geom type="mesh" density="0" rgba="1 1 1 1" mesh="arm5_Link" class="visual"/>
-                    <geom type="mesh" rgba="1 1 1 1" mesh="arm5_Link"/>
+                    <geom mesh="arm5_Link" class="visual"/>
+                    <geom mesh="arm5_Link" class="collision"/>
                     <body name="arm6_Link" pos="0 -0.035 0" quat="0.707107 0.707107 0 0">
                       <inertial pos="0 0 -0.0035" quat="0.5 0.5 -0.5 0.5" mass="0.007" diaginertia="1.4e-06 7.6e-07 7.6e-07"/>
                       <joint name="arm6_Joint" pos="0 0 0" axis="0 0 1" range="-2.0944 2.0944" actuatorfrcrange="-100 100"/>
-                      <geom type="mesh" density="0" rgba="1 1 1 1" mesh="arm6_Link" class="visual"/>
-                      <geom type="mesh" rgba="1 1 1 1" mesh="arm6_Link"/>
+                      <geom mesh="arm6_Link" class="visual"/>
+                      <geom mesh="arm6_Link" class="collision"/>
                       <body name="gripper_base_Link" quat="0.707107 0 0 0.707107">
                         <inertial pos="-0.000183807 8.0503e-05 0.0321437" quat="0.999976 9.08444e-05 0.00689649 0.000788512" mass="0.45" diaginertia="0.000929442 0.000714469 0.000394318"/>
-                        <geom type="mesh" density="0" rgba="1 1 1 1" mesh="gripper_base_Link" class="visual"/>
-                        <geom type="mesh" rgba="1 1 1 1" mesh="gripper_base_Link_collision1"/>
-                        <geom type="mesh" rgba="1 1 1 1" mesh="gripper_base_Link_collision2"/>
+                        <geom mesh="gripper_base_Link" class="visual"/>
+                        <geom mesh="gripper_base_Link_collision1" class="collision"/>
+                        <geom mesh="gripper_base_Link_collision2" class="collision"/>
                         <body name="gripper1_Link" pos="0 0 0.1358" quat="0.707107 0.707107 0 0">
                           <inertial pos="0.000651232 -0.049193 0.00972259" quat="0.477798 0.572974 -0.518028 0.418398" mass="0.025" diaginertia="7.74531e-05 7.36783e-05 5.0886e-06"/>
                           <joint name="gripper1_Joint" pos="0 0 0" axis="0 0 1" type="slide" range="0 0.05" actuatorfrcrange="-10 10"/>
-                          <geom type="mesh" density="0" rgba="1 1 1 1" mesh="gripper1_Link" class="visual"/>
-                          <geom type="mesh" rgba="1 1 1 1" mesh="gripper1_Link"/>
+                          <geom mesh="gripper1_Link" class="visual"/>
+                          <geom mesh="gripper1_Link" class="collision"/>
                         </body>
                         <body name="gripper2_Link" pos="0 0 0.1358" quat="1.89469e-08 1.89469e-08 -0.707107 -0.707107">
                           <inertial pos="0.000651232 -0.049193 0.00972259" quat="0.477798 0.572974 -0.518028 0.418398" mass="0.025" diaginertia="7.74531e-05 7.36783e-05 5.0886e-06"/>
                           <joint name="gripper2_Joint" pos="0 0 0" axis="0 0 -1" type="slide" range="-0.05 0" actuatorfrcrange="-10 10"/>
-                          <geom type="mesh" density="0" rgba="1 1 1 1" mesh="gripper2_Link" class="visual"/>
-                          <geom type="mesh" rgba="1 1 1 1" mesh="gripper2_Link"/>
+                          <geom mesh="gripper2_Link" class="visual"/>
+                          <geom mesh="gripper2_Link" class="collision"/>
                         </body>
                       </body>
                     </body>
@@ -231,35 +234,35 @@
       <!-- antenna L Link -->
       <body name="antenna_L_Link" pos="-0.0025 0.16692 0.211">
         <inertial pos="-2.7e-05 -0.028426 0.013784" quat="0.75335 0.657615 0.00138308 -0.00187246" mass="0.231" diaginertia="0.000424494 0.000395949 0.000165777"/>
-        <geom type="mesh" density="0" rgba="1 1 1 1" mesh="antenna_L_Link" class="visual"/>
-        <geom type="mesh" rgba="1 1 1 1" mesh="antenna_L_Link_collision1"/>
-        <geom type="mesh" rgba="1 1 1 1" mesh="antenna_L_Link_collision2"/>
+        <geom mesh="antenna_L_Link" class="visual"/>
+        <geom mesh="antenna_L_Link_collision1" class="collision"/>
+        <geom mesh="antenna_L_Link_collision2" class="collision"/>
       </body>
 
       <!-- antenna R Link -->
       <body name="antenna_R_Link" pos="-0.0025 -0.16692 0.211">
         <inertial pos="2.7e-05 0.028426 0.013784" quat="0.657613 0.753352 -0.00185952 0.00137144" mass="0.231" diaginertia="0.000424494 0.000395949 0.000165777"/>
-        <geom type="mesh" density="0" rgba="1 1 1 1" mesh="antenna_R_Link" class="visual"/>
-        <geom type="mesh" rgba="1 1 1 1" mesh="antenna_R_Link_collision1"/>
-        <geom type="mesh" rgba="1 1 1 1" mesh="antenna_R_Link_collision2"/>
+        <geom mesh="antenna_R_Link" class="visual"/>
+        <geom mesh="antenna_R_Link_collision1" class="collision"/>
+        <geom mesh="antenna_R_Link_collision2" class="collision"/>
       </body>
 
       <!-- camera mount Link -->
       <body name="camera_mount_Link" pos="0.18058 0 0.23876">
         <inertial pos="0.002536 0.000321 -0.060392" quat="0.995871 -0.00286112 0.0902072 -0.0097294" mass="0.381" diaginertia="0.00166835 0.00150447 0.000510829"/>
-        <geom type="mesh" density="0" rgba="1 1 1 1" mesh="camera_mount_Link" class="visual"/>
-        <geom type="mesh" rgba="1 1 1 1" mesh="camera_mount_Link_collision"/>
+        <geom mesh="camera_mount_Link" class="visual"/>
+        <geom mesh="camera_mount_Link_collision" class="collision"/>
         <body name="radar_Link">
           <inertial pos="-4.8e-05 8.4e-05 0.03502" quat="0.954476 0.1644 0.0447128 0.244843" mass="0.394" diaginertia="0.000309219 0.000308095 0.000304951"/>
-          <geom type="mesh" density="0" rgba="1 1 1 1" mesh="radar_Link" class="visual"/>
-          <geom type="mesh" rgba="1 1 1 1" mesh="radar_Link"/>
+          <geom mesh="radar_Link" class="visual"/>
+          <geom mesh="radar_Link" class="collision"/>
         </body>
       </body>
       <body name="limx_imu">
         <inertial pos="0 0 0" mass="0.01" diaginertia="1e-06 1e-06 1e-06"/>
-        <geom size="0.0075 0.0075 0.002" type="box" density="0" rgba="1 0.423 0.039 1" class="visual"/>
+        <geom size="0.0075 0.0075 0.002" type="box" contype="0" conaffinity="0" group="1" density="0" rgba="1 0.423 0.039 1"/>
         <body name="d435_Link" pos="0.12213 0.01759 0.00599" quat="0.861851 0 0.507162 0">
-          <geom size="0.005 0.005 0.0005" quat="0.5 0.5 0.5 0.5" type="box" density="0" class="visual"/>
+          <geom size="0.005 0.005 0.0005" quat="0.5 0.5 0.5 0.5" type="box" contype="0" conaffinity="0" group="1" density="0"/>
           <body name="d435_optical_frame" quat="0.5 -0.5 0.5 -0.5"/>
         </body>
       </body>
