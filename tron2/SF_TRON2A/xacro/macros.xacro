@@ -27,9 +27,12 @@
       </plugin>
     </gazebo>
 
-    <!-- D435 Camera ROS1 Plugin -->
+    <!-- D435 Camera ROS1 Plugin: split into two sensors instead of using
+         libgazebo_ros_openni_kinect.so. The openni_kinect plugin deadlocks
+         with gazebo_ros_control on Load() and prevents Tron2HWSim::initSim
+         from being called. -->
     <gazebo reference="d435_Link">
-      <sensor type="depth" name="d435_camera_sensor">
+      <sensor type="camera" name="d435_color_sensor">
         <pose>0 0 0 0 0 0</pose>
         <update_rate>60</update_rate>
         <visualize>false</visualize>
@@ -45,13 +48,47 @@
             <far>1.8</far>
           </clip>
         </camera>
-        <plugin name="camera_controller" filename="libgazebo_ros_openni_kinect.so">
-          <cameraName>d435/d435_camera</cameraName>
-          <imageTopicName>color/image_raw</imageTopicName>
-          <cameraInfoTopicName>color/camera_info</cameraInfoTopicName>
-          <depthImageTopicName>depth/image_raw</depthImageTopicName>
-          <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
-          <pointCloudTopicName>depth/points</pointCloudTopicName>
+        <plugin name="d435_color_controller" filename="libgazebo_ros_camera.so">
+          <robotNamespace>d435</robotNamespace>
+          <cameraName>color</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>d435_optical_frame</frameName>
+        </plugin>
+      </sensor>
+
+      <sensor type="depth" name="d435_depth_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>60</update_rate>
+        <visualize>false</visualize>
+        <camera>
+          <horizontal_fov>1.5177</horizontal_fov>
+          <image>
+            <format>R8G8B8</format>
+            <width>64</width>
+            <height>48</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>1.8</far>
+          </clip>
+        </camera>
+        <plugin name="d435_depth_controller" filename="libgazebo_ros_depth_camera.so">
+          <robotNamespace>d435</robotNamespace>
+          <!-- cameraName must differ from the color sensor; otherwise both
+               plugins share the same set_camera_info / set_parameters
+               services and Gazebo logs "Tried to advertise a service that
+               is already advertised" on the second one. -->
+          <cameraName>depth</cameraName>
+          <!-- imageTopicName / cameraInfoTopicName publish the IR/grayscale
+               frame from libgazebo_ros_depth_camera.so. Route them under
+               infra/ so they don't collide with depthImageTopicName /
+               depthImageCameraInfoTopicName (the real depth stream). -->
+          <imageTopicName>infra/image_raw</imageTopicName>
+          <cameraInfoTopicName>infra/camera_info</cameraInfoTopicName>
+          <depthImageTopicName>image_raw</depthImageTopicName>
+          <depthImageCameraInfoTopicName>camera_info</depthImageCameraInfoTopicName>
+          <pointCloudTopicName>points</pointCloudTopicName>
           <frameName>d435_optical_frame</frameName>
           <pointCloudCutoff>0.1</pointCloudCutoff>
           <pointCloudCutoffMax>1.8</pointCloudCutoffMax>
@@ -278,7 +315,7 @@
         <state_interface name="effort" />
       </joint>
 
-      <sensor name="limx_imu_sensor">
+      <sensor name="base_imu_sensor">
         <state_interface name="orientation.x" />
         <state_interface name="orientation.y" />
         <state_interface name="orientation.z" />
@@ -293,8 +330,8 @@
     </ros2_control>
 
     <!-- IMU Gazebo sensor plugin (ROS2) -->
-    <gazebo reference="limx_imu">
-      <sensor type="imu" name="limx_imu_sensor">
+    <gazebo reference="base_imu">
+      <sensor type="imu" name="base_imu_sensor">
         <always_on>true</always_on>
         <update_rate>100</update_rate>
         <visualize>true</visualize>
