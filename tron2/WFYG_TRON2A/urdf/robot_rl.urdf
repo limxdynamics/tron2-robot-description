@@ -283,6 +283,36 @@
     <limit lower="-1745329.2519943295" upper="1745329.2519943295" effort="22.0" velocity="41.89"/>
   </joint>
 
+  <!-- Camera --> 
+  <link name="d435_Link">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.005 0.005 0.005"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="d435_Joint" type="fixed">
+    <origin xyz="0.0968 0.01759 -0.00409" rpy="0 2.7227 0"/>
+    <parent link="base_Link"/>
+    <child link="d435_Link"/>
+  </joint>
+  
+  <link name="d435_optical_frame">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+  </link>
+  <joint name="d435_optical_Joint" type="fixed">
+    <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0"/>
+    <parent link="d435_Link"/>
+    <child link="d435_optical_frame"/>
+  </joint>
+
   <!-- transition Link -->
   <link name="transition_Link">
     <inertial>

@@ -56,10 +56,22 @@
     <!-- base -->
     <body name="base_Link" pos="0.0 0.0 1.2">
       <inertial pos="-0.00205 -0.0001 0.11304" quat="0.696197 -0.130687 -0.132604 0.693287" mass="11.07" diaginertia="0.120931 0.107294 0.0860939"/>
-      <joint type="free" stiffness="1e-09" damping="1e-08"/>
+      <joint type="free" stiffness="1e09" damping="1e08"/>
       <geom mesh="base_Link" class="visual"/>
       <geom mesh="base_Link" class="collision"/>
       <site name="base_imu" pos="0 0 0"/>
+      
+      <!-- base 2 Link -->
+      <body name="base_2_Link" pos="0.00056 -9e-05 -0.07285">
+        <inertial pos="0 0 -0.45862" mass="0.001" diaginertia="1e-06 1e-06 1e-06"/>
+        <geom mesh="base_2_Link" class="visual"/>
+        <geom mesh="base_2_Link" class="collision"/>
+        <body name="base_3_Link" pos="0 0 -0.9295">
+          <inertial pos="0 0 -0.05442" mass="0.001" diaginertia="1e-06 1e-06 1e-06"/>
+          <geom mesh="base_3_Link" class="visual"/>
+          <geom mesh="base_3_Link" class="collision"/>
+        </body>
+      </body>
 
       <!-- proximal pitch L Link -->
       <body name="proximal_pitch_L_Link" pos="-0.00044 0.09178 0.05474">
@@ -107,18 +119,6 @@
               </body>
             </body>
           </body>
-        </body>
-      </body>
-
-      <!-- base 2 Link -->
-      <body name="base_2_Link" pos="0.00056 -9e-05 -0.07285">
-        <inertial pos="0 0 -0.45862" mass="0.001" diaginertia="1e-06 1e-06 1e-06"/>
-        <geom mesh="base_2_Link" class="visual"/>
-        <geom mesh="base_2_Link" class="collision"/>
-        <body name="base_3_Link" pos="0 0 -0.9295">
-          <inertial pos="0 0 -0.05442" mass="0.001" diaginertia="1e-06 1e-06 1e-06"/>
-          <geom mesh="base_3_Link" class="visual"/>
-          <geom mesh="base_3_Link" class="collision"/>
         </body>
       </body>
 
@@ -170,12 +170,12 @@
           </body>
         </body>
       </body>
-      <body name="limx_imu">
-        <inertial pos="0 0 0" mass="0.01" diaginertia="1e-06 1e-06 1e-06"/>
-        <geom size="0.0075 0.0075 0.002" type="box" contype="0" conaffinity="0" group="1" density="0" rgba="1 0.423 0.039 1"/>
-        <body name="d435_Link" pos="0.12213 0.01759 0.00599" quat="0.861851 0 0.507162 0">
-          <geom size="0.005 0.005 0.0005" quat="0.5 0.5 0.5 0.5" type="box" contype="0" conaffinity="0" group="1" density="0"/>
-          <body name="d435_optical_frame" quat="0.5 -0.5 0.5 -0.5"/>
+      
+      <!-- camera -->
+      <body name="d435_Link" pos="0.0968 0.01759 -0.00409" quat="0.207918 0 0.978146 0">
+        <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        <body name="d435_optical_frame" pos="0 0 0" quat="0.5 -0.5 0.5 -0.5">
+          <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
         </body>
       </body>
     </body>

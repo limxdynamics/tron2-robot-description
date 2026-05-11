@@ -40,6 +40,58 @@
     <child link="base_imu"/>
   </joint>
 
+  <!-- base 2 Link -->
+  <link name="base_2_Link">
+    <inertial>
+      <origin xyz="0.0 0.0 -0.45862" rpy="0.0 0.0 0.0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/base_2_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/base_2_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_2_Joint" type="fixed">
+    <origin xyz="0.00056 -9e-05 -0.07285" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="base_2_Link"/>
+  </joint>
+  <link name="base_3_Link">
+    <inertial>
+      <origin xyz="0.0 0.0 -0.05442" rpy="0.0 0.0 0.0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/base_3_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/base_3_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_3_Joint" type="fixed">
+    <origin xyz="0.0 0.0 -0.9295" rpy="0.0 0.0 0.0"/>
+    <parent link="base_2_Link"/>
+    <child link="base_3_Link"/>
+  </joint>
+
   <!-- proximal pitch L Link -->
   <link name="proximal_pitch_L_Link">
     <inertial>
@@ -254,58 +306,6 @@
     <origin xyz="-0.0317 0.0 -0.0812" rpy="0.0 0.0 0.0"/>
     <parent link="wrist_roll_L_Link"/>
     <child link="grasper_L_Link"/>
-  </joint>
-
-  <!-- base 2 Link -->
-  <link name="base_2_Link">
-    <inertial>
-      <origin xyz="0.0 0.0 -0.45862" rpy="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
-    </inertial>
-    <visual>
-      <geometry>
-        <mesh filename="package://bipedal_robot/meshes/base_2_Link.STL"/>
-      </geometry>
-      <material name="grey">
-        <color rgba="1 1 1 1"/>
-      </material>
-    </visual>
-    <collision>
-      <geometry>
-        <mesh filename="package://bipedal_robot/meshes/base_2_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="base_2_Joint" type="fixed">
-    <origin xyz="0.00056 -9e-05 -0.07285" rpy="0.0 0.0 0.0"/>
-    <parent link="base_Link"/>
-    <child link="base_2_Link"/>
-  </joint>
-  <link name="base_3_Link">
-    <inertial>
-      <origin xyz="0.0 0.0 -0.05442" rpy="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
-    </inertial>
-    <visual>
-      <geometry>
-        <mesh filename="package://bipedal_robot/meshes/base_3_Link.STL"/>
-      </geometry>
-      <material name="grey">
-        <color rgba="1 1 1 1"/>
-      </material>
-    </visual>
-    <collision>
-      <geometry>
-        <mesh filename="package://bipedal_robot/meshes/base_3_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="base_3_Joint" type="fixed">
-    <origin xyz="0.0 0.0 -0.9295" rpy="0.0 0.0 0.0"/>
-    <parent link="base_2_Link"/>
-    <child link="base_3_Link"/>
   </joint>
 
   <!-- proximal pitch R Link -->
@@ -524,345 +524,33 @@
     <child link="grasper_R_Link"/>
   </joint>
 
-  <!-- ros2_control plugin -->
-  <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-      <parameters>$(find tron2_gazebo)/config/default_tron2.yaml</parameters>
-    </plugin>
-  </gazebo>
-  <ros2_control name="bipedal_robotGazeboSystem" type="system">
-    <hardware>
-      <plugin>tron2_gazebo/Tron2HWSim</plugin>
-    </hardware>
-    <joint name="proximal_pitch_L_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="proximal_roll_L_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="proximal_yaw_L_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="elbow_L_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="wrist_yaw_L_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="wrist_pitch_L_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="wrist_roll_L_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="proximal_pitch_R_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="wrist_yaw_R_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="proximal_roll_R_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="proximal_yaw_R_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="elbow_R_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="wrist_pitch_R_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="wrist_roll_R_Joint">
-      <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="effort"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <sensor name="limx_imu_sensor">
-      <state_interface name="orientation.x"/>
-      <state_interface name="orientation.y"/>
-      <state_interface name="orientation.z"/>
-      <state_interface name="orientation.w"/>
-      <state_interface name="angular_velocity.x"/>
-      <state_interface name="angular_velocity.y"/>
-      <state_interface name="angular_velocity.z"/>
-      <state_interface name="linear_acceleration.x"/>
-      <state_interface name="linear_acceleration.y"/>
-      <state_interface name="linear_acceleration.z"/>
-    </sensor>
-  </ros2_control>
-  <gazebo reference="limx_imu">
-    <sensor type="imu" name="limx_imu_sensor">
-      <always_on>true</always_on>
-      <update_rate>100</update_rate>
-      <visualize>true</visualize>
-      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
-        <ros>
-          <namespace/>
-          <remapping>~/out:=imu</remapping>
-        </ros>
-        <initial_orientation_as_reference>false</initial_orientation_as_reference>
-      </plugin>
-    </sensor>
-  </gazebo>
-
-  <!-- Ground truth pose plugin -->
-  <gazebo>
-    <plugin filename="libgazebo_ros_p3d.so" name="p3d_base_controller">
-      <ros>
-        <remapping>odom:=ground_truth/state</remapping>
-      </ros>
-      <update_rate>1000.0</update_rate>
-      <body_name>base_Link</body_name>
-      <frame_name>world</frame_name>
-      <gaussian_noise>0.0</gaussian_noise>
-      <xyz_offset>0 0 0</xyz_offset>
-      <rpy_offset>0 0 0</rpy_offset>
-    </plugin>
-  </gazebo>
-
-  <!-- IMU Link -->
-  <joint name="limx_imu_joint" type="fixed">
-    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-    <parent link="base_Link"/>
-    <child link="limx_imu"/>
-  </joint>
-  <link name="limx_imu">
+  <!-- Camera --> 
+  <link name="d435_Link">
     <inertial>
-      <mass value="0.01"/>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.015 0.015 0.004"/>
-      </geometry>
-      <material name="orange">
-        <color rgba="1.0 0.423 0.039 1.0"/>
-      </material>
-    </visual>
-  </link>
-  <gazebo reference="limx_imu_joint">
-    <disableFixedJointLumping>true</disableFixedJointLumping>
-  </gazebo>
-
-  <!-- Camera -->
-  <link name="d435_Link">
-    <visual>
-      <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0.0 -0.0 0"/>
-      <geometry>
-        <box size="0.01 0.01 0.001"/>
+        <box size="0.005 0.005 0.005"/>
       </geometry>
     </visual>
   </link>
-  <joint name="d435_joint" type="fixed">
-    <origin rpy="0.0 1.063778179 0.0" xyz="0.12213 0.01759 0.00599"/>
-    <parent link="limx_imu"/>
+  <joint name="d435_Joint" type="fixed">
+    <origin xyz="0.0968 0.01759 -0.00409" rpy="0 2.7227 0"/>
+    <parent link="base_Link"/>
     <child link="d435_Link"/>
   </joint>
-  <joint name="d435_optical_joint" type="fixed">
+  
+  <link name="d435_optical_frame">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+  </link>
+  <joint name="d435_optical_Joint" type="fixed">
     <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0"/>
     <parent link="d435_Link"/>
     <child link="d435_optical_frame"/>
   </joint>
-  <link name="d435_optical_frame"/>
-  <gazebo reference="d435_Link">
-    <sensor type="depth" name="d435_camera_sensor">
-      <pose>0 0 0 0 0 0</pose>
-      <update_rate>60</update_rate>
-      <visualize>false</visualize>
-      <camera>
-        <horizontal_fov>1.5177</horizontal_fov>
-        <image>
-          <format>B8G8R8</format>
-          <width>64</width>
-          <height>48</height>
-        </image>
-        <clip>
-          <near>0.1</near>
-          <far>1.8</far>
-        </clip>
-      </camera>
-      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-        <ros>
-          <namespace>d435</namespace>
-        </ros>
-        <camera_name>d435_camera</camera_name>
-        <frame_name>d435_optical_frame</frame_name>
-        <min_depth>0.1</min_depth>
-        <max_depth>1.8</max_depth>
-      </plugin>
-    </sensor>
-  </gazebo>
-
-  <!-- Gazebo link physics -->
-  <gazebo reference="base_imu">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="base_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="proximal_pitch_L_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="proximal_roll_L_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="proximal_yaw_L_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="elbow_L_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="wrist_yaw_L_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="wrist_pitch_L_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="wrist_roll_L_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="grasper_L_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="base_2_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="base_3_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="wrist_pitch_R_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="elbow_R_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="wrist_yaw_R_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="proximal_roll_R_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="proximal_pitch_R_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="wrist_roll_R_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="proximal_yaw_R_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
-  <gazebo reference="grasper_R_Link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
-  </gazebo>
 </robot>

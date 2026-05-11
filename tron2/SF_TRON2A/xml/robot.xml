@@ -128,12 +128,12 @@
           </body>
         </body>
       </body>
-      <body name="limx_imu">
-        <inertial pos="0 0 0" mass="0.01" diaginertia="1e-06 1e-06 1e-06"/>
-        <geom size="0.0075 0.0075 0.002" type="box" contype="0" conaffinity="0" group="1" density="0" rgba="1 0.423 0.039 1"/>
-        <body name="d435_Link" pos="0.12213 0.01759 0.00599" quat="0.861851 0 0.507162 0">
-          <geom size="0.005 0.005 0.0005" quat="0.5 0.5 0.5 0.5" type="box" contype="0" conaffinity="0" group="1" density="0"/>
-          <body name="d435_optical_frame" quat="0.5 -0.5 0.5 -0.5"/>
+      
+      <!-- camera -->
+      <body name="d435_Link" pos="0.0968 0.01759 -0.00409" quat="0.207918 0 0.978146 0">
+        <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        <body name="d435_optical_frame" pos="0 0 0" quat="0.5 -0.5 0.5 -0.5">
+          <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
         </body>
       </body>
     </body>

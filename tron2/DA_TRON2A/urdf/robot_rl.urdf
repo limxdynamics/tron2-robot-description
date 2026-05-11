@@ -37,6 +37,52 @@
     <child link="base_imu"/>
   </joint>
 
+  <!-- base 2 Link -->
+  <link name="base_2_Link">
+    <inertial>
+      <origin xyz="0.0 0.0 -0.45862" rpy="0.0 0.0 0.0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/base_2_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="../meshes/base_2_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_2_Joint" type="fixed">
+    <origin xyz="0.00056 -9e-05 -0.07285" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="base_2_Link"/>
+  </joint>
+  <link name="base_3_Link">
+    <inertial>
+      <origin xyz="0.0 0.0 -0.05442" rpy="0.0 0.0 0.0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/base_3_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="../meshes/base_3_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_3_Joint" type="fixed">
+    <origin xyz="0.0 0.0 -0.9295" rpy="0.0 0.0 0.0"/>
+    <parent link="base_2_Link"/>
+    <child link="base_3_Link"/>
+  </joint>
+
   <!-- proximal pitch L Link -->
   <link name="proximal_pitch_L_Link">
     <inertial>
@@ -229,52 +275,6 @@
     <child link="grasper_L_Link"/>
   </joint>
 
-  <!-- base 2 Link -->
-  <link name="base_2_Link">
-    <inertial>
-      <origin xyz="0.0 0.0 -0.45862" rpy="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
-    </inertial>
-    <visual>
-      <geometry>
-        <mesh filename="../meshes/base_2_Link.STL"/>
-      </geometry>
-    </visual>
-    <collision>
-      <geometry>
-        <mesh filename="../meshes/base_2_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="base_2_Joint" type="fixed">
-    <origin xyz="0.00056 -9e-05 -0.07285" rpy="0.0 0.0 0.0"/>
-    <parent link="base_Link"/>
-    <child link="base_2_Link"/>
-  </joint>
-  <link name="base_3_Link">
-    <inertial>
-      <origin xyz="0.0 0.0 -0.05442" rpy="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
-    </inertial>
-    <visual>
-      <geometry>
-        <mesh filename="../meshes/base_3_Link.STL"/>
-      </geometry>
-    </visual>
-    <collision>
-      <geometry>
-        <mesh filename="../meshes/base_3_Link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="base_3_Joint" type="fixed">
-    <origin xyz="0.0 0.0 -0.9295" rpy="0.0 0.0 0.0"/>
-    <parent link="base_2_Link"/>
-    <child link="base_3_Link"/>
-  </joint>
-
   <!-- proximal pitch R Link -->
   <link name="proximal_pitch_R_Link">
     <inertial>
@@ -465,5 +465,35 @@
     <origin xyz="-0.0317 -0.0 -0.0812" rpy="0.0 0.0 0.0"/>
     <parent link="wrist_roll_R_Link"/>
     <child link="grasper_R_Link"/>
+  </joint>
+
+  <!-- Camera --> 
+  <link name="d435_Link">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.005 0.005 0.005"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="d435_Joint" type="fixed">
+    <origin xyz="0.0968 0.01759 -0.00409" rpy="0 2.7227 0"/>
+    <parent link="base_Link"/>
+    <child link="d435_Link"/>
+  </joint>
+  
+  <link name="d435_optical_frame">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+  </link>
+  <joint name="d435_optical_Joint" type="fixed">
+    <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0"/>
+    <parent link="d435_Link"/>
+    <child link="d435_optical_frame"/>
   </joint>
 </robot>

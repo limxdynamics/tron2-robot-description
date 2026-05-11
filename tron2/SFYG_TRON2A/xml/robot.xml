@@ -158,6 +158,14 @@
         </body>
       </body>
 
+      <!-- camera -->
+      <body name="d435_Link" pos="0.0968 0.01759 -0.00409" quat="0.207918 0 0.978146 0">
+        <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        <body name="d435_optical_frame" pos="0 0 0" quat="0.5 -0.5 0.5 -0.5">
+          <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        </body>
+      </body>
+
       <!-- transition Link -->
       <body name="transition_Link" pos="0.01 0 0.26915">
         <inertial pos="-0.111727 0.000317 0.014516" quat="0.0036137 0.764736 -0.00818638 0.644282" mass="1.117" diaginertia="0.00804641 0.00687302 0.00258069"/>
@@ -252,14 +260,6 @@
           <inertial pos="-4.8e-05 8.4e-05 0.03502" quat="0.954476 0.1644 0.0447128 0.244843" mass="0.394" diaginertia="0.000309219 0.000308095 0.000304951"/>
           <geom mesh="radar_Link" class="visual"/>
           <geom mesh="radar_Link" class="collision"/>
-        </body>
-      </body>
-      <body name="limx_imu">
-        <inertial pos="0 0 0" mass="0.01" diaginertia="1e-06 1e-06 1e-06"/>
-        <geom size="0.0075 0.0075 0.002" type="box" contype="0" conaffinity="0" group="1" density="0" rgba="1 0.423 0.039 1"/>
-        <body name="d435_Link" pos="0.12213 0.01759 0.00599" quat="0.861851 0 0.507162 0">
-          <geom size="0.005 0.005 0.0005" quat="0.5 0.5 0.5 0.5" type="box" contype="0" conaffinity="0" group="1" density="0"/>
-          <body name="d435_optical_frame" quat="0.5 -0.5 0.5 -0.5"/>
         </body>
       </body>
     </body>
