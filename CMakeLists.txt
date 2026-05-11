@@ -1,6 +1,5 @@
-# Copyright information
-#
-# © [2024] LimX Dynamics Technology Co., Ltd. All rights reserved.
+# SPDX-FileCopyrightText: 2024 LimX Dynamics Technology Co., Ltd.
+# SPDX-License-Identifier: Apache-2.0
 
 # Declare the minimum required CMake version
 cmake_minimum_required(VERSION 3.10)
