@@ -1,6 +1,6 @@
 # TRON2 robot description
 
-URDF / xacro, MuJoCo XML, meshes, and optional USD assets for **TRON2A** humanoid variants. This package is intended for simulation, visualization, and downstream tooling (ROS 1/2, MuJoCo, Isaac Sim, and similar).
+URDF / xacro, MuJoCo XML, meshes, and optional USD assets for **TRON2A** robot variants. This package is intended for simulation, visualization, and downstream tooling (ROS 1/2, MuJoCo, Isaac Sim, and similar).
 
 ## License
 
@@ -20,17 +20,17 @@ Each hardware/software configuration lives under `tron2/<VARIANT>/`:
 | `meshes/` | STL meshes referenced by the models |
 | `usd/` | USD assets (present on some variants) |
 
-**Note:** `DACH_TRON2A` currently ships **MuJoCo XML and meshes** only (no URDF/xacro in this tree).
+**Note:** `DACH_TRON2A` currently ships **MuJoCo XML and meshes** only.
 
-Illustrations for each variant are in [`docs/images/`](docs/images/) and are embedded in the [Models](#models) section below (`DA.jpg`, `DACH.jpg`, `WF.jpg`, `WFYG.jpg`, `SF_0.jpg` / `SF_1.jpg`, `SFYG_0.jpg` / `SFYG_1.jpg`).
+Illustrations for each variant are in [`docs/images/`](docs/images/) and are embedded in the [Models](#models) section below.
 
 ---
 
 ## Joint zero convention
 
 - **Revolute / prismatic joints:** In these models, **zero angle or zero displacement** is the joint value where the exported URDF/MuJoCo joint axis definition matches the neutral mesh pose at rest. Use this as the software zero for controllers and simulators.
-- **Floating base:** Where a free joint is used (MuJoCo) or a fixed transform is applied in URDF, align your estimator and odometry with the documented root frame (`base_Link` / `root` as in each model).
-- **Calibration:** Hardware zero may require additional offset calibration relative to this kinematic zero; refer to your robot bring-up documentation.
+- **Floating base:** The base is **floating** in the world (six degrees of freedom: position + orientation). MuJoCo often uses a **free joint** on the root; URDF uses a **floating** base joint where applicable. Use **`base_Link`** / the documented root link for transforms; world pose comes from simulation or your localization stack.
+- **Calibration:** Before shipment, each robot is **factory-calibrated** so joint zeros match the **standard zeros defined in this repository’s URDF**. Normal operation assumes that alignment; refer to maintenance procedures only after hardware service or major assembly changes.
 
 Coordinate conventions follow typical ROS usage unless stated otherwise in your integration stack: **x** forward, **y** left, **z** up from the root link.
 
