@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <mujoco model="bipedal_robot">
-  <compiler angle="radian" meshdir="../meshes"/>
+  <compiler angle="radian" meshdir="../meshes" autolimits="true"/>
   <option timestep="0.001"/>
   <size njmax="5000" nconmax="1000"/>
   <default>
@@ -54,7 +54,7 @@
     <camera name="track" mode="trackcom" pos="0 -2.3 1.6" xyaxes="1 0 0 0 0.707 0.707"/>
 
     <!-- base -->
-    <body name="base_Link" pos="0.0 0.0 1.2">
+    <body name="base_Link" pos="0.0 0.0 1.21">
       <inertial pos="-0.00205 -0.0001 0.11304" quat="0.696197 -0.130687 -0.132604 0.693287" mass="11.07" diaginertia="0.120931 0.107294 0.0860939"/>
       <joint type="free" stiffness="1e09" damping="1e08"/>
       <geom mesh="base_Link" class="visual"/>
