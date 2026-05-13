@@ -41,8 +41,8 @@
   <link name="base_2_Link">
     <inertial>
       <origin xyz="0.0 0.0 -0.45862" rpy="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+      <mass value="10"/>
+      <inertia ixx="0.80635" ixy="0" ixz="0" iyy="0.811937" iyz="0" izz="0.017624"/>
     </inertial>
     <visual>
       <geometry>
@@ -50,8 +50,9 @@
       </geometry>
     </visual>
     <collision>
+      <origin xyz="0.0 0.0 -0.45862"/>
       <geometry>
-        <mesh filename="../meshes/base_2_Link.STL"/>
+        <box size="0.118 0.085 0.98"/>
       </geometry>
     </collision>
   </link>
@@ -63,8 +64,8 @@
   <link name="base_3_Link">
     <inertial>
       <origin xyz="0.0 0.0 -0.05442" rpy="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+      <mass value="20"/>
+      <inertia ixx="0.9485" ixy="0" ixz="0" iyy="0.9485" iyz="0" izz="1.6803"/>
     </inertial>
     <visual>
       <geometry>
@@ -82,7 +83,7 @@
     <parent link="base_2_Link"/>
     <child link="base_3_Link"/>
   </joint>
-
+  
   <!-- proximal pitch L Link -->
   <link name="proximal_pitch_L_Link">
     <inertial>

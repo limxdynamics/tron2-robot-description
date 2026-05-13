@@ -63,11 +63,11 @@
       
       <!-- base 2 Link -->
       <body name="base_2_Link" pos="0.00056 -9e-05 -0.07285">
-        <inertial pos="0 0 -0.45862" mass="0.001" diaginertia="1e-06 1e-06 1e-06"/>
+        <inertial pos="0 0 -0.45862" quat="0.707107 0 0 0.707107" mass="10" diaginertia="0.811937 0.80635 0.017624"/>
         <geom mesh="base_2_Link" class="visual"/>
-        <geom mesh="base_2_Link" class="collision"/>
+        <geom size="0.059 0.0425 0.49" pos="0 0 -0.45862" type="box"/>
         <body name="base_3_Link" pos="0 0 -0.9295">
-          <inertial pos="0 0 -0.05442" mass="0.001" diaginertia="1e-06 1e-06 1e-06"/>
+          <inertial pos="0 0 -0.05442" quat="0.5 0.5 -0.5 0.5" mass="20" diaginertia="1.6803 0.9485 0.9485"/>
           <geom mesh="base_3_Link" class="visual"/>
           <geom mesh="base_3_Link" class="collision"/>
         </body>
