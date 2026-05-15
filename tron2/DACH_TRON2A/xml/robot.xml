@@ -251,8 +251,8 @@
         <actuatorpos name="head_yaw_Joint_p" actuator="head_yaw_Joint" />
         <actuatorvel name="head_yaw_Joint_v" actuator="head_yaw_Joint" />
         <actuatorfrc name="head_yaw_Joint_f" actuator="head_yaw_Joint" noise="0.001" />
-        <framequat name="quat" objtype="site" noise="0.001" objname="imu" />
-        <gyro name="gyro" site="imu" noise="0.005" cutoff="34.9" />
-        <accelerometer name="acc" site="imu" />
+        <framequat name="base_imu_quat" objtype="site" noise="0.001" objname="imu" />
+        <gyro name="base_imu_gyro" site="imu" noise="0.005" cutoff="34.9" />
+        <accelerometer name="base_imu_acc" site="imu" />
     </sensor>
 </mujoco>
