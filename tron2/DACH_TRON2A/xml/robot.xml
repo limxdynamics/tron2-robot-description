@@ -16,10 +16,6 @@
     <geom contype="1" conaffinity="1" friction="1.0 0.3 0.3" rgba="0.5 0.6 0.7 0.5" margin="0.001" group="0" solref="0.01 1"/>
     <equality solref="0.001 1"/>
   </default>
-  <visual>
-    <rgba com="0.502 1.0 0 1.0" contactpoint="0.5 0.1 0.8 0.4" contactforce="0.2 0.98 0.2 0.8"/>
-    <scale com="0.2" forcewidth="0.05" contactwidth="0.10" contactheight="0.04"/>
-  </visual>
   <asset>
     <mesh name="base_Link" file="base_Link.STL"/>
     <mesh name="base_2_Link" file="base_2_Link.STL"/>
@@ -47,13 +43,13 @@
     <mesh name="wrist_roll_R_Link" file="wrist_roll_R_Link.STL"/>
     <mesh name="wrist_roll_R_Link_collision" file="wrist_roll_R_Link_collision.STL"/>
     <mesh name="grasper_R_Link" file="grasper_R_Link.STL"/>
-    <texture type="skybox" builtin="gradient" width="512" height="512" rgb1="1 1 1" rgb2="1 1 1"/>
-    <texture name="plane" type="2d" builtin="flat" rgb1="1 1 1" rgb2="1 1 1" width="512" height="512" mark="cross" markrgb="0 0 0"/>
-    <material name="plane" reflectance="0.0" texture="plane" texrepeat="3 3" texuniform="true"/>
+    <texture name="texplane" type="2d" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.15 0.2" width="100" height="100" />
+    <material name="matplane" reflectance="0." texture="texplane" texrepeat="1 1" texuniform="true" />
   </asset>
   <worldbody>
-    <geom name="floor" pos="0 0 0" euler="0 0 0" size="0 0 1" type="plane" material="plane" condim="3" conaffinity="1" contype="1" rgba="1 1 1 1"/>
-    <light directional="true" diffuse=".8 .8 .8" pos="0 0 10" dir="0 0 -10"/>
+    <light directional="true" diffuse="0.4 0.4 0.4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false" />
+    <light directional="true" diffuse="0.6 0.6 0.6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1" castshadow="false" />
+    <geom name="ground" type="plane" pos="0 0 0" size="100 100 0.001" quat="1 0 0 0" material="matplane" condim="3" conaffinity="15" />
     <camera name="track" mode="trackcom" pos="0 -2.3 1.6" xyaxes="1 0 0 0 0.707 0.707"/>
 
     <!-- base -->
