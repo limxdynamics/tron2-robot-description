@@ -109,7 +109,7 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 
 - **Typical paths:** `tron2/SF_TRON2A/urdf/robot.urdf`, `tron2/SF_TRON2A/xml/robot.xml`.
 
-### WFYG_TRON2A
+### WFYG_TRON2A (for ATEC)
 
 <img src="docs/images/WFYG.jpg" alt="WFYG_TRON2A overview" width="360" />
 
@@ -118,7 +118,7 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 - **Hardware / mast:** Physical LiDAR, arms, RTK, compute, and mount frames are listed in [External sensors by variant](#external-sensors-by-variant); URDF uses meshes/links only unless Gazebo plugins are added locally.
 - **Typical paths:** `tron2/WFYG_TRON2A/urdf/robot.urdf`, `tron2/WFYG_TRON2A/xml/robot.xml`.
 
-### SFYG_TRON2A
+### SFYG_TRON2A (for ATEC)
 
 - **Summary:** **SF** ankle-pitch legs with the same **YG** upper-body and mast peripheral layout as `WFYG_TRON2A`.
 - **Legs vs SF:** The **same zero-position and knees-forward convention** as **SF_TRON2A** applies: nominal mesh zero (left) vs **knees-forward** control pose via **180° hip yaw** per leg (right). The YG variant uses the figures below (same leg semantics as `SF_0` / `SF_1`, with arms and mast peripherals).
@@ -138,9 +138,3 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 The catkin / colcon package manifest is [`package.xml`](package.xml). Install the `tron2` tree into your workspace share directory via the provided `CMakeLists.txt` when building under ROS 1 or ROS 2.
 
 ---
-
-## Contributing
-
-Contributions are welcome. Please ensure new meshes and kinematic changes stay consistent across URDF, xacro, and MuJoCo exports where applicable, and include a short note in your pull request describing which variants were updated.
-
-When adding documentation figures, prefer descriptive filenames under `docs/images/` and keep file sizes reasonable for Git hosting.
