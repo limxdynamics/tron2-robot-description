@@ -187,7 +187,6 @@
                       <inertial pos="0 0 -0.0035" quat="0.5 0.5 -0.5 0.5" mass="0.007" diaginertia="1.4e-06 7.6e-07 7.6e-07"/>
                       <joint name="arm6_Joint" pos="0 0 0" axis="0 0 1" range="-2.0944 2.0944" actuatorfrcrange="-100 100"/>
                       <geom mesh="arm6_Link" class="visual"/>
-                      <geom mesh="arm6_Link" class="collision"/>
                       <body name="gripper_base_Link" quat="0.707107 0 0 0.707107">
                         <inertial pos="-0.000183807 8.0503e-05 0.0321437" quat="0.999976 9.08444e-05 0.00689649 0.000788512" mass="0.45" diaginertia="0.000929442 0.000714469 0.000394318"/>
                         <geom mesh="gripper_base_Link" class="visual"/>
