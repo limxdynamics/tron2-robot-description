@@ -112,6 +112,15 @@
       <!-- camera -->
       <body name="d435_Link" pos="0.0968 0.01759 -0.00409" quat="0.207918 0 0.978146 0">
         <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        <!-- Depth camera. Aimed forward-down: -Z view axis = d435_Link +Z =
+             world (0.407,0,-0.914), i.e. front of the robot with a ~66°
+             downward pitch, so the ground and the robot's own wheels are in
+             frame (matches the Gazebo depth image). Equivalent to the
+             xacro/SDF-faithful orientation rotated +90° about the camera's
+             own X axis. fovy 70.840779° is the exact vertical-FOV equivalent
+             of the xacro horizontal_fov 1.5177 rad at 64x48:
+             fovy = 2*atan(tan(1.5177/2) * 48/64). -->
+        <camera name="d435_depth" pos="0 0 0" quat="0 -0.707107 0.707107 0" fovy="70.840779"/>
         <body name="d435_optical_frame" pos="0 0 0" quat="0.5 -0.5 0.5 -0.5">
           <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
         </body>

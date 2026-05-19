@@ -469,6 +469,32 @@
     <kd value="100.0" />
   </gazebo>
 
+  <!-- D435 Camera Links -->
+  <link name="d435_Link">
+    <visual>
+      <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0.0 -0.0 0" />
+      <geometry>
+        <box size="0.01 0.01 0.001" />
+      </geometry>
+      <material name="camera_red">
+        <color rgba="1.0 0.0 0.0 1.0" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="d435_joint" type="fixed">
+    <origin rpy="0 1.063778179 0" xyz="0.12213 0.01759 0.00599" />
+    <parent link="base_imu" />
+    <child link="d435_Link" />
+  </joint>
+
+  <joint name="d435_optical_joint" type="fixed">
+    <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0" />
+    <parent link="d435_Link" />
+    <child link="d435_optical_frame" />
+  </joint>
+  <link name="d435_optical_frame" />
+
   <!-- Conditional ROS version -->
   <xacro:if value="${ros_version == 1}">
     <xacro:ros1_gazebo_all />
