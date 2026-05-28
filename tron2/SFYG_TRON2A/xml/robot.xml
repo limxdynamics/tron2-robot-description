@@ -224,6 +224,10 @@
                           <geom mesh="gripper2_Link" class="visual"/>
                           <geom mesh="gripper2_Link" class="collision"/>
                         </body>
+                        <!-- gripper pick point  -->
+                        <body name="gripper_pick" pos="3.1618e-11 0.00118 0.13544" quat="0.7071 0 -0.7071 0">
+                          <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+                        </body>
                       </body>
                     </body>
                   </body>
