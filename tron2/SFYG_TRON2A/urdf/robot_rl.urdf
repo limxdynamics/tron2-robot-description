@@ -708,6 +708,27 @@
     <limit lower="-0.050000000424915834" upper="0.0" effort="10.0" velocity="3.0"/>
   </joint>
 
+  <!-- gripper pick point for picking -->
+  <link name="gripper_pick">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.0025 0.0025 0.0025"/>
+      </geometry>
+    </visual>
+    <material name="">
+      <color rgba="0 1 0 1" />
+    </material>
+  </link>
+  <joint name="gripper_pick_Joint" type="fixed">
+    <origin xyz="0.00118 0.0 0.13544" rpy="0.0 -1.5707963 0.0"/>
+    <parent link="gripper_base_Link"/>
+    <child link="gripper_pick"/>
+  </joint>
+
   <!-- antenna L Link -->
   <link name="antenna_L_Link">
     <inertial>
