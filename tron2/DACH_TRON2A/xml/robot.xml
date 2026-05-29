@@ -220,8 +220,6 @@
     <gyro site="base_imu" name="base_imu_gyro"/>
     <accelerometer site="base_imu" name="base_imu_acc"/>
 
-    <jointpos joint="head_yaw_Joint" name="head_yaw_pos"/>
-    <jointpos joint="head_pitch_Joint" name="head_pitch_pos"/>
     <jointpos joint="proximal_pitch_L_Joint" name="proximal_pitch_L_pos"/>
     <jointpos joint="proximal_roll_L_Joint" name="proximal_roll_L_pos"/>
     <jointpos joint="proximal_yaw_L_Joint" name="proximal_yaw_L_pos"/>
@@ -236,9 +234,9 @@
     <jointpos joint="wrist_yaw_R_Joint" name="wrist_yaw_R_pos"/>
     <jointpos joint="wrist_pitch_R_Joint" name="wrist_pitch_R_pos"/>
     <jointpos joint="wrist_roll_R_Joint" name="wrist_roll_R_pos"/>
+    <jointpos joint="head_yaw_Joint" name="head_yaw_pos"/>
+    <jointpos joint="head_pitch_Joint" name="head_pitch_pos"/>
 
-    <jointvel joint="head_yaw_Joint" name="head_yaw_vel"/>
-    <jointvel joint="head_pitch_Joint" name="head_pitch_vel"/>
     <jointvel joint="proximal_pitch_L_Joint" name="proximal_pitch_L_vel"/>
     <jointvel joint="proximal_roll_L_Joint" name="proximal_roll_L_vel"/>
     <jointvel joint="proximal_yaw_L_Joint" name="proximal_yaw_L_vel"/>
@@ -253,9 +251,9 @@
     <jointvel joint="wrist_yaw_R_Joint" name="wrist_yaw_R_vel"/>
     <jointvel joint="wrist_pitch_R_Joint" name="wrist_pitch_R_vel"/>
     <jointvel joint="wrist_roll_R_Joint" name="wrist_roll_R_vel"/>
+    <jointvel joint="head_yaw_Joint" name="head_yaw_vel"/>
+    <jointvel joint="head_pitch_Joint" name="head_pitch_vel"/>
 
-    <jointactuatorfrc joint="head_yaw_Joint" name="head_yaw_frc"/>
-    <jointactuatorfrc joint="head_pitch_Joint" name="head_pitch_frc"/>
     <jointactuatorfrc joint="proximal_pitch_L_Joint" name="proximal_pitch_L_frc"/>
     <jointactuatorfrc joint="proximal_roll_L_Joint" name="proximal_roll_L_frc"/>
     <jointactuatorfrc joint="proximal_yaw_L_Joint" name="proximal_yaw_L_frc"/>
@@ -270,5 +268,7 @@
     <jointactuatorfrc joint="wrist_yaw_R_Joint" name="wrist_yaw_R_frc"/>
     <jointactuatorfrc joint="wrist_pitch_R_Joint" name="wrist_pitch_R_frc"/>
     <jointactuatorfrc joint="wrist_roll_R_Joint" name="wrist_roll_R_frc"/>
+    <jointactuatorfrc joint="head_yaw_Joint" name="head_yaw_frc"/>
+    <jointactuatorfrc joint="head_pitch_Joint" name="head_pitch_frc"/>
   </sensor>
 </mujoco>
