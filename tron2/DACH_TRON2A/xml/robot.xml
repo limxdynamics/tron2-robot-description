@@ -72,24 +72,6 @@
         </body>
       </body>
 
-      <!-- head -->
-      <body name="head_base_Link" pos="0.04656 9e-05 0.26115">
-        <inertial pos="-0.0094 0 0.0033" quat="0.504117 0.504215 -0.495751 0.495847" mass="0.13" diaginertia="0.000246277 0.000150053 9.86e-05"/>
-        <geom mesh="head_base_Link" class="visual"/>
-        <body name="head_yaw_Link" pos="0 0 0.008">
-          <inertial pos="0.02452 0.00153 0.06142" quat="0.696669 0.194095 0.236667 0.64882" mass="0.84" diaginertia="0.00204426 0.00201554 0.000504942"/>
-          <joint name="head_yaw_Joint" pos="0 0 0" axis="0 0 1" range="-1.5708 1.5708" actuatorfrcrange="-20 20" armature="0.0166082"/>
-          <geom mesh="head_yaw_Link" class="visual"/>
-          <geom mesh="head_yaw_Link" class="collision"/>
-          <body name="head_pitch_Link" pos="0.051 0.03 0.097">
-            <inertial pos="0.00697 -0.03028 0.03063" quat="0.0176578 0.713106 -0.0130977 0.700712" mass="0.61" diaginertia="0.00235472 0.001711 0.00145461"/>
-            <joint name="head_pitch_Joint" pos="0 0 0" axis="0 1 0" range="-0.785398 1.0472" actuatorfrcrange="-20 20" armature="0.0166082"/>
-            <geom mesh="head_pitch_Link" class="visual"/>
-            <geom mesh="head_pitch_Link" class="collision"/>
-          </body>
-        </body>
-      </body>
-
       <!-- proximal pitch L Link -->
       <body name="proximal_pitch_L_Link" pos="-0.00044 0.09178 0.05474">
         <inertial pos="-0.00522 0.06976 -0.00608" quat="0.749652 0.661722 -0.011603 0.00328095" mass="2.07" diaginertia="0.00415508 0.00333952 0.00291561"/>
@@ -188,6 +170,24 @@
         </body>
       </body>
 
+      <!-- head -->
+      <body name="head_base_Link" pos="0.04656 9e-05 0.26115">
+        <inertial pos="-0.0094 0 0.0033" quat="0.504117 0.504215 -0.495751 0.495847" mass="0.13" diaginertia="0.000246277 0.000150053 9.86e-05"/>
+        <geom mesh="head_base_Link" class="visual"/>
+        <body name="head_yaw_Link" pos="0 0 0.008">
+          <inertial pos="0.02452 0.00153 0.06142" quat="0.696669 0.194095 0.236667 0.64882" mass="0.84" diaginertia="0.00204426 0.00201554 0.000504942"/>
+          <joint name="head_yaw_Joint" pos="0 0 0" axis="0 0 1" range="-1.5708 1.5708" actuatorfrcrange="-20 20" armature="0.0166082"/>
+          <geom mesh="head_yaw_Link" class="visual"/>
+          <geom mesh="head_yaw_Link" class="collision"/>
+          <body name="head_pitch_Link" pos="0.051 0.03 0.097">
+            <inertial pos="0.00697 -0.03028 0.03063" quat="0.0176578 0.713106 -0.0130977 0.700712" mass="0.61" diaginertia="0.00235472 0.001711 0.00145461"/>
+            <joint name="head_pitch_Joint" pos="0 0 0" axis="0 1 0" range="-0.785398 1.0472" actuatorfrcrange="-20 20" armature="0.0166082"/>
+            <geom mesh="head_pitch_Link" class="visual"/>
+            <geom mesh="head_pitch_Link" class="collision"/>
+          </body>
+        </body>
+      </body>
+
       <!-- camera -->
       <body name="d435_Link" pos="0.0968 0.01759 -0.00409" quat="0.207918 0 0.978146 0">
         <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
@@ -198,8 +198,6 @@
     </body>
   </worldbody>
   <actuator>
-    <motor name="head_yaw" joint="head_yaw_Joint" ctrlrange="-20 20" gear="1"/>
-    <motor name="head_pitch" joint="head_pitch_Joint" ctrlrange="-20 20" gear="1"/>
     <motor name="proximal_pitch_L" joint="proximal_pitch_L_Joint" ctrllimited="true" ctrlrange="-150 150" gear="1"/>
     <motor name="proximal_roll_L" joint="proximal_roll_L_Joint" ctrllimited="true" ctrlrange="-150 150" gear="1"/>
     <motor name="proximal_yaw_L" joint="proximal_yaw_L_Joint" ctrllimited="true" ctrlrange="-60 60" gear="1"/>
@@ -214,6 +212,8 @@
     <motor name="wrist_yaw_R" joint="wrist_yaw_R_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1"/>
     <motor name="wrist_pitch_R" joint="wrist_pitch_R_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1"/>
     <motor name="wrist_roll_R" joint="wrist_roll_R_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1"/>
+    <motor name="head_yaw" joint="head_yaw_Joint" ctrlrange="-20 20" gear="1"/>
+    <motor name="head_pitch" joint="head_pitch_Joint" ctrlrange="-20 20" gear="1"/>
   </actuator>
   <sensor>
     <framequat objtype="site" objname="base_imu" name="base_imu_quat"/>
