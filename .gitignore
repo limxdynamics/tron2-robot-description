@@ -1,0 +1,60 @@
+# --- existing rules ---
+.asset_hash
+config.yaml
+**/meshes/*.urdf
+
+# --- ROS / colcon / catkin build outputs ---
+build/
+install/
+log/
+devel/
+.catkin_tools/
+*.pyc
+__pycache__/
+
+# --- editor / OS junk ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# --- CAD source files must NOT be committed (kept local only) ---
+*.sldprt
+*.sldasm
+*.SLDPRT
+*.SLDASM
+*.step
+*.STEP
+*.stp
+*.STP
+*.iges
+*.IGES
+*.igs
+*.IGS
+*.x_t
+*.x_b
+*.f3d
+*.blend
+*.blend1
+*.blend@
+
+# --- excluded artifacts (must never ship in this repo) ---
+*.onnx
+*.pt
+*.pth
+*.ckpt
+*.so
+*.dll
+*.dylib
+*.lib
+*.whl
+*.bag
+*.mcap
+
+# --- generated / scratch ---
+/tmp/
+/out/
+*.log

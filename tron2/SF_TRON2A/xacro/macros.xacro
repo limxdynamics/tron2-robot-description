@@ -1,0 +1,395 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ==================== ROS1 Gazebo Macro ==================== -->
+  <xacro:macro name="ros1_gazebo_all">
+
+    <!-- ros_control plugin -->
+    <gazebo>
+      <plugin filename="libtron2_hw_sim.so" name="gazebo_ros_control">
+        <robotNamespace>/</robotNamespace>
+        <robotParam>robot_description</robotParam>
+        <robotSimType>tron2_gazebo/Tron2HWSim</robotSimType>
+      </plugin>
+    </gazebo>
+
+    <!-- Ground truth pose plugin (ROS1 camelCase) -->
+    <gazebo>
+      <plugin filename="libgazebo_ros_p3d.so" name="p3d_base_controller">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>1000.0</updateRate>
+        <bodyName>base_Link</bodyName>
+        <topicName>ground_truth/state</topicName>
+        <gaussianNoise>0</gaussianNoise>
+        <frameName>world</frameName>
+        <xyzOffsets>0 0 0</xyzOffsets>
+        <rpyOffsets>0 0 0</rpyOffsets>
+      </plugin>
+    </gazebo>
+
+    <!-- D435 Camera ROS1 Plugin: split into two sensors instead of using
+         libgazebo_ros_openni_kinect.so. The openni_kinect plugin deadlocks
+         with gazebo_ros_control on Load() and prevents Tron2HWSim::initSim
+         from being called. -->
+    <gazebo reference="d435_Link">
+      <sensor type="camera" name="d435_color_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>60</update_rate>
+        <visualize>false</visualize>
+        <camera>
+          <horizontal_fov>1.5177</horizontal_fov>
+          <image>
+            <format>B8G8R8</format>
+            <width>64</width>
+            <height>48</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>1.8</far>
+          </clip>
+        </camera>
+        <plugin name="d435_color_controller" filename="libgazebo_ros_camera.so">
+          <robotNamespace>d435</robotNamespace>
+          <cameraName>color</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>d435_optical_frame</frameName>
+        </plugin>
+      </sensor>
+
+      <sensor type="depth" name="d435_depth_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>60</update_rate>
+        <visualize>false</visualize>
+        <camera>
+          <horizontal_fov>1.5177</horizontal_fov>
+          <image>
+            <format>R8G8B8</format>
+            <width>64</width>
+            <height>48</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>1.8</far>
+          </clip>
+        </camera>
+        <plugin name="d435_depth_controller" filename="libgazebo_ros_depth_camera.so">
+          <robotNamespace>d435</robotNamespace>
+          <!-- cameraName must differ from the color sensor; otherwise both
+               plugins share the same set_camera_info / set_parameters
+               services and Gazebo logs "Tried to advertise a service that
+               is already advertised" on the second one. -->
+          <cameraName>depth</cameraName>
+          <!-- imageTopicName / cameraInfoTopicName publish the IR/grayscale
+               frame from libgazebo_ros_depth_camera.so. Route them under
+               infra/ so they don't collide with depthImageTopicName /
+               depthImageCameraInfoTopicName (the real depth stream). -->
+          <imageTopicName>infra/image_raw</imageTopicName>
+          <cameraInfoTopicName>infra/camera_info</cameraInfoTopicName>
+          <depthImageTopicName>image_raw</depthImageTopicName>
+          <depthImageCameraInfoTopicName>camera_info</depthImageCameraInfoTopicName>
+          <pointCloudTopicName>points</pointCloudTopicName>
+          <frameName>d435_optical_frame</frameName>
+          <pointCloudCutoff>0.1</pointCloudCutoff>
+          <pointCloudCutoffMax>1.8</pointCloudCutoffMax>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+    <!-- Transmissions (ROS1) -->
+    <transmission name="proximal_pitch_L_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="proximal_pitch_L_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="proximal_pitch_L_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="proximal_roll_L_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="proximal_roll_L_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="proximal_roll_L_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="proximal_yaw_L_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="proximal_yaw_L_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="proximal_yaw_L_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="knee_L_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="knee_L_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="knee_L_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="ankle_pitch_L_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="ankle_pitch_L_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="ankle_pitch_L_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="proximal_pitch_R_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="proximal_pitch_R_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="proximal_pitch_R_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="proximal_roll_R_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="proximal_roll_R_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="proximal_roll_R_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="proximal_yaw_R_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="proximal_yaw_R_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="proximal_yaw_R_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="knee_R_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="knee_R_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="knee_R_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="ankle_pitch_R_Joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="ankle_pitch_R_Joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="ankle_pitch_R_Joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  </xacro:macro>
+
+  <!-- ==================== ROS2 Gazebo Macro ==================== -->
+  <xacro:macro name="ros2_gazebo_all">
+
+    <!-- ros2_control plugin -->
+    <gazebo>
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <parameters>$(find tron2_gazebo)/config/default_tron2.yaml</parameters>
+      </plugin>
+    </gazebo>
+
+    <!-- ros2_control block -->
+    <ros2_control name="Tron2GazeboSystem" type="system">
+      <hardware>
+        <plugin>tron2_gazebo/Tron2HWSim</plugin>
+      </hardware>
+
+      <joint name="proximal_pitch_L_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="proximal_roll_L_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="proximal_yaw_L_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="knee_L_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="ankle_pitch_L_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="proximal_pitch_R_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="proximal_roll_R_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="proximal_yaw_R_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="knee_R_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <joint name="ankle_pitch_R_Joint">
+        <command_interface name="position" />
+        <command_interface name="velocity" />
+        <command_interface name="effort" />
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <sensor name="base_imu_sensor">
+        <state_interface name="orientation.x" />
+        <state_interface name="orientation.y" />
+        <state_interface name="orientation.z" />
+        <state_interface name="orientation.w" />
+        <state_interface name="angular_velocity.x" />
+        <state_interface name="angular_velocity.y" />
+        <state_interface name="angular_velocity.z" />
+        <state_interface name="linear_acceleration.x" />
+        <state_interface name="linear_acceleration.y" />
+        <state_interface name="linear_acceleration.z" />
+      </sensor>
+    </ros2_control>
+
+    <!-- IMU Gazebo sensor plugin (ROS2) -->
+    <gazebo reference="base_imu">
+      <sensor type="imu" name="base_imu_sensor">
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <visualize>true</visualize>
+        <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+          <ros>
+            <namespace></namespace>
+            <remapping>~/out:=imu</remapping>
+          </ros>
+          <initial_orientation_as_reference>false</initial_orientation_as_reference>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+    <!-- Ground truth pose plugin (ROS2 snake_case) -->
+    <gazebo>
+      <plugin filename="libgazebo_ros_p3d.so" name="p3d_base_controller">
+        <ros>
+          <remapping>odom:=ground_truth/state</remapping>
+        </ros>
+        <update_rate>1000.0</update_rate>
+        <body_name>base_Link</body_name>
+        <frame_name>world</frame_name>
+        <gaussian_noise>0.0</gaussian_noise>
+        <xyz_offset>0 0 0</xyz_offset>
+        <rpy_offset>0 0 0</rpy_offset>
+      </plugin>
+    </gazebo>
+
+    <!-- D435 Camera ROS2 Plugin -->
+    <gazebo reference="d435_Link">
+      <sensor type="depth" name="d435_camera_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>60</update_rate>
+        <visualize>false</visualize>
+        <camera>
+          <horizontal_fov>1.5177</horizontal_fov>
+          <image>
+            <format>B8G8R8</format>
+            <width>64</width>
+            <height>48</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>1.8</far>
+          </clip>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <ros>
+            <namespace>d435</namespace>
+          </ros>
+          <camera_name>d435_camera</camera_name>
+          <frame_name>d435_optical_frame</frame_name>
+          <min_depth>0.1</min_depth>
+          <max_depth>1.8</max_depth>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

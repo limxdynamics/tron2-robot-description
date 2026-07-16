@@ -1,0 +1,567 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<robot name="robot_description/tron2/DACH_TRON2A">
+  <mujoco>
+    <compiler meshdir="../meshes"/>
+  </mujoco>
+
+  <!-- base -->
+  <link name="base_Link">
+    <inertial>
+      <origin xyz="0.00385 -0.00011 0.11254" rpy="0.0 0.0 0.0"/>
+      <mass value="12.57"/>
+      <inertia ixx="0.11473868" ixy="-1.726e-05" ixz="0.00717502" iyy="0.13581253" iyz="8.123e-05" izz="0.10540873"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/base_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/base_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- base imu -->
+  <link name="base_imu">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+    </inertial>
+  </link>
+  <joint name="base_imu_Joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="base_imu"/>
+  </joint>
+
+  <!-- base 2 Link -->
+  <link name="base_2_Link">
+    <inertial>
+      <origin xyz="0.0 0.0 -0.45862" rpy="0.0 0.0 0.0"/>
+      <mass value="10"/>
+      <inertia ixx="0.80635" ixy="0" ixz="0" iyy="0.811937" iyz="0" izz="0.017624"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/base_2_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 -0.45862"/>
+      <geometry>
+        <box size="0.118 0.085 0.98"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_2_Joint" type="fixed">
+    <origin xyz="0.00056 -9e-05 -0.07285" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="base_2_Link"/>
+  </joint>
+  <link name="base_3_Link">
+    <inertial>
+      <origin xyz="0.0 0.0 -0.05442" rpy="0.0 0.0 0.0"/>
+      <mass value="20"/>
+      <inertia ixx="0.9485" ixy="0" ixz="0" iyy="0.9485" iyz="0" izz="1.6803"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/base_3_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/base_3_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_3_Joint" type="fixed">
+    <origin xyz="0.0 0.0 -0.9295" rpy="0.0 0.0 0.0"/>
+    <parent link="base_2_Link"/>
+    <child link="base_3_Link"/>
+  </joint>
+
+  <!-- head -->
+  <link name="head_base_Link">
+    <inertial>
+      <origin xyz="-0.0094 0.0 0.0033" rpy="0.0 0.0 0.0"/>
+      <mass value="0.13"/>
+      <inertia ixx="0.00015008" ixy="1e-08" ixz="1.61e-06" iyy="9.86e-05" iyz="0.0" izz="0.00024625"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/head_base_Link.STL"/>
+      </geometry>
+    </visual>
+    </link>
+  <joint name="head_base_Joint" type="fixed">
+    <origin xyz="0.04656 9e-05 0.26115" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="head_base_Link"/>
+  </joint>
+  <link name="head_yaw_Link">
+    <inertial>
+      <origin xyz="0.02452 0.00153 0.06142" rpy="0.0 0.0 0.0"/>
+      <mass value="0.84"/>
+      <inertia ixx="0.00150459" ixy="-3.09e-05" ixz="-0.00071408" iyy="0.00204199" iyz="-4.724e-05" izz="0.00101816"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/head_yaw_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/head_yaw_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="head_yaw_Joint" type="revolute">
+    <origin xyz="0.0 0.0 0.008" rpy="0.0 0.0 0.0"/>
+    <parent link="head_base_Link"/>
+    <child link="head_yaw_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-1.5707963267948966" upper="1.5707963267948966" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="head_pitch_Link">
+    <inertial>
+      <origin xyz="0.00697 -0.03028 0.03063" rpy="0.0 0.0 0.0"/>
+      <mass value="0.61"/>
+      <inertia ixx="0.00145537" ixy="1.122e-05" ixz="1.582e-05" iyy="0.00171054" iyz="3.71e-06" izz="0.00235442"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/head_pitch_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/head_pitch_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="head_pitch_Joint" type="revolute">
+    <origin xyz="0.051 0.03 0.097" rpy="0.0 0.0 0.0"/>
+    <parent link="head_yaw_Link"/>
+    <child link="head_pitch_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.7853981633974483" upper="1.0471975511965976" effort="20.0" velocity="17.8"/>
+  </joint>
+
+  <!-- proximal pitch L Link -->
+  <link name="proximal_pitch_L_Link">
+    <inertial>
+      <origin xyz="-0.00547 0.07014 -0.00611" rpy="0.0 0.0 0.0"/>
+      <mass value="2.21"/>
+      <inertia ixx="0.00438539" ixy="-1.065e-05" ixz="1.817e-05" iyy="0.00308183" iyz="5.213e-05" izz="0.00349504"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_pitch_L_Joint" type="revolute">
+    <origin xyz="-0.00044 0.09178 0.05474" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="proximal_pitch_L_Link"/>
+    <axis xyz="0.0 0.9961947268929313 -0.0871554135479712"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_roll_L_Link">
+    <inertial>
+      <origin xyz="0.03124 0.00035 -0.08414" rpy="0.0 0.0 0.0"/>
+      <mass value="1.74"/>
+      <inertia ixx="0.00476933" ixy="-1.172e-05" ixz="3.271e-05" iyy="0.00545584" iyz="-2.946e-05" izz="0.00305316"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_roll_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_roll_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_roll_L_Joint" type="revolute">
+    <origin xyz="-0.032 0.0758 -0.00663" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_pitch_L_Link"/>
+    <child link="proximal_roll_L_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-0.2617993877991494" upper="3.193952531149623" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_yaw_L_Link">
+    <inertial>
+      <origin xyz="-0.00428 0.00216 -0.09174" rpy="0.0 0.0 0.0"/>
+      <mass value="1.15"/>
+      <inertia ixx="0.0099418" ixy="6.47e-06" ixz="-2.5e-06" iyy="0.00955094" iyz="0.00020963" izz="0.00229701"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_yaw_L_Link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_yaw_L_Joint" type="revolute">
+    <origin xyz="0.032 0.0 -0.1374" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_roll_L_Link"/>
+    <child link="proximal_yaw_L_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-3.6651914291880923" upper="1.4835298641951802" effort="60.0" velocity="22.52"/>
+  </joint>
+  <link name="elbow_L_Link">
+    <inertial>
+      <origin xyz="-0.00061 -0.0264 -0.00455" rpy="0.0 0.0 0.0"/>
+      <mass value="1.11"/>
+      <inertia ixx="0.00127422" ixy="-6e-07" ixz="-2.815e-05" iyy="0.00150862" iyz="1.54e-05" izz="0.00107896"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/elbow_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/elbow_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="elbow_L_Joint" type="revolute">
+    <origin xyz="0.004 0.02972 -0.2126" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_yaw_L_Link"/>
+    <child link="elbow_L_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-2.6179938779914944" upper="0.5235987755982988" effort="70.0" velocity="22.52"/>
+  </joint>
+  <link name="wrist_yaw_L_Link">
+    <inertial>
+      <origin xyz="-0.00013 0.00206 -0.06635" rpy="0.0 0.0 0.0"/>
+      <mass value="1.15"/>
+      <inertia ixx="0.00312783" ixy="-1.87e-06" ixz="-5.07e-06" iyy="0.00297221" iyz="6.903e-05" izz="0.00104146"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_yaw_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_yaw_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_yaw_L_Joint" type="revolute">
+    <origin xyz="-0.004 -0.02972 -0.0685" rpy="0.0 0.0 0.0"/>
+    <parent link="elbow_L_Link"/>
+    <child link="wrist_yaw_L_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-1.7453292519943295" upper="1.3962634015954636" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="wrist_pitch_L_Link">
+    <inertial>
+      <origin xyz="0.00426 -0.0363 0.00013" rpy="0.0 0.0 0.0"/>
+      <mass value="0.44"/>
+      <inertia ixx="0.00022755" ixy="2.85e-06" ixz="-2.38e-06" iyy="0.00025709" iyz="-3e-08" izz="0.00025502"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_pitch_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_pitch_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_pitch_L_Joint" type="revolute">
+    <origin xyz="0.0 0.0367 -0.1743" rpy="0.0 0.0 0.0"/>
+    <parent link="wrist_yaw_L_Link"/>
+    <child link="wrist_pitch_L_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.7853981633974483" upper="0.7853981633974483" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="wrist_roll_L_Link">
+    <inertial>
+      <origin xyz="-0.02867 -0.00014 -0.04311" rpy="0.0 0.0 0.0"/>
+      <mass value="0.24"/>
+      <inertia ixx="0.00025857" ixy="5e-07" ixz="-8.01e-06" iyy="0.00036517" iyz="-4.6e-07" izz="0.00026664"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_roll_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_roll_L_Link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_roll_L_Joint" type="revolute">
+    <origin xyz="0.0317 -0.0367 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="wrist_pitch_L_Link"/>
+    <child link="wrist_roll_L_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-1.5707963267948966" upper="1.5707963267948966" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="grasper_L_Link">
+    <inertial>
+      <origin xyz="-0.00031 5e-05 -0.06329" rpy="0.0 0.0 0.0"/>
+      <mass value="0.0"/>
+      <inertia ixx="0.00094387" ixy="-7.4e-07" ixz="1.66e-06" iyy="0.00084405" iyz="-1.94e-06" izz="0.00034568"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="grasper_L_Joint" type="fixed">
+    <origin xyz="-0.0317 0.0 -0.0812" rpy="0.0 0.0 0.0"/>
+    <parent link="wrist_roll_L_Link"/>
+    <child link="grasper_L_Link"/>
+  </joint>
+
+  <!-- proximal pitch R Link -->
+  <link name="proximal_pitch_R_Link">
+    <inertial>
+      <origin xyz="-0.00547 -0.07014 -0.00611" rpy="-0.0 0.0 -0.0"/>
+      <mass value="2.21"/>
+      <inertia ixx="0.00438539" ixy="1.065e-05" ixz="1.817e-05" iyy="0.00308183" iyz="-5.213e-05" izz="0.00349504"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_pitch_R_Joint" type="revolute">
+    <origin xyz="-0.00044 -0.09178 0.05474" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="proximal_pitch_R_Link"/>
+    <axis xyz="0.0 0.9961947268929313 0.0871554135479712"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_roll_R_Link">
+    <inertial>
+      <origin xyz="0.03124 -0.00035 -0.08414" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.74"/>
+      <inertia ixx="0.00476933" ixy="1.172e-05" ixz="3.271e-05" iyy="0.00545584" iyz="2.946e-05" izz="0.00305316"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_roll_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_roll_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_roll_R_Joint" type="revolute">
+    <origin xyz="-0.032 -0.0758 -0.00663" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_pitch_R_Link"/>
+    <child link="proximal_roll_R_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-3.193952531149623" upper="0.2617993877991494" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_yaw_R_Link">
+    <inertial>
+      <origin xyz="-0.00428 -0.00216 -0.09174" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.15"/>
+      <inertia ixx="0.0099418" ixy="-6.47e-06" ixz="-2.5e-06" iyy="0.00955094" iyz="-0.00020963" izz="0.00229701"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_yaw_R_Link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_yaw_R_Joint" type="revolute">
+    <origin xyz="0.032 -0.0 -0.1374" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_roll_R_Link"/>
+    <child link="proximal_yaw_R_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-1.4835298641951802" upper="3.6651914291880923" effort="60.0" velocity="22.52"/>
+  </joint>
+  <link name="elbow_R_Link">
+    <inertial>
+      <origin xyz="-0.00061 0.0264 -0.00455" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.11"/>
+      <inertia ixx="0.00127422" ixy="6e-07" ixz="-2.815e-05" iyy="0.00150862" iyz="-1.54e-05" izz="0.00107896"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/elbow_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/elbow_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="elbow_R_Joint" type="revolute">
+    <origin xyz="0.004 -0.02972 -0.2126" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_yaw_R_Link"/>
+    <child link="elbow_R_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-2.6179938779914944" upper="0.5235987755982988" effort="70.0" velocity="22.52"/>
+  </joint>
+  <link name="wrist_yaw_R_Link">
+    <inertial>
+      <origin xyz="-0.00013 -0.00206 -0.06635" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.15"/>
+      <inertia ixx="0.00312783" ixy="1.87e-06" ixz="-5.07e-06" iyy="0.00297221" iyz="-6.903e-05" izz="0.00104146"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_yaw_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_yaw_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_yaw_R_Joint" type="revolute">
+    <origin xyz="-0.004 0.02972 -0.0685" rpy="-0.0 0.0 -0.0"/>
+    <parent link="elbow_R_Link"/>
+    <child link="wrist_yaw_R_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-1.3962634015954636" upper="1.7453292519943295" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="wrist_pitch_R_Link">
+    <inertial>
+      <origin xyz="0.00426 0.0363 0.00013" rpy="-0.0 0.0 -0.0"/>
+      <mass value="0.44"/>
+      <inertia ixx="0.00022755" ixy="-2.85e-06" ixz="-2.38e-06" iyy="0.00025709" iyz="3e-08" izz="0.00025502"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_pitch_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_pitch_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_pitch_R_Joint" type="revolute">
+    <origin xyz="0.0 -0.0367 -0.1743" rpy="-0.0 0.0 -0.0"/>
+    <parent link="wrist_yaw_R_Link"/>
+    <child link="wrist_pitch_R_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.7853981633974483" upper="0.7853981633974483" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="wrist_roll_R_Link">
+    <inertial>
+      <origin xyz="-0.02867 0.00014 -0.04311" rpy="-0.0 0.0 -0.0"/>
+      <mass value="0.24"/>
+      <inertia ixx="0.00025857" ixy="-5e-07" ixz="-8.01e-06" iyy="0.00036517" iyz="4.6e-07" izz="0.00026664"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_roll_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_roll_R_Link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_roll_R_Joint" type="revolute">
+    <origin xyz="0.0317 0.0367 0.0" rpy="-0.0 0.0 -0.0"/>
+    <parent link="wrist_pitch_R_Link"/>
+    <child link="wrist_roll_R_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-1.5707963267948966" upper="1.5707963267948966" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="grasper_R_Link">
+    <inertial>
+      <origin xyz="-0.00031 -5e-05 -0.06329" rpy="-0.0 0.0 -0.0"/>
+      <mass value="0.0"/>
+      <inertia ixx="0.00094387" ixy="7.4e-07" ixz="1.66e-06" iyy="0.00084405" iyz="1.94e-06" izz="0.00034568"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="grasper_R_Joint" type="fixed">
+    <origin xyz="-0.0317 -0.0 -0.0812" rpy="-0.0 0.0 -0.0"/>
+    <parent link="wrist_roll_R_Link"/>
+    <child link="grasper_R_Link"/>
+  </joint>
+
+  <!-- Camera --> 
+  <link name="d435_Link">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.005 0.005 0.005"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="d435_Joint" type="fixed">
+    <origin xyz="0.0968 0.01759 -0.00409" rpy="0 2.7227 0"/>
+    <parent link="base_Link"/>
+    <child link="d435_Link"/>
+  </joint>
+  
+  <link name="d435_optical_frame">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+  </link>
+  <joint name="d435_optical_Joint" type="fixed">
+    <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0"/>
+    <parent link="d435_Link"/>
+    <child link="d435_optical_frame"/>
+  </joint>
+</robot>

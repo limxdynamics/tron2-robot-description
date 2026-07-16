@@ -1,0 +1,130 @@
+# SPDX-License-Identifier: Apache-2.0
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-scan:
+    name: Lint / license & TODO scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: XML well-formedness (URDF + MuJoCo)
+        run: |
+          sudo apt-get update && sudo apt-get install -y libxml2-utils
+          xmllint --noout tron2/*/urdf/*.urdf tron2/*/xml/*.xml
+
+      - name: STL header sanity (binary format, no internal paths)
+        run: |
+          set -e
+          bad=0
+          while IFS= read -r -d '' f; do
+            hdr=$(head -c 80 "$f" | strings || true)
+            if echo "$hdr" | grep -iE '(^solid |users/|/home/|\.sldprt|\.step|serial|internal)' >/dev/null; then
+              echo "::error file=$f::STL header discloses internal metadata or is ASCII"
+              bad=$((bad+1))
+            fi
+          done < <(find tron2 -iname '*.STL' -print0)
+          if [ $bad -ne 0 ]; then exit 1; fi
+
+      - name: USD metadata scan
+        run: |
+          set -e
+          if grep -rE '(customLayerData|comment = "|"author"|"owner"|"copyright")' tron2/*/usd/*.usd; then
+            echo "::error::USD files contain unreviewed metadata; strip or approve before merge"
+            exit 1
+          fi
+
+      - name: License / TODO / proprietary scan
+        run: |
+          set -e
+          # Documentation must not carry unresolved markers.
+          if grep -rniE 'proprietary|confidential|todo: license|unknown license' \
+               README.md THIRD_PARTY_NOTICES.md ASSETS.md CHANGELOG.md CONTRIBUTING.md SECURITY.md; then
+            echo "::error::Unresolved license / provenance markers in top-level docs"
+            exit 1
+          fi
+
+      - name: Excluded artifacts must not be committed
+        run: |
+          set -e
+          if git ls-files | grep -iE '\.(onnx|pt|pth|ckpt|so|dll|dylib|lib|whl|bag|mcap)$'; then
+            echo "::error::Repository must not contain models, SDK binaries, or bag files"
+            exit 1
+          fi
+
+      - name: EXIF sanity (images must not carry GPS / author / serial)
+        run: |
+          sudo apt-get install -y libimage-exiftool-perl
+          set -e
+          bad=0
+          for img in docs/images/*.jpg; do
+            [ -f "$img" ] || continue
+            hits=$(exiftool "$img" | grep -iE '(gps|serial|author|artist|owner)' || true)
+            if [ -n "$hits" ]; then
+              echo "::error file=$img::EXIF discloses $hits"
+              bad=$((bad+1))
+            fi
+          done
+          if [ $bad -ne 0 ]; then exit 1; fi
+
+  urdf-check:
+    name: URDF check_urdf
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install urdfdom
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y liburdfdom-tools
+      - name: Validate every URDF
+        run: |
+          set -e
+          for u in tron2/*/urdf/*.urdf; do
+            echo "── check_urdf $u"
+            check_urdf "$u"
+          done
+
+  xacro-expand:
+    name: xacro expansion
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install xacro
+        run: |
+          python -m pip install --upgrade pip
+          pip install xacro
+      - name: Expand every xacro/robot.xacro
+        run: |
+          set -e
+          shopt -s nullglob
+          for x in tron2/*/xacro/robot.xacro; do
+            echo "── xacro $x"
+            xacro "$x" > /dev/null
+          done
+
+  mujoco-load:
+    name: MuJoCo XML smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install MuJoCo
+        run: |
+          python -m pip install --upgrade pip
+          pip install mujoco>=2.3
+      - name: Load every MuJoCo XML
+        run: |
+          set -e
+          for x in tron2/*/xml/*.xml; do
+            echo "── mujoco load $x"
+            python -c "import mujoco, sys; mujoco.MjModel.from_xml_path(sys.argv[1])" "$x"
+          done

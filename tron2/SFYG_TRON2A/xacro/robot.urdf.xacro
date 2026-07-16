@@ -1,0 +1,1146 @@
+<?xml version="1.0"?>
+<robot name="bipedal_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="ros_version" default="$(optenv ROS_VERSION 2)" />
+  <xacro:property name="ros_version" value="$(arg ros_version)" />
+
+  <xacro:include filename="macros.xacro" />
+
+  <!-- Materials -->
+  <material name="grey">
+    <color rgba="1 1 1 1" />
+  </material>
+  <material name="white">
+    <color rgba="1.0 1.0 1.0 1.0" />
+  </material>
+  <material name="orange">
+    <color rgba="1.0 0.423 0.039 1.0" />
+  </material>
+
+  <!-- IMU Link -->
+  <joint name="base_imu_Joint" type="fixed">
+    <origin rpy="0. 0. 0." xyz="0. 0. 0." />
+    <parent link="base_Link" />
+    <child link="base_imu" />
+  </joint>
+
+  <link name="base_imu">
+    <inertial>
+      <mass value="0.01" />
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <box size="0.015 0.015 0.004" />
+      </geometry>
+      <material name="orange" />
+    </visual>
+  </link>
+
+  <gazebo reference="base_imu_Joint">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+
+  <!-- Links -->
+  <link name="base_Link">
+    <inertial>
+      <origin xyz="3.85E-03 -0.11E-03 112.54E-03" rpy="0 0 0" />
+      <mass value="12.57" />
+      <inertia ixx="114738.68E-06" ixy="-17.26E-06" ixz="7175.02E-06"
+        iyy="135812.53E-06" iyz="81.23E-06" izz="105408.73E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/base_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/base_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="proximal_pitch_L_Link">
+    <inertial>
+      <origin xyz="-5.47E-03 70.14E-03 -6.11E-03" rpy="0 0 0" />
+      <mass value="2.21" />
+      <inertia ixx="4385.39E-06" ixy="-10.65E-06" ixz="18.17E-06"
+        iyy="3081.83E-06" iyz="52.13E-06" izz="3495.04E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/proximal_pitch_L_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/proximal_pitch_L_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="proximal_roll_L_Link">
+    <inertial>
+      <origin xyz="31.24E-03 0.35E-03 -84.14E-03" rpy="0 0 0" />
+      <mass value="1.74" />
+      <inertia ixx="4769.33E-06" ixy="-11.72E-06" ixz="32.71E-06"
+        iyy="5455.84E-06" iyz="-29.46E-06" izz="3053.16E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/proximal_roll_L_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/proximal_roll_L_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="proximal_yaw_L_Link">
+    <inertial>
+      <origin xyz="-2.54E-03 1.55E-03 -107.42E-03" rpy="0 0 0" />
+      <mass value="1.65" />
+      <inertia ixx="15543.14E-06" ixy="-3.32E-06" ixz="246.39E-06"
+        iyy="14853.62E-06" iyz="75.69E-06" izz="3780.04E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/proximal_yaw_L_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/proximal_yaw_L_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="knee_L_Link">
+    <inertial>
+      <origin xyz="-0.00204 -0.02953 -0.12112" rpy="0.0 0.0 0.0"/>
+      <mass value="4.5"/>
+      <inertia ixx="0.10084664" ixy="-3.842e-05" ixz="-0.00100642" iyy="0.10273037" iyz="-0.00292437" izz="0.00591261"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/knee_L_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/knee_L_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="ankle_pitch_L_Link">
+    <inertial>
+      <origin xyz="-15.25E-03 35.42E-03 -46.68E-03" rpy="0 0 0" />
+      <mass value="1.02" />
+      <inertia ixx="1443.30E-06" ixy="35.45E-06" ixz="-145.15E-06"
+        iyy="3461.81E-06" iyz="68.35E-06" izz="3941.99E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/ankle_pitch_L_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.014425463037384678 0.035848761272903706 -0.05027431354942169" />
+      <geometry>
+        <box size="0.14 0.06 0.025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.11909570195246066 0.06354314585176701 -0.07124" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.10049390971791083 0.0038735829813696387 -0.07124" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.07502612984116563 0.011635070405830783 -0.07123754260807935" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.07502612984116541 0.06270942031820081 -0.07124" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.08472274114731804 0.07904998982922917 -0.06424918850744032" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.03564470406430653 0.07627499491461442 -0.06424918850744032" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.08472274114731826 -0.007719774188539752 -0.06424918850744032" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.03564470406430653 -0.0051139227977490265 -0.06424918850744032" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.12805773805226417 0.0355 -0.06424607954803907" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.08868077416023412 0.03550000000000009 -0.06424607954803907" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="proximal_pitch_R_Link">
+    <inertial>
+      <origin xyz="-0.00547 -0.07014 -0.00611" rpy="0 0 0" />
+      <mass value="2.21" />
+      <inertia ixx="0.00438539" ixy="1.065e-05" ixz="1.817e-05"
+        iyy="0.00308183" iyz="-5.213e-05" izz="0.00349504" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/proximal_pitch_R_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/proximal_pitch_R_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="proximal_roll_R_Link">
+    <inertial>
+      <origin xyz="0.03124 -0.00035 -0.08414" rpy="0 0 0" />
+      <mass value="1.74" />
+      <inertia ixx="0.00476933" ixy="1.172e-05" ixz="3.271e-05"
+        iyy="0.00545584" iyz="2.946e-05" izz="0.00305316" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/proximal_roll_R_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/proximal_roll_R_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="proximal_yaw_R_Link">
+    <inertial>
+      <origin xyz="-0.00254 -0.00155 -0.10742" rpy="0 0 0" />
+      <mass value="1.65" />
+      <inertia ixx="0.01554314" ixy="3.32e-06" ixz="0.00024639"
+        iyy="0.01485362" iyz="-7.569e-05" izz="0.00378004" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/proximal_yaw_R_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/proximal_yaw_R_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="knee_R_Link">
+    <inertial>
+      <origin xyz="-0.00204 0.02953 -0.12112" rpy="-0.0 0.0 -0.0"/>
+      <mass value="4.5"/>
+      <inertia ixx="0.10084664" ixy="3.842e-05" ixz="-0.00100642" iyy="0.10273037" iyz="0.00292437" izz="0.00591261"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/knee_R_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/knee_R_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Arm + Gripper + Peripherals (piper-x) -->
+  <link name="transition_Link">
+    <inertial>
+      <origin xyz="-0.111727 0.000317 0.014516" rpy="0 0 0" />
+      <mass value="1.117" />
+      <inertia ixx="0.002739303" ixy="6.6427e-05" ixz="0.000914255"
+        iyy="0.006871988" iyz="-2.0809e-05" izz="0.007888835" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/transition_Link.STL" />
+      </geometry>
+      <material name="white" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/transition_Link_collision.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="arm_base_Link">
+    <inertial>
+      <origin xyz="-0.004736412 2.5683e-05 0.041451518" rpy="0 0 0" />
+      <mass value="1.02" />
+      <inertia ixx="0.00267433" ixy="-7.3e-07" ixz="-0.00017389"
+        iyy="0.00282612" iyz="4e-07" izz="0.00089624" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm_base_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm_base_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="arm1_Link">
+    <inertial>
+      <origin xyz="0.00053 -0.00039 -0.00315" rpy="0 0 0" />
+      <mass value="0.71" />
+      <inertia ixx="0.00050027" ixy="7.8e-07" ixz="6.26e-06"
+        iyy="0.00040879" iyz="4.62e-06" izz="0.00045802" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm1_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm1_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="arm2_Link">
+    <inertial>
+      <origin xyz="0.21856 -0.00859 0.00227" rpy="0 0 0" />
+      <mass value="1.16" />
+      <inertia ixx="0.00111915" ixy="0.00182916" ixz="0.00019233"
+        iyy="0.06763251" iyz="7.67e-06" izz="0.067559" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm2_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm2_Link_collision1.STL" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm2_Link_collision2.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="arm3_Link">
+    <inertial>
+      <origin xyz="0.2014 -0.00418 -0.00141" rpy="0 0 0" />
+      <mass value="0.67" />
+      <inertia ixx="0.00033471" ixy="0.00026891" ixz="0.00013918"
+        iyy="0.03360411" iyz="5.2e-07" izz="0.03356941" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm3_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm3_Link_collision1.STL" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm3_Link_collision2.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="arm4_Link">
+    <inertial>
+      <origin xyz="0.059 -0.05831 0.002" rpy="0 0 0" />
+      <mass value="0.39" />
+      <inertia ixx="0.00120173" ixy="0.00138165" ixz="1.187e-05"
+        iyy="0.00209324" iyz="2.17e-06" izz="0.00307814" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm4_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm4_Link_collision1.STL" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm4_Link_collision2.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="arm5_Link">
+    <inertial>
+      <origin xyz="5e-05 -0.01282 -0.00429" rpy="0 0 0" />
+      <mass value="0.35" />
+      <inertia ixx="0.0002266" ixy="1.9e-07" ixz="5e-08"
+        iyy="0.0001774" iyz="8.5e-07" izz="0.00019425" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm5_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm5_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="arm6_Link">
+    <inertial>
+      <origin xyz="0.0 0.0 -0.0035" rpy="0 0 0" />
+      <mass value="0.007" />
+      <inertia ixx="0.00152112" ixy="2.02e-06" ixz="2.61e-06"
+        iyy="0.00138626" iyz="2e-08" izz="0.00031152" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm6_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/arm6_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="gripper_base_Link">
+    <inertial>
+      <origin xyz="-0.000183807 8.0503e-05 0.032143669" rpy="0 0 0" />
+      <mass value="0.45" />
+      <inertia ixx="0.00092934" ixy="3.4e-07" ixz="-7.38e-06"
+        iyy="0.00071447" iyz="5e-08" izz="0.00039442" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/gripper_base_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/gripper_base_Link_collision1.STL" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/gripper_base_Link_collision2.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="gripper1_Link">
+    <inertial>
+      <origin xyz="0.000651232 -0.049192987 0.009722588" rpy="0 0 0" />
+      <mass value="0.025" />
+      <inertia ixx="7.371e-05" ixy="-1.13e-06" ixz="2.1e-07"
+        iyy="7.81e-06" iyz="-1.372e-05" izz="7.47e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/gripper1_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/gripper1_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="gripper2_Link">
+    <inertial>
+      <origin xyz="0.000651232 -0.049192987 0.009722588" rpy="0 0 0" />
+      <mass value="0.025" />
+      <inertia ixx="7.371e-05" ixy="-1.13e-06" ixz="2.1e-07"
+        iyy="7.81e-06" iyz="-1.372e-05" izz="7.47e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/gripper2_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/gripper2_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="antenna_L_Link">
+    <inertial>
+      <origin xyz="-2.7e-05 -0.028426 0.013784" rpy="0 0 0" />
+      <mass value="0.231" />
+      <inertia ixx="0.000424493" ixy="-1.15e-07" ixz="-1.18e-07"
+        iyy="0.000169977" iyz="3.0807e-05" izz="0.00039175" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/antenna_L_Link.STL" />
+      </geometry>
+      <material name="white" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/antenna_L_Link_collision1.STL" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/antenna_L_Link_collision2.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="antenna_R_Link">
+    <inertial>
+      <origin xyz="2.7e-05 0.028426 0.013784" rpy="0 0 0" />
+      <mass value="0.231" />
+      <inertia ixx="0.000424493" ixy="-1.15e-07" ixz="1.17e-07"
+        iyy="0.000169977" iyz="-3.0808e-05" izz="0.000391749" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/antenna_R_Link.STL" />
+      </geometry>
+      <material name="white" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/antenna_R_Link_collision1.STL" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/antenna_R_Link_collision2.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="camera_mount_Link">
+    <inertial>
+      <origin xyz="0.002536 0.000321 -0.060392" rpy="0 0 0" />
+      <mass value="0.381" />
+      <inertia ixx="0.001630905" ixy="-3.911e-06" ixz="-0.000204624"
+        iyy="0.001504517" iyz="-3.269e-06" izz="0.000548227" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/camera_mount_Link.STL" />
+      </geometry>
+      <material name="white" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/camera_mount_Link_collision.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="radar_Link">
+    <inertial>
+      <origin xyz="-4.8e-05 8.4e-05 0.03502" rpy="0 0 0" />
+      <mass value="0.394" />
+      <inertia ixx="0.000308871" ixy="6.27e-07" ixz="-4.96e-07"
+        iyy="0.000308088" iyz="8.62e-07" izz="0.000305305" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/radar_Link.STL" />
+      </geometry>
+      <material name="white" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SFYG_TRON2A/meshes/radar_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="ankle_pitch_R_Link">
+    <inertial>
+      <origin xyz="-0.01525 -0.03542 -0.04668" rpy="0 0 0" />
+      <mass value="1.02" />
+      <inertia ixx="0.0014433" ixy="-3.545e-05" ixz="-0.00014515"
+        iyy="0.00346181" iyz="-6.835e-05" izz="0.00394199" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/SF_TRON2A/meshes/ankle_pitch_R_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.014425463037384678 -0.035848761272903706 -0.05027431354942169" />
+      <geometry>
+        <box size="0.14 0.06 0.025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.11909570195246066 -0.06354314585176701 -0.07124" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.10049390971791083 -0.0038735829813696387 -0.07124" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.07502612984116563 -0.011635070405830783 -0.07123754260807935" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.07502612984116541 -0.06270942031820081 -0.07124" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.08472274114731804 -0.07904998982922917 -0.06424918850744032" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.03564470406430653 -0.07627499491461442 -0.06424918850744032" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.08472274114731826 0.007719774188539752 -0.06424918850744032" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.03564470406430653 0.0051139227977490265 -0.06424918850744032" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.12805773805226417 -0.0355 -0.06424607954803907" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.08868077416023412 -0.03550000000000009 -0.06424607954803907" />
+      <geometry>
+        <sphere radius="0.0025" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- D435 Camera Links -->
+  <link name="d435_Link">
+    <visual>
+      <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0.0 -0.0 0" />
+      <geometry>
+        <box size="0.01 0.01 0.001" />
+      </geometry>
+      <material name="camera_red">
+        <color rgba="1.0 0.0 0.0 1.0" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="d435_joint" type="fixed">
+    <origin rpy="0 1.063778179 0" xyz="0.12213 0.01759 0.00599" />
+    <parent link="base_imu" />
+    <child link="d435_Link" />
+  </joint>
+
+  <joint name="d435_optical_joint" type="fixed">
+    <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0" />
+    <parent link="d435_Link" />
+    <child link="d435_optical_frame" />
+  </joint>
+  <link name="d435_optical_frame" />
+
+  <!-- Joints -->
+  <joint name="proximal_pitch_L_Joint" type="revolute">
+    <origin xyz="-0.00044 0.09178 0.05474" rpy="0 0 0" />
+    <parent link="base_Link" />
+    <child link="proximal_pitch_L_Link" />
+    <axis xyz="0.0 0.996194726892931 -0.0871554135479712" />
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3" />
+  </joint>
+
+  <joint name="proximal_roll_L_Joint" type="revolute">
+    <origin xyz="-0.032 0.0758 -0.00663" rpy="0 0 0" />
+    <parent link="proximal_pitch_L_Link" />
+    <child link="proximal_roll_L_Link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.2617993877991494" upper="3.1939524787897455" effort="150" velocity="18.3" />
+  </joint>
+
+  <joint name="proximal_yaw_L_Joint" type="revolute">
+    <origin xyz="0.032 0.0 -0.1374" rpy="0 0 0" />
+    <parent link="proximal_roll_L_Link" />
+    <child link="proximal_yaw_L_Link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-3.6651914291880923" upper="1.4835298641951802" effort="60" velocity="22.52" />
+  </joint>
+
+  <joint name="knee_L_Joint" type="revolute">
+    <origin xyz="0.004 0.032 -0.2126" rpy="0 0 0" />
+    <parent link="proximal_yaw_L_Link" />
+    <child link="knee_L_Link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150" velocity="18.3" />
+  </joint>
+
+  <joint name="ankle_pitch_L_Joint" type="revolute">
+    <origin xyz="-0.004 -0.06775 -0.35" rpy="0 0 0" />
+    <parent link="knee_L_Link" />
+    <child link="ankle_pitch_L_Link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.6231562043547265" upper="1.6231562043547265" effort="60" velocity="22.52" />
+  </joint>
+
+  <joint name="proximal_pitch_R_Joint" type="revolute">
+    <origin xyz="-0.00044 -0.09178 0.05474" rpy="0 0 0" />
+    <parent link="base_Link" />
+    <child link="proximal_pitch_R_Link" />
+    <axis xyz="-0.0 0.996194726892931 0.0871554135479712" />
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3" />
+  </joint>
+
+  <joint name="proximal_roll_R_Joint" type="revolute">
+    <origin xyz="-0.032 -0.0758 -0.00663" rpy="0 0 0" />
+    <parent link="proximal_pitch_R_Link" />
+    <child link="proximal_roll_R_Link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-3.1939524787897455" upper="0.2617993877991494" effort="150" velocity="18.3" />
+  </joint>
+
+  <joint name="proximal_yaw_R_Joint" type="revolute">
+    <origin xyz="0.032 -0.0 -0.1374" rpy="0 0 0" />
+    <parent link="proximal_roll_R_Link" />
+    <child link="proximal_yaw_R_Link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.4835298641951802" upper="3.6651914291880923" effort="60" velocity="22.52" />
+  </joint>
+
+  <joint name="knee_R_Joint" type="revolute">
+    <origin xyz="0.004 -0.032 -0.2126" rpy="0 0 0" />
+    <parent link="proximal_yaw_R_Link" />
+    <child link="knee_R_Link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150" velocity="18.3" />
+  </joint>
+
+  <joint name="ankle_pitch_R_Joint" type="revolute">
+    <origin xyz="-0.004 0.06775 -0.35" rpy="0 0 0" />
+    <parent link="knee_R_Link" />
+    <child link="ankle_pitch_R_Link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.6231562043547265" upper="1.6231562043547265" effort="60" velocity="22.52" />
+  </joint>
+
+  <!-- Arm + Gripper + Peripherals joints (piper-x) -->
+  <joint name="transition_Joint" type="fixed">
+    <origin xyz="0.01 0.0 0.26915" rpy="0 0 0" />
+    <parent link="base_Link" />
+    <child link="transition_Link" />
+  </joint>
+
+  <joint name="arm_base_Joint" type="fixed">
+    <origin xyz="0.006 0.0 0.0" rpy="0 0 0" />
+    <parent link="transition_Link" />
+    <child link="arm_base_Link" />
+  </joint>
+
+  <joint name="arm1_Joint" type="revolute">
+    <origin xyz="0.0 0.0 0.123" rpy="0.0 0.0 3.1415926" />
+    <parent link="arm_base_Link" />
+    <child link="arm1_Link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.6179938081783245" upper="2.6179938081783245" effort="100.0" velocity="5.0" />
+  </joint>
+
+  <joint name="arm2_Joint" type="revolute">
+    <origin xyz="0.0 0.0 0.0" rpy="-1.5707963 -3.005806 -3.1415926" />
+    <parent link="arm1_Link" />
+    <child link="arm2_Link" />
+    <axis xyz="0 0 1" />
+    <limit lower="0.0" upper="3.141592601229916" effort="100.0" velocity="5.0" />
+  </joint>
+
+  <joint name="arm3_Joint" type="revolute">
+    <origin xyz="0.28503 0.0 0.0" rpy="0.0 0.0 2.8380798" />
+    <parent link="arm2_Link" />
+    <child link="arm3_Link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.967059693483775" upper="0.0" effort="100.0" velocity="5.0" />
+  </joint>
+
+  <joint name="arm4_Joint" type="revolute">
+    <origin xyz="0.27364 0.0 0.0" rpy="0.0 0.0 0.0806342" />
+    <parent link="arm3_Link" />
+    <child link="arm4_Link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.5533429993683683" upper="1.5533429993683683" effort="100.0" velocity="5.0" />
+  </joint>
+
+  <joint name="arm5_Joint" type="revolute">
+    <origin xyz="0.07466 0.0 0.0" rpy="-1.5707963 1.5707963 0.0" />
+    <parent link="arm4_Link" />
+    <child link="arm5_Link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.5533429993683683" upper="1.5533429993683683" effort="100.0" velocity="5.0" />
+  </joint>
+
+  <joint name="arm6_Joint" type="revolute">
+    <origin xyz="0.0 -0.035 0.0" rpy="1.5707963 0.0 0.0" />
+    <parent link="arm5_Link" />
+    <child link="arm6_Link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.0943951023931953" upper="2.0943951023931953" effort="100.0" velocity="5.0" />
+  </joint>
+
+  <joint name="gripper_base_Joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 1.5707963" />
+    <parent link="arm6_Link" />
+    <child link="gripper_base_Link" />
+  </joint>
+
+  <joint name="gripper1_Joint" type="prismatic">
+    <origin xyz="0.0 0.0 0.1358" rpy="1.5707963 0.0 0.0" />
+    <parent link="gripper_base_Link" />
+    <child link="gripper1_Link" />
+    <axis xyz="0 0 1" />
+    <limit lower="0.0" upper="0.050000000424915834" effort="10.0" velocity="3.0" />
+  </joint>
+
+  <joint name="gripper2_Joint" type="prismatic">
+    <origin xyz="0.0 0.0 0.1358" rpy="1.5707963 0.0 -3.1415926" />
+    <parent link="gripper_base_Link" />
+    <child link="gripper2_Link" />
+    <axis xyz="-0.0 -0.0 1.0" />
+    <limit lower="-0.0" upper="0.050000000424915834" effort="10.0" velocity="3.0" />
+  </joint>
+
+  <joint name="antenna_L_Joint" type="fixed">
+    <origin xyz="-0.0025 0.16692 0.211" rpy="0 0 0" />
+    <parent link="base_Link" />
+    <child link="antenna_L_Link" />
+  </joint>
+
+  <joint name="antenna_R_Joint" type="fixed">
+    <origin xyz="-0.0025 -0.16692 0.211" rpy="0 0 0" />
+    <parent link="base_Link" />
+    <child link="antenna_R_Link" />
+  </joint>
+
+  <joint name="camera_mount_Joint" type="fixed">
+    <origin xyz="0.18058 0.0 0.23876" rpy="0 0 0" />
+    <parent link="base_Link" />
+    <child link="camera_mount_Link" />
+  </joint>
+
+  <joint name="radar_Joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+    <parent link="camera_mount_Link" />
+    <child link="radar_Link" />
+  </joint>
+
+  <!-- Gazebo Material / Friction (shared) -->
+  <gazebo reference="proximal_yaw_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="proximal_roll_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="proximal_yaw_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="proximal_roll_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="ankle_pitch_L_Link">
+    <mu1>2.0</mu1>
+    <mu2>2.0</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0" />
+    <kd value="100.0" />
+  </gazebo>
+
+  <gazebo reference="proximal_pitch_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="proximal_pitch_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="knee_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0" />
+    <kd value="100.0" />
+  </gazebo>
+
+  <gazebo reference="ankle_pitch_R_Link">
+    <mu1>2.0</mu1>
+    <mu2>2.0</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0" />
+    <kd value="100.0" />
+  </gazebo>
+
+  <gazebo reference="knee_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0" />
+    <kd value="100.0" />
+  </gazebo>
+
+  <!-- Arm + Gripper + Peripherals friction/material -->
+  <gazebo reference="transition_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+  <gazebo reference="arm_base_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm1_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm2_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm3_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm4_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm5_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm6_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="gripper_base_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="gripper1_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="gripper2_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="antenna_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+  <gazebo reference="antenna_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+  <gazebo reference="camera_mount_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+  <gazebo reference="radar_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <!-- Conditional ROS version -->
+  <xacro:if value="${ros_version == 1}">
+    <xacro:ros1_gazebo_all />
+  </xacro:if>
+  <xacro:if value="${ros_version == 2}">
+    <xacro:ros2_gazebo_all />
+  </xacro:if>
+
+</robot>

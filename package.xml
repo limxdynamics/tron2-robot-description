@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+  SPDX-FileCopyrightText: 2024-2026 LimX Dynamics Technology Co., Ltd.
+  SPDX-License-Identifier: Apache-2.0
+-->
+<package format="3">
+  <name>robot_description</name>
+  <version>0.1.0</version>
+  <description>
+    URDF, xacro, MuJoCo, STL meshes, and USD assets for the TRON2A
+    humanoid robot family (DA / DACH / WF / SF / WFYG / SFYG variants).
+    Simulation and visualization only — this package ships no control
+    code, no SDK binaries, no model weights, and no calibration values.
+  </description>
+
+  <maintainer email="contact@limxdynamics.com">LimX Dynamics</maintainer>
+  <author email="contact@limxdynamics.com">LimX Dynamics</author>
+
+  <license>Apache-2.0</license>
+
+  <url type="website">https://www.limxdynamics.com</url>
+  <url type="repository">https://github.com/limx-tron2/robot-description</url>
+  <url type="bugtracker">https://github.com/limx-tron2/robot-description/issues</url>
+
+  <buildtool_depend    condition="$ROS_VERSION == 0">ament_cmake</buildtool_depend>
+
+  <buildtool_depend    condition="$ROS_VERSION == 1">catkin</buildtool_depend>
+  <build_depend        condition="$ROS_VERSION == 1">roscpp</build_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">roscpp</build_export_depend>
+  <exec_depend         condition="$ROS_VERSION == 1">roscpp</exec_depend>
+
+  <buildtool_depend    condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
+  <build_depend        condition="$ROS_VERSION == 2">rclcpp</build_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">rclcpp</build_export_depend>
+  <exec_depend         condition="$ROS_VERSION == 2">rclcpp</exec_depend>
+
+  <export>
+    <build_type condition="$ROS_VERSION == 0">ament_cmake</build_type>
+    <build_type condition="$ROS_VERSION == 1">catkin</build_type>
+    <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
+  </export>
+</package>

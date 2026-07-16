@@ -1,0 +1,12 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: mailto:contact@limxdynamics.com
+    about: >
+      Do NOT open a public issue for security reports. Email
+      contact@limxdynamics.com; see SECURITY.md for the full policy.
+  - name: General questions
+    url: https://github.com/limx-tron2/robot-description/discussions
+    about: >
+      Use Discussions for how-to questions, integration help, or
+      simulator-specific quirks that are not yet a defect.

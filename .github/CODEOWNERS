@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# CODEOWNERS for robot-description
+#
+# Order matters: the LAST matching pattern wins for each file.
+# Replace the placeholder handles below with real GitHub logins before
+# enabling branch protection that requires code-owner review.
+
+# Default owners: repo maintainers / meta files
+*                                       @limx-tron2/maintainers
+
+# Open-source scaffolding & policy
+/LICENSE                                @limx-tron2/legal @limx-tron2/maintainers
+/NOTICE                                 @limx-tron2/legal @limx-tron2/maintainers
+/THIRD_PARTY_NOTICES.md                 @limx-tron2/legal @limx-tron2/maintainers
+/SECURITY.md                            @limx-tron2/security
+/CONTRIBUTING.md                        @limx-tron2/maintainers
+/CHANGELOG.md                           @limx-tron2/maintainers
+/ASSETS.md                              @limx-tron2/legal @limx-tron2/hardware
+
+# Build / packaging
+/package.xml                            @limx-tron2/maintainers
+/CMakeLists.txt                         @limx-tron2/maintainers
+
+# CI / templates
+/.github/                               @limx-tron2/maintainers
+
+# Documentation media (owner audit before merge)
+/docs/                                  @limx-tron2/content @limx-tron2/legal
+
+# Per-variant asset ownership
+/tron2/DA_TRON2A/                       @limx-tron2/hardware @limx-tron2/mechanical
+/tron2/DACH_TRON2A/                     @limx-tron2/hardware @limx-tron2/mechanical
+/tron2/WF_TRON2A/                       @limx-tron2/hardware @limx-tron2/mechanical
+/tron2/SF_TRON2A/                       @limx-tron2/hardware @limx-tron2/mechanical
+/tron2/WFYG_TRON2A/                     @limx-tron2/hardware @limx-tron2/mechanical
+/tron2/SFYG_TRON2A/                     @limx-tron2/hardware @limx-tron2/mechanical
+
+# Meshes and USD assets — extra review required for provenance
+/tron2/*/meshes/                        @limx-tron2/hardware @limx-tron2/legal
+/tron2/*/usd/                           @limx-tron2/hardware @limx-tron2/legal

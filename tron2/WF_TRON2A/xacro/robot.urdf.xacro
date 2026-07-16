@@ -1,0 +1,506 @@
+<?xml version="1.0"?>
+<robot name="bipedal_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="ros_version" default="$(optenv ROS_VERSION 2)" />
+  <xacro:arg name="use_primitive_collision" default="false" />
+  <xacro:property name="ros_version" value="$(arg ros_version)" />
+  <xacro:property name="use_primitive" value="$(arg use_primitive_collision)" />
+
+  <xacro:include filename="macros.xacro" />
+
+  <!-- Materials -->
+  <material name="grey">
+    <color rgba="1 1 1 1" />
+  </material>
+  <material name="white">
+    <color rgba="1.0 1.0 1.0 1.0" />
+  </material>
+  <material name="orange">
+    <color rgba="1.0 0.423 0.039 1.0" />
+  </material>
+
+  <!-- IMU Link -->
+  <joint name="base_imu_Joint" type="fixed">
+    <origin rpy="0. 0. 0." xyz="0. 0. 0." />
+    <parent link="base_Link" />
+    <child link="base_imu" />
+  </joint>
+
+  <link name="base_imu">
+    <inertial>
+      <mass value="0.01" />
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <box size="0.015 0.015 0.004" />
+      </geometry>
+      <material name="orange" />
+    </visual>
+  </link>
+
+  <gazebo reference="base_imu_Joint">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+
+  <!-- Links -->
+  <link name="base_Link">
+    <inertial>
+      <origin xyz="3.85E-03 -0.11E-03 112.54E-03" rpy="0 0 0" />
+      <mass value="12.57" />
+      <inertia ixx="114738.68E-06" ixy="-17.26E-06" ixz="7175.02E-06"
+        iyy="135812.53E-06" iyz="81.23E-06" izz="105408.73E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/base_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <xacro:unless value="${use_primitive}">
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/base_Link.STL" />
+    </xacro:unless>
+    <xacro:if value="${use_primitive}">
+      <xacro:collision_box
+        prim_origin_xyz="0.007348134464503642 0.0032471465881624044 0.10977665292815185"
+        prim_origin_rpy="1.5469195434180267 -0.10680015192437434 3.039190661120036"
+        prim_size="0.2597991458857211 0.23762547316400467 0.1436914098299209" />
+    </xacro:if>
+  </link>
+
+  <link name="proximal_pitch_L_Link">
+    <inertial>
+      <origin xyz="-5.47E-03 70.14E-03 -6.11E-03" rpy="0 0 0" />
+      <mass value="2.21" />
+      <inertia ixx="4385.39E-06" ixy="-10.65E-06" ixz="18.17E-06"
+        iyy="3081.83E-06" iyz="52.13E-06" izz="3495.04E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_L_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <xacro:unless value="${use_primitive}">
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_L_Link.STL" />
+    </xacro:unless>
+    <xacro:if value="${use_primitive}">
+      <xacro:collision_box
+        prim_origin_xyz="5.987514523439594e-05 0.06508075057013676 -0.006841685085521819"
+        prim_origin_rpy="-1.4032369732915861 -0.02701564972848465 1.4661961381397592"
+        prim_size="0.11131007270728407 0.09818504019266563 0.08304442551436556" />
+    </xacro:if>
+  </link>
+
+  <link name="proximal_roll_L_Link">
+    <inertial>
+      <origin xyz="31.24E-03 0.35E-03 -84.14E-03" rpy="0 0 0" />
+      <mass value="1.74" />
+      <inertia ixx="4769.33E-06" ixy="-11.72E-06" ixz="32.71E-06"
+        iyy="5455.84E-06" iyz="-29.46E-06" izz="3053.16E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_L_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <xacro:unless value="${use_primitive}">
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_L_Link.STL" />
+    </xacro:unless>
+    <xacro:if value="${use_primitive}">
+      <xacro:collision_box
+        prim_origin_xyz="0.03282584416041619 8.086435368361053e-05 -0.060744534514964796"
+        prim_origin_rpy="1.4475135078157757 -1.4924341839947453 3.0187541692678255"
+        prim_size="0.15285250115227061 0.09631417192997857 0.07440971186768168" />
+    </xacro:if>
+  </link>
+
+  <link name="proximal_yaw_L_Link">
+    <inertial>
+      <origin xyz="-2.54E-03 1.55E-03 -107.42E-03" rpy="0 0 0" />
+      <mass value="1.65" />
+      <inertia ixx="15543.14E-06" ixy="-3.32E-06" ixz="246.39E-06"
+        iyy="14853.62E-06" iyz="75.69E-06" izz="3780.04E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_L_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <xacro:unless value="${use_primitive}">
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_L_Link.STL" />
+    </xacro:unless>
+    <xacro:if value="${use_primitive}">
+      <xacro:collision_box
+        prim_origin_xyz="0.0005525587055855946 -0.0003964502189309157 -0.11186786637185574"
+        prim_origin_rpy="1.8538769687055119 -1.5457630769736446 -1.268245574617436"
+        prim_size="0.23728120433932615 0.09509009132558871 0.0835632757215519" />
+    </xacro:if>
+  </link>
+
+  <link name="knee_L_Link">
+    <inertial>
+      <origin xyz="-2.04E-03 -24.49E-03 -129.95E-03" rpy="0 0 0" />
+      <mass value="4.66" />
+      <inertia ixx="110570.56E-06" ixy="7.11E-06" ixz="-1000.30E-06"
+        iyy="112863.53E-06" iyz="1589.87E-06" izz="6203.43E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_L_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <xacro:unless value="${use_primitive}">
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_L_Link.STL" />
+    </xacro:unless>
+    <xacro:if value="${use_primitive}">
+      <xacro:collision_box
+        prim_origin_xyz="-0.008638977480288506 -0.027170549381364706 -0.19514454182631188"
+        prim_origin_rpy="-0.5036057458709716 -1.4961803668049691 -2.156194467275544"
+        prim_size="0.35071140892805774 0.08183791262227849 0.05564076319552396" />
+    </xacro:if>
+  </link>
+
+  <link name="wheel_L_Link">
+    <inertial>
+      <origin xyz="0.48E-03 4.84E-03 0.30E-03" rpy="0 0 0" />
+      <mass value="0.91" />
+      <inertia ixx="2562.23E-06" ixy="0.76E-06" ixz="-22.92E-06"
+        iyy="4908.44E-06" iyz="0.42E-06" izz="2592.34E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/wheel_L_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0.003 0" />
+      <geometry>
+        <cylinder length="0.045" radius="0.1" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="proximal_pitch_R_Link">
+    <inertial>
+      <origin xyz="-0.00547 -0.07014 -0.00611" rpy="0 0 0" />
+      <mass value="2.21" />
+      <inertia ixx="0.00438539" ixy="1.065e-05" ixz="1.817e-05"
+        iyy="0.00308183" iyz="-5.213e-05" izz="0.00349504" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_R_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <xacro:unless value="${use_primitive}">
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_R_Link.STL" />
+    </xacro:unless>
+    <xacro:if value="${use_primitive}">
+      <xacro:collision_box
+        prim_origin_xyz="-0.0005174045300471743 -0.06668062789143361 -0.007925748251852046"
+        prim_origin_rpy="-1.6670047568739776 0.16195823758999756 1.718051700253101"
+        prim_size="0.10825180602686951 0.09805226925878321 0.08186054028322054" />
+    </xacro:if>
+  </link>
+
+  <link name="proximal_roll_R_Link">
+    <inertial>
+      <origin xyz="0.03124 -0.00035 -0.08414" rpy="0 0 0" />
+      <mass value="1.74" />
+      <inertia ixx="0.00476933" ixy="1.172e-05" ixz="3.271e-05"
+        iyy="0.00545584" iyz="2.946e-05" izz="0.00305316" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_R_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <xacro:unless value="${use_primitive}">
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_R_Link.STL" />
+    </xacro:unless>
+    <xacro:if value="${use_primitive}">
+      <xacro:collision_box
+        prim_origin_xyz="0.03196752864774217 -0.00015995279150125442 -0.058464411408008767"
+        prim_origin_rpy="1.6251037239340689 -1.424725232580415 -3.112554303158455"
+        prim_size="0.1536669734811392 0.09605964379357113 0.0759119709979863" />
+    </xacro:if>
+  </link>
+
+  <link name="proximal_yaw_R_Link">
+    <inertial>
+      <origin xyz="-0.00254 -0.00155 -0.10742" rpy="0 0 0" />
+      <mass value="1.65" />
+      <inertia ixx="0.01554314" ixy="3.32e-06" ixz="0.00024639"
+        iyy="0.01485362" iyz="-7.569e-05" izz="0.00378004" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_R_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <xacro:unless value="${use_primitive}">
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_R_Link.STL" />
+    </xacro:unless>
+    <xacro:if value="${use_primitive}">
+      <xacro:collision_box
+        prim_origin_xyz="0.00020356451469706046 -0.000565352487610307 -0.11355075943954146"
+        prim_origin_rpy="-1.6490699554275263 -1.5103010119536417 1.4615509142316025"
+        prim_size="0.24071647178608346 0.09694328158875576 0.08532051256257897" />
+    </xacro:if>
+  </link>
+
+  <link name="knee_R_Link">
+    <inertial>
+      <origin xyz="-0.00204 0.02449 -0.12995" rpy="0 0 0" />
+      <mass value="4.66" />
+      <inertia ixx="0.11057056" ixy="-7.11e-06" ixz="-0.0010003"
+        iyy="0.11286353" iyz="-0.00158987" izz="0.00620343" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_R_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <xacro:unless value="${use_primitive}">
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_R_Link.STL" />
+    </xacro:unless>
+    <xacro:if value="${use_primitive}">
+      <xacro:collision_box
+        prim_origin_xyz="-0.008496961405027011 0.027214356143545868 -0.19581862673188605"
+        prim_origin_rpy="0.4907171104385046 -1.495692223792686 2.143705996442358"
+        prim_size="0.3488590582419444 0.08152843974740721 0.05572487473024" />
+    </xacro:if>
+  </link>
+
+  <link name="wheel_R_Link">
+    <inertial>
+      <origin xyz="0.00048 -0.00484 0.0003" rpy="0 0 0" />
+      <mass value="0.91" />
+      <inertia ixx="0.00256223" ixy="-7.6e-07" ixz="-2.292e-05"
+        iyy="0.00490844" iyz="-4.2e-07" izz="0.00259234" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/wheel_R_Link.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 -0.003 0" />
+      <geometry>
+        <cylinder length="0.045" radius="0.1" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Joints -->
+  <joint name="proximal_pitch_L_Joint" type="revolute">
+    <origin xyz="-0.00044 0.09178 0.05474" rpy="0 0 0" />
+    <parent link="base_Link" />
+    <child link="proximal_pitch_L_Link" />
+    <axis xyz="0 0.99619 -0.087155" />
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3" />
+  </joint>
+
+  <joint name="proximal_roll_L_Joint" type="revolute">
+    <origin xyz="-0.032 0.0758 -0.00663" rpy="0 0 0" />
+    <parent link="proximal_pitch_L_Link" />
+    <child link="proximal_roll_L_Link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.2617993877991494" upper="3.19395248" effort="150" velocity="18.3" />
+  </joint>
+
+  <joint name="proximal_yaw_L_Joint" type="revolute">
+    <origin xyz="0.032 0.0 -0.1374" rpy="0 0 0" />
+    <parent link="proximal_roll_L_Link" />
+    <child link="proximal_yaw_L_Link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-3.6651914291880923" upper="1.4835298641951802" effort="60" velocity="22.52" />
+  </joint>
+
+  <joint name="knee_L_Joint" type="revolute">
+    <origin xyz="0.004 0.032 -0.2126" rpy="0 0 0" />
+    <parent link="proximal_yaw_L_Link" />
+    <child link="knee_L_Link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150" velocity="18.3" />
+  </joint>
+
+  <joint name="wheel_L_Joint" type="revolute">
+    <origin xyz="-0.004 0.013 -0.35" rpy="0 0 0" />
+    <parent link="knee_L_Link" />
+    <child link="wheel_L_Link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1745329.2519943293" upper="1745329.2519943293" effort="22" velocity="41.89" />
+  </joint>
+
+  <joint name="proximal_pitch_R_Joint" type="revolute">
+    <origin xyz="-0.00044 -0.09178 0.05474" rpy="0 0 0" />
+    <parent link="base_Link" />
+    <child link="proximal_pitch_R_Link" />
+    <axis xyz="0 0.99619 0.087155" />
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3" />
+  </joint>
+
+  <joint name="proximal_roll_R_Joint" type="revolute">
+    <origin xyz="-0.032 -0.0758 -0.00663" rpy="0 0 0" />
+    <parent link="proximal_pitch_R_Link" />
+    <child link="proximal_roll_R_Link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-3.19395248" upper="0.2617993877991494" effort="150" velocity="18.3" />
+  </joint>
+
+  <joint name="proximal_yaw_R_Joint" type="revolute">
+    <origin xyz="0.032 -0.0 -0.1374" rpy="0 0 0" />
+    <parent link="proximal_roll_R_Link" />
+    <child link="proximal_yaw_R_Link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.4835298641951802" upper="3.6651914291880923" effort="60" velocity="22.52" />
+  </joint>
+
+  <joint name="knee_R_Joint" type="revolute">
+    <origin xyz="0.004 -0.032 -0.2126" rpy="0 0 0" />
+    <parent link="proximal_yaw_R_Link" />
+    <child link="knee_R_Link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.6179938779914944" upper="0.2617993877991494" effort="150" velocity="18.3" />
+  </joint>
+
+  <joint name="wheel_R_Joint" type="revolute">
+    <origin xyz="-0.004 -0.013 -0.35" rpy="0 0 0" />
+    <parent link="knee_R_Link" />
+    <child link="wheel_R_Link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1745329.2519943293" upper="1745329.2519943293" effort="22" velocity="41.89" />
+  </joint>
+
+  <!-- Gazebo Material / Friction (shared) -->
+  <gazebo reference="proximal_yaw_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="proximal_roll_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="proximal_pitch_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="proximal_roll_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="proximal_pitch_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="wheel_L_Link">
+    <mu1>2.0</mu1>
+    <mu2>2.0</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0" />
+    <kd value="100.0" />
+  </gazebo>
+
+  <gazebo reference="proximal_yaw_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="knee_L_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0" />
+    <kd value="100.0" />
+  </gazebo>
+
+  <gazebo reference="knee_R_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0" />
+    <kd value="100.0" />
+  </gazebo>
+
+  <gazebo reference="wheel_R_Link">
+    <mu1>2.0</mu1>
+    <mu2>2.0</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0" />
+    <kd value="100.0" />
+  </gazebo>
+
+  <!-- D435 Camera Links -->
+  <link name="d435_Link">
+    <visual>
+      <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0.0 -0.0 0" />
+      <geometry>
+        <box size="0.01 0.01 0.001" />
+      </geometry>
+      <material name="camera_red">
+        <color rgba="1.0 0.0 0.0 1.0" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="d435_joint" type="fixed">
+    <origin rpy="0 1.063778179 0" xyz="0.12213 0.01759 0.00599" />
+    <parent link="base_imu" />
+    <child link="d435_Link" />
+  </joint>
+
+  <joint name="d435_optical_joint" type="fixed">
+    <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0" />
+    <parent link="d435_Link" />
+    <child link="d435_optical_frame" />
+  </joint>
+  <link name="d435_optical_frame" />
+
+  <!-- Conditional ROS version -->
+  <xacro:if value="${ros_version == 1}">
+    <xacro:ros1_gazebo_all />
+  </xacro:if>
+  <xacro:if value="${ros_version == 2}">
+    <xacro:ros2_gazebo_all />
+  </xacro:if>
+
+</robot>
