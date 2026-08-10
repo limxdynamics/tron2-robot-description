@@ -1,3 +1,5 @@
+# English | [中文](README_cn.md)
+
 <!--
   SPDX-FileCopyrightText: 2024-2026 LimX Dynamics Technology Co., Ltd.
   SPDX-License-Identifier: Apache-2.0
