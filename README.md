@@ -1,4 +1,4 @@
-# English | [中文](README_cn.md)
+# English | [中文](README_zh-CN.md)
 
 <!--
   SPDX-FileCopyrightText: 2024-2026 LimX Dynamics Technology Co., Ltd.
