@@ -5,7 +5,6 @@
   SPDX-License-Identifier: Apache-2.0
 -->
 
-[English](README.md) | [中文](README_zh-CN.md)
 
 > **Distribution:** the primary open-source copy of this repository is
 > hosted at
