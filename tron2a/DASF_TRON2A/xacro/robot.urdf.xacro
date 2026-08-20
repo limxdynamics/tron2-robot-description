@@ -1,0 +1,1000 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="DASF_TRON2A" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="ros_version" default="$(optenv ROS_VERSION 2)" />
+  <xacro:property name="ros_version" value="$(arg ros_version)" />
+
+  <xacro:include filename="macros.xacro" />
+
+  <material name="orange">
+    <color rgba="1.0 0.423 0.039 1.0"/>
+  </material>
+
+  <!-- IMU Link -->
+  <joint name="base_imu_Joint" type="fixed">
+    <origin rpy="0. 0. 0." xyz="0. 0. 0."/>
+    <parent link="base_Link"/>
+    <child link="base_imu"/>
+  </joint>
+
+  <!-- Keep sensor reference frames alive (Gazebo lumps fixed joints by default) -->
+  <gazebo reference="base_imu_Joint">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference="d435_U_Joint">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+
+  <!-- Self-collision, to match the training asset (enabled_self_collisions=True).
+       Gazebo skips pairs joined by a joint, so this only stops the arms/head from
+       passing through the torso and the legs from crossing each other. -->
+  <xacro:macro name="self_collide_links" params="links">
+    <xacro:if value="${links}">
+      <gazebo reference="${links[0]}">
+        <selfCollide>true</selfCollide>
+      </gazebo>
+      <xacro:self_collide_links links="${links[1:]}"/>
+    </xacro:if>
+  </xacro:macro>
+  <xacro:self_collide_links links="${[
+      'base_Link',
+      'proximal_pitch_L_Link', 'proximal_roll_L_Link', 'proximal_yaw_L_Link', 'knee_L_Link', 'ankle_pitch_L_Link',
+      'proximal_pitch_R_Link', 'proximal_roll_R_Link', 'proximal_yaw_R_Link', 'knee_R_Link', 'ankle_pitch_R_Link',
+      'transition_upper_Link', 'upper_base_Link',
+      'proximal_pitch_L_U_Link', 'proximal_roll_L_U_Link', 'proximal_yaw_L_U_Link', 'elbow_L_U_Link',
+      'wrist_yaw_L_U_Link', 'wrist_pitch_L_U_Link', 'wrist_roll_L_U_Link', 'grasper_L_U_Link',
+      'proximal_pitch_R_U_Link', 'proximal_roll_R_U_Link', 'proximal_yaw_R_U_Link', 'elbow_R_U_Link',
+      'wrist_yaw_R_U_Link', 'wrist_pitch_R_U_Link', 'wrist_roll_R_U_Link', 'grasper_R_U_Link',
+      'head_yaw_Link', 'head_pitch_Link']}"/>
+
+  <link name="base_imu">
+    <inertial>
+      <mass value="0.01"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.015 0.004"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <!-- base -->
+  <link name="base_Link">
+    <inertial>
+      <origin xyz="0.00385 -0.00011 0.11254" rpy="0.0 0.0 0.0"/>
+      <mass value="12.57"/>
+      <inertia ixx="0.11473868" ixy="-1.726e-05" ixz="0.00717502" iyy="0.13581253" iyz="8.123e-05" izz="0.10540873"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/base_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/base_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- proximal pitch L Link -->
+  <link name="proximal_pitch_L_Link">
+    <inertial>
+      <origin xyz="-0.00547 0.07014 -0.00611" rpy="0.0 0.0 0.0"/>
+      <mass value="2.21"/>
+      <inertia ixx="0.00438539" ixy="-1.065e-05" ixz="1.817e-05" iyy="0.00308183" iyz="5.213e-05" izz="0.00349504"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_pitch_L_Joint" type="revolute">
+    <origin xyz="-0.00044 0.09178 0.05474" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="proximal_pitch_L_Link"/>
+    <axis xyz="0.0 0.9961947268929313 -0.0871554135479712"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="200.0" velocity="12.3"/>
+  </joint>
+  <link name="proximal_roll_L_Link">
+    <inertial>
+      <origin xyz="0.03124 0.00035 -0.08414" rpy="0.0 0.0 0.0"/>
+      <mass value="1.74"/>
+      <inertia ixx="0.00476933" ixy="-1.172e-05" ixz="3.271e-05" iyy="0.00545584" iyz="-2.946e-05" izz="0.00305316"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_roll_L_Joint" type="revolute">
+    <origin xyz="-0.032 0.0758 -0.00663" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_pitch_L_Link"/>
+    <child link="proximal_roll_L_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-0.2617993877991494" upper="3.193952531149623" effort="200.0" velocity="12.3"/>
+  </joint>
+  <link name="proximal_yaw_L_Link">
+    <inertial>
+      <origin xyz="0.00254 -0.00155 -0.10742" rpy="0.0 0.0 0.0"/>
+      <mass value="1.65"/>
+      <inertia ixx="0.01554314" ixy="-3.32e-06" ixz="-0.00024638" iyy="0.01485362" iyz="-7.569e-05" izz="0.00378004"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_yaw_L_Joint" type="revolute">
+    <origin xyz="0.032 0.0 -0.1374" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_roll_L_Link"/>
+    <child link="proximal_yaw_L_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-0.5235987755982988" upper="4.625122517784973" effort="70.0" velocity="14.52"/>
+  </joint>
+  <link name="knee_L_Link">
+    <inertial>
+      <origin xyz="0.00204 0.02953 -0.12112" rpy="0.0 0.0 0.0"/>
+      <mass value="4.5"/>
+      <inertia ixx="0.10084664" ixy="-3.842e-05" ixz="0.00100648" iyy="0.10273037" iyz="0.00292437" izz="0.00591261"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/knee_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/knee_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="knee_L_Joint" type="revolute">
+    <origin xyz="-0.004 -0.032 -0.2126" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_yaw_L_Link"/>
+    <child link="knee_L_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.2617993877991494" upper="2.6179938779914944" effort="200.0" velocity="12.3"/>
+  </joint>
+  <link name="ankle_pitch_L_Link">
+    <inertial>
+      <origin xyz="0.01525 -0.03542 -0.04668" rpy="0.0 0.0 0.0"/>
+      <mass value="1.02"/>
+      <inertia ixx="0.0014433" ixy="3.545e-05" ixz="0.00014515" iyy="0.00346181" iyz="-6.835e-05" izz="0.00394199"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/ankle_pitch_L_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.014425463037384678 -0.035848761272903706 -0.05027431354942169"/>
+      <geometry>
+        <box size="0.14 0.06 0.025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.11909570195246066 -0.06354314585176701 -0.07124"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.10049390971791083 -0.0038735829813696387 -0.07124"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.07502612984116563 -0.011635070405830783 -0.07123754260807935"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.07502612984116541 -0.06270942031820081 -0.07124"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.08472274114731804 -0.07904998982922917 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.03564470406430653 -0.07627499491461442 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.08472274114731826 0.007719774188539752 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.03564470406430653 0.0051139227977490265 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.12805773805226417 -0.0355 -0.06424607954803907"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.08868077416023412 -0.03550000000000009 -0.06424607954803907"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="ankle_pitch_L_Joint" type="revolute">
+    <origin xyz="0.004 0.06775 -0.35" rpy="0.0 0.0 0.0"/>
+    <parent link="knee_L_Link"/>
+    <child link="ankle_pitch_L_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-1.6231562043547265" upper="1.6231562043547265" effort="70.0" velocity="14.52"/>
+  </joint>
+
+  <!-- proximal pitch R Link -->
+  <link name="proximal_pitch_R_Link">
+    <inertial>
+      <origin xyz="-0.00547 -0.07014 -0.00611" rpy="-0.0 0.0 -0.0"/>
+      <mass value="2.21"/>
+      <inertia ixx="0.00438539" ixy="1.065e-05" ixz="1.817e-05" iyy="0.00308183" iyz="-5.213e-05" izz="0.00349504"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_pitch_R_Joint" type="revolute">
+    <origin xyz="-0.00044 -0.09178 0.05474" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="proximal_pitch_R_Link"/>
+    <axis xyz="0.0 0.9961947268929313 0.0871554135479712"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="200.0" velocity="12.3"/>
+  </joint>
+  <link name="proximal_roll_R_Link">
+    <inertial>
+      <origin xyz="0.03124 -0.00035 -0.08414" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.74"/>
+      <inertia ixx="0.00476933" ixy="1.172e-05" ixz="3.271e-05" iyy="0.00545584" iyz="2.946e-05" izz="0.00305316"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_roll_R_Joint" type="revolute">
+    <origin xyz="-0.032 -0.0758 -0.00663" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_pitch_R_Link"/>
+    <child link="proximal_roll_R_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-3.193952531149623" upper="0.2617993877991494" effort="200.0" velocity="12.3"/>
+  </joint>
+  <link name="proximal_yaw_R_Link">
+    <inertial>
+      <origin xyz="0.00254 0.00155 -0.10742" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.65"/>
+      <inertia ixx="0.01554314" ixy="3.32e-06" ixz="-0.00024638" iyy="0.01485362" iyz="7.569e-05" izz="0.00378004"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_yaw_R_Joint" type="revolute">
+    <origin xyz="0.032 -0.0 -0.1374" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_roll_R_Link"/>
+    <child link="proximal_yaw_R_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-4.625122517784973" upper="0.5235987755982988" effort="70.0" velocity="14.52"/>
+  </joint>
+  <link name="knee_R_Link">
+    <inertial>
+      <origin xyz="0.00204 -0.02953 -0.12112" rpy="-0.0 0.0 -0.0"/>
+      <mass value="4.5"/>
+      <inertia ixx="0.10084664" ixy="3.842e-05" ixz="0.00100648" iyy="0.10273037" iyz="-0.00292437" izz="0.00591261"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/knee_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/knee_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="knee_R_Joint" type="revolute">
+    <origin xyz="-0.004 0.032 -0.2126" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_yaw_R_Link"/>
+    <child link="knee_R_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.2617993877991494" upper="2.6179938779914944" effort="200.0" velocity="12.3"/>
+  </joint>
+  <link name="ankle_pitch_R_Link">
+    <inertial>
+      <origin xyz="0.01525 0.03542 -0.04668" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.02"/>
+      <inertia ixx="0.0014433" ixy="-3.545e-05" ixz="0.00014515" iyy="0.00346181" iyz="6.835e-05" izz="0.00394199"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/ankle_pitch_R_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.014425463037384678 0.035848761272903706 -0.05027431354942169"/>
+      <geometry>
+        <box size="0.14 0.06 0.025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.11909570195246066 0.06354314585176701 -0.07124"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.10049390971791083 0.0038735829813696387 -0.07124"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.07502612984116563 0.011635070405830783 -0.07123754260807935"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.07502612984116541 0.06270942031820081 -0.07124"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.08472274114731804 0.07904998982922917 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.03564470406430653 0.07627499491461442 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.08472274114731826 -0.007719774188539752 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.03564470406430653 -0.0051139227977490265 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.12805773805226417 0.0355 -0.06424607954803907"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.08868077416023412 0.03550000000000009 -0.06424607954803907"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="ankle_pitch_R_Joint" type="revolute">
+    <origin xyz="0.004 -0.06775 -0.35" rpy="-0.0 0.0 -0.0"/>
+    <parent link="knee_R_Link"/>
+    <child link="ankle_pitch_R_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-1.6231562043547265" upper="1.6231562043547265" effort="70.0" velocity="14.52"/>
+  </joint>
+
+  <!-- ===================== 转接件 (transition_resource) ===================== -->
+  <link name="transition_upper_Link">
+    <inertial>
+      <origin xyz="-7.1264e-07 -4.2963e-08 -9.482e-09" rpy="0 0 0"/>
+      <mass value="0.72114"/>
+      <inertia ixx="0.0018072" ixy="-2.3681e-06" ixz="-1.9503e-09" iyy="0.0025368" iyz="4.2231e-10" izz="0.0036695"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/transition_upper_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/transition_upper_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="transition_upper_Joint" type="fixed">
+    <origin xyz="-0.00267 0 0.29115" rpy="0 0 0"/>
+    <parent link="base_Link"/>
+    <child link="transition_upper_Link"/>
+  </joint>
+
+  <!-- ===================== 双臂+头 (DACH_TRON2A, 绕X轴旋转180度后挂在转接件上) ===================== -->
+  <link name="upper_base_Link">
+    <inertial>
+      <origin xyz="0.00385 0.00011 -0.11254" rpy="3.14159265358979 0 0"/>
+      <mass value="12.57"/>
+      <inertia ixx="0.11473868" ixy="1.726e-05" ixz="-0.00717502" iyy="0.13581253" iyz="8.123e-05" izz="0.10540873"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159265358979 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/upper_base_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="3.14159265358979 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/upper_base_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="upper_base_Joint" type="fixed">
+    <origin xyz="0.00267 0 0.29115" rpy="0 0 0"/>
+    <parent link="transition_upper_Link"/>
+    <child link="upper_base_Link"/>
+  </joint>
+
+  <!-- upper base imu (坐标系与 upper_base_Link 一致) -->
+  <link name="upper_base_imu">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+    </inertial>
+  </link>
+  <joint name="upper_base_imu_Joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="upper_base_Link"/>
+    <child link="upper_base_imu"/>
+  </joint>
+
+  <!-- Camera (随双臂模块一起翻转) -->
+  <link name="d435_U_Link">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.005 0.005 0.005"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="d435_U_Joint" type="fixed">
+    <origin xyz="0.0968 -0.01759 0.00409" rpy="3.14159265358979 -2.7227 0"/>
+    <parent link="upper_base_Link"/>
+    <child link="d435_U_Link"/>
+  </joint>
+
+  <link name="d435_optical_frame_U">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+  </link>
+  <joint name="d435_optical_U_Joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.5707963267948966 0 -1.5707963267948966"/>
+    <parent link="d435_U_Link"/>
+    <child link="d435_optical_frame_U"/>
+  </joint>
+
+  <!-- 左臂 -->
+  <link name="proximal_pitch_L_U_Link">
+    <inertial>
+      <origin xyz="-0.00547 0.07014 -0.00611" rpy="0.0 0.0 0.0"/>
+      <mass value="2.21"/>
+      <inertia ixx="0.00438539" ixy="-1.065e-05" ixz="1.817e-05" iyy="0.00308183" iyz="5.213e-05" izz="0.00349504"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_L_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_L_U_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_pitch_L_U_Joint" type="revolute">
+    <origin xyz="-0.00044 -0.09178 -0.05474" rpy="3.14159265358979 0 0"/>
+    <parent link="upper_base_Link"/>
+    <child link="proximal_pitch_L_U_Link"/>
+    <axis xyz="0.0 0.9961947268929313 -0.0871554135479712"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_roll_L_U_Link">
+    <inertial>
+      <origin xyz="0.03124 0.00035 -0.08414" rpy="0.0 0.0 0.0"/>
+      <mass value="1.74"/>
+      <inertia ixx="0.00476933" ixy="-1.172e-05" ixz="3.271e-05" iyy="0.00545584" iyz="-2.946e-05" izz="0.00305316"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_L_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_L_U_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_roll_L_U_Joint" type="revolute">
+    <origin xyz="-0.032 0.0758 -0.00663" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_pitch_L_U_Link"/>
+    <child link="proximal_roll_L_U_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-0.2617993877991494" upper="3.193952531149623" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_yaw_L_U_Link">
+    <inertial>
+      <origin xyz="-0.00428 0.00216 -0.09174" rpy="0.0 0.0 0.0"/>
+      <mass value="1.15"/>
+      <inertia ixx="0.0099418" ixy="6.47e-06" ixz="-2.5e-06" iyy="0.00955094" iyz="0.00020963" izz="0.00229701"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_L_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_L_U_Link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_yaw_L_U_Joint" type="revolute">
+    <origin xyz="0.032 0.0 -0.1374" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_roll_L_U_Link"/>
+    <child link="proximal_yaw_L_U_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-3.6651914291880923" upper="1.4835298641951802" effort="60.0" velocity="22.52"/>
+  </joint>
+  <link name="elbow_L_U_Link">
+    <inertial>
+      <origin xyz="-0.00061 -0.0264 -0.00455" rpy="0.0 0.0 0.0"/>
+      <mass value="1.11"/>
+      <inertia ixx="0.00127422" ixy="-6e-07" ixz="-2.815e-05" iyy="0.00150862" iyz="1.54e-05" izz="0.00107896"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/elbow_L_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/elbow_L_U_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="elbow_L_U_Joint" type="revolute">
+    <origin xyz="0.004 0.02972 -0.2126" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_yaw_L_U_Link"/>
+    <child link="elbow_L_U_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-2.6179938779914944" upper="0.5235987755982988" effort="70.0" velocity="22.52"/>
+  </joint>
+  <link name="wrist_yaw_L_U_Link">
+    <inertial>
+      <origin xyz="-0.00013 0.00206 -0.06635" rpy="0.0 0.0 0.0"/>
+      <mass value="1.15"/>
+      <inertia ixx="0.00312783" ixy="-1.87e-06" ixz="-5.07e-06" iyy="0.00297221" iyz="6.903e-05" izz="0.00104146"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_yaw_L_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_yaw_L_U_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_yaw_L_U_Joint" type="revolute">
+    <origin xyz="-0.004 -0.02972 -0.0685" rpy="0.0 0.0 0.0"/>
+    <parent link="elbow_L_U_Link"/>
+    <child link="wrist_yaw_L_U_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-1.7453292519943295" upper="1.3962634015954636" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="wrist_pitch_L_U_Link">
+    <inertial>
+      <origin xyz="0.00426 -0.0363 0.00013" rpy="0.0 0.0 0.0"/>
+      <mass value="0.44"/>
+      <inertia ixx="0.00022755" ixy="2.85e-06" ixz="-2.38e-06" iyy="0.00025709" iyz="-3e-08" izz="0.00025502"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_pitch_L_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_pitch_L_U_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_pitch_L_U_Joint" type="revolute">
+    <origin xyz="0.0 0.0367 -0.1743" rpy="0.0 0.0 0.0"/>
+    <parent link="wrist_yaw_L_U_Link"/>
+    <child link="wrist_pitch_L_U_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.7853981633974483" upper="0.7853981633974483" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="wrist_roll_L_U_Link">
+    <inertial>
+      <origin xyz="-0.02867 -0.00014 -0.04311" rpy="0.0 0.0 0.0"/>
+      <mass value="0.24"/>
+      <inertia ixx="0.00025857" ixy="5e-07" ixz="-8.01e-06" iyy="0.00036517" iyz="-4.6e-07" izz="0.00026664"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_roll_L_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_roll_L_U_Link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_roll_L_U_Joint" type="revolute">
+    <origin xyz="0.0317 -0.0367 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="wrist_pitch_L_U_Link"/>
+    <child link="wrist_roll_L_U_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-1.5707963267948966" upper="1.5707963267948966" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="grasper_L_U_Link">
+    <inertial>
+      <origin xyz="-0.00031 5e-05 -0.06329" rpy="0.0 0.0 0.0"/>
+      <mass value="0.53"/>
+      <inertia ixx="0.00094387" ixy="-7.4e-07" ixz="1.66e-06" iyy="0.00084405" iyz="-1.94e-06" izz="0.00034568"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/grasper_L_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/grasper_L_U_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="grasper_L_U_Joint" type="fixed">
+    <origin xyz="-0.0317 0.0 -0.0812" rpy="0.0 0.0 0.0"/>
+    <parent link="wrist_roll_L_U_Link"/>
+    <child link="grasper_L_U_Link"/>
+  </joint>
+
+  <!-- 右臂 -->
+  <link name="proximal_pitch_R_U_Link">
+    <inertial>
+      <origin xyz="-0.00547 -0.07014 -0.00611" rpy="-0.0 0.0 -0.0"/>
+      <mass value="2.21"/>
+      <inertia ixx="0.00438539" ixy="1.065e-05" ixz="1.817e-05" iyy="0.00308183" iyz="-5.213e-05" izz="0.00349504"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_R_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_R_U_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_pitch_R_U_Joint" type="revolute">
+    <origin xyz="-0.00044 0.09178 -0.05474" rpy="3.14159265358979 0 0"/>
+    <parent link="upper_base_Link"/>
+    <child link="proximal_pitch_R_U_Link"/>
+    <axis xyz="0.0 0.9961947268929313 0.0871554135479712"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_roll_R_U_Link">
+    <inertial>
+      <origin xyz="0.03124 -0.00035 -0.08414" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.74"/>
+      <inertia ixx="0.00476933" ixy="1.172e-05" ixz="3.271e-05" iyy="0.00545584" iyz="2.946e-05" izz="0.00305316"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_R_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_R_U_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_roll_R_U_Joint" type="revolute">
+    <origin xyz="-0.032 -0.0758 -0.00663" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_pitch_R_U_Link"/>
+    <child link="proximal_roll_R_U_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-3.193952531149623" upper="0.2617993877991494" effort="150.0" velocity="18.3"/>
+  </joint>
+  <link name="proximal_yaw_R_U_Link">
+    <inertial>
+      <origin xyz="-0.00428 -0.00216 -0.09174" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.15"/>
+      <inertia ixx="0.0099418" ixy="-6.47e-06" ixz="-2.5e-06" iyy="0.00955094" iyz="-0.00020963" izz="0.00229701"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_R_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_R_U_Link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_yaw_R_U_Joint" type="revolute">
+    <origin xyz="0.032 -0.0 -0.1374" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_roll_R_U_Link"/>
+    <child link="proximal_yaw_R_U_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-1.4835298641951802" upper="3.6651914291880923" effort="60.0" velocity="22.52"/>
+  </joint>
+  <link name="elbow_R_U_Link">
+    <inertial>
+      <origin xyz="-0.00061 0.0264 -0.00455" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.11"/>
+      <inertia ixx="0.00127422" ixy="6e-07" ixz="-2.815e-05" iyy="0.00150862" iyz="-1.54e-05" izz="0.00107896"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/elbow_R_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/elbow_R_U_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="elbow_R_U_Joint" type="revolute">
+    <origin xyz="0.004 -0.02972 -0.2126" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_yaw_R_U_Link"/>
+    <child link="elbow_R_U_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-2.6179938779914944" upper="0.5235987755982988" effort="70.0" velocity="22.52"/>
+  </joint>
+  <link name="wrist_yaw_R_U_Link">
+    <inertial>
+      <origin xyz="-0.00013 -0.00206 -0.06635" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.15"/>
+      <inertia ixx="0.00312783" ixy="1.87e-06" ixz="-5.07e-06" iyy="0.00297221" iyz="-6.903e-05" izz="0.00104146"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_yaw_R_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_yaw_R_U_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_yaw_R_U_Joint" type="revolute">
+    <origin xyz="-0.004 0.02972 -0.0685" rpy="-0.0 0.0 -0.0"/>
+    <parent link="elbow_R_U_Link"/>
+    <child link="wrist_yaw_R_U_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-1.3962634015954636" upper="1.7453292519943295" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="wrist_pitch_R_U_Link">
+    <inertial>
+      <origin xyz="0.00426 0.0363 0.00013" rpy="-0.0 0.0 -0.0"/>
+      <mass value="0.44"/>
+      <inertia ixx="0.00022755" ixy="-2.85e-06" ixz="-2.38e-06" iyy="0.00025709" iyz="3e-08" izz="0.00025502"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_pitch_R_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_pitch_R_U_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_pitch_R_U_Joint" type="revolute">
+    <origin xyz="0.0 -0.0367 -0.1743" rpy="-0.0 0.0 -0.0"/>
+    <parent link="wrist_yaw_R_U_Link"/>
+    <child link="wrist_pitch_R_U_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.7853981633974483" upper="0.7853981633974483" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="wrist_roll_R_U_Link">
+    <inertial>
+      <origin xyz="-0.02867 0.00014 -0.04311" rpy="-0.0 0.0 -0.0"/>
+      <mass value="0.24"/>
+      <inertia ixx="0.00025857" ixy="-5e-07" ixz="-8.01e-06" iyy="0.00036517" iyz="4.6e-07" izz="0.00026664"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_roll_R_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_roll_R_U_Link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_roll_R_U_Joint" type="revolute">
+    <origin xyz="0.0317 0.0367 0.0" rpy="-0.0 0.0 -0.0"/>
+    <parent link="wrist_pitch_R_U_Link"/>
+    <child link="wrist_roll_R_U_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-1.5707963267948966" upper="1.5707963267948966" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="grasper_R_U_Link">
+    <inertial>
+      <origin xyz="-0.00031 -5e-05 -0.06329" rpy="-0.0 0.0 -0.0"/>
+      <mass value="0.53"/>
+      <inertia ixx="0.00094387" ixy="7.4e-07" ixz="1.66e-06" iyy="0.00084405" iyz="1.94e-06" izz="0.00034568"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/grasper_R_U_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/grasper_R_U_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="grasper_R_U_Joint" type="fixed">
+    <origin xyz="-0.0317 -0.0 -0.0812" rpy="-0.0 0.0 -0.0"/>
+    <parent link="wrist_roll_R_U_Link"/>
+    <child link="grasper_R_U_Link"/>
+  </joint>
+
+  <!-- 头部 (不加后缀，相对 upper_base 的挂载采用半人马参考数值) -->
+  <link name="head_base_Link">
+    <inertial>
+      <origin xyz="-0.0094 0.0 0.0033" rpy="0.0 0.0 0.0"/>
+      <mass value="0.13"/>
+      <inertia ixx="0.00015008" ixy="1e-08" ixz="1.61e-06" iyy="9.86e-05" iyz="0.0" izz="0.00024625"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/head_base_Link.STL"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="head_base_Joint" type="fixed">
+    <origin xyz="0.04656 9e-05 0.018" rpy="0.0 0.0 0.0"/>
+    <parent link="upper_base_Link"/>
+    <child link="head_base_Link"/>
+  </joint>
+  <link name="head_yaw_Link">
+    <inertial>
+      <origin xyz="0.02452 0.00153 0.06142" rpy="0.0 0.0 0.0"/>
+      <mass value="0.84"/>
+      <inertia ixx="0.00150459" ixy="-3.09e-05" ixz="-0.00071408" iyy="0.00204199" iyz="-4.724e-05" izz="0.00101816"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/head_yaw_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/head_yaw_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="head_yaw_Joint" type="revolute">
+    <origin xyz="0.0 0.0 0.008" rpy="0.0 0.0 0.0"/>
+    <parent link="head_base_Link"/>
+    <child link="head_yaw_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-1.5707963267948966" upper="1.5707963267948966" effort="20.0" velocity="17.8"/>
+  </joint>
+  <link name="head_pitch_Link">
+    <inertial>
+      <origin xyz="0.00697 -0.03028 0.03063" rpy="0.0 0.0 0.0"/>
+      <mass value="0.61"/>
+      <inertia ixx="0.00145537" ixy="1.122e-05" ixz="1.582e-05" iyy="0.00171054" iyz="3.71e-06" izz="0.00235442"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/head_pitch_Link.STL"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/head_pitch_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="head_pitch_Joint" type="revolute">
+    <origin xyz="0.051 0.03 0.097" rpy="0.0 0.0 0.0"/>
+    <parent link="head_yaw_Link"/>
+    <child link="head_pitch_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.7853981633974483" upper="1.0471975511965976" effort="20.0" velocity="17.8"/>
+  </joint>
+
+  <!-- Gazebo (ROS2) plugins + ros2_control -->
+  <xacro:ros2_gazebo_all />
+
+</robot>

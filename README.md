@@ -5,7 +5,6 @@
   SPDX-License-Identifier: Apache-2.0
 -->
 
-
 > **Distribution:** the primary open-source copy of this repository is
 > hosted at
 > [`github.com/limx-tron2/robot-description`](https://github.com/limx-tron2/robot-description).
@@ -32,7 +31,7 @@ This project is licensed under the **Apache License, Version 2.0** (January 2004
 
 **Included** in this repository:
 
-- URDF and xacro sources for six TRON2A variants (`DA`, `DACH`, `WF`, `SF`, `WFYG`, `SFYG`).
+- URDF and xacro sources for eight TRON2A variants (`DA`, `DACH`, `WF`, `SF`, `WFYG`, `SFYG`, `DASF`, `DASF2`).
 - MuJoCo XML models with IMU sites for each variant.
 - Binary STL meshes (visual + collision).
 - USD assets for Isaac Sim / Omniverse workflows.
@@ -51,7 +50,7 @@ For the deployment stack, model weights, and SDK, see the sibling repositories i
 
 ## Repository layout
 
-Each hardware/software configuration lives under `tron2/<VARIANT>/`:
+Each hardware/software configuration lives under `tron2a/<VARIANT>/`:
 
 | Path | Contents |
 |------|-----------|
@@ -87,8 +86,10 @@ Coordinate conventions follow typical ROS usage unless stated otherwise in your 
 | `SF_TRON2A` | **Sole Ankle** leg design (no wheel); torso IMU. |
 | `WFYG_TRON2A` | WF base plus **upper-body peripherals** (arms, grippers, mast-mounted structures). |
 | `SFYG_TRON2A` | SF base plus the same **upper-body peripheral** stack as `WFYG_TRON2A`. |
+| `DASF_TRON2A` | **Top-bottom combined humanoid** — `SF` ankle-pitch legs joined to a `DACH` dual-arm + 2-DoF head upper body via `transition_upper_Link`. |
+| `DASF2_TRON2A` | **Centaur-style** variant — two `SF`-style leg pairs (front `_F` and back `_B`) under a `DACH` dual-arm + head upper body. |
 
-The suffix **YG** denotes the richer upper-body / mast peripheral layout (arms, hands, and accessory links—see below).
+The suffix **YG** denotes the richer upper-body / mast peripheral layout (arms, hands, and accessory links—see below). The **DASF** / **DASF2** variants combine previously separate lower-body (`SF`) and upper-body (`DACH`) descriptions into a single stacked (“上下拼接”) humanoid, each with its own IMU per body segment.
 
 ---
 
@@ -104,6 +105,8 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 | `SF_TRON2A` | Yes — same pattern as WF | Yes — same D435 Gazebo block as WF | — | |
 | `WFYG_TRON2A` | Yes | Yes — same chest D435 as WF | **URDF (meshes / kinematics):** `transition_Link` (转接件), `camera_mount_Link`, `radar_Link`, `antenna_L_Link`, `antenna_R_Link`. **Physical hardware** (on `transition_Link`): LiDAR **RoboSense Fairy96** (速腾 Fairy96); dual arms **AgileX Piper X** (松灵 PiperX); RTK **Huace M722** (华测 M722); compute **NVIDIA Jetson Orin NX**. **Simulation note:** URDF provides geometry/collision only; **no** Gazebo radar/RF sensor plugins in this package. | |
 | `SFYG_TRON2A` | Yes | Yes | **Same YG stack as `WFYG_TRON2A`** — same URDF link set, same hardware (Fairy96, Piper X, M722, Orin NX on `transition_Link`) and the same simulation caveats. |  |
+| `DASF_TRON2A` | Two — lower body `base_imu`, upper body `upper_base_imu` | Yes — `d435_U_Link` + `d435_optical_frame_U` on the upper body | — | Stacked `SF` legs + `DACH` arms/head joined at `transition_upper_Link`; MuJoCo IMU sensors on both `base_imu` and `upper_base_imu` sites. |
+| `DASF2_TRON2A` | Three — `limx_F_imu` (front legs), `limx_B_imu` (back legs), `limx_H_imu` (head/upper body) | Yes — `d435_F_Link`, `d435_B_Link`, `d435_H_Link` (front / back / head cameras) | — | Centaur-style: two `SF`-style leg pairs (`transition_middle_Link` to front legs, direct to back legs) plus `DACH` upper body via `transition_upper_Link`. |
 
 **Legend:** “RGB-D / depth” follows the Intel RealSense **D435**-style optical frame and Gazebo `depth` sensor naming (`d435_camera_sensor`) where present. Add your own drivers or Gazebo plugins if you need simulated radar or extra cameras.
 
@@ -118,7 +121,7 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 - **Summary:** Biped with **dual arms** and **parallel grippers**; suitable for manipulation-focused simulation and control development.
 - **Root / IMU:** URDF exposes link `base_imu` fixed to `base_Link` at the torso IMU origin. MuJoCo uses site `base_imu` on the floating root with quaternion, gyro, and accelerometer sensors.
 - **End effectors:** Left / right arms terminate in parallel-gripper links `grasper_L_Link` / `grasper_R_Link` (fixed in the default `robot.urdf`). A chest-mounted RealSense **D435** is modeled as `d435_Link` + `d435_optical_frame`.
-- **Typical paths:** `tron2/DA_TRON2A/urdf/robot.urdf`, `tron2/DA_TRON2A/xml/robot.xml`.
+- **Typical paths:** `tron2a/DA_TRON2A/urdf/robot.urdf`, `tron2a/DA_TRON2A/xml/robot.xml`.
 
 ### DACH_TRON2A
 
@@ -126,7 +129,7 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 
 - **Summary:** Same dual-arm stack as **DA**, plus a **2-DoF head** (`head_yaw_Joint`, `head_pitch_Joint`) for perception.
 - **Root / IMU:** Same IMU modeling pattern as DA (URDF link `base_imu`; MuJoCo site `base_imu` with orientation / gyro / accel sensors).
-- **Typical paths:** `tron2/DACH_TRON2A/urdf/robot.urdf`, `tron2/DACH_TRON2A/xml/robot.xml` (USD under `tron2/DACH_TRON2A/usd/`; meshes under `tron2/DACH_TRON2A/meshes/`).
+- **Typical paths:** `tron2a/DACH_TRON2A/urdf/robot.urdf`, `tron2a/DACH_TRON2A/xml/robot.xml` (USD under `tron2a/DACH_TRON2A/usd/`; meshes under `tron2a/DACH_TRON2A/meshes/`).
 
 ### WF_TRON2A
 
@@ -134,7 +137,7 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 
 - **Summary:** Locomotion-oriented variant with **powered wheels** at the ankles (`wheel_L_Link` / `wheel_R_Link`) and knee joints (`knee_*`).
 - **Root / IMU:** URDF link `base_imu` fixed to `base_Link`; MuJoCo exposes `base_imu` sensors (orientation, gyro, accelerometer) tied to that site.
-- **Typical paths:** `tron2/WF_TRON2A/urdf/robot.urdf`, `tron2/WF_TRON2A/xml/robot.xml`.
+- **Typical paths:** `tron2a/WF_TRON2A/urdf/robot.urdf`, `tron2a/WF_TRON2A/xml/robot.xml`.
 
 ### SF_TRON2A
 
@@ -146,7 +149,7 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 | --- | --- |
 | <img src="docs/images/SF_0.jpg" alt="SF zero position" width="300" /> | <img src="docs/images/SF_1.jpg" alt="SF knees-forward pose" width="300" /> |
 
-- **Typical paths:** `tron2/SF_TRON2A/urdf/robot.urdf`, `tron2/SF_TRON2A/xml/robot.xml`.
+- **Typical paths:** `tron2a/SF_TRON2A/urdf/robot.urdf`, `tron2a/SF_TRON2A/xml/robot.xml`.
 
 ### WFYG_TRON2A (for ATEC)
 
@@ -156,7 +159,7 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 - **Root / IMU:** Same torso IMU pattern as WF (`base_imu` in URDF; MuJoCo IMU sensors on `base_imu`).
 - **Hardware / mast:** Physical LiDAR, arms, RTK, compute, and mount frames are listed in [External sensors by variant](#external-sensors-by-variant); URDF uses meshes/links only unless Gazebo plugins are added locally.
 - **Manipulation frame:** A fixed `gripper_pick` body in the MuJoCo model (`xml/robot.xml`) marks the gripper pick point for grasp planning.
-- **Typical paths:** `tron2/WFYG_TRON2A/urdf/robot.urdf`, `tron2/WFYG_TRON2A/xml/robot.xml`.
+- **Typical paths:** `tron2a/WFYG_TRON2A/urdf/robot.urdf`, `tron2a/WFYG_TRON2A/xml/robot.xml`.
 
 ### SFYG_TRON2A (for ATEC)
 
@@ -170,13 +173,33 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 - **Root / IMU:** Same as SF/WF YG variants (`base_imu` / MuJoCo IMU block).
 - **Hardware / mast:** Same as WFYG — see [External sensors by variant](#external-sensors-by-variant).
 - **Manipulation frame:** Same `gripper_pick` pick-point body as WFYG in the MuJoCo model (`xml/robot.xml`).
-- **Typical paths:** `tron2/SFYG_TRON2A/urdf/robot.urdf`, `tron2/SFYG_TRON2A/xml/robot.xml`.
+- **Typical paths:** `tron2a/SFYG_TRON2A/urdf/robot.urdf`, `tron2a/SFYG_TRON2A/xml/robot.xml`.
+
+### DASF_TRON2A
+
+<img src="docs/images/DASF.jpg" alt="DASF_TRON2A overview — top-bottom combined humanoid" width="360" />
+
+- **Summary:** **Top-bottom combined (“上下拼接”) humanoid** — the `SF_TRON2A` ankle-pitch legs joined to the `DACH_TRON2A` dual-arm + 2-DoF head upper body via a fixed `transition_upper_Link`, giving a single full-height biped with arms and a head.
+- **Root / IMU:** **Two IMU sites**, one per body segment — lower body `base_imu` (on `base_Link`) and upper body `upper_base_imu` (on `upper_base_Link`). MuJoCo exposes quaternion / gyro / accelerometer sensors at both sites.
+- **End effectors / perception:** Left / right arms terminate in `grasper_L_U_Link` / `grasper_R_U_Link`; a RealSense **D435**-style camera is modeled on the upper body as `d435_U_Link` + `d435_optical_frame_U`; head is 2-DoF (`head_yaw_Joint`, `head_pitch_Joint`).
+- **Zero position vs control (knees-forward):** Same **SF** leg convention applies to the lower body — see [SF_TRON2A](#sf_tron2a) for the knees-forward 180° hip-yaw offset (`proximal_yaw_L_Joint` / `proximal_yaw_R_Joint`).
+- **Typical paths:** `tron2a/DASF_TRON2A/urdf/robot_rl.urdf` (no plain `robot.urdf` variant is shipped for this model — use `robot_rl.urdf` or `robot_zeromass_graser.urdf`), `tron2a/DASF_TRON2A/xml/robot.xml`.
+
+### DASF2_TRON2A
+
+<img src="docs/images/DASF2.jpg" alt="DASF2_TRON2A overview — centaur-style variant" width="360" />
+
+- **Summary:** **Centaur-style** variant — two `SF`-style leg pairs (front `_F`, back `_B`) mounted under a `DACH_TRON2A` dual-arm + 2-DoF head upper body. Kinematic chain: `base_Link` → `front_base_Link` (front legs) → `transition_middle_Link` → `back_base_Link` (back legs); the upper body hangs off `front_base_Link` via `transition_upper_Link`.
+- **Root / IMU:** **Three IMU sites** — `limx_F_imu` (front legs), `limx_B_imu` (back legs), `limx_H_imu` (head/upper body); MuJoCo exposes IMU sensors at all three.
+- **End effectors / perception:** Dual-arm grippers `grasper_L_Link` / `grasper_R_Link`; three RealSense **D435**-style cameras (`d435_F_Link`, `d435_B_Link`, `d435_H_Link` — front, back, and head).
+- **Zero position vs control (knees-forward):** The same **180° hip-yaw** convention as `SF_TRON2A` applies independently to both leg pairs — `proximal_yaw_{L,R}_F_Joint` for the front legs and `proximal_yaw_{L,R}_B_Joint` for the back legs.
+- **Typical paths:** `tron2a/DASF2_TRON2A/urdf/robot.urdf`, `tron2a/DASF2_TRON2A/xml/robot.xml`.
 
 ---
 
 ## ROS packages
 
-The catkin / colcon package manifest is [`package.xml`](package.xml). The ROS package name is **`robot_description`**. Install the `tron2` asset tree into your workspace share directory via the provided [`CMakeLists.txt`](CMakeLists.txt).
+The catkin / colcon package manifest is [`package.xml`](package.xml). The ROS package name is **`robot_description`**. Install the `tron2a` asset tree into your workspace share directory via the provided [`CMakeLists.txt`](CMakeLists.txt).
 
 **ROS 1 (Noetic):**
 
@@ -198,7 +221,7 @@ colcon build --packages-select robot_description
 source install/setup.bash
 ```
 
-Assets install to `$(ros2 pkg prefix robot_description)/share/robot_description/tron2/<VARIANT>/`.
+Assets install to `$(ros2 pkg prefix robot_description)/share/robot_description/tron2a/<VARIANT>/`.
 
 ---
 
@@ -208,27 +231,27 @@ The commands below are the same ones CI runs (see [`.github/workflows/ci.yml`](.
 
 ```bash
 # 1. URDF well-formed
-for u in tron2/*/urdf/*.urdf; do check_urdf "$u"; done
+for u in tron2a/*/urdf/*.urdf; do check_urdf "$u"; done
 
 # 2. MuJoCo can load every XML
 pip install "mujoco>=2.3"
-for x in tron2/*/xml/*.xml; do
+for x in tron2a/*/xml/*.xml; do
   python -c "import mujoco, sys; mujoco.MjModel.from_xml_path(sys.argv[1])" "$x"
 done
 
 # 3. xacro expands cleanly
 pip install xacro
-for x in tron2/*/xacro/robot.xacro; do xacro "$x" > /dev/null; done
+for x in tron2a/*/xacro/robot.xacro; do xacro "$x" > /dev/null; done
 
 # 4. Generic XML sanity
-xmllint --noout tron2/*/urdf/*.urdf tron2/*/xml/*.xml
+xmllint --noout tron2a/*/urdf/*.urdf tron2a/*/xml/*.xml
 ```
 
 Preview a variant in Rviz:
 
 ```bash
 ros2 launch urdf_tutorial display.launch.py \
-  model:=$(ros2 pkg prefix robot_description)/share/robot_description/tron2/WF_TRON2A/urdf/robot.urdf
+  model:=$(ros2 pkg prefix robot_description)/share/robot_description/tron2a/WF_TRON2A/urdf/robot.urdf
 ```
 
 ---

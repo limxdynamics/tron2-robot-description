@@ -30,7 +30,7 @@
 
 **本仓库包含**：
 
-- 六个 TRON2A 型号（`DA`、`DACH`、`WF`、`SF`、`WFYG`、`SFYG`）的 URDF 与 xacro 源文件。
+- 八个 TRON2A 型号（`DA`、`DACH`、`WF`、`SF`、`WFYG`、`SFYG`、`DASF`、`DASF2`）的 URDF 与 xacro 源文件。
 - 各型号带 IMU site 的 MuJoCo XML 模型。
 - 二进制 STL 网格（视觉 + 碰撞）。
 - 用于 Isaac Sim / Omniverse 工作流的 USD 资产。
@@ -49,7 +49,7 @@
 
 ## 仓库结构（Repository layout）
 
-每种硬件 / 软件配置位于 `tron2/<VARIANT>/` 目录下：
+每种硬件 / 软件配置位于 `tron2a/<VARIANT>/` 目录下：
 
 | 路径 | 内容 |
 |------|-----------|
@@ -85,8 +85,10 @@
 | `SF_TRON2A` | **实心足踝**（Sole Ankle）腿部设计（无轮）；躯干 IMU。 |
 | `WFYG_TRON2A` | WF 基础上加装 **上肢外设**（手臂、夹爪、塔杆挂载结构）。 |
 | `SFYG_TRON2A` | SF 基础上加装与 `WFYG_TRON2A` 相同的 **上肢外设** 组件。 |
+| `DASF_TRON2A` | **上下拼接人形** — 将 `SF_TRON2A` 的踝俯仰腿部通过 `transition_upper_Link` 与 `DACH_TRON2A` 的双臂 + 2 自由度头部上半身拼接为一体。 |
+| `DASF2_TRON2A` | **半人马（centaur）式** 型号 — 两组 `SF` 式腿部（前腿 `_F`、后腿 `_B`）加装 `DACH` 双臂 + 头部上半身。 |
 
-后缀 **YG** 表示更丰富的上肢 / 塔杆外设布局（手臂、机械手及附属链接—详见下文）。
+后缀 **YG** 表示更丰富的上肢 / 塔杆外设布局（手臂、机械手及附属链接—详见下文）。**DASF** / **DASF2** 型号将此前独立的下半身（`SF`）与上半身（`DACH`）描述拼接为单一的“上下拼接”人形，每个身体分段各自拥有独立的 IMU。
 
 ---
 
@@ -102,6 +104,8 @@
 | `SF_TRON2A` | 有 — 与 WF 相同 | 有 — 与 WF 相同的 D435 Gazebo 配置 | — | |
 | `WFYG_TRON2A` | 有 | 有 — 与 WF 相同的胸前 D435 | **URDF（网格 / 运动学）：** `transition_Link`（转接件）、`camera_mount_Link`、`radar_Link`、`antenna_L_Link`、`antenna_R_Link`。**实物硬件**（安装在 `transition_Link` 上）：LiDAR **RoboSense Fairy96**（速腾 Fairy96）；双臂 **AgileX Piper X**（松灵 PiperX）；RTK **Huace M722**（华测 M722）；计算单元 **NVIDIA Jetson Orin NX**。**仿真说明：** URDF 仅提供几何 / 碰撞；本包 **不** 提供 Gazebo 雷达 / RF 传感器插件。 | |
 | `SFYG_TRON2A` | 有 | 有 | **与 `WFYG_TRON2A` 相同的 YG 组件** — 相同的 URDF 链接集合、相同的实物硬件（`transition_Link` 上的 Fairy96、Piper X、M722、Orin NX），以及相同的仿真注意事项。 |  |
+| `DASF_TRON2A` | 两个 — 下半身 `base_imu`、上半身 `upper_base_imu` | 有 — 上半身 `d435_U_Link` + `d435_optical_frame_U` | — | `SF` 腿部 + `DACH` 手臂/头部通过 `transition_upper_Link` 拼接；MuJoCo 在 `base_imu` 与 `upper_base_imu` 两个 site 上均提供 IMU 传感器。 |
+| `DASF2_TRON2A` | 三个 — `limx_F_imu`（前腿）、`limx_B_imu`（后腿）、`limx_H_imu`（头部/上半身） | 有 — `d435_F_Link`、`d435_B_Link`、`d435_H_Link`（前 / 后 / 头部相机） | — | 半人马式：两组 `SF` 式腿部（`transition_middle_Link` 连接前后腿）加上通过 `transition_upper_Link` 挂载的 `DACH` 上半身。 |
 
 **图例：** “RGB-D / depth” 沿用 Intel RealSense **D435** 风格的光学坐标系与 Gazebo `depth` 传感器命名（如存在，为 `d435_camera_sensor`）。如需仿真雷达或额外相机，请自行添加驱动或 Gazebo 插件。
 
@@ -116,7 +120,7 @@
 - **简介：** 双足机器人，配 **双臂** 与 **平行夹爪**；适用于面向操作的仿真与控制开发。
 - **根节点 / IMU：** URDF 中链接 `base_imu` 固定于 `base_Link`，对齐躯干 IMU 原点。MuJoCo 在浮动根上使用 site `base_imu`，提供四元数、陀螺与加速度计传感器。
 - **末端执行器：** 左 / 右臂末端为平行夹爪链接 `grasper_L_Link` / `grasper_R_Link`（在默认 `robot.urdf` 中固定连接）。胸前挂载的 RealSense **D435** 建模为 `d435_Link` + `d435_optical_frame`。
-- **典型路径：** `tron2/DA_TRON2A/urdf/robot.urdf`、`tron2/DA_TRON2A/xml/robot.xml`。
+- **典型路径：** `tron2a/DA_TRON2A/urdf/robot.urdf`、`tron2a/DA_TRON2A/xml/robot.xml`。
 
 ### DACH_TRON2A
 
@@ -124,7 +128,7 @@
 
 - **简介：** 与 **DA** 相同的双臂组件，另外配备 **2 自由度头部**（`head_yaw_Joint`、`head_pitch_Joint`）用于感知。
 - **根节点 / IMU：** IMU 建模方式与 DA 相同（URDF 链接 `base_imu`；MuJoCo site `base_imu`，含姿态 / 陀螺 / 加速度传感器）。
-- **典型路径：** `tron2/DACH_TRON2A/urdf/robot.urdf`、`tron2/DACH_TRON2A/xml/robot.xml`（USD 位于 `tron2/DACH_TRON2A/usd/`；网格位于 `tron2/DACH_TRON2A/meshes/`）。
+- **典型路径：** `tron2a/DACH_TRON2A/urdf/robot.urdf`、`tron2a/DACH_TRON2A/xml/robot.xml`（USD 位于 `tron2a/DACH_TRON2A/usd/`；网格位于 `tron2a/DACH_TRON2A/meshes/`）。
 
 ### WF_TRON2A
 
@@ -132,7 +136,7 @@
 
 - **简介：** 面向移动能力的型号，踝部配 **驱动轮**（`wheel_L_Link` / `wheel_R_Link`），并带膝关节（`knee_*`）。
 - **根节点 / IMU：** URDF 链接 `base_imu` 固定于 `base_Link`；MuJoCo 在该 site 上暴露 `base_imu` 传感器（姿态、陀螺、加速度计）。
-- **典型路径：** `tron2/WF_TRON2A/urdf/robot.urdf`、`tron2/WF_TRON2A/xml/robot.xml`。
+- **典型路径：** `tron2a/WF_TRON2A/urdf/robot.urdf`、`tron2a/WF_TRON2A/xml/robot.xml`。
 
 ### SF_TRON2A
 
@@ -144,7 +148,7 @@
 | --- | --- |
 | <img src="docs/images/SF_0.jpg" alt="SF zero position" width="300" /> | <img src="docs/images/SF_1.jpg" alt="SF knees-forward pose" width="300" /> |
 
-- **典型路径：** `tron2/SF_TRON2A/urdf/robot.urdf`、`tron2/SF_TRON2A/xml/robot.xml`。
+- **典型路径：** `tron2a/SF_TRON2A/urdf/robot.urdf`、`tron2a/SF_TRON2A/xml/robot.xml`。
 
 ### WFYG_TRON2A (for ATEC)
 
@@ -154,7 +158,7 @@
 - **根节点 / IMU：** 与 WF 相同的躯干 IMU 布局（URDF 中的 `base_imu`；MuJoCo 在 `base_imu` 上的 IMU 传感器）。
 - **硬件 / 塔杆：** 实物 LiDAR、机械臂、RTK、计算单元与安装坐标系详见 [各型号外部传感器](#各型号外部传感器external-sensors-by-variant)；URDF 仅使用网格 / 链接，除非你在本地增补 Gazebo 插件。
 - **操作坐标系：** MuJoCo 模型（`xml/robot.xml`）中提供一个固定的 `gripper_pick` 刚体，用作抓取规划的夹爪拾取点。
-- **典型路径：** `tron2/WFYG_TRON2A/urdf/robot.urdf`、`tron2/WFYG_TRON2A/xml/robot.xml`。
+- **典型路径：** `tron2a/WFYG_TRON2A/urdf/robot.urdf`、`tron2a/WFYG_TRON2A/xml/robot.xml`。
 
 ### SFYG_TRON2A (for ATEC)
 
@@ -168,13 +172,33 @@
 - **根节点 / IMU：** 与其他 SF/WF YG 型号相同（`base_imu` / MuJoCo IMU 块）。
 - **硬件 / 塔杆：** 与 WFYG 相同 —— 详见 [各型号外部传感器](#各型号外部传感器external-sensors-by-variant)。
 - **操作坐标系：** MuJoCo 模型（`xml/robot.xml`）中与 WFYG 一致的 `gripper_pick` 拾取点刚体。
-- **典型路径：** `tron2/SFYG_TRON2A/urdf/robot.urdf`、`tron2/SFYG_TRON2A/xml/robot.xml`。
+- **典型路径：** `tron2a/SFYG_TRON2A/urdf/robot.urdf`、`tron2a/SFYG_TRON2A/xml/robot.xml`。
+
+### DASF_TRON2A
+
+<img src="docs/images/DASF.jpg" alt="DASF_TRON2A 概览 — 上下拼接人形" width="360" />
+
+- **简介：** **上下拼接人形** —— 将 `SF_TRON2A` 的踝俯仰腿部通过固定连接 `transition_upper_Link` 与 `DACH_TRON2A` 的双臂 + 2 自由度头部上半身拼接为一体，形成一个具备手臂与头部的全身双足人形。
+- **根节点 / IMU：** **两个 IMU site**，每个身体分段各一个 —— 下半身 `base_imu`（位于 `base_Link`）与上半身 `upper_base_imu`（位于 `upper_base_Link`）。MuJoCo 在两个 site 上均提供四元数 / 陀螺 / 加速度计传感器。
+- **末端执行器 / 感知：** 左右臂末端为 `grasper_L_U_Link` / `grasper_R_U_Link`；上半身建模了一个 RealSense **D435** 风格相机，即 `d435_U_Link` + `d435_optical_frame_U`；头部为 2 自由度（`head_yaw_Joint`、`head_pitch_Joint`）。
+- **零位与控制姿态（膝盖前倾）：** 下半身沿用与 **SF** 相同的腿部约定 —— 参见 [SF_TRON2A](#sf_tron2a) 中关于膝盖前倾（180° 髋偏航偏置，`proximal_yaw_L_Joint` / `proximal_yaw_R_Joint`）的说明。
+- **典型路径：** `tron2a/DASF_TRON2A/urdf/robot_rl.urdf`（本型号未提供普通的 `robot.urdf`，请使用 `robot_rl.urdf` 或 `robot_zeromass_graser.urdf`）、`tron2a/DASF_TRON2A/xml/robot.xml`。
+
+### DASF2_TRON2A
+
+<img src="docs/images/DASF2.jpg" alt="DASF2_TRON2A 概览 — 半人马式型号" width="360" />
+
+- **简介：** **半人马（centaur）式** 型号 —— 两组 `SF` 式腿部（前腿 `_F`、后腿 `_B`）搭载于 `DACH_TRON2A` 双臂 + 2 自由度头部上半身之下。运动学链：`base_Link` → `front_base_Link`（前腿）→ `transition_middle_Link` → `back_base_Link`（后腿）；上半身通过 `transition_upper_Link` 挂载在 `front_base_Link` 上。
+- **根节点 / IMU：** **三个 IMU site** —— `limx_F_imu`（前腿）、`limx_B_imu`（后腿）、`limx_H_imu`（头部/上半身）；MuJoCo 在三个 site 上均提供 IMU 传感器。
+- **末端执行器 / 感知：** 双臂夹爪 `grasper_L_Link` / `grasper_R_Link`；三个 RealSense **D435** 风格相机（`d435_F_Link`、`d435_B_Link`、`d435_H_Link` —— 分别位于前、后与头部）。
+- **零位与控制姿态（膝盖前倾）：** 与 `SF_TRON2A` 相同的 **180° 髋偏航** 约定分别独立适用于两组腿 —— 前腿为 `proximal_yaw_{L,R}_F_Joint`，后腿为 `proximal_yaw_{L,R}_B_Joint`。
+- **典型路径：** `tron2a/DASF2_TRON2A/urdf/robot.urdf`、`tron2a/DASF2_TRON2A/xml/robot.xml`。
 
 ---
 
 ## ROS 包（ROS packages）
 
-catkin / colcon 的包清单为 [`package.xml`](package.xml)。ROS 包名为 **`robot_description`**。通过提供的 [`CMakeLists.txt`](CMakeLists.txt) 将 `tron2` 资产树安装到工作空间的 share 目录。
+catkin / colcon 的包清单为 [`package.xml`](package.xml)。ROS 包名为 **`robot_description`**。通过提供的 [`CMakeLists.txt`](CMakeLists.txt) 将 `tron2a` 资产树安装到工作空间的 share 目录。
 
 **ROS 1（Noetic）：**
 
@@ -196,7 +220,7 @@ colcon build --packages-select robot_description
 source install/setup.bash
 ```
 
-资产将安装至 `$(ros2 pkg prefix robot_description)/share/robot_description/tron2/<VARIANT>/`。
+资产将安装至 `$(ros2 pkg prefix robot_description)/share/robot_description/tron2a/<VARIANT>/`。
 
 ---
 
@@ -206,27 +230,27 @@ source install/setup.bash
 
 ```bash
 # 1. URDF well-formed
-for u in tron2/*/urdf/*.urdf; do check_urdf "$u"; done
+for u in tron2a/*/urdf/*.urdf; do check_urdf "$u"; done
 
 # 2. MuJoCo can load every XML
 pip install "mujoco>=2.3"
-for x in tron2/*/xml/*.xml; do
+for x in tron2a/*/xml/*.xml; do
   python -c "import mujoco, sys; mujoco.MjModel.from_xml_path(sys.argv[1])" "$x"
 done
 
 # 3. xacro expands cleanly
 pip install xacro
-for x in tron2/*/xacro/robot.xacro; do xacro "$x" > /dev/null; done
+for x in tron2a/*/xacro/robot.xacro; do xacro "$x" > /dev/null; done
 
 # 4. Generic XML sanity
-xmllint --noout tron2/*/urdf/*.urdf tron2/*/xml/*.xml
+xmllint --noout tron2a/*/urdf/*.urdf tron2a/*/xml/*.xml
 ```
 
 在 Rviz 中预览某个型号：
 
 ```bash
 ros2 launch urdf_tutorial display.launch.py \
-  model:=$(ros2 pkg prefix robot_description)/share/robot_description/tron2/WF_TRON2A/urdf/robot.urdf
+  model:=$(ros2 pkg prefix robot_description)/share/robot_description/tron2a/WF_TRON2A/urdf/robot.urdf
 ```
 
 ---

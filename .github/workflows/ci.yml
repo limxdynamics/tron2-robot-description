@@ -21,7 +21,7 @@ jobs:
       - name: XML well-formedness (URDF + MuJoCo)
         run: |
           sudo apt-get update && sudo apt-get install -y libxml2-utils
-          xmllint --noout tron2/*/urdf/*.urdf tron2/*/xml/*.xml
+          xmllint --noout tron2a/*/urdf/*.urdf tron2a/*/xml/*.xml
 
       - name: STL header sanity (binary format, no internal paths)
         run: |
@@ -39,7 +39,7 @@ jobs:
       - name: USD metadata scan
         run: |
           set -e
-          if grep -rE '(customLayerData|comment = "|"author"|"owner"|"copyright")' tron2/*/usd/*.usd; then
+          if grep -rE '(customLayerData|comment = "|"author"|"owner"|"copyright")' tron2a/*/usd/*.usd; then
             echo "::error::USD files contain unreviewed metadata; strip or approve before merge"
             exit 1
           fi
@@ -89,7 +89,7 @@ jobs:
       - name: Validate every URDF
         run: |
           set -e
-          for u in tron2/*/urdf/*.urdf; do
+          for u in tron2a/*/urdf/*.urdf; do
             echo "── check_urdf $u"
             check_urdf "$u"
           done
@@ -107,7 +107,7 @@ jobs:
         run: |
           set -e
           shopt -s nullglob
-          for x in tron2/*/xacro/robot.xacro; do
+          for x in tron2a/*/xacro/robot.xacro; do
             echo "── xacro $x"
             xacro "$x" > /dev/null
           done
@@ -124,7 +124,7 @@ jobs:
       - name: Load every MuJoCo XML
         run: |
           set -e
-          for x in tron2/*/xml/*.xml; do
+          for x in tron2a/*/xml/*.xml; do
             echo "── mujoco load $x"
             python -c "import mujoco, sys; mujoco.MjModel.from_xml_path(sys.argv[1])" "$x"
           done

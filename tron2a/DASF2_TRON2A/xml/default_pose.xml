@@ -1,0 +1,19 @@
+<mujoco model="DASF2_TRON2A_default_pose">
+  <!-- Wrapper over robot.xml: adds an initial pose as a keyframe.
+       Joint angles (radian; robot.xml compiler is angle="radian"):
+         proximal_pitch_L_F_Joint =  pi/2  ( 90 deg)
+         proximal_pitch_R_F_Joint =  pi/2  ( 90 deg)
+         proximal_pitch_L_B_Joint =  pi/2  ( 90 deg)
+         proximal_pitch_R_B_Joint =  pi/2  ( 90 deg)
+         proximal_yaw_L_F_Joint   = -3.14  (~180 deg)
+         proximal_yaw_R_F_Joint   =  3.14  (~180 deg)
+       All other joints = 0; free base kept at default (pos 0 0 0.78081, quat 1 0 0 0).
+       keyframe qpos is the FULL nq=43 vector: 7 (free base) + 36 (hinge joints).
+       Load this file (not robot.xml) to get the pose; apply with
+       mj_resetDataKeyframe(m, d, 0) or data.qpos = model.key_qpos[0]. -->
+  <include file="robot.xml"/>
+  <keyframe>
+    <key name="default_pose"
+         qpos="0 0 0.78081 1 0 0 0 1.570796326794897 0 -3.14 0 0 1.570796326794897 0 3.14 0 0 1.570796326794897 0 0 0 0 1.570796326794897 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
+  </keyframe>
+</mujoco>
