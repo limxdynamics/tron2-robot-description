@@ -40,6 +40,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Confirmation that the "factory-calibrated zero" description and the
   180° hip-yaw "knees-forward" note are cleared for public release.
 
+## [1.3.0] — TBD
+
+### Added
+- `README.md` / `README_zh-CN.md`: new `DASF_TRON2A` and `DASF2_TRON2A`
+  Models subsections, plus "Variant overview" and "External sensors by
+  variant" table rows for both — `DASF_TRON2A` is a top-bottom combined
+  humanoid (`SF` legs + `DACH` dual-arm/head upper body); `DASF2_TRON2A`
+  is a centaur-style variant (two `SF`-style leg pairs, front/back, plus
+  a `DACH` upper body).
+- `ASSETS.md`: documented the TRON2B robot family (8 variants — `DA`,
+  `DACH`, `WF`, `SF`, `WFYG`, `SFYG`, `DASF`, `DASF2_TRON2B`) as
+  ✅ Confirmed for public release, based on a full (non-sampled) header /
+  metadata scan across all 251 STL and 40 USD files (zero hits for
+  leaked paths, usernames, CAD filenames, serials, or authoring
+  metadata). **Not yet pushed** — two TRON2B USD files
+  (`DASF_TRON2B`/`DASF2_TRON2B` `robot_base.usd`, ~111–113 MiB) exceed
+  GitHub's 100 MiB hard limit and require Git LFS or re-export before
+  an actual TRON2B push.
+
+### Changed
+- `docs/images/DASF.jpg`, `DASF2.jpg`, `WFYG.jpg`, `SFYG_0.jpg`: replaced
+  with manually-captured hardware screenshots (previously
+  pybullet-rendered placeholders).
+- README (EN/中文): rewrote the "Joint zero convention" section to
+  explicitly distinguish `tron2a/` (URDF zero = real robot's
+  factory-calibrated zero; knees-forward needs a 180° hip-yaw software
+  offset) from `tron2b/` (URDF zero is defined directly as the
+  knees-forward pose, intentionally not matching factory zero, for
+  training / visualization convenience — requires an inverse offset at
+  deployment).
+- README (EN/中文): simplified the `SFYG_TRON2A` section to a single
+  overview image with a pointer to "Joint zero convention", removed the
+  "(for ATEC)" qualifier from the `WFYG_TRON2A` / `SFYG_TRON2A` headers.
+- Fixed stale `tron2/` path references (left over from the
+  `tron2` → `tron2a` rename) in `README.md`, `README_zh-CN.md`,
+  `.github/workflows/ci.yml`, and `.github/CODEOWNERS`.
+
+### Removed
+- `docs/images/SFYG_1.jpg` (superseded by the single-image `SFYG_0.jpg`
+  overview).
+
 ## [0.1.0] — TBD
 
 First public release. Contents:
@@ -51,5 +92,6 @@ First public release. Contents:
 - ROS 1 (catkin) and ROS 2 (ament_cmake) install rules via
   `package.xml` and `CMakeLists.txt`.
 
-[Unreleased]: https://github.com/limx-tron2/robot-description/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/limx-tron2/robot-description/releases/tag/v0.1.0
+[Unreleased]: https://github.com/limxdynamics/tron2-robot-description/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/limxdynamics/tron2-robot-description/compare/v1.2.0...v1.3.0
+[0.1.0]: https://github.com/limxdynamics/tron2-robot-description/releases/tag/v0.1.0

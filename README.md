@@ -1,9 +1,9 @@
-# English | [中文](README_zh-CN.md)
-
 <!--
   SPDX-FileCopyrightText: 2024-2026 LimX Dynamics Technology Co., Ltd.
   SPDX-License-Identifier: Apache-2.0
 -->
+
+[English](README.md) | [中文](README_zh-CN.md)
 
 > **Distribution:** the primary open-source copy of this repository is
 > hosted at
@@ -31,7 +31,7 @@ This project is licensed under the **Apache License, Version 2.0** (January 2004
 
 **Included** in this repository:
 
-- URDF and xacro sources for eight TRON2A variants (`DA`, `DACH`, `WF`, `SF`, `WFYG`, `SFYG`, `DASF`, `DASF2`).
+- URDF and xacro sources for six TRON2A variants (`DA`, `DACH`, `WF`, `SF`, `WFYG`, `SFYG`).
 - MuJoCo XML models with IMU sites for each variant.
 - Binary STL meshes (visual + collision).
 - USD assets for Isaac Sim / Omniverse workflows.
@@ -72,7 +72,9 @@ Illustrations for each variant are in [`docs/images/`](docs/images/) and are emb
 
 Coordinate conventions follow typical ROS usage unless stated otherwise in your integration stack: **x** forward, **y** left, **z** up from the root link.
 
-- **SF / SFYG leg morphology:** The URDF/MuJoCo **zero** pose is not always the posture used on the real robot for walking control. See [SF_TRON2A](#sf_tron2a) for **zero vs knees-forward** (knees facing forward) and the proximal-yaw 180° convention.
+- **SF / SFYG leg morphology — TRON2A vs TRON2B:**
+  - **`tron2a/` (TRON2A):** The URDF/MuJoCo **zero** matches the real robot's factory-calibrated zero — it is **not** the knees-forward pose used for walking control. To get the knees-forward pose, rotate each leg's **hip yaw** joint by **180°** (π rad), e.g. `proximal_yaw_L_Joint` / `proximal_yaw_R_Joint`, in your controller or state initialisation. See [SF_TRON2A](#sf_tron2a) for the two poses side by side.
+  - **`tron2b/` (TRON2B):** The URDF zero is defined **directly as the knees-forward pose** and does **not** match the real robot's factory zero. This intentional choice makes the model more intuitive for training and visual inspection (no mental 180°-yaw offset needed to picture the walking stance), at the cost of the URDF zero no longer being the as-shipped hardware zero. **When deploying to real TRON2B hardware, you must apply the corresponding joint offset** (the inverse of the 180° hip-yaw rotation) to convert between the URDF/sim convention and the real robot's factory zero.
 
 ---
 
@@ -151,7 +153,7 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 
 - **Typical paths:** `tron2a/SF_TRON2A/urdf/robot.urdf`, `tron2a/SF_TRON2A/xml/robot.xml`.
 
-### WFYG_TRON2A (for ATEC)
+### WFYG_TRON2A
 
 <img src="docs/images/WFYG.jpg" alt="WFYG_TRON2A overview" width="360" />
 
@@ -161,15 +163,12 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 - **Manipulation frame:** A fixed `gripper_pick` body in the MuJoCo model (`xml/robot.xml`) marks the gripper pick point for grasp planning.
 - **Typical paths:** `tron2a/WFYG_TRON2A/urdf/robot.urdf`, `tron2a/WFYG_TRON2A/xml/robot.xml`.
 
-### SFYG_TRON2A (for ATEC)
+### SFYG_TRON2A
+
+<img src="docs/images/SFYG_0.jpg" alt="SFYG_TRON2A overview" width="360" />
 
 - **Summary:** **SF** ankle-pitch legs with the same **YG** upper-body and mast peripheral layout as `WFYG_TRON2A`.
-- **Legs vs SF:** The **same zero-position and knees-forward convention** as **SF_TRON2A** applies: nominal mesh zero (left) vs **knees-forward** control pose via **180° hip yaw** per leg (right). The YG variant uses the figures below (same leg semantics as `SF_0` / `SF_1`, with arms and mast peripherals).
-
-| Zero position (nominal kinematic zero) | Knees-forward pose for control (after ~180° yaw per leg) |
-| --- | --- |
-| <img src="docs/images/SFYG_0.jpg" alt="SFYG zero position" width="300" /> | <img src="docs/images/SFYG_1.jpg" alt="SFYG knees-forward pose" width="300" /> |
-
+- **Legs vs SF:** Same leg semantics as **SF_TRON2A** — the URDF zero is the real robot's factory zero, **not** the knees-forward control pose (see [Joint zero convention](#joint-zero-convention) for the TRON2A/TRON2B distinction and the 180° hip-yaw offset needed for knees-forward control).
 - **Root / IMU:** Same as SF/WF YG variants (`base_imu` / MuJoCo IMU block).
 - **Hardware / mast:** Same as WFYG — see [External sensors by variant](#external-sensors-by-variant).
 - **Manipulation frame:** Same `gripper_pick` pick-point body as WFYG in the MuJoCo model (`xml/robot.xml`).
@@ -177,29 +176,29 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 
 ### DASF_TRON2A
 
-<img src="docs/images/DASF.jpg" alt="DASF_TRON2A overview — top-bottom combined humanoid" width="360" />
+<img src="docs/images/DASF.jpg" alt="DASF_TRON2A overview" width="360" />
 
-- **Summary:** **Top-bottom combined (“上下拼接”) humanoid** — the `SF_TRON2A` ankle-pitch legs joined to the `DACH_TRON2A` dual-arm + 2-DoF head upper body via a fixed `transition_upper_Link`, giving a single full-height biped with arms and a head.
-- **Root / IMU:** **Two IMU sites**, one per body segment — lower body `base_imu` (on `base_Link`) and upper body `upper_base_imu` (on `upper_base_Link`). MuJoCo exposes quaternion / gyro / accelerometer sensors at both sites.
-- **End effectors / perception:** Left / right arms terminate in `grasper_L_U_Link` / `grasper_R_U_Link`; a RealSense **D435**-style camera is modeled on the upper body as `d435_U_Link` + `d435_optical_frame_U`; head is 2-DoF (`head_yaw_Joint`, `head_pitch_Joint`).
-- **Zero position vs control (knees-forward):** Same **SF** leg convention applies to the lower body — see [SF_TRON2A](#sf_tron2a) for the knees-forward 180° hip-yaw offset (`proximal_yaw_L_Joint` / `proximal_yaw_R_Joint`).
-- **Typical paths:** `tron2a/DASF_TRON2A/urdf/robot_rl.urdf` (no plain `robot.urdf` variant is shipped for this model — use `robot_rl.urdf` or `robot_zeromass_graser.urdf`), `tron2a/DASF_TRON2A/xml/robot.xml`.
+- **Summary:** **Top-bottom combined humanoid** — `SF` ankle-pitch legs (lower body) joined via `transition_upper_Link` to a `DACH`-style dual-arm + 2-DoF head upper body. Effectively a biped + dual-arm assembly stacked into a single humanoid.
+- **Legs vs SF:** Same leg semantics as **SF_TRON2A** — the URDF zero is the real robot's factory zero, **not** the knees-forward control pose (see [Joint zero convention](#joint-zero-convention) for the TRON2A/TRON2B distinction and the 180° hip-yaw offset needed for knees-forward control).
+- **Root / IMU:** Two IMUs — `base_imu` on the lower body, `upper_base_imu` on the upper body; both exposed as MuJoCo IMU sensor sites.
+- **Hardware / cameras:** Upper-body depth camera (`d435_U_Link` / `d435_optical_frame_U`); arm/head hardware follows the `DACH_TRON2A` upper-body layout — see [External sensors by variant](#external-sensors-by-variant).
+- **Typical paths:** `tron2a/DASF_TRON2A/urdf/robot_rl.urdf`, `tron2a/DASF_TRON2A/xml/robot.xml`.
 
 ### DASF2_TRON2A
 
-<img src="docs/images/DASF2.jpg" alt="DASF2_TRON2A overview — centaur-style variant" width="360" />
+<img src="docs/images/DASF2.jpg" alt="DASF2_TRON2A overview" width="360" />
 
-- **Summary:** **Centaur-style** variant — two `SF`-style leg pairs (front `_F`, back `_B`) mounted under a `DACH_TRON2A` dual-arm + 2-DoF head upper body. Kinematic chain: `base_Link` → `front_base_Link` (front legs) → `transition_middle_Link` → `back_base_Link` (back legs); the upper body hangs off `front_base_Link` via `transition_upper_Link`.
-- **Root / IMU:** **Three IMU sites** — `limx_F_imu` (front legs), `limx_B_imu` (back legs), `limx_H_imu` (head/upper body); MuJoCo exposes IMU sensors at all three.
-- **End effectors / perception:** Dual-arm grippers `grasper_L_Link` / `grasper_R_Link`; three RealSense **D435**-style cameras (`d435_F_Link`, `d435_B_Link`, `d435_H_Link` — front, back, and head).
-- **Zero position vs control (knees-forward):** The same **180° hip-yaw** convention as `SF_TRON2A` applies independently to both leg pairs — `proximal_yaw_{L,R}_F_Joint` for the front legs and `proximal_yaw_{L,R}_B_Joint` for the back legs.
+- **Summary:** **Centaur-style** variant — two `SF`-style leg pairs joined front-to-back (`front_base_Link` and `back_base_Link` via `transition_middle_Link`), with a `DACH`-style dual-arm + head upper body stacked on top of the front legs via `transition_upper_Link`.
+- **Legs vs SF:** Same leg semantics as **SF_TRON2A** for both the front and back leg pairs — URDF zero is the real robot's factory zero, **not** the knees-forward control pose (see [Joint zero convention](#joint-zero-convention) for the TRON2A/TRON2B distinction and the 180° hip-yaw offset needed for knees-forward control).
+- **Root / IMU:** Three IMUs — `limx_F_imu` (front legs), `limx_B_imu` (back legs), `limx_H_imu` (head/upper body); all exposed as MuJoCo IMU sensor sites.
+- **Hardware / cameras:** Front/back/head depth cameras (`d435_F_Link`, `d435_B_Link`, `d435_H_Link`); arm/head hardware follows the `DACH_TRON2A` upper-body layout — see [External sensors by variant](#external-sensors-by-variant).
 - **Typical paths:** `tron2a/DASF2_TRON2A/urdf/robot.urdf`, `tron2a/DASF2_TRON2A/xml/robot.xml`.
 
 ---
 
 ## ROS packages
 
-The catkin / colcon package manifest is [`package.xml`](package.xml). The ROS package name is **`robot_description`**. Install the `tron2a` asset tree into your workspace share directory via the provided [`CMakeLists.txt`](CMakeLists.txt).
+The catkin / colcon package manifest is [`package.xml`](package.xml). The ROS package name is **`robot_description`**. Install the `tron2` asset tree into your workspace share directory via the provided [`CMakeLists.txt`](CMakeLists.txt).
 
 **ROS 1 (Noetic):**
 

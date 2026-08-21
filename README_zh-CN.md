@@ -30,7 +30,7 @@
 
 **本仓库包含**：
 
-- 八个 TRON2A 型号（`DA`、`DACH`、`WF`、`SF`、`WFYG`、`SFYG`、`DASF`、`DASF2`）的 URDF 与 xacro 源文件。
+- 六个 TRON2A 型号（`DA`、`DACH`、`WF`、`SF`、`WFYG`、`SFYG`）的 URDF 与 xacro 源文件。
 - 各型号带 IMU site 的 MuJoCo XML 模型。
 - 二进制 STL 网格（视觉 + 碰撞）。
 - 用于 Isaac Sim / Omniverse 工作流的 USD 资产。
@@ -71,7 +71,9 @@
 
 除非集成栈另有说明，坐标约定遵循典型的 ROS 用法：以根链接为基准，**x** 向前、**y** 向左、**z** 向上。
 
-- **SF / SFYG 腿部形态：** URDF/MuJoCo 的 **零位** 姿态并不总是实物机器人行走控制所使用的姿态。请参见 [SF_TRON2A](#sf_tron2a) 中关于 **零位与膝盖前倾（knees-forward）** 的说明，以及近端偏航（proximal-yaw）180° 约定。
+- **SF / SFYG 腿部形态 —— TRON2A 与 TRON2B 的区别：**
+  - **`tron2a/`（TRON2A）：** URDF/MuJoCo 的 **零位** 与实物机器人出厂标定的零位一致 —— **并非** 行走控制所用的膝盖前倾姿态。要获得膝盖前倾姿态，需要在控制器或状态初始化中将每条腿的 **髋关节偏航（hip yaw）** 旋转 **180°**（π rad），例如 `proximal_yaw_L_Joint` / `proximal_yaw_R_Joint`。两种姿态对比见 [SF_TRON2A](#sf_tron2a)。
+  - **`tron2b/`（TRON2B）：** URDF 零位 **直接定义为膝盖前倾姿态**，**与实物机器人出厂零位不一致**。这是有意为之的设计选择，目的是让模型在训练与直观理解上更方便（无需再脑内换算 180° 偏航即可直接看出行走站姿），代价是 URDF 零位不再等同于出厂硬件零位。**部署到 TRON2B 实机时，必须应用相应的关节偏置**（即 180° 髋偏航旋转的逆变换），以在 URDF/仿真约定与实机出厂零位之间进行转换。
 
 ---
 
@@ -85,10 +87,12 @@
 | `SF_TRON2A` | **实心足踝**（Sole Ankle）腿部设计（无轮）；躯干 IMU。 |
 | `WFYG_TRON2A` | WF 基础上加装 **上肢外设**（手臂、夹爪、塔杆挂载结构）。 |
 | `SFYG_TRON2A` | SF 基础上加装与 `WFYG_TRON2A` 相同的 **上肢外设** 组件。 |
-| `DASF_TRON2A` | **上下拼接人形** — 将 `SF_TRON2A` 的踝俯仰腿部通过 `transition_upper_Link` 与 `DACH_TRON2A` 的双臂 + 2 自由度头部上半身拼接为一体。 |
-| `DASF2_TRON2A` | **半人马（centaur）式** 型号 — 两组 `SF` 式腿部（前腿 `_F`、后腿 `_B`）加装 `DACH` 双臂 + 头部上半身。 |
+| `DASF_TRON2A` | **上下拼接式人形** — `SF` 踝俯仰腿型通过 `transition_upper_Link` 与 `DACH` 双臂 + 2 自由度头部上肢拼接。 |
+| `DASF2_TRON2A` | **半人马式** 变体 — 两组 `SF` 式腿型（前 `_F`、后 `_B`）搭配 `DACH` 双臂 + 头部上肢。 |
 
-后缀 **YG** 表示更丰富的上肢 / 塔杆外设布局（手臂、机械手及附属链接—详见下文）。**DASF** / **DASF2** 型号将此前独立的下半身（`SF`）与上半身（`DACH`）描述拼接为单一的“上下拼接”人形，每个身体分段各自拥有独立的 IMU。
+**YG** 后缀表示更丰富的上肢 / 塔杆外设布局（手臂、手部及配件结构，详见下文）。**DASF** / **DASF2** 变体将此前独立的下肢（`SF`）与上肢（`DACH`）描述拼接为单一人形，每个身体分段各配一路 IMU。
+
+后缀 **YG** 表示更丰富的上肢 / 塔杆外设布局（手臂、机械手及附属链接—详见下文）。
 
 ---
 
@@ -104,8 +108,8 @@
 | `SF_TRON2A` | 有 — 与 WF 相同 | 有 — 与 WF 相同的 D435 Gazebo 配置 | — | |
 | `WFYG_TRON2A` | 有 | 有 — 与 WF 相同的胸前 D435 | **URDF（网格 / 运动学）：** `transition_Link`（转接件）、`camera_mount_Link`、`radar_Link`、`antenna_L_Link`、`antenna_R_Link`。**实物硬件**（安装在 `transition_Link` 上）：LiDAR **RoboSense Fairy96**（速腾 Fairy96）；双臂 **AgileX Piper X**（松灵 PiperX）；RTK **Huace M722**（华测 M722）；计算单元 **NVIDIA Jetson Orin NX**。**仿真说明：** URDF 仅提供几何 / 碰撞；本包 **不** 提供 Gazebo 雷达 / RF 传感器插件。 | |
 | `SFYG_TRON2A` | 有 | 有 | **与 `WFYG_TRON2A` 相同的 YG 组件** — 相同的 URDF 链接集合、相同的实物硬件（`transition_Link` 上的 Fairy96、Piper X、M722、Orin NX），以及相同的仿真注意事项。 |  |
-| `DASF_TRON2A` | 两个 — 下半身 `base_imu`、上半身 `upper_base_imu` | 有 — 上半身 `d435_U_Link` + `d435_optical_frame_U` | — | `SF` 腿部 + `DACH` 手臂/头部通过 `transition_upper_Link` 拼接；MuJoCo 在 `base_imu` 与 `upper_base_imu` 两个 site 上均提供 IMU 传感器。 |
-| `DASF2_TRON2A` | 三个 — `limx_F_imu`（前腿）、`limx_B_imu`（后腿）、`limx_H_imu`（头部/上半身） | 有 — `d435_F_Link`、`d435_B_Link`、`d435_H_Link`（前 / 后 / 头部相机） | — | 半人马式：两组 `SF` 式腿部（`transition_middle_Link` 连接前后腿）加上通过 `transition_upper_Link` 挂载的 `DACH` 上半身。 |
+| `DASF_TRON2A` | 两路 — 下肢 `base_imu`，上肢 `upper_base_imu` | 有 — 上肢 `d435_U_Link` + `d435_optical_frame_U` | — | `SF` 腿型与 `DACH` 双臂 / 头部通过 `transition_upper_Link` 拼接；MuJoCo 在 `base_imu` 与 `upper_base_imu` 两个站点均配置 IMU 传感器。 |
+| `DASF2_TRON2A` | 三路 — `limx_F_imu`（前腿）、`limx_B_imu`（后腿）、`limx_H_imu`（头部 / 上肢） | 有 — `d435_F_Link`、`d435_B_Link`、`d435_H_Link`（前 / 后 / 头部相机） | — | 半人马式：两组 `SF` 式腿型（经 `transition_middle_Link` 连接前腿，后腿直连）加上通过 `transition_upper_Link` 拼接的 `DACH` 上肢。 |
 
 **图例：** “RGB-D / depth” 沿用 Intel RealSense **D435** 风格的光学坐标系与 Gazebo `depth` 传感器命名（如存在，为 `d435_camera_sensor`）。如需仿真雷达或额外相机，请自行添加驱动或 Gazebo 插件。
 
@@ -150,7 +154,7 @@
 
 - **典型路径：** `tron2a/SF_TRON2A/urdf/robot.urdf`、`tron2a/SF_TRON2A/xml/robot.xml`。
 
-### WFYG_TRON2A (for ATEC)
+### WFYG_TRON2A
 
 <img src="docs/images/WFYG.jpg" alt="WFYG_TRON2A overview" width="360" />
 
@@ -160,15 +164,12 @@
 - **操作坐标系：** MuJoCo 模型（`xml/robot.xml`）中提供一个固定的 `gripper_pick` 刚体，用作抓取规划的夹爪拾取点。
 - **典型路径：** `tron2a/WFYG_TRON2A/urdf/robot.urdf`、`tron2a/WFYG_TRON2A/xml/robot.xml`。
 
-### SFYG_TRON2A (for ATEC)
+### SFYG_TRON2A
+
+<img src="docs/images/SFYG_0.jpg" alt="SFYG_TRON2A overview" width="360" />
 
 - **简介：** 采用 **SF** 踝俯仰腿型，配 **YG** 上肢与塔杆外设，布局与 `WFYG_TRON2A` 相同。
-- **腿部与 SF 对比：** 适用 **与 SF_TRON2A 相同的零位与膝盖前倾约定**：名义网格零位（左）与每腿 **180° 髋偏航** 后的 **膝盖前倾** 控制姿态（右）。YG 型号使用下图（腿部语义与 `SF_0` / `SF_1` 相同，另含手臂与塔杆外设）。
-
-| 零位姿态（名义运动学零位） | 用于控制的膝盖前倾姿态（每腿 yaw 约 180° 后） |
-| --- | --- |
-| <img src="docs/images/SFYG_0.jpg" alt="SFYG zero position" width="300" /> | <img src="docs/images/SFYG_1.jpg" alt="SFYG knees-forward pose" width="300" /> |
-
+- **腿部与 SF 对比：** 与 **SF_TRON2A** 腿部语义相同 —— URDF 零位是实机出厂零位，**并非** 膝盖前倾控制姿态（TRON2A/TRON2B 的区别及膝盖前倾所需的 180° 髋偏航偏置，详见 [关节零位约定](#关节零位约定joint-zero-convention)）。
 - **根节点 / IMU：** 与其他 SF/WF YG 型号相同（`base_imu` / MuJoCo IMU 块）。
 - **硬件 / 塔杆：** 与 WFYG 相同 —— 详见 [各型号外部传感器](#各型号外部传感器external-sensors-by-variant)。
 - **操作坐标系：** MuJoCo 模型（`xml/robot.xml`）中与 WFYG 一致的 `gripper_pick` 拾取点刚体。
@@ -176,29 +177,29 @@
 
 ### DASF_TRON2A
 
-<img src="docs/images/DASF.jpg" alt="DASF_TRON2A 概览 — 上下拼接人形" width="360" />
+<img src="docs/images/DASF.jpg" alt="DASF_TRON2A overview" width="360" />
 
-- **简介：** **上下拼接人形** —— 将 `SF_TRON2A` 的踝俯仰腿部通过固定连接 `transition_upper_Link` 与 `DACH_TRON2A` 的双臂 + 2 自由度头部上半身拼接为一体，形成一个具备手臂与头部的全身双足人形。
-- **根节点 / IMU：** **两个 IMU site**，每个身体分段各一个 —— 下半身 `base_imu`（位于 `base_Link`）与上半身 `upper_base_imu`（位于 `upper_base_Link`）。MuJoCo 在两个 site 上均提供四元数 / 陀螺 / 加速度计传感器。
-- **末端执行器 / 感知：** 左右臂末端为 `grasper_L_U_Link` / `grasper_R_U_Link`；上半身建模了一个 RealSense **D435** 风格相机，即 `d435_U_Link` + `d435_optical_frame_U`；头部为 2 自由度（`head_yaw_Joint`、`head_pitch_Joint`）。
-- **零位与控制姿态（膝盖前倾）：** 下半身沿用与 **SF** 相同的腿部约定 —— 参见 [SF_TRON2A](#sf_tron2a) 中关于膝盖前倾（180° 髋偏航偏置，`proximal_yaw_L_Joint` / `proximal_yaw_R_Joint`）的说明。
-- **典型路径：** `tron2a/DASF_TRON2A/urdf/robot_rl.urdf`（本型号未提供普通的 `robot.urdf`，请使用 `robot_rl.urdf` 或 `robot_zeromass_graser.urdf`）、`tron2a/DASF_TRON2A/xml/robot.xml`。
+- **简介：** **上下拼接式人形** —— `SF` 踝俯仰腿型（下肢）通过 `transition_upper_Link` 与 `DACH` 式双臂 + 2 自由度头部（上肢）拼接。相当于将双足腿部与双臂组件上下拼接成完整人形。
+- **腿部与 SF 对比：** 与 **SF_TRON2A** 腿部语义相同 —— URDF 零位是实机出厂零位，**并非** 膝盖前倾控制姿态（TRON2A/TRON2B 的区别及膝盖前倾所需的 180° 髋偏航偏置，详见 [关节零位约定](#关节零位约定joint-zero-convention)）。
+- **根节点 / IMU：** 两路 IMU —— 下肢 `base_imu`，上肢 `upper_base_imu`；均以 MuJoCo IMU 传感器站点形式提供。
+- **硬件 / 相机：** 上肢深度相机（`d435_U_Link` / `d435_optical_frame_U`）；手臂 / 头部硬件延续 `DACH_TRON2A` 上肢布局 —— 详见 [各型号外部传感器](#各型号外部传感器external-sensors-by-variant)。
+- **典型路径：** `tron2a/DASF_TRON2A/urdf/robot_rl.urdf`、`tron2a/DASF_TRON2A/xml/robot.xml`。
 
 ### DASF2_TRON2A
 
-<img src="docs/images/DASF2.jpg" alt="DASF2_TRON2A 概览 — 半人马式型号" width="360" />
+<img src="docs/images/DASF2.jpg" alt="DASF2_TRON2A overview" width="360" />
 
-- **简介：** **半人马（centaur）式** 型号 —— 两组 `SF` 式腿部（前腿 `_F`、后腿 `_B`）搭载于 `DACH_TRON2A` 双臂 + 2 自由度头部上半身之下。运动学链：`base_Link` → `front_base_Link`（前腿）→ `transition_middle_Link` → `back_base_Link`（后腿）；上半身通过 `transition_upper_Link` 挂载在 `front_base_Link` 上。
-- **根节点 / IMU：** **三个 IMU site** —— `limx_F_imu`（前腿）、`limx_B_imu`（后腿）、`limx_H_imu`（头部/上半身）；MuJoCo 在三个 site 上均提供 IMU 传感器。
-- **末端执行器 / 感知：** 双臂夹爪 `grasper_L_Link` / `grasper_R_Link`；三个 RealSense **D435** 风格相机（`d435_F_Link`、`d435_B_Link`、`d435_H_Link` —— 分别位于前、后与头部）。
-- **零位与控制姿态（膝盖前倾）：** 与 `SF_TRON2A` 相同的 **180° 髋偏航** 约定分别独立适用于两组腿 —— 前腿为 `proximal_yaw_{L,R}_F_Joint`，后腿为 `proximal_yaw_{L,R}_B_Joint`。
+- **简介：** **半人马式** 变体 —— 两组 `SF` 式腿型前后拼接（`front_base_Link` 与 `back_base_Link` 经 `transition_middle_Link` 连接），并在前腿上方通过 `transition_upper_Link` 拼接一套 `DACH` 式双臂 + 头部上肢。
+- **腿部与 SF 对比：** 前后两组腿的语义均与 **SF_TRON2A** 相同 —— URDF 零位是实机出厂零位，**并非** 膝盖前倾控制姿态（TRON2A/TRON2B 的区别及膝盖前倾所需的 180° 髋偏航偏置，详见 [关节零位约定](#关节零位约定joint-zero-convention)）。
+- **根节点 / IMU：** 三路 IMU —— `limx_F_imu`（前腿）、`limx_B_imu`（后腿）、`limx_H_imu`（头部 / 上肢）；均以 MuJoCo IMU 传感器站点形式提供。
+- **硬件 / 相机：** 前 / 后 / 头部深度相机（`d435_F_Link`、`d435_B_Link`、`d435_H_Link`）；手臂 / 头部硬件延续 `DACH_TRON2A` 上肢布局 —— 详见 [各型号外部传感器](#各型号外部传感器external-sensors-by-variant)。
 - **典型路径：** `tron2a/DASF2_TRON2A/urdf/robot.urdf`、`tron2a/DASF2_TRON2A/xml/robot.xml`。
 
 ---
 
 ## ROS 包（ROS packages）
 
-catkin / colcon 的包清单为 [`package.xml`](package.xml)。ROS 包名为 **`robot_description`**。通过提供的 [`CMakeLists.txt`](CMakeLists.txt) 将 `tron2a` 资产树安装到工作空间的 share 目录。
+catkin / colcon 的包清单为 [`package.xml`](package.xml)。ROS 包名为 **`robot_description`**。通过提供的 [`CMakeLists.txt`](CMakeLists.txt) 将 `tron2` 资产树安装到工作空间的 share 目录。
 
 **ROS 1（Noetic）：**
 

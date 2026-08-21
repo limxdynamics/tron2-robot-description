@@ -29,15 +29,15 @@
 /docs/                                  @limx-tron2/content @limx-tron2/legal
 
 # Per-variant asset ownership
-/tron2a/DA_TRON2A/                       @limx-tron2/hardware @limx-tron2/mechanical
-/tron2a/DACH_TRON2A/                     @limx-tron2/hardware @limx-tron2/mechanical
-/tron2a/WF_TRON2A/                       @limx-tron2/hardware @limx-tron2/mechanical
-/tron2a/SF_TRON2A/                       @limx-tron2/hardware @limx-tron2/mechanical
-/tron2a/WFYG_TRON2A/                     @limx-tron2/hardware @limx-tron2/mechanical
-/tron2a/SFYG_TRON2A/                     @limx-tron2/hardware @limx-tron2/mechanical
-/tron2a/DASF_TRON2A/                     @limx-tron2/hardware @limx-tron2/mechanical
-/tron2a/DASF2_TRON2A/                    @limx-tron2/hardware @limx-tron2/mechanical
+/tron2a/DA_TRON2A/                      @limx-tron2/hardware @limx-tron2/mechanical
+/tron2a/DACH_TRON2A/                    @limx-tron2/hardware @limx-tron2/mechanical
+/tron2a/WF_TRON2A/                      @limx-tron2/hardware @limx-tron2/mechanical
+/tron2a/SF_TRON2A/                      @limx-tron2/hardware @limx-tron2/mechanical
+/tron2a/WFYG_TRON2A/                    @limx-tron2/hardware @limx-tron2/mechanical
+/tron2a/SFYG_TRON2A/                    @limx-tron2/hardware @limx-tron2/mechanical
+/tron2a/DASF_TRON2A/                    @limx-tron2/hardware @limx-tron2/mechanical
+/tron2a/DASF2_TRON2A/                   @limx-tron2/hardware @limx-tron2/mechanical
 
 # Meshes and USD assets — extra review required for provenance
-/tron2a/*/meshes/                        @limx-tron2/hardware @limx-tron2/legal
-/tron2a/*/usd/                           @limx-tron2/hardware @limx-tron2/legal
+/tron2a/*/meshes/                       @limx-tron2/hardware @limx-tron2/legal
+/tron2a/*/usd/                          @limx-tron2/hardware @limx-tron2/legal

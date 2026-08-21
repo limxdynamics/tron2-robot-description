@@ -1,0 +1,464 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="bipedal_robot">
+  <mujoco>
+    <compiler meshdir="../meshes"/>
+  </mujoco>
+
+  <!-- base -->
+  <link name="base_Link">
+    <inertial>
+      <origin xyz="0.00241 -0.00022 0.11116" rpy="0.0 0.0 0.0"/>
+      <mass value="13.4"/>
+      <inertia ixx="0.11544842" ixy="-6.32e-06" ixz="0.00636327" iyy="0.13779136" iyz="-2.76e-05" izz="0.10571445"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/base_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/base_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- base imu -->
+  <link name="base_imu">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+    </inertial>
+  </link>
+  <joint name="base_imu_Joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="base_imu"/>
+  </joint>
+
+  <!-- proximal pitch L Link -->
+  <link name="proximal_pitch_L_Link">
+    <inertial>
+      <origin xyz="0.0033 0.06714 -0.00603" rpy="0.0 0.0 0.0"/>
+      <mass value="2.05"/>
+      <inertia ixx="0.00389778" ixy="-0.00013725" ixz="4.62e-05" iyy="0.00320014" iyz="5.272e-05" izz="0.00357523"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_pitch_L_Joint" type="revolute">
+    <origin xyz="-0.00044 0.09497 0.05446" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="proximal_pitch_L_Link"/>
+    <axis xyz="0.0 0.9961947268929313 -0.0871554135479712"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="200.0" velocity="17.0693"/>
+  </joint>
+  <link name="proximal_roll_L_Link">
+    <inertial>
+      <origin xyz="0.03623 0.00056 -0.08095" rpy="0.0 0.0 0.0"/>
+      <mass value="1.75"/>
+      <inertia ixx="0.00438693" ixy="-1.167e-05" ixz="-5.518e-05" iyy="0.00508428" iyz="-3.078e-05" izz="0.00295723"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_roll_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_roll_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_roll_L_Joint" type="revolute">
+    <origin xyz="-0.0352 0.07261 -0.00635" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_pitch_L_Link"/>
+    <child link="proximal_roll_L_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-0.2617993877991494" upper="3.193952531149623" effort="200.0" velocity="17.0693"/>
+  </joint>
+  <link name="proximal_yaw_L_Link">
+    <inertial>
+      <origin xyz="0.00241 -0.00149 -0.10876" rpy="0.0 0.0 0.0"/>
+      <mass value="1.6"/>
+      <inertia ixx="0.01537565" ixy="-1.485e-05" ixz="-0.00022049" iyy="0.01470715" iyz="-0.00019641" izz="0.00374848"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_yaw_L_Joint" type="revolute">
+    <origin xyz="0.0352 0.0 -0.1348" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_roll_L_Link"/>
+    <child link="proximal_yaw_L_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-0.5235987755982988" upper="4.625122517784973" effort="70.0" velocity="16.3363"/>
+  </joint>
+  <link name="knee_L_Link">
+    <inertial>
+      <origin xyz="0.00239 0.03377 -0.12995" rpy="0.0 0.0 0.0"/>
+      <mass value="4.69"/>
+      <inertia ixx="0.11050319" ixy="1.419e-05" ixz="0.00097249" iyy="0.11251599" iyz="0.00269319" izz="0.00620302"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/knee_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/knee_L_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="knee_L_Joint" type="revolute">
+    <origin xyz="-0.004 -0.0319 -0.2152" rpy="0.0 0.0 0.0"/>
+    <parent link="proximal_yaw_L_Link"/>
+    <child link="knee_L_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.2617993877991494" upper="2.6179938779914944" effort="200.0" velocity="17.0693"/>
+  </joint>
+  <link name="ankle_pitch_L_Link">
+    <inertial>
+      <origin xyz="0.01503 -0.04184 -0.04849" rpy="0.0 0.0 0.0"/>
+      <mass value="1.04"/>
+      <inertia ixx="0.00148218" ixy="1.612e-05" ixz="0.00014408" iyy="0.00355131" iyz="-1.187e-05" izz="0.00402278"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/ankle_pitch_L_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.014425463037384678 -0.04144876127290371 -0.05027431354942169" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <box size="0.14 0.06 0.025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.11909570195246066 -0.06914314585176701 -0.07124" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.10049390971791083 -0.00947358298136964 -0.07124" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.07502612984116563 -0.017235070405830784 -0.07123754260807935" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.07502612984116541 -0.06830942031820081 -0.07124" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.08472274114731804 -0.08464998982922917 -0.06424918850744032" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.03564470406430653 -0.08187499491461442 -0.06424918850744032" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.08472274114731826 0.002119774188539752 -0.06424918850744032" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.03564470406430653 -0.00048607720225097347 -0.06424918850744032" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.12805773805226417 -0.0411 -0.06424607954803907" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.08868077416023412 -0.04110000000000009 -0.06424607954803907" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="ankle_pitch_L_Joint" type="revolute">
+    <origin xyz="0.004 0.07335 -0.35" rpy="0.0 0.0 0.0"/>
+    <parent link="knee_L_Link"/>
+    <child link="ankle_pitch_L_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-1.6231562043547265" upper="1.6231562043547265" effort="70.0" velocity="16.3363"/>
+  </joint>
+
+  <!-- proximal pitch R Link -->
+  <link name="proximal_pitch_R_Link">
+    <inertial>
+      <origin xyz="0.0033 -0.06714 -0.00603" rpy="-0.0 0.0 -0.0"/>
+      <mass value="2.05"/>
+      <inertia ixx="0.00389778" ixy="0.00013725" ixz="4.62e-05" iyy="0.00320014" iyz="-5.272e-05" izz="0.00357523"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_pitch_R_Joint" type="revolute">
+    <origin xyz="-0.00044 -0.09497 0.05446" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
+    <child link="proximal_pitch_R_Link"/>
+    <axis xyz="0.0 0.9961947268929313 0.0871554135479712"/>
+    <limit lower="-3.141592653589793" upper="2.600540585471551" effort="200.0" velocity="17.0693"/>
+  </joint>
+  <link name="proximal_roll_R_Link">
+    <inertial>
+      <origin xyz="0.03623 -0.00056 -0.08095" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.75"/>
+      <inertia ixx="0.00438693" ixy="1.167e-05" ixz="-5.518e-05" iyy="0.00508428" iyz="3.078e-05" izz="0.00295723"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_roll_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_roll_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_roll_R_Joint" type="revolute">
+    <origin xyz="-0.0352 -0.07261 -0.00635" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_pitch_R_Link"/>
+    <child link="proximal_roll_R_Link"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <limit lower="-3.193952531149623" upper="0.2617993877991494" effort="200.0" velocity="17.0693"/>
+  </joint>
+  <link name="proximal_yaw_R_Link">
+    <inertial>
+      <origin xyz="0.00241 0.00149 -0.10876" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.6"/>
+      <inertia ixx="0.01537565" ixy="1.485e-05" ixz="-0.00022049" iyy="0.01470715" iyz="0.00019641" izz="0.00374848"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="proximal_yaw_R_Joint" type="revolute">
+    <origin xyz="0.0352 -0.0 -0.1348" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_roll_R_Link"/>
+    <child link="proximal_yaw_R_Link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="-4.625122517784973" upper="0.5235987755982988" effort="70.0" velocity="16.3363"/>
+  </joint>
+  <link name="knee_R_Link">
+    <inertial>
+      <origin xyz="0.00239 -0.03377 -0.12995" rpy="-0.0 0.0 -0.0"/>
+      <mass value="4.69"/>
+      <inertia ixx="0.11050319" ixy="-1.419e-05" ixz="0.00097249" iyy="0.11251599" iyz="-0.00269319" izz="0.00620302"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/knee_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/knee_R_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="knee_R_Joint" type="revolute">
+    <origin xyz="-0.004 0.0319 -0.2152" rpy="-0.0 0.0 -0.0"/>
+    <parent link="proximal_yaw_R_Link"/>
+    <child link="knee_R_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.2617993877991494" upper="2.6179938779914944" effort="200.0" velocity="17.0693"/>
+  </joint>
+  <link name="ankle_pitch_R_Link">
+    <inertial>
+      <origin xyz="0.01503 0.04184 -0.04849" rpy="-0.0 0.0 -0.0"/>
+      <mass value="1.04"/>
+      <inertia ixx="0.00148218" ixy="-1.612e-05" ixz="0.00014408" iyy="0.00355131" iyz="1.187e-05" izz="0.00402278"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/ankle_pitch_R_Link.STL"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.014425463037384678 0.04144876127290371 -0.05027431354942169" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <box size="0.14 0.06 0.025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.11909570195246066 0.06914314585176701 -0.07124" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.10049390971791083 0.00947358298136964 -0.07124" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.07502612984116563 0.017235070405830784 -0.07123754260807935" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.07502612984116541 0.06830942031820081 -0.07124" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.08472274114731804 0.08464998982922917 -0.06424918850744032" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.03564470406430653 0.08187499491461442 -0.06424918850744032" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.08472274114731826 -0.002119774188539752 -0.06424918850744032" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.03564470406430653 0.00048607720225097347 -0.06424918850744032" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.12805773805226417 0.0411 -0.06424607954803907" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.08868077416023412 0.04110000000000009 -0.06424607954803907" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="ankle_pitch_R_Joint" type="revolute">
+    <origin xyz="0.004 -0.07335 -0.35" rpy="-0.0 0.0 -0.0"/>
+    <parent link="knee_R_Link"/>
+    <child link="ankle_pitch_R_Link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-1.6231562043547265" upper="1.6231562043547265" effort="70.0" velocity="16.3363"/>
+  </joint>
+
+  <!-- d435 Link -->
+  <link name="d435_Link">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+  </link>
+  <joint name="d435_Joint" type="fixed">
+    <origin xyz="0.0968 0.01759 -0.00409" rpy="0.0 2.7227 0.0"/>
+    <parent link="base_Link"/>
+    <child link="d435_Link"/>
+  </joint>
+  <link name="d435_optical_frame">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+  </link>
+  <joint name="d435_optical_Joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267948966 0.0 -1.5707963267948966"/>
+    <parent link="d435_Link"/>
+    <child link="d435_optical_frame"/>
+  </joint>
+</robot>

@@ -1,0 +1,441 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mujoco model="bipedal_robot">
+  <compiler angle="radian" meshdir="../meshes" autolimits="true"/>
+  <option timestep="0.001"/>
+  <size njmax="5000" nconmax="1000"/>
+  <default>
+    <light castshadow="false" diffuse="1 1 1"/>
+    <camera fovy="60"/>
+    <default class="visual">
+      <geom contype="0" conaffinity="0" group="1" type="mesh" density="0" rgba="0.8 0.8 0.8 1.0"/>
+    </default>
+    <default class="collision">
+      <geom type="mesh" density="0" rgba="0.8 0.8 0.8 0.3"/>
+    </default>
+    <joint damping="0.01" margin="0.0001" solreflimit="0.002 1"/>
+    <geom contype="1" conaffinity="1" friction="1.0 0.3 0.3" rgba="0.5 0.6 0.7 0.5" margin="0" group="0" solref="0.01 1"/>
+    <equality solref="0.001 1"/>
+  </default>
+  <visual>
+    <rgba com="0.502 1.0 0 1.0" contactpoint="0.5 0.1 0.8 0.4" contactforce="0.2 0.98 0.2 0.8"/>
+    <scale com="0.2" forcewidth="0.05" contactwidth="0.10" contactheight="0.04"/>
+  </visual>
+  <asset>
+    <mesh name="base_Link" file="base_Link.STL"/>
+    <mesh name="proximal_pitch_L_Link" file="proximal_pitch_L_Link.STL"/>
+    <mesh name="proximal_roll_L_Link" file="proximal_roll_L_Link.STL"/>
+    <mesh name="proximal_yaw_L_Link" file="proximal_yaw_L_Link.STL"/>
+    <mesh name="proximal_yaw_L_Link_collision" file="proximal_yaw_L_Link_collision.STL"/>
+    <mesh name="elbow_L_Link" file="elbow_L_Link.STL"/>
+    <mesh name="wrist_yaw_L_Link" file="wrist_yaw_L_Link.STL"/>
+    <mesh name="wrist_pitch_L_Link" file="wrist_pitch_L_Link.STL"/>
+    <mesh name="wrist_roll_L_Link" file="wrist_roll_L_Link.STL"/>
+    <mesh name="wrist_roll_L_Link_collision" file="wrist_roll_L_Link_collision.STL"/>
+    <mesh name="grasper_L_base_Link" file="grasper_L_base_Link.STL"/>
+    <mesh name="grasper_L_jaw_left_Link" file="grasper_L_jaw_left_Link.STL"/>
+    <mesh name="grasper_L_jaw_right_Link" file="grasper_L_jaw_right_Link.STL"/>
+    <mesh name="grasper_L_bar_left_Link" file="grasper_L_bar_left_Link.STL"/>
+    <mesh name="grasper_L_bar_right_Link" file="grasper_L_bar_right_Link.STL"/>
+    <mesh name="grasper_L_crank_left_Link" file="grasper_L_crank_left_Link.STL"/>
+    <mesh name="grasper_L_crank_right_Link" file="grasper_L_crank_right_Link.STL"/>
+    <mesh name="grasper_L_nut_Link" file="grasper_L_nut_Link.STL"/>
+    <mesh name="proximal_pitch_R_Link" file="proximal_pitch_R_Link.STL"/>
+    <mesh name="proximal_roll_R_Link" file="proximal_roll_R_Link.STL"/>
+    <mesh name="proximal_yaw_R_Link" file="proximal_yaw_R_Link.STL"/>
+    <mesh name="proximal_yaw_R_Link_collision" file="proximal_yaw_R_Link_collision.STL"/>
+    <mesh name="elbow_R_Link" file="elbow_R_Link.STL"/>
+    <mesh name="wrist_yaw_R_Link" file="wrist_yaw_R_Link.STL"/>
+    <mesh name="wrist_pitch_R_Link" file="wrist_pitch_R_Link.STL"/>
+    <mesh name="wrist_roll_R_Link" file="wrist_roll_R_Link.STL"/>
+    <mesh name="wrist_roll_R_Link_collision" file="wrist_roll_R_Link_collision.STL"/>
+    <mesh name="grasper_R_base_Link" file="grasper_R_base_Link.STL"/>
+    <mesh name="grasper_R_jaw_left_Link" file="grasper_R_jaw_left_Link.STL"/>
+    <mesh name="grasper_R_jaw_right_Link" file="grasper_R_jaw_right_Link.STL"/>
+    <mesh name="grasper_R_bar_left_Link" file="grasper_R_bar_left_Link.STL"/>
+    <mesh name="grasper_R_bar_right_Link" file="grasper_R_bar_right_Link.STL"/>
+    <mesh name="grasper_R_crank_left_Link" file="grasper_R_crank_left_Link.STL"/>
+    <mesh name="grasper_R_crank_right_Link" file="grasper_R_crank_right_Link.STL"/>
+    <mesh name="grasper_R_nut_Link" file="grasper_R_nut_Link.STL"/>
+    <mesh name="head_base_Link" file="head_base_Link.STL"/>
+    <mesh name="head_yaw_Link" file="head_yaw_Link.STL"/>
+    <mesh name="head_pitch_Link" file="head_pitch_Link.STL"/>
+    <mesh name="base_2_Link" file="base_2_Link.STL"/>
+    <mesh name="base_3_Link" file="base_3_Link.STL"/>
+    <texture name="texplane" type="2d" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.15 0.2" width="100" height="100"/>
+    <material name="matplane" reflectance="0." texture="texplane" texrepeat="1 1" texuniform="true"/>
+  </asset>
+  <worldbody>
+    <light directional="true" diffuse="0.4 0.4 0.4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false"/>
+    <light directional="true" diffuse="0.6 0.6 0.6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1" castshadow="false"/>
+    <geom name="ground" type="plane" pos="0 0 0" size="100 100 0.001" quat="1 0 0 0" material="matplane" condim="3" conaffinity="15" margin="0.002"/>
+    <camera name="track" mode="trackcom" pos="0 -2.3 1.6" xyaxes="1 0 0 0 0.707 0.707"/>
+
+    <!-- base -->
+    <body name="base_Link" pos="0.0 0.0 1.20035">
+      <inertial pos="0.00241 -0.00022 0.11116" quat="0.688302 -0.161125 -0.160546 0.688843" mass="13.4" diaginertia="0.137791 0.118593 0.10257"/>
+      <geom mesh="base_Link" class="visual"/>
+      <geom mesh="base_Link" class="collision"/>
+      <site name="base_imu" pos="0 0 0"/>
+
+      <!-- proximal pitch L Link -->
+      <body name="proximal_pitch_L_Link" pos="-0.00044 0.09497 0.05446">
+        <inertial pos="0.0033 0.06714 -0.00603" quat="0.756285 0.646116 -0.0968279 -0.0345196" mass="2.05" diaginertia="0.00392745 0.00358052 0.00316517"/>
+        <joint name="proximal_pitch_L_Joint" pos="0 0 0" axis="0 0.996195 -0.0871554" range="-3.14159 2.60054" actuatorfrcrange="-200 200" armature="0.0754"/>
+        <geom mesh="proximal_pitch_L_Link" class="visual"/>
+        <geom mesh="proximal_pitch_L_Link" class="collision"/>
+        <body name="proximal_roll_L_Link" pos="-0.0352 0.07261 -0.00635">
+          <inertial pos="0.03623 0.00056 -0.08095" quat="0.701515 0.00861671 0.0187709 0.712355" mass="1.75" diaginertia="0.00508489 0.0043889 0.00295465"/>
+          <joint name="proximal_roll_L_Joint" pos="0 0 0" axis="1 0 0" range="-0.261799 3.19395" actuatorfrcrange="-200 200" armature="0.0754"/>
+          <geom mesh="proximal_roll_L_Link" class="visual"/>
+          <geom mesh="proximal_roll_L_Link" class="collision"/>
+          <body name="proximal_yaw_L_Link" pos="0.0352 0 -0.1348">
+            <inertial pos="-0.00376 0.00165 -0.09017" quat="0.999846 0.0154892 0.00170593 0.00802236" mass="1.21" diaginertia="0.0103083 0.00995226 0.00235418"/>
+            <joint name="proximal_yaw_L_Joint" pos="0 0 0" axis="0 0 1" range="-3.66519 1.48353" actuatorfrcrange="-70 70" armature="0.0178"/>
+            <geom mesh="proximal_yaw_L_Link" class="visual"/>
+            <geom mesh="proximal_yaw_L_Link_collision" class="collision"/>
+            <body name="elbow_L_Link" pos="0.004 0.0348 -0.2152">
+              <inertial pos="-0.00057 -0.03166 -0.00438" quat="0.705354 0.0702226 0.0648115 0.702385" mass="1.05" diaginertia="0.00133096 0.00104844 0.000902192"/>
+              <joint name="elbow_L_Joint" pos="0 0 0" axis="0 1 0" range="-2.61799 0.523599" actuatorfrcrange="-70 70" armature="0.0178"/>
+              <geom mesh="elbow_L_Link" class="visual"/>
+              <geom mesh="elbow_L_Link" class="collision"/>
+              <body name="wrist_yaw_L_Link" pos="-0.00367 -0.03481 -0.0685">
+                <inertial pos="-0.00013 0.00206 -0.06635" quat="0.999818 0.0178355 0.00131601 -0.00666706" mass="1.15" diaginertia="0.00312787 0.00297465 0.00103898"/>
+                <joint name="wrist_yaw_L_Joint" pos="0 0 0" axis="0 0 1" range="-1.74533 1.39626" actuatorfrcrange="-15 15" armature="0.0164"/>
+                <geom mesh="wrist_yaw_L_Link" class="visual"/>
+                <geom mesh="wrist_yaw_L_Link" class="collision"/>
+                <body name="wrist_pitch_L_Link" pos="0 0.0367 -0.1743">
+                  <inertial pos="0.00426 -0.0363 0.00013" quat="0.572769 0.473017 0.483797 0.462742" mass="0.44" diaginertia="0.000257393 0.00025519 0.000227077"/>
+                  <joint name="wrist_pitch_L_Joint" pos="0 0 0" axis="0 1 0" range="-0.785398 0.785398" actuatorfrcrange="-15 15" armature="0.0164"/>
+                  <geom mesh="wrist_pitch_L_Link" class="visual"/>
+                  <geom mesh="wrist_pitch_L_Link" class="collision"/>
+                  <body name="wrist_roll_L_Link" pos="0.0317 -0.0367 0">
+                    <inertial pos="-0.02867 -0.00014 -0.04311" quat="0.619771 0.344122 0.34551 0.614888" mass="0.24" diaginertia="0.000365175 0.000271569 0.000253636"/>
+                    <joint name="wrist_roll_L_Joint" pos="0 0 0" axis="1 0 0" range="-1.5708 1.5708" actuatorfrcrange="-15 15" armature="0.0164"/>
+                    <geom mesh="wrist_roll_L_Link" class="visual"/>
+                    <geom mesh="wrist_roll_L_Link_collision" class="collision"/>
+                    <body name="grasper_base_L_Link" pos="-0.0317 0 -0.0812">
+                      <inertial pos="-3.3414980e-04 5.3895572e-05 -5.9247964e-02" mass="0.49169168" fullinertia="7.7058372e-04 6.8423133e-04 3.2638784e-04 -7.3989424e-07 9.9599422e-07 -1.8328899e-06"/>
+                      <joint name="grasper_base_L_Joint" pos="0 0 0" axis="0 0 1" range="0.0 1.8326" actuatorfrcrange="-20 20"/>
+                      <geom mesh="grasper_L_base_Link" class="visual"/>
+                      <geom mesh="grasper_L_base_Link" class="collision"/>
+                      <!-- single-DOF linkage: drive(crank_left) is the only actuated joint; fingers close via connect equality -->
+                      <body name="grasper_L_crank_left_Link" pos="0 0.0275 -0.0689">
+                        <inertial pos="4.7600073e-06 -0.0055481701 -0.019012995" mass="0.0028716751" fullinertia="8.4974068e-07 1.0893102e-06 3.9176962e-07 -8.1619392e-11 -2.8305318e-10 -2.2248284e-07"/>
+                        <joint name="grasper_L_drive_Joint" pos="0 0 0" axis="1 0 0" range="-0.09522 0.77302" actuatorfrcrange="-2 2" armature="0.0005"/>
+                        <geom mesh="grasper_L_crank_left_Link" class="visual"/>
+                        <body name="grasper_L_jaw_left_Link" pos="0 -0.01401 -0.048">
+                          <inertial pos="1.392162e-07 -0.0012691085 -0.023147552" mass="0.011059233" fullinertia="3.8418984e-06 4.2033876e-06 1.006352e-06 3.6462472e-12 -3.5054283e-11 -5.2696422e-07"/>
+                          <joint name="grasper_L_tip_left_Joint" pos="0 0 0" axis="1 0 0" range="-0.77302 0.09522" armature="0.0005"/>
+                          <geom mesh="grasper_L_jaw_left_Link" class="visual"/>
+                          <geom mesh="grasper_L_jaw_left_Link" class="collision"/>
+                        </body>
+                      </body>
+                      <body name="grasper_L_bar_left_Link" pos="0 0.04136 -0.0609">
+                        <inertial pos="-2.9205723e-07 -0.0062299561 -0.013666476" mass="0.0036449843" fullinertia="1.4160278e-06 1.6580051e-06 4.4120395e-07 -4.0833729e-12 2.3404541e-11 -1.8301211e-07"/>
+                        <joint name="grasper_L_bar_left_Joint" pos="0 0 0" axis="1 0 0" range="-0.09522 0.77302" armature="0.0005"/>
+                        <geom mesh="grasper_L_bar_left_Link" class="visual"/>
+                      </body>
+                      <body name="grasper_L_crank_right_Link" pos="0 -0.0275 -0.0689">
+                        <inertial pos="-4.8119616e-06 0.0055481697 -0.019012993" mass="0.0028716752" fullinertia="8.4974076e-07 1.0893103e-06 3.9176964e-07 -8.1479958e-11 2.8278323e-10 2.2248286e-07"/>
+                        <joint name="grasper_L_crank_right_Joint" pos="0 0 0" axis="-1 0 0" range="-0.09522 0.77302" armature="0.0005"/>
+                        <geom mesh="grasper_L_crank_right_Link" class="visual"/>
+                        <body name="grasper_L_jaw_right_Link" pos="0 0.01401 -0.048">
+                          <inertial pos="-2.2359754e-07 0.0012691084 -0.023147552" mass="0.011059233" fullinertia="3.8418985e-06 4.2033877e-06 1.006352e-06 3.9560488e-12 3.3441013e-11 5.2696424e-07"/>
+                          <joint name="grasper_L_tip_right_Joint" pos="0 0 0" axis="-1 0 0" range="-0.77302 0.09522" armature="0.0005"/>
+                          <geom mesh="grasper_L_jaw_right_Link" class="visual"/>
+                          <geom mesh="grasper_L_jaw_right_Link" class="collision"/>
+                        </body>
+                      </body>
+                      <body name="grasper_L_bar_right_Link" pos="0 -0.04136 -0.0609">
+                        <inertial pos="2.4766637e-07 0.0062299561 -0.013666476" mass="0.0036449843" fullinertia="1.4160279e-06 1.6580051e-06 4.4120396e-07 -3.9635664e-12 -2.3989416e-11 1.8301211e-07"/>
+                        <joint name="grasper_L_bar_right_Joint" pos="0 0 0" axis="-1 0 0" range="-0.09522 0.77302" armature="0.0005"/>
+                        <geom mesh="grasper_L_bar_right_Link" class="visual"/>
+                      </body>
+                      <body name="grasper_L_nut_Link" pos="0 0 0">
+                        <inertial pos="-2.7416387e-08 -4.6963269e-12 -0.089912512" mass="0.0029565354" fullinertia="3.2809364e-07 2.3847151e-07 5.2186569e-07 2.710444e-12 4.8523164e-14 -1.5187541e-16"/>
+                        <joint name="grasper_L_nut_Joint" pos="0 0 0" axis="0 0 1" type="slide" range="-0.0019044 0.0154604"/>
+                        <geom mesh="grasper_L_nut_Link" class="visual"/>
+                      </body>
+                      <body name="grasper_L_jaw_left_ref_Link" pos="0 0 0">
+                        <inertial pos="0 0 0" mass="0.0001" diaginertia="1e-08 1e-08 1e-08"/>
+                        <joint name="grasper_L_jaw_left_Joint" pos="0 0 0" axis="0 1 0" type="slide" range="-0.0045 0.0375"/>
+                      </body>
+                      <body name="grasper_L_jaw_right_ref_Link" pos="0 0 0">
+                        <inertial pos="0 0 0" mass="0.0001" diaginertia="1e-08 1e-08 1e-08"/>
+                        <joint name="grasper_L_jaw_right_Joint" pos="0 0 0" axis="0 -1 0" type="slide" range="-0.0045 0.0375"/>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- proximal pitch R Link -->
+      <body name="proximal_pitch_R_Link" pos="-0.00044 -0.09497 0.05446">
+        <inertial pos="0.0033 -0.06714 -0.00603" quat="0.646116 0.756285 0.0345196 0.0968279" mass="2.05" diaginertia="0.00392745 0.00358052 0.00316517"/>
+        <joint name="proximal_pitch_R_Joint" pos="0 0 0" axis="0 0.996195 0.0871554" range="-3.14159 2.60054" actuatorfrcrange="-200 200" armature="0.0754"/>
+        <geom mesh="proximal_pitch_R_Link" class="visual"/>
+        <geom mesh="proximal_pitch_R_Link" class="collision"/>
+        <body name="proximal_roll_R_Link" pos="-0.0352 -0.07261 -0.00635">
+          <inertial pos="0.03623 -0.00056 -0.08095" quat="0.712355 0.0187709 0.00861671 0.701515" mass="1.75" diaginertia="0.00508489 0.0043889 0.00295465"/>
+          <joint name="proximal_roll_R_Joint" pos="0 0 0" axis="1 0 0" range="-3.19395 0.261799" actuatorfrcrange="-200 200" armature="0.0754"/>
+          <geom mesh="proximal_roll_R_Link" class="visual"/>
+          <geom mesh="proximal_roll_R_Link" class="collision"/>
+          <body name="proximal_yaw_R_Link" pos="0.0352 0 -0.1348">
+            <inertial pos="-0.00376 -0.00165 -0.09017" quat="0.999846 -0.0154892 0.00170593 -0.00802236" mass="1.21" diaginertia="0.0103083 0.00995226 0.00235418"/>
+            <joint name="proximal_yaw_R_Joint" pos="0 0 0" axis="0 0 1" range="-1.48353 3.66519" actuatorfrcrange="-70 70" armature="0.0178"/>
+            <geom mesh="proximal_yaw_R_Link" class="visual"/>
+            <geom mesh="proximal_yaw_R_Link_collision" class="collision"/>
+            <body name="elbow_R_Link" pos="0.004 -0.0348 -0.2152">
+              <inertial pos="-0.00057 0.03166 -0.00438" quat="0.702385 0.0648115 0.0702226 0.705354" mass="1.05" diaginertia="0.00133096 0.00104844 0.000902192"/>
+              <joint name="elbow_R_Joint" pos="0 0 0" axis="0 1 0" range="-2.61799 0.523599" actuatorfrcrange="-70 70" armature="0.0178"/>
+              <geom mesh="elbow_R_Link" class="visual"/>
+              <geom mesh="elbow_R_Link" class="collision"/>
+              <body name="wrist_yaw_R_Link" pos="-0.00367 0.03481 -0.0685">
+                <inertial pos="-0.00013 -0.00206 -0.06635" quat="0.999818 -0.0178355 0.00131601 0.00666706" mass="1.15" diaginertia="0.00312787 0.00297465 0.00103898"/>
+                <joint name="wrist_yaw_R_Joint" pos="0 0 0" axis="0 0 1" range="-1.39626 1.74533" actuatorfrcrange="-15 15" armature="0.0164"/>
+                <geom mesh="wrist_yaw_R_Link" class="visual"/>
+                <geom mesh="wrist_yaw_R_Link" class="collision"/>
+                <body name="wrist_pitch_R_Link" pos="0 -0.0367 -0.1743">
+                  <inertial pos="0.00426 0.0363 0.00013" quat="0.462742 0.483797 0.473017 0.572769" mass="0.44" diaginertia="0.000257393 0.00025519 0.000227077"/>
+                  <joint name="wrist_pitch_R_Joint" pos="0 0 0" axis="0 1 0" range="-0.785398 0.785398" actuatorfrcrange="-15 15" armature="0.0164"/>
+                  <geom mesh="wrist_pitch_R_Link" class="visual"/>
+                  <geom mesh="wrist_pitch_R_Link" class="collision"/>
+                  <body name="wrist_roll_R_Link" pos="0.0317 0.0367 0">
+                    <inertial pos="-0.02867 0.00014 -0.04311" quat="0.614888 0.34551 0.344122 0.619771" mass="0.24" diaginertia="0.000365175 0.000271569 0.000253636"/>
+                    <joint name="wrist_roll_R_Joint" pos="0 0 0" axis="1 0 0" range="-1.5708 1.5708" actuatorfrcrange="-15 15" armature="0.0164"/>
+                    <geom mesh="wrist_roll_R_Link" class="visual"/>
+                    <geom mesh="wrist_roll_R_Link_collision" class="collision"/>
+                    <body name="grasper_base_R_Link" pos="-0.0317 0 -0.0812">
+                      <inertial pos="-3.3414980e-04 -5.3895554e-05 -5.9247964e-02" mass="0.49169168" fullinertia="7.7058372e-04 6.8423133e-04 3.2638784e-04 7.4138256e-07 9.9599422e-07 1.8328899e-06"/>
+                      <joint name="grasper_base_R_Joint" pos="0 0 0" axis="0 0 1" range="0.0 1.8326" actuatorfrcrange="-20 20"/>
+                      <geom mesh="grasper_R_base_Link" class="visual"/>
+                      <geom mesh="grasper_R_base_Link" class="collision"/>
+                      <!-- single-DOF linkage: drive(crank_left) is the only actuated joint; fingers close via connect equality -->
+                      <body name="grasper_R_crank_left_Link" pos="0 0.0275 -0.0689">
+                        <inertial pos="4.7600073e-06 -0.0055481701 -0.019012995" mass="0.0028716751" fullinertia="8.4974068e-07 1.0893102e-06 3.9176962e-07 -8.1619392e-11 -2.8305318e-10 -2.2248284e-07"/>
+                        <joint name="grasper_R_drive_Joint" pos="0 0 0" axis="1 0 0" range="-0.09522 0.77302" actuatorfrcrange="-2 2" armature="0.0005"/>
+                        <geom mesh="grasper_R_crank_left_Link" class="visual"/>
+                        <body name="grasper_R_jaw_left_Link" pos="0 -0.01401 -0.048">
+                          <inertial pos="1.392162e-07 -0.0012691085 -0.023147552" mass="0.011059233" fullinertia="3.8418984e-06 4.2033876e-06 1.006352e-06 3.6462472e-12 -3.5054283e-11 -5.2696422e-07"/>
+                          <joint name="grasper_R_tip_left_Joint" pos="0 0 0" axis="1 0 0" range="-0.77302 0.09522" armature="0.0005"/>
+                          <geom mesh="grasper_R_jaw_left_Link" class="visual"/>
+                          <geom mesh="grasper_R_jaw_left_Link" class="collision"/>
+                        </body>
+                      </body>
+                      <body name="grasper_R_bar_left_Link" pos="0 0.04136 -0.0609">
+                        <inertial pos="-2.9205723e-07 -0.0062299561 -0.013666476" mass="0.0036449843" fullinertia="1.4160278e-06 1.6580051e-06 4.4120395e-07 -4.0833729e-12 2.3404541e-11 -1.8301211e-07"/>
+                        <joint name="grasper_R_bar_left_Joint" pos="0 0 0" axis="1 0 0" range="-0.09522 0.77302" armature="0.0005"/>
+                        <geom mesh="grasper_R_bar_left_Link" class="visual"/>
+                      </body>
+                      <body name="grasper_R_crank_right_Link" pos="0 -0.0275 -0.0689">
+                        <inertial pos="-4.8119616e-06 0.0055481697 -0.019012993" mass="0.0028716752" fullinertia="8.4974076e-07 1.0893103e-06 3.9176964e-07 -8.1479958e-11 2.8278323e-10 2.2248286e-07"/>
+                        <joint name="grasper_R_crank_right_Joint" pos="0 0 0" axis="-1 0 0" range="-0.09522 0.77302" armature="0.0005"/>
+                        <geom mesh="grasper_R_crank_right_Link" class="visual"/>
+                        <body name="grasper_R_jaw_right_Link" pos="0 0.01401 -0.048">
+                          <inertial pos="-2.2359754e-07 0.0012691084 -0.023147552" mass="0.011059233" fullinertia="3.8418985e-06 4.2033877e-06 1.006352e-06 3.9560488e-12 3.3441013e-11 5.2696424e-07"/>
+                          <joint name="grasper_R_tip_right_Joint" pos="0 0 0" axis="-1 0 0" range="-0.77302 0.09522" armature="0.0005"/>
+                          <geom mesh="grasper_R_jaw_right_Link" class="visual"/>
+                          <geom mesh="grasper_R_jaw_right_Link" class="collision"/>
+                        </body>
+                      </body>
+                      <body name="grasper_R_bar_right_Link" pos="0 -0.04136 -0.0609">
+                        <inertial pos="2.4766637e-07 0.0062299561 -0.013666476" mass="0.0036449843" fullinertia="1.4160279e-06 1.6580051e-06 4.4120396e-07 -3.9635664e-12 -2.3989416e-11 1.8301211e-07"/>
+                        <joint name="grasper_R_bar_right_Joint" pos="0 0 0" axis="-1 0 0" range="-0.09522 0.77302" armature="0.0005"/>
+                        <geom mesh="grasper_R_bar_right_Link" class="visual"/>
+                      </body>
+                      <body name="grasper_R_nut_Link" pos="0 0 0">
+                        <inertial pos="-2.7416387e-08 -4.6963269e-12 -0.089912512" mass="0.0029565354" fullinertia="3.2809364e-07 2.3847151e-07 5.2186569e-07 2.710444e-12 4.8523164e-14 -1.5187541e-16"/>
+                        <joint name="grasper_R_nut_Joint" pos="0 0 0" axis="0 0 1" type="slide" range="-0.0019044 0.0154604"/>
+                        <geom mesh="grasper_R_nut_Link" class="visual"/>
+                      </body>
+                      <body name="grasper_R_jaw_left_ref_Link" pos="0 0 0">
+                        <inertial pos="0 0 0" mass="0.0001" diaginertia="1e-08 1e-08 1e-08"/>
+                        <joint name="grasper_R_jaw_left_Joint" pos="0 0 0" axis="0 1 0" type="slide" range="-0.0045 0.0375"/>
+                      </body>
+                      <body name="grasper_R_jaw_right_ref_Link" pos="0 0 0">
+                        <inertial pos="0 0 0" mass="0.0001" diaginertia="1e-08 1e-08 1e-08"/>
+                        <joint name="grasper_R_jaw_right_Joint" pos="0 0 0" axis="0 -1 0" type="slide" range="-0.0045 0.0375"/>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- head base Link -->
+      <body name="head_base_Link" pos="0.04656 9e-05 0.26115">
+        <inertial pos="-0.0094 0 0.0033" quat="0.504117 0.504215 -0.495751 0.495847" mass="0.13" diaginertia="0.000246277 0.000150053 9.86e-05"/>
+        <geom mesh="head_base_Link" class="visual"/>
+        <geom mesh="head_base_Link" class="collision"/>
+        <body name="head_yaw_Link" pos="0 0 0.008">
+          <inertial pos="0.02452 0.00153 0.06142" quat="0.696669 0.194095 0.236667 0.64882" mass="0.84" diaginertia="0.00204426 0.00201554 0.000504942"/>
+          <joint name="head_yaw_Joint" pos="0 0 0" axis="0 0 1" range="-1.5708 1.5708" actuatorfrcrange="-15 15" armature="0.0164"/>
+          <geom mesh="head_yaw_Link" class="visual"/>
+          <geom mesh="head_yaw_Link" class="collision"/>
+          <body name="head_pitch_Link" pos="0.051 0.03 0.097">
+            <inertial pos="0.00697 -0.03028 0.03063" quat="0.0176578 0.713106 -0.0130977 0.700712" mass="0.61" diaginertia="0.00235472 0.001711 0.00145461"/>
+            <joint name="head_pitch_Joint" pos="0 0 0" axis="0 1 0" range="-0.785398 1.0472" actuatorfrcrange="-15 15" armature="0.0164"/>
+            <geom mesh="head_pitch_Link" class="visual"/>
+            <geom mesh="head_pitch_Link" class="collision"/>
+          </body>
+        </body>
+      </body>
+
+      <!-- base 2 Link -->
+      <body name="base_2_Link" pos="0.00056 -9e-05 -0.07285">
+        <inertial pos="0 0 -0.45862" quat="0.707107 0 0 0.707107" mass="10" diaginertia="0.811937 0.80635 0.017624"/>
+        <geom mesh="base_2_Link" class="visual"/>
+        <geom size="0.059 0.0425 0.49" pos="0 0 -0.45862" type="box"/>
+        <body name="base_3_Link" pos="0 0 -0.9295">
+          <inertial pos="0 0 -0.05442" quat="0.5 0.5 -0.5 0.5" mass="20" diaginertia="1.6803 0.9485 0.9485"/>
+          <geom mesh="base_3_Link" class="visual"/>
+          <geom mesh="base_3_Link" class="collision"/>
+        </body>
+      </body>
+
+      <!-- d435 Link -->
+      <body name="d435_Link" pos="0.0968 0.01759 -0.00409" quat="0.207912 0 0.978148 0">
+        <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        <camera name="d435_depth" pos="0 0 0" quat="0 -0.707107 0.707107 0" fovy="70.840779"/>
+        <body name="d435_optical_frame" quat="0.5 -0.5 0.5 -0.5">
+          <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <contact>
+    <exclude body1="base_Link" body2="proximal_pitch_L_Link"/>
+    <exclude body1="head_base_Link" body2="proximal_pitch_L_Link"/>
+    <exclude body1="base_2_Link" body2="proximal_pitch_L_Link"/>
+    <exclude body1="base_3_Link" body2="proximal_pitch_L_Link"/>
+    <exclude body1="base_Link" body2="proximal_pitch_R_Link"/>
+    <exclude body1="head_base_Link" body2="proximal_pitch_R_Link"/>
+    <exclude body1="base_2_Link" body2="proximal_pitch_R_Link"/>
+    <exclude body1="base_3_Link" body2="proximal_pitch_R_Link"/>
+    <exclude body1="base_Link" body2="head_yaw_Link"/>
+    <exclude body1="head_base_Link" body2="head_yaw_Link"/>
+    <exclude body1="base_2_Link" body2="head_yaw_Link"/>
+    <exclude body1="base_3_Link" body2="head_yaw_Link"/>
+    <exclude body1="grasper_base_L_Link" body2="grasper_L_jaw_left_Link"/>
+    <exclude body1="grasper_base_L_Link" body2="grasper_L_jaw_right_Link"/>
+    <exclude body1="grasper_base_R_Link" body2="grasper_R_jaw_left_Link"/>
+    <exclude body1="grasper_base_R_Link" body2="grasper_R_jaw_right_Link"/>
+  </contact>
+  <actuator>
+    <motor name="proximal_pitch_L" joint="proximal_pitch_L_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1"/>
+    <motor name="proximal_roll_L" joint="proximal_roll_L_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1"/>
+    <motor name="proximal_yaw_L" joint="proximal_yaw_L_Joint" ctrllimited="true" ctrlrange="-70 70" gear="1"/>
+    <motor name="elbow_L" joint="elbow_L_Joint" ctrllimited="true" ctrlrange="-70 70" gear="1"/>
+    <motor name="wrist_yaw_L" joint="wrist_yaw_L_Joint" ctrllimited="true" ctrlrange="-15 15" gear="1"/>
+    <motor name="wrist_pitch_L" joint="wrist_pitch_L_Joint" ctrllimited="true" ctrlrange="-15 15" gear="1"/>
+    <motor name="wrist_roll_L" joint="wrist_roll_L_Joint" ctrllimited="true" ctrlrange="-15 15" gear="1"/>
+    <motor name="proximal_pitch_R" joint="proximal_pitch_R_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1"/>
+    <motor name="proximal_roll_R" joint="proximal_roll_R_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1"/>
+    <motor name="proximal_yaw_R" joint="proximal_yaw_R_Joint" ctrllimited="true" ctrlrange="-70 70" gear="1"/>
+    <motor name="elbow_R" joint="elbow_R_Joint" ctrllimited="true" ctrlrange="-70 70" gear="1"/>
+    <motor name="wrist_yaw_R" joint="wrist_yaw_R_Joint" ctrllimited="true" ctrlrange="-15 15" gear="1"/>
+    <motor name="wrist_pitch_R" joint="wrist_pitch_R_Joint" ctrllimited="true" ctrlrange="-15 15" gear="1"/>
+    <motor name="wrist_roll_R" joint="wrist_roll_R_Joint" ctrllimited="true" ctrlrange="-15 15" gear="1"/>
+    <motor name="grasper_base_L_Joint_ctrl" joint="grasper_base_L_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1"/>
+    <motor name="grasper_L_drive_Joint_ctrl" joint="grasper_L_drive_Joint" ctrllimited="true" ctrlrange="-2 2" gear="1"/>
+    <motor name="grasper_base_R_Joint_ctrl" joint="grasper_base_R_Joint" ctrllimited="true" ctrlrange="-20 20" gear="1"/>
+    <motor name="grasper_R_drive_Joint_ctrl" joint="grasper_R_drive_Joint" ctrllimited="true" ctrlrange="-2 2" gear="1"/>
+    <motor name="head_pitch" joint="head_pitch_Joint" ctrllimited="true" ctrlrange="-15 15" gear="1"/>
+    <motor name="head_yaw" joint="head_yaw_Joint" ctrllimited="true" ctrlrange="-15 15" gear="1"/>
+  </actuator>
+  <sensor>
+    <framequat objtype="site" objname="base_imu" name="base_imu_quat"/>
+    <gyro site="base_imu" name="base_imu_gyro"/>
+    <accelerometer site="base_imu" name="base_imu_acc"/>
+
+    <jointpos joint="proximal_pitch_L_Joint" name="proximal_pitch_L_pos"/>
+    <jointpos joint="proximal_roll_L_Joint" name="proximal_roll_L_pos"/>
+    <jointpos joint="proximal_yaw_L_Joint" name="proximal_yaw_L_pos"/>
+    <jointpos joint="elbow_L_Joint" name="elbow_L_pos"/>
+    <jointpos joint="wrist_yaw_L_Joint" name="wrist_yaw_L_pos"/>
+    <jointpos joint="wrist_pitch_L_Joint" name="wrist_pitch_L_pos"/>
+    <jointpos joint="wrist_roll_L_Joint" name="wrist_roll_L_pos"/>
+    <jointpos joint="proximal_pitch_R_Joint" name="proximal_pitch_R_pos"/>
+    <jointpos joint="proximal_roll_R_Joint" name="proximal_roll_R_pos"/>
+    <jointpos joint="proximal_yaw_R_Joint" name="proximal_yaw_R_pos"/>
+    <jointpos joint="elbow_R_Joint" name="elbow_R_pos"/>
+    <jointpos joint="wrist_yaw_R_Joint" name="wrist_yaw_R_pos"/>
+    <jointpos joint="wrist_pitch_R_Joint" name="wrist_pitch_R_pos"/>
+    <jointpos joint="wrist_roll_R_Joint" name="wrist_roll_R_pos"/>
+    <jointpos joint="grasper_base_L_Joint" name="grasper_base_L_pos"/>
+    <jointpos joint="grasper_L_jaw_left_Joint" name="grasper_L_jaw_pos"/>
+    <jointpos joint="grasper_L_drive_Joint" name="grasper_L_drive_pos"/>
+    <jointpos joint="grasper_base_R_Joint" name="grasper_base_R_pos"/>
+    <jointpos joint="grasper_R_jaw_left_Joint" name="grasper_R_jaw_pos"/>
+    <jointpos joint="grasper_R_drive_Joint" name="grasper_R_drive_pos"/>
+    <jointpos joint="head_pitch_Joint" name="head_pitch_pos"/>
+    <jointpos joint="head_yaw_Joint" name="head_yaw_pos"/>
+
+    <jointvel joint="proximal_pitch_L_Joint" name="proximal_pitch_L_vel"/>
+    <jointvel joint="proximal_roll_L_Joint" name="proximal_roll_L_vel"/>
+    <jointvel joint="proximal_yaw_L_Joint" name="proximal_yaw_L_vel"/>
+    <jointvel joint="elbow_L_Joint" name="elbow_L_vel"/>
+    <jointvel joint="wrist_yaw_L_Joint" name="wrist_yaw_L_vel"/>
+    <jointvel joint="wrist_pitch_L_Joint" name="wrist_pitch_L_vel"/>
+    <jointvel joint="wrist_roll_L_Joint" name="wrist_roll_L_vel"/>
+    <jointvel joint="proximal_pitch_R_Joint" name="proximal_pitch_R_vel"/>
+    <jointvel joint="proximal_roll_R_Joint" name="proximal_roll_R_vel"/>
+    <jointvel joint="proximal_yaw_R_Joint" name="proximal_yaw_R_vel"/>
+    <jointvel joint="elbow_R_Joint" name="elbow_R_vel"/>
+    <jointvel joint="wrist_yaw_R_Joint" name="wrist_yaw_R_vel"/>
+    <jointvel joint="wrist_pitch_R_Joint" name="wrist_pitch_R_vel"/>
+    <jointvel joint="wrist_roll_R_Joint" name="wrist_roll_R_vel"/>
+    <jointvel joint="grasper_base_L_Joint" name="grasper_base_L_vel"/>
+    <jointvel joint="grasper_L_jaw_left_Joint" name="grasper_L_jaw_vel"/>
+    <jointvel joint="grasper_L_drive_Joint" name="grasper_L_drive_vel"/>
+    <jointvel joint="grasper_base_R_Joint" name="grasper_base_R_vel"/>
+    <jointvel joint="grasper_R_jaw_left_Joint" name="grasper_R_jaw_vel"/>
+    <jointvel joint="grasper_R_drive_Joint" name="grasper_R_drive_vel"/>
+    <jointvel joint="head_pitch_Joint" name="head_pitch_vel"/>
+    <jointvel joint="head_yaw_Joint" name="head_yaw_vel"/>
+
+    <jointactuatorfrc joint="proximal_pitch_L_Joint" name="proximal_pitch_L_frc"/>
+    <jointactuatorfrc joint="proximal_roll_L_Joint" name="proximal_roll_L_frc"/>
+    <jointactuatorfrc joint="proximal_yaw_L_Joint" name="proximal_yaw_L_frc"/>
+    <jointactuatorfrc joint="elbow_L_Joint" name="elbow_L_frc"/>
+    <jointactuatorfrc joint="wrist_yaw_L_Joint" name="wrist_yaw_L_frc"/>
+    <jointactuatorfrc joint="wrist_pitch_L_Joint" name="wrist_pitch_L_frc"/>
+    <jointactuatorfrc joint="wrist_roll_L_Joint" name="wrist_roll_L_frc"/>
+    <jointactuatorfrc joint="proximal_pitch_R_Joint" name="proximal_pitch_R_frc"/>
+    <jointactuatorfrc joint="proximal_roll_R_Joint" name="proximal_roll_R_frc"/>
+    <jointactuatorfrc joint="proximal_yaw_R_Joint" name="proximal_yaw_R_frc"/>
+    <jointactuatorfrc joint="elbow_R_Joint" name="elbow_R_frc"/>
+    <jointactuatorfrc joint="wrist_yaw_R_Joint" name="wrist_yaw_R_frc"/>
+    <jointactuatorfrc joint="wrist_pitch_R_Joint" name="wrist_pitch_R_frc"/>
+    <jointactuatorfrc joint="wrist_roll_R_Joint" name="wrist_roll_R_frc"/>
+    <jointactuatorfrc joint="grasper_base_L_Joint" name="grasper_base_L_frc"/>
+    <jointactuatorfrc joint="grasper_L_drive_Joint" name="grasper_L_drive_frc"/>
+    <jointactuatorfrc joint="grasper_base_R_Joint" name="grasper_base_R_frc"/>
+    <jointactuatorfrc joint="grasper_R_drive_Joint" name="grasper_R_drive_frc"/>
+    <jointactuatorfrc joint="head_pitch_Joint" name="head_pitch_frc"/>
+    <jointactuatorfrc joint="head_yaw_Joint" name="head_yaw_frc"/>
+  </sensor>
+  <equality>
+    <!-- grasper L: closed-loop four-bars + linear couplings -->
+    <connect body1="grasper_L_bar_left_Link" body2="grasper_L_jaw_left_Link" anchor="0 -0.01401 -0.048"/>
+    <connect body1="grasper_L_bar_right_Link" body2="grasper_L_jaw_right_Link" anchor="0 0.01401 -0.048"/>
+    <joint joint1="grasper_L_crank_right_Joint" joint2="grasper_L_drive_Joint" polycoef="0 1 0 0 0"/>
+    <joint joint1="grasper_L_nut_Joint" joint2="grasper_L_drive_Joint" polycoef="0 0.02 0 0 0"/>
+    <joint joint1="grasper_L_jaw_left_Joint" joint2="grasper_L_drive_Joint" polycoef="-3.3776e-07 0.0479991 0.0070779 -0.0083881 0.0001134"/>
+    <joint joint1="grasper_L_jaw_right_Joint" joint2="grasper_L_drive_Joint" polycoef="-3.3776e-07 0.0479991 0.0070779 -0.0083881 0.0001134"/>
+    <!-- grasper R: closed-loop four-bars + linear couplings -->
+    <connect body1="grasper_R_bar_left_Link" body2="grasper_R_jaw_left_Link" anchor="0 -0.01401 -0.048"/>
+    <connect body1="grasper_R_bar_right_Link" body2="grasper_R_jaw_right_Link" anchor="0 0.01401 -0.048"/>
+    <joint joint1="grasper_R_crank_right_Joint" joint2="grasper_R_drive_Joint" polycoef="0 1 0 0 0"/>
+    <joint joint1="grasper_R_nut_Joint" joint2="grasper_R_drive_Joint" polycoef="0 0.02 0 0 0"/>
+    <joint joint1="grasper_R_jaw_left_Joint" joint2="grasper_R_drive_Joint" polycoef="-3.3776e-07 0.0479991 0.0070779 -0.0083881 0.0001134"/>
+    <joint joint1="grasper_R_jaw_right_Joint" joint2="grasper_R_drive_Joint" polycoef="-3.3776e-07 0.0479991 0.0070779 -0.0083881 0.0001134"/>
+  </equality>
+</mujoco>

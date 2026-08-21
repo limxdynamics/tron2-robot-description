@@ -33,7 +33,7 @@ jobs:
               echo "::error file=$f::STL header discloses internal metadata or is ASCII"
               bad=$((bad+1))
             fi
-          done < <(find tron2 -iname '*.STL' -print0)
+          done < <(find tron2a -iname '*.STL' -print0)
           if [ $bad -ne 0 ]; then exit 1; fi
 
       - name: USD metadata scan
