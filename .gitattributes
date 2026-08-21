@@ -1,0 +1,4 @@
+# Large USD assets exceeding GitHub's 100MB per-file hard limit
+tron2a/DASF_TRON2A/usd/configuration/robot_base.usd filter=lfs diff=lfs merge=lfs -text
+tron2b/DASF_TRON2B/usd/configuration/robot_base.usd filter=lfs diff=lfs merge=lfs -text
+tron2b/DASF2_TRON2B/usd/configuration/robot_base.usd filter=lfs diff=lfs merge=lfs -text
