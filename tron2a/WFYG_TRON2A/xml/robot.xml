@@ -29,7 +29,8 @@
     <mesh name="knee_R_Link" file="knee_R_Link.STL"/>
     <mesh name="wheel_R_Link" file="wheel_R_Link.STL"/>
     <mesh name="transition_Link" file="transition_Link.STL"/>
-    <mesh name="transition_Link_collision" file="transition_Link_collision.STL"/>
+    <mesh name="transition_Link_collision_1" file="transition_Link_collision_1.STL"/>
+    <mesh name="transition_Link_collision_2" file="transition_Link_collision_2.STL"/>
     <mesh name="arm_base_Link" file="arm_base_Link.STL"/>
     <mesh name="arm1_Link" file="arm1_Link.STL"/>
     <mesh name="arm2_Link" file="arm2_Link.STL"/>
@@ -49,13 +50,12 @@
     <mesh name="gripper1_Link" file="gripper1_Link.STL"/>
     <mesh name="gripper2_Link" file="gripper2_Link.STL"/>
     <mesh name="antenna_L_Link" file="antenna_L_Link.STL"/>
-    <mesh name="antenna_L_Link_collision1" file="antenna_L_Link_collision1.STL"/>
-    <mesh name="antenna_L_Link_collision2" file="antenna_L_Link_collision2.STL"/>
+    <mesh name="antenna_L_Link_collision_1" file="antenna_L_Link_collision_1.STL"/>
+    <mesh name="antenna_L_Link_collision_2" file="antenna_L_Link_collision_2.STL"/>
     <mesh name="antenna_R_Link" file="antenna_R_Link.STL"/>
-    <mesh name="antenna_R_Link_collision1" file="antenna_R_Link_collision1.STL"/>
-    <mesh name="antenna_R_Link_collision2" file="antenna_R_Link_collision2.STL"/>
+    <mesh name="antenna_R_Link_collision_1" file="antenna_R_Link_collision_1.STL"/>
+    <mesh name="antenna_R_Link_collision_2" file="antenna_R_Link_collision_2.STL"/>
     <mesh name="camera_mount_Link" file="camera_mount_Link.STL"/>
-    <mesh name="camera_mount_Link_collision" file="camera_mount_Link_collision.STL"/>
     <mesh name="radar_Link" file="radar_Link.STL"/>
     <texture name="texplane" type="2d" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.15 0.2" width="100" height="100" />
     <material name="matplane" reflectance="0." texture="texplane" texrepeat="1 1" texuniform="true" />
@@ -148,10 +148,11 @@
 
       <!-- transition Link -->
       <body name="transition_Link" pos="0.01 0 0.26915">
-        <inertial pos="-0.111727 0.000317 0.014516" quat="0.0036137 0.764736 -0.00818638 0.644282" mass="1.117" diaginertia="0.00804641 0.00687302 0.00258069"/>
+        <inertial pos="-0.109866 -0.002238 0.012131" quat="-0.0128779 0.763664 0.0146947 0.645318" mass="1.117" diaginertia="0.00871932 0.00714081 0.00257108"/>
         <geom mesh="transition_Link" class="visual"/>
-        <geom mesh="transition_Link_collision" class="collision"/>
-        <body name="arm_base_Link" pos="0.006 0 0">
+        <geom mesh="transition_Link_collision_1" class="collision"/>
+        <geom mesh="transition_Link_collision_2" class="collision"/>
+        <body name="arm_base_Link">
           <inertial pos="-0.00473641 2.5683e-05 0.0414515" quat="0.70428 0.034288 0.0339756 0.708279" mass="1.02" diaginertia="0.00282612 0.00269117 0.000879394"/>
           <geom mesh="arm_base_Link" class="visual"/>
           <geom mesh="arm_base_Link" class="collision"/>
@@ -219,31 +220,33 @@
       </body>
 
       <!-- antenna L Link -->
-      <body name="antenna_L_Link" pos="-0.0025 0.16692 0.211">
-        <inertial pos="-2.7e-05 -0.028426 0.013784" quat="0.75335 0.657615 0.00138308 -0.00187246" mass="0.231" diaginertia="0.000424494 0.000395949 0.000165777"/>
+      <body name="antenna_L_Link" pos="-0.04365 0.1535 0.23765">
+        <inertial pos="0 -0.025937 0.00756" quat="0.705004 0.709204 -5.38434e-06 -5.41642e-06" mass="0.073" diaginertia="9.4062e-05 7.75867e-05 2.85953e-05"/>
         <geom mesh="antenna_L_Link" class="visual"/>
-        <geom mesh="antenna_L_Link_collision1" class="collision"/>
-        <geom mesh="antenna_L_Link_collision2" class="collision"/>
+        <geom mesh="antenna_L_Link_collision_1" class="collision"/>
+        <geom mesh="antenna_L_Link_collision_2" class="collision"/>
       </body>
 
       <!-- antenna R Link -->
-      <body name="antenna_R_Link" pos="-0.0025 -0.16692 0.211">
-        <inertial pos="2.7e-05 0.028426 0.013784" quat="0.657613 0.753352 -0.00185952 0.00137144" mass="0.231" diaginertia="0.000424494 0.000395949 0.000165777"/>
+      <body name="antenna_R_Link" pos="-0.04365 -0.1535 0.23765">
+        <inertial pos="0 0.025937 0.00756" quat="0.709197 0.705011 -5.41637e-06 -5.3844e-06" mass="0.073" diaginertia="9.4062e-05 7.75857e-05 2.85953e-05"/>
         <geom mesh="antenna_R_Link" class="visual"/>
-        <geom mesh="antenna_R_Link_collision1" class="collision"/>
-        <geom mesh="antenna_R_Link_collision2" class="collision"/>
+        <geom mesh="antenna_R_Link_collision_1" class="collision"/>
+        <geom mesh="antenna_R_Link_collision_2" class="collision"/>
       </body>
 
       <!-- camera mount Link -->
       <body name="camera_mount_Link" pos="0.18058 0 0.23876">
-        <inertial pos="0.002536 0.000321 -0.060392" quat="0.995871 -0.00286112 0.0902072 -0.0097294" mass="0.381" diaginertia="0.00166835 0.00150447 0.000510829"/>
+        <inertial pos="-0.019708 0.000381 -0.010581" quat="-0.00524609 0.802967 -2.10081e-05 0.596001" mass="0.288" diaginertia="0.00184131 0.00133133 0.000667704"/>
         <geom mesh="camera_mount_Link" class="visual"/>
-        <geom mesh="camera_mount_Link_collision" class="collision"/>
-        <body name="radar_Link">
-          <inertial pos="-4.8e-05 8.4e-05 0.03502" quat="0.954476 0.1644 0.0447128 0.244843" mass="0.394" diaginertia="0.000309219 0.000308095 0.000304951"/>
-          <geom mesh="radar_Link" class="visual"/>
-          <geom mesh="radar_Link" class="collision"/>
-        </body>
+        <geom mesh="camera_mount_Link" class="collision"/>
+      </body>
+
+      <!-- radar Link -->
+      <body name="radar_Link" pos="0.18058 0 0.23876">
+        <inertial pos="-0.001188 1e-06 0.037286" quat="0.999805 -0.000207679 -0.0195809 0.00270534" mass="0.406" diaginertia="0.000379189 0.00036962 0.000353347"/>
+        <geom mesh="radar_Link" class="visual"/>
+        <geom mesh="radar_Link" class="collision"/>
       </body>
     </body>
   </worldbody>

@@ -349,9 +349,9 @@
   <!-- transition Link -->
   <link name="transition_Link">
     <inertial>
-      <origin xyz="-0.111727 0.000317 0.014516" rpy="0.0 0.0 0.0"/>
+      <origin xyz="-0.109866 -0.002238 0.012131" rpy="0.0 0.0 0.0"/>
       <mass value="1.117"/>
-      <inertia ixx="0.002739303" ixy="6.6427e-05" ixz="0.000914255" iyy="0.006871988" iyz="-2.0809e-05" izz="0.007888835"/>
+      <inertia ixx="0.002748897" ixy="-0.000172411" ixz="0.00101041" iyy="0.007134041" iyz="3.8511e-05" izz="0.008548272"/>
     </inertial>
     <visual>
       <geometry>
@@ -363,7 +363,13 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/transition_Link_collision.STL"/>
+        <mesh filename="package://bipedal_robot/meshes/transition_Link_collision_1.STL"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://bipedal_robot/meshes/transition_Link_collision_2.STL"/>
       </geometry>
     </collision>
   </link>
@@ -393,7 +399,7 @@
     </collision>
   </link>
   <joint name="arm_base_Joint" type="fixed">
-    <origin xyz="0.006 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
     <parent link="transition_Link"/>
     <child link="arm_base_Link"/>
   </joint>
@@ -657,9 +663,9 @@
   <!-- antenna L Link -->
   <link name="antenna_L_Link">
     <inertial>
-      <origin xyz="-2.7e-05 -0.028426 0.013784" rpy="0.0 0.0 0.0"/>
-      <mass value="0.231"/>
-      <inertia ixx="0.000424493" ixy="-1.15e-07" ixz="-1.18e-07" iyy="0.000169977" iyz="3.0807e-05" izz="0.00039175"/>
+      <origin xyz="0.0 -0.025937 0.00756" rpy="0.0 0.0 0.0"/>
+      <mass value="0.073"/>
+      <inertia ixx="9.4062e-05" ixy="-1e-09" ixz="0.0" iyy="2.8597e-05" iyz="-2.91e-07" izz="7.7585e-05"/>
     </inertial>
     <visual>
       <geometry>
@@ -671,17 +677,18 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/antenna_L_Link_collision1.STL"/>
+        <mesh filename="package://bipedal_robot/meshes/antenna_L_Link_collision_1.STL"/>
       </geometry>
     </collision>
     <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/antenna_L_Link_collision2.STL"/>
+        <mesh filename="package://bipedal_robot/meshes/antenna_L_Link_collision_2.STL"/>
       </geometry>
     </collision>
   </link>
   <joint name="antenna_L_Joint" type="fixed">
-    <origin xyz="-0.0025 0.16692 0.211" rpy="0.0 0.0 0.0"/>
+    <origin xyz="-0.04365 0.1535 0.23765" rpy="0.0 0.0 0.0"/>
     <parent link="base_Link"/>
     <child link="antenna_L_Link"/>
   </joint>
@@ -689,9 +696,9 @@
   <!-- antenna R Link -->
   <link name="antenna_R_Link">
     <inertial>
-      <origin xyz="2.7e-05 0.028426 0.013784" rpy="0.0 0.0 0.0"/>
-      <mass value="0.231"/>
-      <inertia ixx="0.000424493" ixy="-1.15e-07" ixz="1.17e-07" iyy="0.000169977" iyz="-3.0808e-05" izz="0.000391749"/>
+      <origin xyz="0.0 0.025937 0.00756" rpy="0.0 0.0 0.0"/>
+      <mass value="0.073"/>
+      <inertia ixx="9.4062e-05" ixy="-1e-09" ixz="0.0" iyy="2.8597e-05" iyz="2.9e-07" izz="7.7584e-05"/>
     </inertial>
     <visual>
       <geometry>
@@ -703,17 +710,18 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/antenna_R_Link_collision1.STL"/>
+        <mesh filename="package://bipedal_robot/meshes/antenna_R_Link_collision_1.STL"/>
       </geometry>
     </collision>
     <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/antenna_R_Link_collision2.STL"/>
+        <mesh filename="package://bipedal_robot/meshes/antenna_R_Link_collision_2.STL"/>
       </geometry>
     </collision>
   </link>
   <joint name="antenna_R_Joint" type="fixed">
-    <origin xyz="-0.0025 -0.16692 0.211" rpy="0.0 0.0 0.0"/>
+    <origin xyz="-0.04365 -0.1535 0.23765" rpy="0.0 0.0 0.0"/>
     <parent link="base_Link"/>
     <child link="antenna_R_Link"/>
   </joint>
@@ -721,9 +729,9 @@
   <!-- camera mount Link -->
   <link name="camera_mount_Link">
     <inertial>
-      <origin xyz="0.002536 0.000321 -0.060392" rpy="0.0 0.0 0.0"/>
-      <mass value="0.381"/>
-      <inertia ixx="0.001630905" ixy="-3.911e-06" ixz="-0.000204624" iyy="0.001504517" iyz="-3.269e-06" izz="0.000548227"/>
+      <origin xyz="-0.019708 0.000381 -0.010581" rpy="0.0 0.0 0.0"/>
+      <mass value="0.288"/>
+      <inertia ixx="0.000766135" ixy="-6.264e-06" ixz="0.000325236" iyy="0.001331301" iyz="-1.455e-06" izz="0.001742907"/>
     </inertial>
     <visual>
       <geometry>
@@ -735,7 +743,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/camera_mount_Link_collision.STL"/>
+        <mesh filename="package://bipedal_robot/meshes/camera_mount_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -746,9 +754,9 @@
   </joint>
   <link name="radar_Link">
     <inertial>
-      <origin xyz="-4.8e-05 8.4e-05 0.03502" rpy="0.0 0.0 0.0"/>
-      <mass value="0.394"/>
-      <inertia ixx="0.000308871" ixy="6.27e-07" ixz="-4.96e-07" iyy="0.000308088" iyz="8.62e-07" izz="0.000305305"/>
+      <origin xyz="-0.001188 1e-06 0.037286" rpy="0.0 0.0 0.0"/>
+      <mass value="0.406"/>
+      <inertia ixx="0.000379149" ixy="5.2e-08" ixz="1.011e-06" iyy="0.00036962" iyz="-3e-09" izz="0.000353387"/>
     </inertial>
     <visual>
       <geometry>
@@ -765,8 +773,8 @@
     </collision>
   </link>
   <joint name="radar_Joint" type="fixed">
-    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-    <parent link="camera_mount_Link"/>
+    <origin xyz="0.18058 0.0 0.23876" rpy="0.0 0.0 0.0"/>
+    <parent link="base_Link"/>
     <child link="radar_Link"/>
   </joint>
 </robot>
