@@ -14,7 +14,7 @@
     <visual>
       <origin xyz="0.0 0.0 0.0" rpy="0.0 -1.57079632679 0.0"/>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/base_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -23,7 +23,7 @@
     <collision>
       <origin xyz="0.0 0.0 0.0" rpy="0.0 -1.57079632679 0.0"/>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/base_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -51,7 +51,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_L_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_pitch_L_F_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -59,7 +59,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_L_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_pitch_L_F_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -78,7 +78,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_roll_L_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_roll_L_F_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -86,7 +86,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_roll_L_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_roll_L_F_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -105,7 +105,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_L_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_yaw_L_F_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -113,7 +113,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_L_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_yaw_L_F_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -132,7 +132,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/knee_L_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/knee_L_F_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -140,7 +140,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/knee_L_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/knee_L_F_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -159,7 +159,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/ankle_pitch_L_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/ankle_pitch_L_F_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -249,7 +249,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_R_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_pitch_R_F_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -257,7 +257,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_R_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_pitch_R_F_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -276,7 +276,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_roll_R_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_roll_R_F_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -284,7 +284,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_roll_R_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_roll_R_F_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -303,7 +303,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_R_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_yaw_R_F_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -311,7 +311,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_R_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_yaw_R_F_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -330,7 +330,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/knee_R_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/knee_R_F_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -338,7 +338,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/knee_R_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/knee_R_F_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -357,7 +357,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/ankle_pitch_R_F_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/ankle_pitch_R_F_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -473,7 +473,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/transition_middle_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/transition_middle_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -481,7 +481,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/transition_middle_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/transition_middle_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -499,7 +499,7 @@
     <visual>
       <origin xyz="0.0 0.0 0.0" rpy="3.14159265358979 -1.57079632679 0.0"/>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/back_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/back_base_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -508,7 +508,7 @@
     <collision>
       <origin xyz="0.0 0.0 0.0" rpy="3.14159265358979 -1.57079632679 0.0"/>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/back_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/back_base_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -525,7 +525,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_L_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_pitch_L_B_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -533,7 +533,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_L_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_pitch_L_B_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -552,7 +552,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_roll_L_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_roll_L_B_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -560,7 +560,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_roll_L_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_roll_L_B_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -579,7 +579,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_L_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_yaw_L_B_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -587,7 +587,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_L_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_yaw_L_B_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -606,7 +606,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/knee_L_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/knee_L_B_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -614,7 +614,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/knee_L_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/knee_L_B_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -633,7 +633,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/ankle_pitch_L_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/ankle_pitch_L_B_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -721,7 +721,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_R_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_pitch_R_B_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -729,7 +729,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_R_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_pitch_R_B_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -748,7 +748,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_roll_R_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_roll_R_B_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -756,7 +756,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_roll_R_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_roll_R_B_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -775,7 +775,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_R_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_yaw_R_B_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -783,7 +783,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_R_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_yaw_R_B_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -802,7 +802,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/knee_R_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/knee_R_B_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -810,7 +810,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/knee_R_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/knee_R_B_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -829,7 +829,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/ankle_pitch_R_B_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/ankle_pitch_R_B_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -955,7 +955,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/transition_upper_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/transition_upper_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -963,7 +963,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/transition_upper_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/transition_upper_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -981,7 +981,7 @@
     <visual>
       <origin xyz="0.0 0.0 0.0" rpy="3.14159265358979 0.0 0.0"/>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/upper_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/upper_base_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -990,7 +990,7 @@
     <collision>
       <origin xyz="0.0 0.0 0.0" rpy="3.14159265358979 0.0 0.0"/>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/upper_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/upper_base_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1007,7 +1007,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_L_H_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_pitch_L_H_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1015,7 +1015,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_L_H_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_pitch_L_H_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1034,7 +1034,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_roll_L_H_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_roll_L_H_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1042,7 +1042,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_roll_L_H_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_roll_L_H_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1061,7 +1061,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_L_H_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_yaw_L_H_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1069,7 +1069,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_L_H_Link_collision.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_yaw_L_H_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1088,7 +1088,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/elbow_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/elbow_L_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1096,7 +1096,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/elbow_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/elbow_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1115,7 +1115,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/wrist_yaw_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/wrist_yaw_L_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1123,7 +1123,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/wrist_yaw_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/wrist_yaw_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1142,7 +1142,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/wrist_pitch_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/wrist_pitch_L_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1150,7 +1150,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/wrist_pitch_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/wrist_pitch_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1169,7 +1169,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/wrist_roll_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/wrist_roll_L_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1177,7 +1177,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/wrist_roll_L_Link_collision.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/wrist_roll_L_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1196,7 +1196,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/grasper_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/grasper_L_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1204,7 +1204,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/grasper_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/grasper_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1221,7 +1221,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_R_H_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_pitch_R_H_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1229,7 +1229,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_pitch_R_H_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_pitch_R_H_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1248,7 +1248,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_roll_R_H_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_roll_R_H_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1256,7 +1256,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_roll_R_H_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_roll_R_H_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1275,7 +1275,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_R_H_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_yaw_R_H_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1283,7 +1283,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/proximal_yaw_R_H_Link_collision.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/proximal_yaw_R_H_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1302,7 +1302,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/elbow_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/elbow_R_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1310,7 +1310,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/elbow_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/elbow_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1329,7 +1329,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/wrist_yaw_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/wrist_yaw_R_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1337,7 +1337,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/wrist_yaw_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/wrist_yaw_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1356,7 +1356,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/wrist_pitch_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/wrist_pitch_R_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1364,7 +1364,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/wrist_pitch_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/wrist_pitch_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1383,7 +1383,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/wrist_roll_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/wrist_roll_R_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1391,7 +1391,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/wrist_roll_R_Link_collision.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/wrist_roll_R_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1410,7 +1410,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/grasper_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/grasper_R_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1418,7 +1418,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/grasper_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/grasper_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1435,7 +1435,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/head_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/head_base_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1443,7 +1443,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/head_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/head_base_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1460,7 +1460,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/head_yaw_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/head_yaw_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1468,7 +1468,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/head_yaw_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/head_yaw_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1487,7 +1487,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/head_pitch_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/head_pitch_Link.STL"/>
       </geometry>
       <material name="grey">
         <color rgba="1 1 1 1"/>
@@ -1495,7 +1495,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://bipedal_robot/meshes/head_pitch_Link.STL"/>
+        <mesh filename="package://robot_description/tron2b/DASF2_TRON2B/meshes/head_pitch_Link.STL"/>
       </geometry>
     </collision>
   </link>

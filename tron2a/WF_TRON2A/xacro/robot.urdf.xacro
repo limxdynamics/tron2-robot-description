@@ -56,12 +56,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/base_Link.STL" />
+        <mesh filename="package://robot_description/tron2a/WF_TRON2A/meshes/base_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/base_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2a/WF_TRON2A/meshes/base_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -81,12 +81,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_L_Link.STL" />
+        <mesh filename="package://robot_description/tron2a/WF_TRON2A/meshes/proximal_pitch_L_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_L_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2a/WF_TRON2A/meshes/proximal_pitch_L_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -106,12 +106,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_L_Link.STL" />
+        <mesh filename="package://robot_description/tron2a/WF_TRON2A/meshes/proximal_roll_L_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_L_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2a/WF_TRON2A/meshes/proximal_roll_L_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -131,12 +131,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_L_Link.STL" />
+        <mesh filename="package://robot_description/tron2a/WF_TRON2A/meshes/proximal_yaw_L_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_L_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2a/WF_TRON2A/meshes/proximal_yaw_L_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -156,12 +156,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_L_Link.STL" />
+        <mesh filename="package://robot_description/tron2a/WF_TRON2A/meshes/knee_L_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_L_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2a/WF_TRON2A/meshes/knee_L_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -181,7 +181,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/wheel_L_Link.STL" />
+        <mesh filename="package://robot_description/tron2a/WF_TRON2A/meshes/wheel_L_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
@@ -203,12 +203,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_R_Link.STL" />
+        <mesh filename="package://robot_description/tron2a/WF_TRON2A/meshes/proximal_pitch_R_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_pitch_R_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2a/WF_TRON2A/meshes/proximal_pitch_R_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -228,12 +228,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_R_Link.STL" />
+        <mesh filename="package://robot_description/tron2a/WF_TRON2A/meshes/proximal_roll_R_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_roll_R_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2a/WF_TRON2A/meshes/proximal_roll_R_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -253,12 +253,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_R_Link.STL" />
+        <mesh filename="package://robot_description/tron2a/WF_TRON2A/meshes/proximal_yaw_R_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/proximal_yaw_R_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2a/WF_TRON2A/meshes/proximal_yaw_R_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -278,12 +278,12 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_R_Link.STL" />
+        <mesh filename="package://robot_description/tron2a/WF_TRON2A/meshes/knee_R_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>
     <xacro:unless value="${use_primitive}">
-      <xacro:collision_mesh mesh_filename="package://robot_description/tron2/WF_TRON2A/meshes/knee_R_Link.STL" />
+      <xacro:collision_mesh mesh_filename="package://robot_description/tron2a/WF_TRON2A/meshes/knee_R_Link.STL" />
     </xacro:unless>
     <xacro:if value="${use_primitive}">
       <xacro:collision_box
@@ -303,7 +303,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2/WF_TRON2A/meshes/wheel_R_Link.STL" />
+        <mesh filename="package://robot_description/tron2a/WF_TRON2A/meshes/wheel_R_Link.STL" />
       </geometry>
       <material name="grey" />
     </visual>

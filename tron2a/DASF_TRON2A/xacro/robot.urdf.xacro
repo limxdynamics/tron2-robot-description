@@ -73,12 +73,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/base_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/base_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -92,12 +92,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -116,12 +116,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_roll_L_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_roll_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -140,12 +140,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -164,12 +164,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/knee_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/knee_L_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/knee_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/knee_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -188,7 +188,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/ankle_pitch_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/ankle_pitch_L_Link.STL"/>
       </geometry>
     </visual>
     <collision>
@@ -275,12 +275,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -299,12 +299,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_roll_R_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_roll_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -323,12 +323,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -347,12 +347,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/knee_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/knee_R_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/knee_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/knee_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -371,7 +371,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/ankle_pitch_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/ankle_pitch_R_Link.STL"/>
       </geometry>
     </visual>
     <collision>
@@ -458,12 +458,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/transition_upper_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/transition_upper_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/transition_upper_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/transition_upper_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -483,13 +483,13 @@
     <visual>
       <origin xyz="0 0 0" rpy="3.14159265358979 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/upper_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/upper_base_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="3.14159265358979 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/upper_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/upper_base_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -552,12 +552,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_pitch_L_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_pitch_L_U_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -576,12 +576,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_roll_L_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_roll_L_U_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -600,12 +600,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_yaw_L_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_L_U_Link_collision.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_yaw_L_U_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -624,12 +624,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/elbow_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/elbow_L_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/elbow_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/elbow_L_U_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -648,12 +648,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_yaw_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/wrist_yaw_L_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_yaw_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/wrist_yaw_L_U_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -672,12 +672,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_pitch_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/wrist_pitch_L_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_pitch_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/wrist_pitch_L_U_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -696,12 +696,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_roll_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/wrist_roll_L_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_roll_L_U_Link_collision.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/wrist_roll_L_U_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -720,12 +720,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/grasper_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/grasper_L_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/grasper_L_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/grasper_L_U_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -744,12 +744,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_pitch_R_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_pitch_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_pitch_R_U_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -768,12 +768,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_roll_R_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_roll_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_roll_R_U_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -792,12 +792,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_yaw_R_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/proximal_yaw_R_U_Link_collision.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/proximal_yaw_R_U_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -816,12 +816,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/elbow_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/elbow_R_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/elbow_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/elbow_R_U_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -840,12 +840,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_yaw_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/wrist_yaw_R_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_yaw_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/wrist_yaw_R_U_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -864,12 +864,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_pitch_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/wrist_pitch_R_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_pitch_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/wrist_pitch_R_U_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -888,12 +888,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_roll_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/wrist_roll_R_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/wrist_roll_R_U_Link_collision.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/wrist_roll_R_U_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -912,12 +912,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/grasper_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/grasper_R_U_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/grasper_R_U_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/grasper_R_U_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -936,7 +936,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/head_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/head_base_Link.STL"/>
       </geometry>
     </visual>
   </link>
@@ -953,12 +953,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/head_yaw_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/head_yaw_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/head_yaw_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/head_yaw_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -977,12 +977,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/head_pitch_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/head_pitch_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DASF_TRON2A/meshes/head_pitch_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DASF_TRON2A/meshes/head_pitch_Link.STL"/>
       </geometry>
     </collision>
   </link>

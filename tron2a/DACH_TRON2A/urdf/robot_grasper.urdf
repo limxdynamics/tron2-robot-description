@@ -13,12 +13,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/base_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/base_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -46,7 +46,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/base_2_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/base_2_Link.STL"/>
       </geometry>
     </visual>
     <collision>
@@ -69,12 +69,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/base_3_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/base_3_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/base_3_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/base_3_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -93,7 +93,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/head_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/head_base_Link.STL"/>
       </geometry>
     </visual>
     </link>
@@ -110,12 +110,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/head_yaw_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/head_yaw_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/head_yaw_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/head_yaw_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -134,12 +134,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/head_pitch_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/head_pitch_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/head_pitch_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/head_pitch_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -160,12 +160,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/proximal_pitch_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -184,12 +184,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_roll_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/proximal_roll_L_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_roll_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/proximal_roll_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -208,12 +208,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/proximal_yaw_L_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_yaw_L_Link_collision.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/proximal_yaw_L_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -232,12 +232,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/elbow_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/elbow_L_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/elbow_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/elbow_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -256,12 +256,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_yaw_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/wrist_yaw_L_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_yaw_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/wrist_yaw_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -280,12 +280,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_pitch_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/wrist_pitch_L_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_pitch_L_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/wrist_pitch_L_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -304,12 +304,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_roll_L_Link_cam.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/wrist_roll_L_Link_cam.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_roll_L_Link_collision.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/wrist_roll_L_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -341,12 +341,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_L_base_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_L_base_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -365,7 +365,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_crank_left_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_L_crank_left_Link.STL"/>
       </geometry>
     </visual>
   </link>
@@ -384,12 +384,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_jaw_left_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_L_jaw_left_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_jaw_left_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_L_jaw_left_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -409,7 +409,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_bar_left_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_L_bar_left_Link.STL"/>
       </geometry>
     </visual>
   </link>
@@ -429,7 +429,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_crank_right_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_L_crank_right_Link.STL"/>
       </geometry>
     </visual>
   </link>
@@ -449,12 +449,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_jaw_right_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_L_jaw_right_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_jaw_right_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_L_jaw_right_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -474,7 +474,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_bar_right_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_L_bar_right_Link.STL"/>
       </geometry>
     </visual>
   </link>
@@ -494,7 +494,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_L_nut_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_L_nut_Link.STL"/>
       </geometry>
     </visual>
   </link>
@@ -546,12 +546,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/proximal_pitch_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -570,12 +570,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_roll_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/proximal_roll_R_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_roll_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/proximal_roll_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -594,12 +594,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/proximal_yaw_R_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/proximal_yaw_R_Link_collision.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/proximal_yaw_R_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -618,12 +618,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/elbow_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/elbow_R_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/elbow_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/elbow_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -642,12 +642,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_yaw_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/wrist_yaw_R_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_yaw_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/wrist_yaw_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -666,12 +666,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_pitch_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/wrist_pitch_R_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_pitch_R_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/wrist_pitch_R_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -690,12 +690,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_roll_R_Link_cam.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/wrist_roll_R_Link_cam.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/wrist_roll_R_Link_collision.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/wrist_roll_R_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -727,12 +727,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_R_base_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_base_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_R_base_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -751,7 +751,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_crank_left_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_R_crank_left_Link.STL"/>
       </geometry>
     </visual>
   </link>
@@ -770,12 +770,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_jaw_left_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_R_jaw_left_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_jaw_left_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_R_jaw_left_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -795,7 +795,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_bar_left_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_R_bar_left_Link.STL"/>
       </geometry>
     </visual>
   </link>
@@ -815,7 +815,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_crank_right_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_R_crank_right_Link.STL"/>
       </geometry>
     </visual>
   </link>
@@ -835,12 +835,12 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_jaw_right_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_R_jaw_right_Link.STL"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_jaw_right_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_R_jaw_right_Link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -860,7 +860,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_bar_right_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_R_bar_right_Link.STL"/>
       </geometry>
     </visual>
   </link>
@@ -880,7 +880,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="package://robot_description/tron2/DACH_TRON2A/meshes/grasper_R_nut_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/DACH_TRON2A/meshes/grasper_R_nut_Link.STL"/>
       </geometry>
     </visual>
   </link>
