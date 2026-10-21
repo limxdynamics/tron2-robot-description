@@ -116,8 +116,14 @@ python -m mujoco.viewer --mjcf=tron2a/DACH_TRON2A/xml/robot.xml
 除非集成栈另有说明，坐标约定遵循典型的 ROS 用法：以根链接为基准，**x** 向前、**y** 向左、**z** 向上。
 
 - **SF / SFYG 腿部形态 —— TRON2A 与 TRON2B 的区别：**
-  - **`tron2a/`（TRON2A）：** URDF/MuJoCo 的 **零位** 与实物机器人出厂标定的零位一致 —— **并非** 行走控制所用的膝盖前倾姿态。要获得膝盖前倾姿态，需要在控制器或状态初始化中将每条腿的 **髋关节偏航（hip yaw）** 旋转 **180°**（π rad），例如 `proximal_yaw_L_Joint` / `proximal_yaw_R_Joint`。两种姿态对比见 [SF_TRON2A](#sf_tron2a)。
+  - **`tron2a/`（TRON2A）：** URDF/MuJoCo 的 **零位** 与实物机器人出厂标定的零位一致 —— **并非** 行走控制所用的膝盖前倾姿态。要获得膝盖前倾姿态，需要在控制器或状态初始化中将每条腿的 **髋关节偏航（hip yaw）** 旋转 **180°**（π rad），例如 `proximal_yaw_L_Joint` / `proximal_yaw_R_Joint`。两种姿态的对比见下图。
   - **`tron2b/`（TRON2B）：** URDF 零位 **直接定义为膝盖前倾姿态**，**与实物机器人出厂零位不一致**。这是有意为之的设计选择，目的是让模型在训练与直观理解上更方便（无需再脑内换算 180° 偏航即可直接看出行走站姿），代价是 URDF 零位不再等同于出厂硬件零位。**部署到 TRON2B 实机时，必须应用相应的关节偏置**（即 180° 髋偏航旋转的逆变换），以在 URDF/仿真约定与实机出厂零位之间进行转换。
+
+| 零位姿态（名义运动学零位） | 用于控制的膝盖前倾姿态（每腿 yaw 约 180° 后） |
+| :---: | :---: |
+| <img src="docs/images/render_SF_TRON2A_zero.jpg" alt="SF zero position" width="400" /> | <img src="docs/images/render_SF_TRON2A_knees_forward.jpg" alt="SF knees-forward pose" width="400" /> |
+
+<sub>两张图都加了相同的轻微髋 / 膝 / 踝弯曲，以便看清膝盖朝向；两者唯一的区别是髋关节偏航的 180° 偏置。</sub>
 
 ---
 
@@ -165,14 +171,7 @@ python -m mujoco.viewer --mjcf=tron2a/DACH_TRON2A/xml/robot.xml
 
 - **简介：** 采用 **踝关节俯仰（ankle pitch）** 而非车轮的腿部设计；髋 / 膝层级的腿部拓扑与 WF 类似。
 - **根节点 / IMU：** 与 **WF_TRON2A** 相同的 `base_imu` / MuJoCo 传感器布局。
-- **零位与控制姿态（膝盖前倾，knees-forward）：** 网格 / URDF 的 **零位** 与左图站立姿态一致。全身控制通常希望采用 **膝盖前倾**——膝盖指向前方（类人站姿）。在软件中，可通过将每条腿的 **髋关节偏航（hip yaw）** 旋转 **180°**（π rad）得到该姿态，例如 `proximal_yaw_L_Joint` 与 `proximal_yaw_R_Joint`，效果如右图所示。模型文件本身仍编码名义零位；请在你的控制器或状态初始化中按需应用该偏置。
-
-| 零位姿态（名义运动学零位） | 用于控制的膝盖前倾姿态（每腿 yaw 约 180° 后） |
-| :---: | :---: |
-| <img src="docs/images/render_SF_TRON2A_zero.jpg" alt="SF zero position" width="400" /> | <img src="docs/images/render_SF_TRON2A_knees_forward.jpg" alt="SF knees-forward pose" width="400" /> |
-
-<sub>两张图都加了相同的轻微髋 / 膝 / 踝弯曲，以便看清膝盖朝向；两者唯一的区别是髋关节偏航的 180° 偏置。</sub>
-
+- **零位与控制姿态（膝盖前倾，knees-forward）：** 网格 / URDF 的 **零位** 与 [关节零位约定](#关节零位约定joint-zero-convention) 中的左图一致。全身控制通常希望采用 **膝盖前倾**——膝盖指向前方（类人站姿）。在软件中，可通过将每条腿的 **髋关节偏航（hip yaw）** 旋转 **180°**（π rad）得到该姿态，例如 `proximal_yaw_L_Joint` 与 `proximal_yaw_R_Joint`，效果如该处右图所示。模型文件本身仍编码名义零位；请在你的控制器或状态初始化中按需应用该偏置。
 - **典型路径：** `tron2a/SF_TRON2A/urdf/robot.urdf`、`tron2a/SF_TRON2A/xml/robot.xml`。
 
 ### WFYG_TRON2A

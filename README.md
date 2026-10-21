@@ -117,8 +117,14 @@ Replace `DACH_TRON2A` with any folder under `tron2a/`. For `DASF2_TRON2A`, load 
 Coordinate conventions follow typical ROS usage unless stated otherwise in your integration stack: **x** forward, **y** left, **z** up from the root link.
 
 - **SF / SFYG leg morphology — TRON2A vs TRON2B:**
-  - **`tron2a/` (TRON2A):** The URDF/MuJoCo **zero** matches the real robot's factory-calibrated zero — it is **not** the knees-forward pose used for walking control. To get the knees-forward pose, rotate each leg's **hip yaw** joint by **180°** (π rad), e.g. `proximal_yaw_L_Joint` / `proximal_yaw_R_Joint`, in your controller or state initialisation. See [SF_TRON2A](#sf_tron2a) for the two poses side by side.
+  - **`tron2a/` (TRON2A):** The URDF/MuJoCo **zero** matches the real robot's factory-calibrated zero — it is **not** the knees-forward pose used for walking control. To get the knees-forward pose, rotate each leg's **hip yaw** joint by **180°** (π rad), e.g. `proximal_yaw_L_Joint` / `proximal_yaw_R_Joint`, in your controller or state initialisation. The two poses are compared side by side below.
   - **`tron2b/` (TRON2B):** The URDF zero is defined **directly as the knees-forward pose** and does **not** match the real robot's factory zero. This intentional choice makes the model more intuitive for training and visual inspection (no mental 180°-yaw offset needed to picture the walking stance), at the cost of the URDF zero no longer being the as-shipped hardware zero. **When deploying to real TRON2B hardware, you must apply the corresponding joint offset** (the inverse of the 180° hip-yaw rotation) to convert between the URDF/sim convention and the real robot's factory zero.
+
+| Zero position (nominal kinematic zero) | Knees-forward pose for control (after ~180° yaw per leg) |
+| :---: | :---: |
+| <img src="docs/images/render_SF_TRON2A_zero.jpg" alt="SF zero position" width="400" /> | <img src="docs/images/render_SF_TRON2A_knees_forward.jpg" alt="SF knees-forward pose" width="400" /> |
+
+<sub>Both renders add the same small hip / knee / ankle bend so the knee direction is visible; the only difference between them is the 180° hip-yaw offset.</sub>
 
 ---
 
@@ -166,14 +172,7 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 
 - **Summary:** Leg design with **ankle pitch** links instead of wheels; otherwise shares the same leg topology style as WF at the hip/knee level.
 - **Root / IMU:** Same `base_imu` / MuJoCo sensor layout as **WF_TRON2A**.
-- **Zero position vs control (knees-forward):** The mesh/URDF **zero** matches the standing pose in the left figure. For whole-body control we usually want **knees-forward** orientation—the knees point forward (human-like stance). In software, that layout is obtained by rotating each leg’s **hip yaw** joint by **180°** (π rad), e.g. `proximal_yaw_L_Joint` and `proximal_yaw_R_Joint`, as shown on the right. The model file still encodes the nominal zero; apply the offset in your controller or state initialisation as needed.
-
-| Zero position (nominal kinematic zero) | Knees-forward pose for control (after ~180° yaw per leg) |
-| :---: | :---: |
-| <img src="docs/images/render_SF_TRON2A_zero.jpg" alt="SF zero position" width="400" /> | <img src="docs/images/render_SF_TRON2A_knees_forward.jpg" alt="SF knees-forward pose" width="400" /> |
-
-<sub>Both renders add the same small hip / knee / ankle bend so the knee direction is visible; the only difference between them is the 180° hip-yaw offset.</sub>
-
+- **Zero position vs control (knees-forward):** The mesh/URDF **zero** matches the left figure in [Joint zero convention](#joint-zero-convention). For whole-body control we usually want **knees-forward** orientation—the knees point forward (human-like stance). In software, that layout is obtained by rotating each leg’s **hip yaw** joint by **180°** (π rad), e.g. `proximal_yaw_L_Joint` and `proximal_yaw_R_Joint`, as shown in the right figure there. The model file still encodes the nominal zero; apply the offset in your controller or state initialisation as needed.
 - **Typical paths:** `tron2a/SF_TRON2A/urdf/robot.urdf`, `tron2a/SF_TRON2A/xml/robot.xml`.
 
 ### WFYG_TRON2A
