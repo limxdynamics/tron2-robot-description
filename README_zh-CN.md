@@ -27,6 +27,45 @@
 
 面向 **TRON2A** 机器人各型号的 URDF / xacro、MuJoCo XML、网格（mesh）以及可选的 USD 资产。本仓库用于仿真、可视化以及下游工具链（ROS 1/2、MuJoCo、Isaac Sim 等）。
 
+## 型号图集（Variant gallery）
+
+所有图片均由本仓库的 MuJoCo 模型渲染，使用相同的相机角度与灯光。
+
+<table>
+  <tr>
+    <td align="center" width="50%"><img src="docs/images/render_DA_TRON2A.jpg" width="400" alt="DA_TRON2A"></td>
+    <td align="center" width="50%"><img src="docs/images/render_DACH_TRON2A.jpg" width="400" alt="DACH_TRON2A"></td>
+  </tr>
+  <tr>
+    <td align="center"><b><code>DA_TRON2A</code></b><br><sub>双臂 + 平行夹爪</sub></td>
+    <td align="center"><b><code>DACH_TRON2A</code></b><br><sub>双臂 + 2 自由度头部</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/images/render_WF_TRON2A.jpg" width="400" alt="WF_TRON2A"></td>
+    <td align="center" width="50%"><img src="docs/images/render_SF_TRON2A.jpg" width="400" alt="SF_TRON2A"></td>
+  </tr>
+  <tr>
+    <td align="center"><b><code>WF_TRON2A</code></b><br><sub>轮式腿（膝关节 + 轮）</sub></td>
+    <td align="center"><b><code>SF_TRON2A</code></b><br><sub>实心足踝腿型，名义零位</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/images/render_WFYG_TRON2A.jpg" width="400" alt="WFYG_TRON2A"></td>
+    <td align="center" width="50%"><img src="docs/images/render_SFYG_TRON2A.jpg" width="400" alt="SFYG_TRON2A"></td>
+  </tr>
+  <tr>
+    <td align="center"><b><code>WFYG_TRON2A</code></b><br><sub>WF 底盘 + YG 上肢外设</sub></td>
+    <td align="center"><b><code>SFYG_TRON2A</code></b><br><sub>SF 底盘 + YG 上肢外设</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/images/render_DASF_TRON2A.jpg" width="400" alt="DASF_TRON2A"></td>
+    <td align="center" width="50%"><img src="docs/images/render_DASF2_TRON2A.jpg" width="400" alt="DASF2_TRON2A"></td>
+  </tr>
+  <tr>
+    <td align="center"><b><code>DASF_TRON2A</code></b><br><sub>上下拼接式人形</sub></td>
+    <td align="center"><b><code>DASF2_TRON2A</code></b><br><sub>半人马式，默认姿态</sub></td>
+  </tr>
+</table>
+
 ## 许可与署名（License & attribution）
 
 本项目基于 **Apache License, Version 2.0**（2004 年 1 月）发布。完整许可文本请参见 [`LICENSE`](LICENSE) 文件。SPDX 标识符：`Apache-2.0`。
@@ -71,7 +110,7 @@
 | `meshes/` | 模型引用的 STL 网格 |
 | `usd/` | USD 资产（部分型号提供） |
 
-各型号的渲染图位于 [`docs/images/`](docs/images/)，并展示在下文的 [型号图集](#型号图集variant-gallery) 中。
+各型号的渲染图位于 [`docs/images/`](docs/images/)，并展示在上文的 [型号图集](#型号图集variant-gallery) 中。
 
 ---
 
@@ -103,45 +142,6 @@ python -m mujoco.viewer --mjcf=tron2a/DACH_TRON2A/xml/robot.xml
   - **`tron2b/`（TRON2B）：** URDF 零位 **直接定义为膝盖前倾姿态**，**与实物机器人出厂零位不一致**。这是有意为之的设计选择，目的是让模型在训练与直观理解上更方便（无需再脑内换算 180° 偏航即可直接看出行走站姿），代价是 URDF 零位不再等同于出厂硬件零位。**部署到 TRON2B 实机时，必须应用相应的关节偏置**（即 180° 髋偏航旋转的逆变换），以在 URDF/仿真约定与实机出厂零位之间进行转换。
 
 ---
-
-## 型号图集（Variant gallery）
-
-所有图片均由本仓库的 MuJoCo 模型渲染，使用相同的相机角度与灯光。
-
-<table>
-  <tr>
-    <td align="center" width="50%"><img src="docs/images/render_DA_TRON2A.jpg" width="400" alt="DA_TRON2A"></td>
-    <td align="center" width="50%"><img src="docs/images/render_DACH_TRON2A.jpg" width="400" alt="DACH_TRON2A"></td>
-  </tr>
-  <tr>
-    <td align="center"><b><code>DA_TRON2A</code></b><br><sub>双臂 + 平行夹爪</sub></td>
-    <td align="center"><b><code>DACH_TRON2A</code></b><br><sub>双臂 + 2 自由度头部</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="50%"><img src="docs/images/render_WF_TRON2A.jpg" width="400" alt="WF_TRON2A"></td>
-    <td align="center" width="50%"><img src="docs/images/render_SF_TRON2A.jpg" width="400" alt="SF_TRON2A"></td>
-  </tr>
-  <tr>
-    <td align="center"><b><code>WF_TRON2A</code></b><br><sub>轮式腿（膝关节 + 轮）</sub></td>
-    <td align="center"><b><code>SF_TRON2A</code></b><br><sub>实心足踝腿型，名义零位</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="50%"><img src="docs/images/render_WFYG_TRON2A.jpg" width="400" alt="WFYG_TRON2A"></td>
-    <td align="center" width="50%"><img src="docs/images/render_SFYG_TRON2A.jpg" width="400" alt="SFYG_TRON2A"></td>
-  </tr>
-  <tr>
-    <td align="center"><b><code>WFYG_TRON2A</code></b><br><sub>WF 底盘 + YG 上肢外设</sub></td>
-    <td align="center"><b><code>SFYG_TRON2A</code></b><br><sub>SF 底盘 + YG 上肢外设</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="50%"><img src="docs/images/render_DASF_TRON2A.jpg" width="400" alt="DASF_TRON2A"></td>
-    <td align="center" width="50%"><img src="docs/images/render_DASF2_TRON2A.jpg" width="400" alt="DASF2_TRON2A"></td>
-  </tr>
-  <tr>
-    <td align="center"><b><code>DASF_TRON2A</code></b><br><sub>上下拼接式人形</sub></td>
-    <td align="center"><b><code>DASF2_TRON2A</code></b><br><sub>半人马式，默认姿态</sub></td>
-  </tr>
-</table>
 
 ## 型号概览（Variant overview）
 

@@ -28,6 +28,45 @@
 
 URDF / xacro, MuJoCo XML, meshes, and optional USD assets for **TRON2A** robot variants. This package is intended for simulation, visualization, and downstream tooling (ROS 1/2, MuJoCo, Isaac Sim, and similar).
 
+## Variant gallery
+
+All images are rendered from the MuJoCo models in this repository with the same camera and lighting.
+
+<table>
+  <tr>
+    <td align="center" width="50%"><img src="docs/images/render_DA_TRON2A.jpg" width="400" alt="DA_TRON2A"></td>
+    <td align="center" width="50%"><img src="docs/images/render_DACH_TRON2A.jpg" width="400" alt="DACH_TRON2A"></td>
+  </tr>
+  <tr>
+    <td align="center"><b><code>DA_TRON2A</code></b><br><sub>Dual arms with parallel grippers</sub></td>
+    <td align="center"><b><code>DACH_TRON2A</code></b><br><sub>Dual arms with a 2-DoF head</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/images/render_WF_TRON2A.jpg" width="400" alt="WF_TRON2A"></td>
+    <td align="center" width="50%"><img src="docs/images/render_SF_TRON2A.jpg" width="400" alt="SF_TRON2A"></td>
+  </tr>
+  <tr>
+    <td align="center"><b><code>WF_TRON2A</code></b><br><sub>Wheeled legs (knee + wheel)</sub></td>
+    <td align="center"><b><code>SF_TRON2A</code></b><br><sub>Sole-ankle legs, shown at the nominal zero</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/images/render_WFYG_TRON2A.jpg" width="400" alt="WFYG_TRON2A"></td>
+    <td align="center" width="50%"><img src="docs/images/render_SFYG_TRON2A.jpg" width="400" alt="SFYG_TRON2A"></td>
+  </tr>
+  <tr>
+    <td align="center"><b><code>WFYG_TRON2A</code></b><br><sub>WF base with YG upper-body peripherals</sub></td>
+    <td align="center"><b><code>SFYG_TRON2A</code></b><br><sub>SF base with YG upper-body peripherals</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/images/render_DASF_TRON2A.jpg" width="400" alt="DASF_TRON2A"></td>
+    <td align="center" width="50%"><img src="docs/images/render_DASF2_TRON2A.jpg" width="400" alt="DASF2_TRON2A"></td>
+  </tr>
+  <tr>
+    <td align="center"><b><code>DASF_TRON2A</code></b><br><sub>Top-bottom combined humanoid</sub></td>
+    <td align="center"><b><code>DASF2_TRON2A</code></b><br><sub>Centaur-style, shown in its default pose</sub></td>
+  </tr>
+</table>
+
 ## License & attribution
 
 This project is licensed under the **Apache License, Version 2.0** (January 2004). See the [`LICENSE`](LICENSE) file for the full text. SPDX identifier: `Apache-2.0`.
@@ -72,7 +111,7 @@ Each hardware/software configuration lives under `tron2a/<VARIANT>/`:
 | `meshes/` | STL meshes referenced by the models |
 | `usd/` | USD assets (present on some variants) |
 
-Renders of every variant are in [`docs/images/`](docs/images/) and shown in the [Variant gallery](#variant-gallery) below.
+Renders of every variant are in [`docs/images/`](docs/images/) and shown in the [Variant gallery](#variant-gallery) above.
 
 ---
 
@@ -104,45 +143,6 @@ Coordinate conventions follow typical ROS usage unless stated otherwise in your 
   - **`tron2b/` (TRON2B):** The URDF zero is defined **directly as the knees-forward pose** and does **not** match the real robot's factory zero. This intentional choice makes the model more intuitive for training and visual inspection (no mental 180°-yaw offset needed to picture the walking stance), at the cost of the URDF zero no longer being the as-shipped hardware zero. **When deploying to real TRON2B hardware, you must apply the corresponding joint offset** (the inverse of the 180° hip-yaw rotation) to convert between the URDF/sim convention and the real robot's factory zero.
 
 ---
-
-## Variant gallery
-
-All images are rendered from the MuJoCo models in this repository with the same camera and lighting.
-
-<table>
-  <tr>
-    <td align="center" width="50%"><img src="docs/images/render_DA_TRON2A.jpg" width="400" alt="DA_TRON2A"></td>
-    <td align="center" width="50%"><img src="docs/images/render_DACH_TRON2A.jpg" width="400" alt="DACH_TRON2A"></td>
-  </tr>
-  <tr>
-    <td align="center"><b><code>DA_TRON2A</code></b><br><sub>Dual arms with parallel grippers</sub></td>
-    <td align="center"><b><code>DACH_TRON2A</code></b><br><sub>Dual arms with a 2-DoF head</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="50%"><img src="docs/images/render_WF_TRON2A.jpg" width="400" alt="WF_TRON2A"></td>
-    <td align="center" width="50%"><img src="docs/images/render_SF_TRON2A.jpg" width="400" alt="SF_TRON2A"></td>
-  </tr>
-  <tr>
-    <td align="center"><b><code>WF_TRON2A</code></b><br><sub>Wheeled legs (knee + wheel)</sub></td>
-    <td align="center"><b><code>SF_TRON2A</code></b><br><sub>Sole-ankle legs, shown at the nominal zero</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="50%"><img src="docs/images/render_WFYG_TRON2A.jpg" width="400" alt="WFYG_TRON2A"></td>
-    <td align="center" width="50%"><img src="docs/images/render_SFYG_TRON2A.jpg" width="400" alt="SFYG_TRON2A"></td>
-  </tr>
-  <tr>
-    <td align="center"><b><code>WFYG_TRON2A</code></b><br><sub>WF base with YG upper-body peripherals</sub></td>
-    <td align="center"><b><code>SFYG_TRON2A</code></b><br><sub>SF base with YG upper-body peripherals</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="50%"><img src="docs/images/render_DASF_TRON2A.jpg" width="400" alt="DASF_TRON2A"></td>
-    <td align="center" width="50%"><img src="docs/images/render_DASF2_TRON2A.jpg" width="400" alt="DASF2_TRON2A"></td>
-  </tr>
-  <tr>
-    <td align="center"><b><code>DASF_TRON2A</code></b><br><sub>Top-bottom combined humanoid</sub></td>
-    <td align="center"><b><code>DASF2_TRON2A</code></b><br><sub>Centaur-style, shown in its default pose</sub></td>
-  </tr>
-</table>
 
 ## Variant overview
 
