@@ -238,7 +238,7 @@ non-public products visible?) — a check that cannot be automated.
 
 Rendered with MuJoCo from the `tron2a/<VARIANT>/xml/` models in this
 repository, using the repository's own STL meshes and no third-party
-imagery. Used by the README banner, the Variant gallery and the SF pose
+imagery. Used by the README banner, the Variants table and the SF pose
 comparison.
 
 | File | Depicts | Provenance |

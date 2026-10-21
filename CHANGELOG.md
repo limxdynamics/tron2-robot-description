@@ -12,7 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   variants, the SF zero vs knees-forward comparison, and a README banner
   (see `ASSETS.md` §3.7).
 - `README.md` / `README_zh-CN.md`: banner, badges, Quick start and a
-  two-column Variant gallery; Models sections now use the gallery instead
+  Variants table with a render per variant (merging the former Variant
+  overview); Models sections now use the table instead
   of per-section images.
 - Open-source scaffolding: `NOTICE`, `THIRD_PARTY_NOTICES.md`,
   `SECURITY.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, `ASSETS.md`.
