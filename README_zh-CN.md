@@ -33,14 +33,14 @@
 
 | | 型号 | 说明 | 驱动自由度 | 格式 |
 |:-:|---|---|:-:|---|
-| <img src="docs/images/render_DA_TRON2A.jpg" width="260" alt="DA_TRON2A"> | `DA_TRON2A` | 双臂机械手加夹爪；躯干安装 IMU 坐标系。 | 14 | URDF · Xacro · MJCF · USD |
-| <img src="docs/images/render_DACH_TRON2A.jpg" width="260" alt="DACH_TRON2A"> | `DACH_TRON2A` | 双臂配置，**加装 2 自由度头部**（yaw / pitch）。 | 16 | URDF · Xacro · MJCF · USD |
-| <img src="docs/images/render_WF_TRON2A.jpg" width="260" alt="WF_TRON2A"> | `WF_TRON2A` | **轮式**腿部设计（膝关节 + 轮）；躯干 IMU。 | 10 | URDF · Xacro · MJCF · USD |
-| <img src="docs/images/render_SF_TRON2A.jpg" width="260" alt="SF_TRON2A"> | `SF_TRON2A` | **实心足踝**（Sole Ankle）腿部设计（无轮）；躯干 IMU。 | 10 | URDF · Xacro · MJCF · USD |
-| <img src="docs/images/render_WFYG_TRON2A.jpg" width="260" alt="WFYG_TRON2A"> | `WFYG_TRON2A` | WF 基础上加装 **上肢外设**（手臂、夹爪、塔杆挂载结构）。 | 18 | URDF · Xacro · MJCF · USD |
-| <img src="docs/images/render_SFYG_TRON2A.jpg" width="260" alt="SFYG_TRON2A"> | `SFYG_TRON2A` | SF 基础上加装与 `WFYG_TRON2A` 相同的 **上肢外设** 组件。 | 18 | URDF · Xacro · MJCF · USD |
-| <img src="docs/images/render_DASF_TRON2A.jpg" width="260" alt="DASF_TRON2A"> | `DASF_TRON2A` | **上下拼接式人形** — `SF` 踝俯仰腿型通过 `transition_upper_Link` 与 `DACH` 双臂 + 2 自由度头部上肢拼接。 | 26 | URDF · Xacro · MJCF · USD |
-| <img src="docs/images/render_DASF2_TRON2A.jpg" width="260" alt="DASF2_TRON2A"> | `DASF2_TRON2A` | **半人马式** 变体 — 两组 `SF` 式腿型（前 `_F`、后 `_B`）搭配 `DACH` 双臂 + 头部上肢。 | 36 | URDF · MJCF · USD |
+| <img src="docs/images/render_DA_TRON2A.jpg" width="320" alt="DA_TRON2A"> | `DA_TRON2A` | 双臂机械手加夹爪；躯干安装 IMU 坐标系。 | 14 | URDF · Xacro · MJCF · USD |
+| <img src="docs/images/render_DACH_TRON2A.jpg" width="320" alt="DACH_TRON2A"> | `DACH_TRON2A` | 双臂配置，**加装 2 自由度头部**（yaw / pitch）。 | 16 | URDF · Xacro · MJCF · USD |
+| <img src="docs/images/render_WF_TRON2A.jpg" width="320" alt="WF_TRON2A"> | `WF_TRON2A` | **轮式**腿部设计（膝关节 + 轮）；躯干 IMU。 | 10 | URDF · Xacro · MJCF · USD |
+| <img src="docs/images/render_SF_TRON2A.jpg" width="320" alt="SF_TRON2A"> | `SF_TRON2A` | **实心足踝**（Sole Ankle）腿部设计（无轮）；躯干 IMU。 | 10 | URDF · Xacro · MJCF · USD |
+| <img src="docs/images/render_WFYG_TRON2A.jpg" width="320" alt="WFYG_TRON2A"> | `WFYG_TRON2A` | WF 基础上加装 **上肢外设**（手臂、夹爪、塔杆挂载结构）。 | 18 | URDF · Xacro · MJCF · USD |
+| <img src="docs/images/render_SFYG_TRON2A.jpg" width="320" alt="SFYG_TRON2A"> | `SFYG_TRON2A` | SF 基础上加装与 `WFYG_TRON2A` 相同的 **上肢外设** 组件。 | 18 | URDF · Xacro · MJCF · USD |
+| <img src="docs/images/render_DASF_TRON2A.jpg" width="320" alt="DASF_TRON2A"> | `DASF_TRON2A` | **上下拼接式人形** — `SF` 踝俯仰腿型通过 `transition_upper_Link` 与 `DACH` 双臂 + 2 自由度头部上肢拼接。 | 26 | URDF · Xacro · MJCF · USD |
+| <img src="docs/images/render_DASF2_TRON2A.jpg" width="320" alt="DASF2_TRON2A"> | `DASF2_TRON2A` | **半人马式** 变体 — 两组 `SF` 式腿型（前 `_F`、后 `_B`）搭配 `DACH` 双臂 + 头部上肢。 | 36 | URDF · MJCF · USD |
 
 **YG** 后缀表示更丰富的上肢 / 塔杆外设布局（手臂、手部及配件结构，详见下文）。**DASF** / **DASF2** 变体将此前独立的下肢（`SF`）与上肢（`DACH`）描述拼接为单一人形，每个身体分段各配一路 IMU。
 
