@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `docs/images/render_*.jpg`: uniform MuJoCo renders of all eight TRON2A
+  variants, the SF zero vs knees-forward comparison, and a README banner
+  (see `ASSETS.md` §3.7).
+- `README.md` / `README_zh-CN.md`: banner, badges, Quick start and a
+  two-column Variant gallery; Models sections now use the gallery instead
+  of per-section images.
 - Open-source scaffolding: `NOTICE`, `THIRD_PARTY_NOTICES.md`,
   `SECURITY.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, `ASSETS.md`.
 - GitHub CI workflow: URDF `check_urdf`, MuJoCo XML load smoke test,

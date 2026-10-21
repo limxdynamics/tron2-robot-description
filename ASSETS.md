@@ -234,6 +234,24 @@ non-public products visible?) — a check that cannot be automated.
 
 - **Owner:** Content / marketing lead.
 
+### 3.7 README renders (`docs/images/render_*.jpg`) — **11 files**
+
+Rendered with MuJoCo from the `tron2a/<VARIANT>/xml/` models in this
+repository, using the repository's own STL meshes and no third-party
+imagery. Used by the README banner, the Variant gallery and the SF pose
+comparison.
+
+| File | Depicts | Provenance |
+|------|---------|------------|
+| `render_banner.jpg` | README banner: `WF`, `DASF`, `DASF2` | Rendered from this repository's MuJoCo models |
+| `render_<VARIANT>_TRON2A.jpg` (8 files) | One per TRON2A variant, nominal zero pose (`DASF` with arms lowered, `DASF2` in its `default_pose.xml` keyframe) | Rendered from this repository's MuJoCo models |
+| `render_SF_TRON2A_zero.jpg` | SF, nominal zero with a small hip / knee / ankle bend | Rendered from this repository's MuJoCo models |
+| `render_SF_TRON2A_knees_forward.jpg` | SF, same bend plus 180° hip-yaw offset | Rendered from this repository's MuJoCo models |
+
+- **EXIF:** written without EXIF metadata; passes the CI EXIF sanity step.
+- **Regeneration:** load the model in MuJoCo, render offscreen, and
+  export as JPEG without metadata.
+
 ## 4. External hardware referenced (geometry only)
 
 See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) §2 for the

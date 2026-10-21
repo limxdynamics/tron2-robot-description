@@ -3,7 +3,19 @@
   SPDX-License-Identifier: Apache-2.0
 -->
 
-[English](README.md) | [中文](README_zh-CN.md)
+<div align="center">
+
+<img src="docs/images/render_banner.jpg" alt="TRON2 机器人描述：由 MuJoCo 模型渲染的 TRON2A 各型号" width="100%">
+
+[English](README.md) | **中文**
+
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![CI](https://github.com/limxdynamics/tron2-robot-description/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/limxdynamics/tron2-robot-description/actions/workflows/ci.yml)
+[![ROS](https://img.shields.io/badge/ROS-1%20%7C%202-22314E?logo=ros)](#ros-包ros-packages)
+[![MuJoCo](https://img.shields.io/badge/MuJoCo-MJCF-0A7BBB)](https://mujoco.org/)
+[![Isaac Sim](https://img.shields.io/badge/Isaac%20Sim-USD-76B900?logo=nvidia)](https://developer.nvidia.com/isaac/sim)
+
+</div>
 
 > **发布渠道：** 本仓库的开源主副本托管于
 > [`github.com/limx-tron2/robot-description`](https://github.com/limx-tron2/robot-description)。
@@ -30,7 +42,7 @@
 
 **本仓库包含**：
 
-- 六个 TRON2A 型号（`DA`、`DACH`、`WF`、`SF`、`WFYG`、`SFYG`）的 URDF 与 xacro 源文件。
+- 八个 TRON2A 型号（`DA`、`DACH`、`WF`、`SF`、`WFYG`、`SFYG`、`DASF`、`DASF2`）的 URDF 与 xacro 源文件。
 - 各型号带 IMU site 的 MuJoCo XML 模型。
 - 二进制 STL 网格（视觉 + 碰撞）。
 - 用于 Isaac Sim / Omniverse 工作流的 USD 资产。
@@ -59,7 +71,22 @@
 | `meshes/` | 模型引用的 STL 网格 |
 | `usd/` | USD 资产（部分型号提供） |
 
-各型号的插图位于 [`docs/images/`](docs/images/)，并嵌入下文的 [模型](#模型models) 章节。
+各型号的渲染图位于 [`docs/images/`](docs/images/)，并展示在下文的 [型号图集](#型号图集variant-gallery) 中。
+
+---
+
+## 快速开始（Quick start）
+
+无需 ROS，即可在 MuJoCo 中预览任一型号：
+
+```bash
+git clone https://github.com/limxdynamics/tron2-robot-description.git
+cd tron2-robot-description
+pip install "mujoco>=2.3"
+python -m mujoco.viewer --mjcf=tron2a/DACH_TRON2A/xml/robot.xml
+```
+
+将 `DACH_TRON2A` 替换为 `tron2a/` 下的任意目录即可。`DASF2_TRON2A` 可加载 `xml/default_pose.xml`，从站立关键帧开始。
 
 ---
 
@@ -77,6 +104,45 @@
 
 ---
 
+## 型号图集（Variant gallery）
+
+所有图片均由本仓库的 MuJoCo 模型渲染，使用相同的相机角度与灯光。
+
+<table>
+  <tr>
+    <td align="center" width="50%"><img src="docs/images/render_DA_TRON2A.jpg" width="400" alt="DA_TRON2A"></td>
+    <td align="center" width="50%"><img src="docs/images/render_DACH_TRON2A.jpg" width="400" alt="DACH_TRON2A"></td>
+  </tr>
+  <tr>
+    <td align="center"><b><code>DA_TRON2A</code></b><br><sub>双臂 + 平行夹爪</sub></td>
+    <td align="center"><b><code>DACH_TRON2A</code></b><br><sub>双臂 + 2 自由度头部</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/images/render_WF_TRON2A.jpg" width="400" alt="WF_TRON2A"></td>
+    <td align="center" width="50%"><img src="docs/images/render_SF_TRON2A.jpg" width="400" alt="SF_TRON2A"></td>
+  </tr>
+  <tr>
+    <td align="center"><b><code>WF_TRON2A</code></b><br><sub>轮式腿（膝关节 + 轮）</sub></td>
+    <td align="center"><b><code>SF_TRON2A</code></b><br><sub>实心足踝腿型，名义零位</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/images/render_WFYG_TRON2A.jpg" width="400" alt="WFYG_TRON2A"></td>
+    <td align="center" width="50%"><img src="docs/images/render_SFYG_TRON2A.jpg" width="400" alt="SFYG_TRON2A"></td>
+  </tr>
+  <tr>
+    <td align="center"><b><code>WFYG_TRON2A</code></b><br><sub>WF 底盘 + YG 上肢外设</sub></td>
+    <td align="center"><b><code>SFYG_TRON2A</code></b><br><sub>SF 底盘 + YG 上肢外设</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/images/render_DASF_TRON2A.jpg" width="400" alt="DASF_TRON2A"></td>
+    <td align="center" width="50%"><img src="docs/images/render_DASF2_TRON2A.jpg" width="400" alt="DASF2_TRON2A"></td>
+  </tr>
+  <tr>
+    <td align="center"><b><code>DASF_TRON2A</code></b><br><sub>上下拼接式人形</sub></td>
+    <td align="center"><b><code>DASF2_TRON2A</code></b><br><sub>半人马式，默认姿态</sub></td>
+  </tr>
+</table>
+
 ## 型号概览（Variant overview）
 
 | 型号目录 | 简要说明 |
@@ -92,7 +158,6 @@
 
 **YG** 后缀表示更丰富的上肢 / 塔杆外设布局（手臂、手部及配件结构，详见下文）。**DASF** / **DASF2** 变体将此前独立的下肢（`SF`）与上肢（`DACH`）描述拼接为单一人形，每个身体分段各配一路 IMU。
 
-后缀 **YG** 表示更丰富的上肢 / 塔杆外设布局（手臂、机械手及附属链接—详见下文）。
 
 ---
 
@@ -119,8 +184,6 @@
 
 ### DA_TRON2A
 
-<img src="docs/images/DA.jpg" alt="DA_TRON2A overview" width="360" />
-
 - **简介：** 双足机器人，配 **双臂** 与 **平行夹爪**；适用于面向操作的仿真与控制开发。
 - **根节点 / IMU：** URDF 中链接 `base_imu` 固定于 `base_Link`，对齐躯干 IMU 原点。MuJoCo 在浮动根上使用 site `base_imu`，提供四元数、陀螺与加速度计传感器。
 - **末端执行器：** 左 / 右臂末端为平行夹爪链接 `grasper_L_Link` / `grasper_R_Link`（在默认 `robot.urdf` 中固定连接）。胸前挂载的 RealSense **D435** 建模为 `d435_Link` + `d435_optical_frame`。
@@ -128,15 +191,11 @@
 
 ### DACH_TRON2A
 
-<img src="docs/images/DACH.jpg" alt="DACH_TRON2A overview" width="360" />
-
 - **简介：** 与 **DA** 相同的双臂组件，另外配备 **2 自由度头部**（`head_yaw_Joint`、`head_pitch_Joint`）用于感知。
 - **根节点 / IMU：** IMU 建模方式与 DA 相同（URDF 链接 `base_imu`；MuJoCo site `base_imu`，含姿态 / 陀螺 / 加速度传感器）。
 - **典型路径：** `tron2a/DACH_TRON2A/urdf/robot.urdf`、`tron2a/DACH_TRON2A/xml/robot.xml`（USD 位于 `tron2a/DACH_TRON2A/usd/`；网格位于 `tron2a/DACH_TRON2A/meshes/`）。
 
 ### WF_TRON2A
-
-<img src="docs/images/WF.jpg" alt="WF_TRON2A overview" width="360" />
 
 - **简介：** 面向移动能力的型号，踝部配 **驱动轮**（`wheel_L_Link` / `wheel_R_Link`），并带膝关节（`knee_*`）。
 - **根节点 / IMU：** URDF 链接 `base_imu` 固定于 `base_Link`；MuJoCo 在该 site 上暴露 `base_imu` 传感器（姿态、陀螺、加速度计）。
@@ -149,14 +208,14 @@
 - **零位与控制姿态（膝盖前倾，knees-forward）：** 网格 / URDF 的 **零位** 与左图站立姿态一致。全身控制通常希望采用 **膝盖前倾**——膝盖指向前方（类人站姿）。在软件中，可通过将每条腿的 **髋关节偏航（hip yaw）** 旋转 **180°**（π rad）得到该姿态，例如 `proximal_yaw_L_Joint` 与 `proximal_yaw_R_Joint`，效果如右图所示。模型文件本身仍编码名义零位；请在你的控制器或状态初始化中按需应用该偏置。
 
 | 零位姿态（名义运动学零位） | 用于控制的膝盖前倾姿态（每腿 yaw 约 180° 后） |
-| --- | --- |
-| <img src="docs/images/SF_0.jpg" alt="SF zero position" width="300" /> | <img src="docs/images/SF_1.jpg" alt="SF knees-forward pose" width="300" /> |
+| :---: | :---: |
+| <img src="docs/images/render_SF_TRON2A_zero.jpg" alt="SF zero position" width="400" /> | <img src="docs/images/render_SF_TRON2A_knees_forward.jpg" alt="SF knees-forward pose" width="400" /> |
+
+<sub>两张图都加了相同的轻微髋 / 膝 / 踝弯曲，以便看清膝盖朝向；两者唯一的区别是髋关节偏航的 180° 偏置。</sub>
 
 - **典型路径：** `tron2a/SF_TRON2A/urdf/robot.urdf`、`tron2a/SF_TRON2A/xml/robot.xml`。
 
 ### WFYG_TRON2A
-
-<img src="docs/images/WFYG.jpg" alt="WFYG_TRON2A overview" width="360" />
 
 - **简介：** 在 **WF** 移动底座之上，加装 **双臂**、夹爪，以及 **塔杆挂载的附属几何**：`camera_mount_Link`、嵌套的 `radar_Link`，以及成对的 `antenna_*` 链接（提供视觉 / 碰撞网格，便于与感知栈集成）。
 - **根节点 / IMU：** 与 WF 相同的躯干 IMU 布局（URDF 中的 `base_imu`；MuJoCo 在 `base_imu` 上的 IMU 传感器）。
@@ -165,8 +224,6 @@
 - **典型路径：** `tron2a/WFYG_TRON2A/urdf/robot.urdf`、`tron2a/WFYG_TRON2A/xml/robot.xml`。
 
 ### SFYG_TRON2A
-
-<img src="docs/images/SFYG_0.jpg" alt="SFYG_TRON2A overview" width="360" />
 
 - **简介：** 采用 **SF** 踝俯仰腿型，配 **YG** 上肢与塔杆外设，布局与 `WFYG_TRON2A` 相同。
 - **腿部与 SF 对比：** 与 **SF_TRON2A** 腿部语义相同 —— URDF 零位是实机出厂零位，**并非** 膝盖前倾控制姿态（TRON2A/TRON2B 的区别及膝盖前倾所需的 180° 髋偏航偏置，详见 [关节零位约定](#关节零位约定joint-zero-convention)）。
@@ -177,8 +234,6 @@
 
 ### DASF_TRON2A
 
-<img src="docs/images/DASF.jpg" alt="DASF_TRON2A overview" width="360" />
-
 - **简介：** **上下拼接式人形** —— `SF` 踝俯仰腿型（下肢）通过 `transition_upper_Link` 与 `DACH` 式双臂 + 2 自由度头部（上肢）拼接。相当于将双足腿部与双臂组件上下拼接成完整人形。
 - **腿部与 SF 对比：** 与 **SF_TRON2A** 腿部语义相同 —— URDF 零位是实机出厂零位，**并非** 膝盖前倾控制姿态（TRON2A/TRON2B 的区别及膝盖前倾所需的 180° 髋偏航偏置，详见 [关节零位约定](#关节零位约定joint-zero-convention)）。
 - **根节点 / IMU：** 两路 IMU —— 下肢 `base_imu`，上肢 `upper_base_imu`；均以 MuJoCo IMU 传感器站点形式提供。
@@ -186,8 +241,6 @@
 - **典型路径：** `tron2a/DASF_TRON2A/urdf/robot_rl.urdf`、`tron2a/DASF_TRON2A/xml/robot.xml`。
 
 ### DASF2_TRON2A
-
-<img src="docs/images/DASF2.jpg" alt="DASF2_TRON2A overview" width="360" />
 
 - **简介：** **半人马式** 变体 —— 两组 `SF` 式腿型前后拼接（`front_base_Link` 与 `back_base_Link` 经 `transition_middle_Link` 连接），并在前腿上方通过 `transition_upper_Link` 拼接一套 `DACH` 式双臂 + 头部上肢。
 - **腿部与 SF 对比：** 前后两组腿的语义均与 **SF_TRON2A** 相同 —— URDF 零位是实机出厂零位，**并非** 膝盖前倾控制姿态（TRON2A/TRON2B 的区别及膝盖前倾所需的 180° 髋偏航偏置，详见 [关节零位约定](#关节零位约定joint-zero-convention)）。
