@@ -115,17 +115,42 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install xacro
-      - name: Expand every xacro/robot.urdf.xacro (TRON2A only)
+      - name: Provide a stand-in for ament_index_python
+        run: |
+          # xacro only reaches ament_index_python for $(find <pkg>), and it only needs a
+          # path string back - it never stats the result. The runner has no ROS install
+          # and tron2_gazebo is not checked out here, so a small stand-in lets the ROS 2
+          # branch of every entry point expand too.
+          stub="$RUNNER_TEMP/ament_stub/ament_index_python"
+          mkdir -p "$stub"
+          touch "$stub/__init__.py"
+          cat > "$stub/packages.py" <<'PY'
+          import os
+          class PackageNotFoundError(KeyError):
+              pass
+          def get_package_share_directory(package_name):
+              return os.path.join(os.environ.get("XACRO_STUB_SHARE", "/opt/ros/share"), package_name)
+          def get_package_prefix(package_name):
+              return os.environ.get("XACRO_STUB_PREFIX", "/opt/ros")
+          def get_packages_with_prefixes():
+              return {}
+          def get_ament_prefix_path():
+              return os.environ.get("AMENT_PREFIX_PATH", "/opt/ros")
+          PY
+          echo "PYTHONPATH=$RUNNER_TEMP/ament_stub${PYTHONPATH:+:$PYTHONPATH}" >> "$GITHUB_ENV"
+      - name: Expand every xacro entry point (TRON2A only, ROS 1 + ROS 2 branches)
         run: |
           set -e
           shopt -s nullglob
           # TRON2B ships no xacro/ tree - its URDF/MJCF are authored directly (see ASSETS.md).
           xacros=(tron2a/*/xacro/robot.urdf.xacro)
           if [ ${#xacros[@]} -eq 0 ]; then echo "::error::no xacro entry point matched"; exit 1; fi
-          echo "── ${#xacros[@]} xacro entry points"
+          echo "── ${#xacros[@]} xacro entry points x 2 ROS branches"
           for x in "${xacros[@]}"; do
-            echo "── xacro $x"
-            xacro "$x" > /dev/null
+            for rv in 1 2; do
+              echo "── xacro $x (ROS_VERSION=$rv)"
+              ROS_VERSION=$rv xacro "$x" > /dev/null
+            done
           done
 
   mujoco-load:
