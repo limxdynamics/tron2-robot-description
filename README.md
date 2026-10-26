@@ -300,7 +300,7 @@ done
 
 # 3. xacro expands cleanly (TRON2A only — TRON2B ships no xacro)
 pip install xacro
-for x in tron2a/*/xacro/robot.xacro; do xacro "$x" > /dev/null; done
+for x in tron2a/*/xacro/robot.urdf.xacro; do xacro "$x" > /dev/null; done
 
 # 4. Generic XML sanity
 xmllint --noout tron2a/*/urdf/*.urdf tron2b/*/urdf/*.urdf tron2a/*/xml/*.xml tron2b/*/xml/*.xml
