@@ -297,7 +297,7 @@ for x in tron2a/*/xml/*.xml tron2b/*/xml/*.xml; do
   python -c "import mujoco, sys; mujoco.MjModel.from_xml_path(sys.argv[1])" "$x"
 done
 
-# 3. xacro expands cleanly (TRON2A only — TRON2B ships no xacro)
+# 3. xacro expands cleanly (TRON2A only — TRON2B ships no xacro; needs a ROS env for $(find tron2_gazebo))
 pip install xacro
 for x in tron2a/*/xacro/robot.urdf.xacro; do xacro "$x" > /dev/null; done
 
