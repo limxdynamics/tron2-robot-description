@@ -41,6 +41,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   committed here (`*.onnx`, `*.pt`, `*.so`, `*.dll`, `*.whl`, `*.bag`,
   `*.mcap`, …).
 
+### Fixed
+- CI license / provenance marker scan no longer fails on reviewed,
+  legitimate uses of flagged words (e.g. the Isaac Sim EULA row in
+  `THIRD_PARTY_NOTICES.md`); such lines are listed verbatim in
+  `.github/ci-scan-allowlist.txt`, and any other or edited match still
+  fails the job.
+
 ### Pending owner sign-off (blocks first public tag)
 - Provenance and re-distribution terms for all STL / USD meshes
   (see `⚠ TO CONFIRM` rows in `THIRD_PARTY_NOTICES.md`).

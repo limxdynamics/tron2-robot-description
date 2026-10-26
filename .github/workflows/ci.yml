@@ -48,9 +48,13 @@ jobs:
         run: |
           set -e
           # Documentation must not carry unresolved markers.
-          if grep -rniE 'proprietary|confidential|todo: license|unknown license' \
-               README.md THIRD_PARTY_NOTICES.md ASSETS.md CHANGELOG.md CONTRIBUTING.md SECURITY.md; then
-            echo "::error::Unresolved license / provenance markers in top-level docs"
+          # Reviewed, legitimate uses are listed verbatim in .github/ci-scan-allowlist.txt.
+          hits=$(grep -HiE 'proprietary|confidential|todo: license|unknown license' \
+                   README.md THIRD_PARTY_NOTICES.md ASSETS.md CHANGELOG.md CONTRIBUTING.md SECURITY.md \
+                 | grep -vxFf <(grep -v '^#' .github/ci-scan-allowlist.txt) || true)
+          if [ -n "$hits" ]; then
+            echo "$hits"
+            echo "::error::Unresolved license / provenance markers in top-level docs (see .github/ci-scan-allowlist.txt for reviewed exceptions)"
             exit 1
           fi
 

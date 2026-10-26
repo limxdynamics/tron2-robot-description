@@ -1,0 +1,8 @@
+# Lines allowed by the "License / TODO / proprietary scan" CI step.
+# Format: <file>:<exact line content>, one per line (matched as fixed, whole lines).
+# Each entry is a reviewed, legitimate use of a flagged word, not an unresolved marker.
+# If an allowed line is edited, the scan flags it again and the entry must be re-reviewed.
+THIRD_PARTY_NOTICES.md:| Isaac Sim | Load `usd/*.usd` | NVIDIA proprietary EULA | https://developer.nvidia.com/isaac-sim |
+CONTRIBUTING.md:# 5. No unresolved TODO / proprietary / confidential markers
+CONTRIBUTING.md:rg -n -i "unknown|todo|proprietary|confidential" \
+SECURITY.md:- Inadvertent disclosure of proprietary CAD, calibration values, or
