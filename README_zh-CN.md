@@ -285,7 +285,7 @@ source install/setup.bash
 
 ## 校验（Verification）
 
-以下命令即 CI 所运行的内容（见 [`.github/workflows/ci.yml`](.github/workflows/ci.yml)），并在此基础上额外覆盖了 `tron2b/` —— CI 本身目前只校验 `tron2a/` 目录树。在提 PR 前先在本地跑一遍可以省去多次评审往返。
+以下命令即 CI 所运行的内容（见 [`.github/workflows/ci.yml`](.github/workflows/ci.yml)），覆盖 `tron2a/` 与 `tron2b/` 两棵目录树。在提 PR 前先在本地跑一遍可以省去多次评审往返。
 
 ```bash
 # 1. URDF well-formed

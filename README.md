@@ -286,7 +286,7 @@ Assets install to `$(ros2 pkg prefix robot_description)/share/robot_description/
 
 ## Verification
 
-The commands below are the ones CI runs (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)), extended here to cover `tron2b/` as well — CI itself currently validates the `tron2a/` tree only. Running them locally before opening a PR saves review round-trips.
+The commands below are the ones CI runs (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)) across both the `tron2a/` and `tron2b/` trees. Running them locally before opening a PR saves review round-trips.
 
 ```bash
 # 1. URDF well-formed
