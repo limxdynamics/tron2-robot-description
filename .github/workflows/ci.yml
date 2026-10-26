@@ -21,25 +21,29 @@ jobs:
       - name: XML well-formedness (URDF + MuJoCo)
         run: |
           sudo apt-get update && sudo apt-get install -y libxml2-utils
-          xmllint --noout tron2a/*/urdf/*.urdf tron2a/*/xml/*.xml
+          xmllint --noout tron2a/*/urdf/*.urdf tron2b/*/urdf/*.urdf \
+                            tron2a/*/xml/*.xml tron2b/*/xml/*.xml
 
       - name: STL header sanity (binary format, no internal paths)
         run: |
           set -e
           bad=0
+          n=0
           while IFS= read -r -d '' f; do
+            n=$((n+1))
             hdr=$(head -c 80 "$f" | strings || true)
             if echo "$hdr" | grep -iE '(^solid |users/|/home/|\.sldprt|\.step|serial|internal)' >/dev/null; then
               echo "::error file=$f::STL header discloses internal metadata or is ASCII"
               bad=$((bad+1))
             fi
-          done < <(find tron2a -iname '*.STL' -print0)
+          done < <(find tron2a tron2b -iname '*.STL' -print0)
+          echo "── scanned $n STL files (tron2a + tron2b)"
           if [ $bad -ne 0 ]; then exit 1; fi
 
       - name: USD metadata scan
         run: |
           set -e
-          if grep -rE '(customLayerData|comment = "|"author"|"owner"|"copyright")' tron2a/*/usd/*.usd; then
+          if grep -rE '(customLayerData|comment = "|"author"|"owner"|"copyright")' tron2a/*/usd/*.usd tron2b/*/usd/*.usd; then
             echo "::error::USD files contain unreviewed metadata; strip or approve before merge"
             exit 1
           fi
@@ -93,7 +97,11 @@ jobs:
       - name: Validate every URDF
         run: |
           set -e
-          for u in tron2a/*/urdf/*.urdf; do
+          shopt -s nullglob
+          urdfs=(tron2a/*/urdf/*.urdf tron2b/*/urdf/*.urdf)
+          if [ ${#urdfs[@]} -eq 0 ]; then echo "::error::no URDF files matched"; exit 1; fi
+          echo "── ${#urdfs[@]} URDF files (tron2a + tron2b)"
+          for u in "${urdfs[@]}"; do
             echo "── check_urdf $u"
             check_urdf "$u"
           done
@@ -107,11 +115,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install xacro
-      - name: Expand every xacro/robot.xacro
+      - name: Expand every xacro/robot.urdf.xacro (TRON2A only)
         run: |
           set -e
           shopt -s nullglob
-          for x in tron2a/*/xacro/robot.xacro; do
+          # TRON2B ships no xacro/ tree - its URDF/MJCF are authored directly (see ASSETS.md).
+          xacros=(tron2a/*/xacro/robot.urdf.xacro)
+          if [ ${#xacros[@]} -eq 0 ]; then echo "::error::no xacro entry point matched"; exit 1; fi
+          echo "── ${#xacros[@]} xacro entry points"
+          for x in "${xacros[@]}"; do
             echo "── xacro $x"
             xacro "$x" > /dev/null
           done
@@ -128,7 +140,11 @@ jobs:
       - name: Load every MuJoCo XML
         run: |
           set -e
-          for x in tron2a/*/xml/*.xml; do
+          shopt -s nullglob
+          xmls=(tron2a/*/xml/*.xml tron2b/*/xml/*.xml)
+          if [ ${#xmls[@]} -eq 0 ]; then echo "::error::no MuJoCo XML matched"; exit 1; fi
+          echo "── ${#xmls[@]} MuJoCo XML files (tron2a + tron2b)"
+          for x in "${xmls[@]}"; do
             echo "── mujoco load $x"
             python -c "import mujoco, sys; mujoco.MjModel.from_xml_path(sys.argv[1])" "$x"
           done
