@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `README.md` / `README_zh-CN.md`: "Model mass" section listing the
+  simulation model mass of every TRON2A / TRON2B variant, with a
+  reproduce command and a note that these are not hardware specs
+  (#2).
 - `docs/images/render_*.jpg`: uniform MuJoCo renders of all eight TRON2A
   variants, the SF zero vs knees-forward comparison, and a README banner
   (see `ASSETS.md` §3.7).

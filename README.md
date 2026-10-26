@@ -147,6 +147,33 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 
 ---
 
+## Model mass
+
+Total mass of the robot body in each MuJoCo model (`xml/robot.xml`), i.e. the sum of all `<inertial>` masses in the robot's kinematic tree. Mocap-only visualization bodies (`target_left_body` / `target_right_body` in `DACH_TRON2A`) are excluded.
+
+| Variant | TRON2A | TRON2B |
+|---|--:|--:|
+| `WF` | 34.912 kg | 35.542 kg |
+| `SF` | 34.812 kg | 35.662 kg |
+| `WFYG` | 41.677 kg | 42.306 kg |
+| `SFYG` | 41.577 kg | 42.426 kg |
+| `DA` | 59.712 kg | 60.242 kg |
+| `DACH` | 61.292 kg | 61.822 kg |
+| `DASF` | 66.843 kg | 68.205 kg |
+| `DASF2` | 104.675 kg | 106.875 kg |
+
+- **URDF vs MJCF:** the URDF of the same variant is typically heavier by 0.01 kg per IMU, because each IMU is a separate `base_imu` link (0.01 kg) in URDF but a massless site in MJCF.
+- **Grasper models:** `robot_grasper.*` keeps the same total mass; the lumped gripper mass is redistributed over the articulated gripper links.
+- **These are simulation model values, not hardware specifications.** The physical robot includes components that are not modeled here (cabling, fasteners, optional peripherals, etc.). For the weight of a shipped robot, refer to the official [TRON 2 specifications](https://limxdynamics.com/en/products/tron2/spec) or contact our sales team.
+
+Reproduce with MuJoCo:
+
+```bash
+python -c "import mujoco, sys; m = mujoco.MjModel.from_xml_path(sys.argv[1]); print(round(sum(m.body_subtreemass[i] for i in range(1, m.nbody) if m.body_parentid[i] == 0 and m.body_mocapid[i] < 0), 3))" tron2a/DACH_TRON2A/xml/robot.xml
+```
+
+---
+
 ## Models
 
 ### DA_TRON2A

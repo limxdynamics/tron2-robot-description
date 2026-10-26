@@ -146,6 +146,33 @@ python -m mujoco.viewer --mjcf=tron2a/DACH_TRON2A/xml/robot.xml
 
 ---
 
+## 模型质量（Model mass）
+
+下表为各型号 MuJoCo 模型（`xml/robot.xml`）中机器人本体的总质量，即机器人运动学树内所有 `<inertial>` 质量之和；不含仅用于可视化的 mocap body（`DACH_TRON2A` 中的 `target_left_body` / `target_right_body`）。
+
+| 型号 | TRON2A | TRON2B |
+|---|--:|--:|
+| `WF` | 34.912 kg | 35.542 kg |
+| `SF` | 34.812 kg | 35.662 kg |
+| `WFYG` | 41.677 kg | 42.306 kg |
+| `SFYG` | 41.577 kg | 42.426 kg |
+| `DA` | 59.712 kg | 60.242 kg |
+| `DACH` | 61.292 kg | 61.822 kg |
+| `DASF` | 66.843 kg | 68.205 kg |
+| `DASF2` | 104.675 kg | 106.875 kg |
+
+- **URDF 与 MJCF：** 同一型号的 URDF 通常每个 IMU 多 0.01 kg。原因是 URDF 将 IMU 建为独立的 `base_imu` 链接（0.01 kg），而 MJCF 中为无质量的 site。
+- **夹爪模型：** `robot_grasper.*` 总质量不变，只是把集总的夹爪质量分配到了各个铰接夹爪链接上。
+- **以上为仿真模型质量，不是实机规格。** 实机包含本仓库未建模的部件（线缆、紧固件、选配外设等）。实机重量请以官方 [TRON 2 产品参数](https://limxdynamics.com/tron2/spec) 为准，或咨询公司销售。
+
+使用 MuJoCo 复算：
+
+```bash
+python -c "import mujoco, sys; m = mujoco.MjModel.from_xml_path(sys.argv[1]); print(round(sum(m.body_subtreemass[i] for i in range(1, m.nbody) if m.body_parentid[i] == 0 and m.body_mocapid[i] < 0), 3))" tron2a/DACH_TRON2A/xml/robot.xml
+```
+
+---
+
 ## 模型（Models）
 
 ### DA_TRON2A
