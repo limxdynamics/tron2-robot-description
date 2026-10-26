@@ -26,7 +26,7 @@
 
 # TRON2 robot description
 
-URDF / xacro, MuJoCo XML, meshes, and optional USD assets for **TRON2A** robot variants. This package is intended for simulation, visualization, and downstream tooling (ROS 1/2, MuJoCo, Isaac Sim, and similar).
+URDF / xacro, MuJoCo XML, meshes, and optional USD assets for **TRON2A** and **TRON2B** robot variants — the same eight configurations in two hardware revisions, 16 model sets in total. This package is intended for simulation, visualization, and downstream tooling (ROS 1/2, MuJoCo, Isaac Sim, and similar).
 
 ## Variants
 
@@ -45,6 +45,22 @@ Each image is rendered from the variant's MuJoCo model in this repository with t
 
 The suffix **YG** denotes the richer upper-body / mast peripheral layout (arms, hands, and accessory links—see below). The **DASF** / **DASF2** variants combine previously separate lower-body (`SF`) and upper-body (`DACH`) descriptions into a single stacked (“上下拼接”) humanoid, each with its own IMU per body segment.
 
+### TRON2A vs TRON2B
+
+The table above shows the **TRON2A** family, which lives under `tron2a/`. The `tron2b/` directory holds the corresponding **TRON2B** hardware revision with the same eight configurations — `DA`, `DACH`, `WF`, `SF`, `WFYG`, `SFYG`, `DASF`, `DASF2` — so this repository ships **16 model sets** in total.
+
+| | TRON2A (`tron2a/`) | TRON2B (`tron2b/`) |
+|---|---|---|
+| Variants | 8 | 8 — same list |
+| Formats shipped | URDF · Xacro · MJCF · USD (`DASF2` has no xacro) | URDF · MJCF · USD — **no xacro** |
+| STL meshes | 253 | 251 |
+| USD files | 40 | 40 |
+| URDF zero | real robot's factory-calibrated zero | knees-forward pose (see [Joint zero convention](#joint-zero-convention)) |
+
+Both families appear side by side in [Model mass](#model-mass), and the per-file manifest in [`ASSETS.md`](ASSETS.md) enumerates every asset. The renders under `docs/images/` cover TRON2A only; the TRON2B assemblies are structurally the same on the updated hardware revision (the **YG** variants carry an updated sensor kit), so treat the TRON2A images as the layout reference.
+
+**Which tree to use:** `tron2a/` when the model has to line up with an as-shipped TRON2A robot or with the TRON2A policies trained in `tron2_rl_lab`; `tron2b/` for TRON2B hardware, or when a knees-forward rest pose is preferable for training and inspection without a 180° hip-yaw offset.
+
 ## License & attribution
 
 This project is licensed under the **Apache License, Version 2.0** (January 2004). See the [`LICENSE`](LICENSE) file for the full text. SPDX identifier: `Apache-2.0`.
@@ -60,7 +76,8 @@ This project is licensed under the **Apache License, Version 2.0** (January 2004
 
 **Included** in this repository:
 
-- URDF and xacro sources for eight TRON2A variants (`DA`, `DACH`, `WF`, `SF`, `WFYG`, `SFYG`, `DASF`, `DASF2`).
+- URDF and xacro sources for eight TRON2A variants (`DA`, `DACH`, `WF`, `SF`, `WFYG`, `SFYG`, `DASF`, `DASF2`) under `tron2a/`.
+- URDF sources for the same eight variants under `tron2b/` — TRON2B ships no xacro, its URDF/MJCF are authored directly.
 - MuJoCo XML models with IMU sites for each variant.
 - Binary STL meshes (visual + collision).
 - USD assets for Isaac Sim / Omniverse workflows.
@@ -79,12 +96,12 @@ For the deployment stack, model weights, and SDK, see the sibling repositories i
 
 ## Repository layout
 
-Each hardware/software configuration lives under `tron2a/<VARIANT>/`:
+Each hardware/software configuration lives under `tron2a/<VARIANT>/` (TRON2A) or `tron2b/<VARIANT>/` (TRON2B):
 
 | Path | Contents |
 |------|-----------|
 | `urdf/` | Generated or hand-maintained URDF |
-| `xacro/` | Source xacro (macro includes, collision options) |
+| `xacro/` | Source xacro (macro includes, collision options) — TRON2A only |
 | `xml/` | MuJoCo model (`robot.xml`) |
 | `meshes/` | STL meshes referenced by the models |
 | `usd/` | USD assets (present on some variants) |
@@ -104,7 +121,7 @@ pip install "mujoco>=2.3"
 python -m mujoco.viewer --mjcf=tron2a/DACH_TRON2A/xml/robot.xml
 ```
 
-Replace `DACH_TRON2A` with any folder under `tron2a/`. For `DASF2_TRON2A`, load `xml/default_pose.xml` to start from the standing keyframe.
+Replace `DACH_TRON2A` with any folder under `tron2a/` or `tron2b/` (for example `tron2b/DACH_TRON2B`). For `DASF2_TRON2A`, load `xml/default_pose.xml` to start from the standing keyframe.
 
 ---
 
@@ -176,6 +193,8 @@ python -c "import mujoco, sys; m = mujoco.MjModel.from_xml_path(sys.argv[1]); pr
 
 ## Models
 
+The subsections below describe the **TRON2A** tree. The `tron2b/` tree mirrors every entry variant-for-variant — same assemblies and file layout, on the TRON2B hardware revision — differing in the URDF zero convention (see [Joint zero convention](#joint-zero-convention)) and in the mass figures listed in [Model mass](#model-mass).
+
 ### DA_TRON2A
 
 - **Summary:** Biped with **dual arms** and **parallel grippers**; suitable for manipulation-focused simulation and control development.
@@ -239,7 +258,7 @@ python -c "import mujoco, sys; m = mujoco.MjModel.from_xml_path(sys.argv[1]); pr
 
 ## ROS packages
 
-The catkin / colcon package manifest is [`package.xml`](package.xml). The ROS package name is **`robot_description`**. Install the `tron2` asset tree into your workspace share directory via the provided [`CMakeLists.txt`](CMakeLists.txt).
+The catkin / colcon package manifest is [`package.xml`](package.xml). The ROS package name is **`robot_description`**. Install the `tron2a` / `tron2b` asset trees into your workspace share directory via the provided [`CMakeLists.txt`](CMakeLists.txt).
 
 **ROS 1 (Noetic):**
 
@@ -261,30 +280,30 @@ colcon build --packages-select robot_description
 source install/setup.bash
 ```
 
-Assets install to `$(ros2 pkg prefix robot_description)/share/robot_description/tron2a/<VARIANT>/`.
+Assets install to `$(ros2 pkg prefix robot_description)/share/robot_description/tron2a/<VARIANT>/` and `.../tron2b/<VARIANT>/`; `CMakeLists.txt` installs both trees.
 
 ---
 
 ## Verification
 
-The commands below are the same ones CI runs (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)); running them locally before opening a PR saves review round-trips.
+The commands below are the ones CI runs (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)), extended here to cover `tron2b/` as well — CI itself currently validates the `tron2a/` tree only. Running them locally before opening a PR saves review round-trips.
 
 ```bash
 # 1. URDF well-formed
-for u in tron2a/*/urdf/*.urdf; do check_urdf "$u"; done
+for u in tron2a/*/urdf/*.urdf tron2b/*/urdf/*.urdf; do check_urdf "$u"; done
 
 # 2. MuJoCo can load every XML
 pip install "mujoco>=2.3"
-for x in tron2a/*/xml/*.xml; do
+for x in tron2a/*/xml/*.xml tron2b/*/xml/*.xml; do
   python -c "import mujoco, sys; mujoco.MjModel.from_xml_path(sys.argv[1])" "$x"
 done
 
-# 3. xacro expands cleanly
+# 3. xacro expands cleanly (TRON2A only — TRON2B ships no xacro)
 pip install xacro
 for x in tron2a/*/xacro/robot.xacro; do xacro "$x" > /dev/null; done
 
 # 4. Generic XML sanity
-xmllint --noout tron2a/*/urdf/*.urdf tron2a/*/xml/*.xml
+xmllint --noout tron2a/*/urdf/*.urdf tron2b/*/urdf/*.urdf tron2a/*/xml/*.xml tron2b/*/xml/*.xml
 ```
 
 Preview a variant in Rviz:

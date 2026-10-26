@@ -25,7 +25,7 @@
 
 # TRON2 机器人描述（TRON2 robot description）
 
-面向 **TRON2A** 机器人各型号的 URDF / xacro、MuJoCo XML、网格（mesh）以及可选的 USD 资产。本仓库用于仿真、可视化以及下游工具链（ROS 1/2、MuJoCo、Isaac Sim 等）。
+面向 **TRON2A** 与 **TRON2B** 机器人各型号的 URDF / xacro、MuJoCo XML、网格（mesh）以及可选的 USD 资产 —— 同一批八个型号的两个硬件版本，共 16 套模型。本仓库用于仿真、可视化以及下游工具链（ROS 1/2、MuJoCo、Isaac Sim 等）。
 
 ## 型号一览（Variants）
 
@@ -44,6 +44,22 @@
 
 **YG** 后缀表示更丰富的上肢 / 塔杆外设布局（手臂、手部及配件结构，详见下文）。**DASF** / **DASF2** 变体将此前独立的下肢（`SF`）与上肢（`DACH`）描述拼接为单一人形，每个身体分段各配一路 IMU。
 
+### TRON2A 与 TRON2B 的区别
+
+上表列出的是 **TRON2A** 系列，位于 `tron2a/` 目录。`tron2b/` 目录是与之一一对应的 **TRON2B** 硬件版本，同样包含八个型号 —— `DA`、`DACH`、`WF`、`SF`、`WFYG`、`SFYG`、`DASF`、`DASF2`，因此本仓库共提供 **16 套模型**。
+
+| | TRON2A（`tron2a/`） | TRON2B（`tron2b/`） |
+|---|---|---|
+| 型号数量 | 8 | 8 —— 型号相同 |
+| 提供的格式 | URDF · Xacro · MJCF · USD（`DASF2` 无 xacro） | URDF · MJCF · USD —— **无 xacro** |
+| STL 网格 | 253 | 251 |
+| USD 文件 | 40 | 40 |
+| URDF 零位 | 实机出厂标定零位 | 膝盖前倾姿态（见 [关节零位约定](#关节零位约定joint-zero-convention)） |
+
+两个系列在 [模型质量](#模型质量model-mass) 一节中逐型号并列给出数值，逐文件清单见 [`ASSETS.md`](ASSETS.md)。`docs/images/` 下的渲染图仅覆盖 TRON2A；TRON2B 在结构上是同一批装配体，差别在硬件版本（**YG** 型号换装了更新的一套传感器），因此可将 TRON2A 的渲染图作为布局参考。
+
+**选哪个目录：** 需要与出厂状态的 TRON2A 实机、或与 `tron2_rl_lab` 中训练出的 TRON2A 策略对齐时用 `tron2a/`；面向 TRON2B 硬件，或希望训练与查看时直接用膝盖前倾零位（不必再叠加 180° 髋偏航偏置）时用 `tron2b/`。
+
 ## 许可与署名（License & attribution）
 
 本项目基于 **Apache License, Version 2.0**（2004 年 1 月）发布。完整许可文本请参见 [`LICENSE`](LICENSE) 文件。SPDX 标识符：`Apache-2.0`。
@@ -59,7 +75,8 @@
 
 **本仓库包含**：
 
-- 八个 TRON2A 型号（`DA`、`DACH`、`WF`、`SF`、`WFYG`、`SFYG`、`DASF`、`DASF2`）的 URDF 与 xacro 源文件。
+- `tron2a/` 下八个 TRON2A 型号（`DA`、`DACH`、`WF`、`SF`、`WFYG`、`SFYG`、`DASF`、`DASF2`）的 URDF 与 xacro 源文件。
+- `tron2b/` 下同样八个 TRON2B 型号的 URDF 源文件（TRON2B 不含 xacro，URDF/MJCF 直接编写）。
 - 各型号带 IMU site 的 MuJoCo XML 模型。
 - 二进制 STL 网格（视觉 + 碰撞）。
 - 用于 Isaac Sim / Omniverse 工作流的 USD 资产。
@@ -78,12 +95,12 @@
 
 ## 仓库结构（Repository layout）
 
-每种硬件 / 软件配置位于 `tron2a/<VARIANT>/` 目录下：
+每种硬件 / 软件配置位于 `tron2a/<VARIANT>/`（TRON2A）或 `tron2b/<VARIANT>/`（TRON2B）目录下：
 
 | 路径 | 内容 |
 |------|-----------|
 | `urdf/` | 生成的或手工维护的 URDF |
-| `xacro/` | xacro 源文件（宏 include、碰撞选项） |
+| `xacro/` | xacro 源文件（宏 include、碰撞选项）—— 仅 TRON2A |
 | `xml/` | MuJoCo 模型（`robot.xml`） |
 | `meshes/` | 模型引用的 STL 网格 |
 | `usd/` | USD 资产（部分型号提供） |
@@ -103,7 +120,7 @@ pip install "mujoco>=2.3"
 python -m mujoco.viewer --mjcf=tron2a/DACH_TRON2A/xml/robot.xml
 ```
 
-将 `DACH_TRON2A` 替换为 `tron2a/` 下的任意目录即可。`DASF2_TRON2A` 可加载 `xml/default_pose.xml`，从站立关键帧开始。
+将 `DACH_TRON2A` 替换为 `tron2a/` 或 `tron2b/` 下的任意目录即可（例如 `tron2b/DACH_TRON2B`）。`DASF2_TRON2A` 可加载 `xml/default_pose.xml`，从站立关键帧开始。
 
 ---
 
@@ -175,6 +192,8 @@ python -c "import mujoco, sys; m = mujoco.MjModel.from_xml_path(sys.argv[1]); pr
 
 ## 模型（Models）
 
+以下小节描述的是 **TRON2A** 目录树。`tron2b/` 目录树与之一一对应 —— 装配体与文件布局相同，区别在于 TRON2B 硬件版本、URDF 零位约定（见 [关节零位约定](#关节零位约定joint-zero-convention)）以及 [模型质量](#模型质量model-mass) 中给出的数值。
+
 ### DA_TRON2A
 
 - **简介：** 双足机器人，配 **双臂** 与 **平行夹爪**；适用于面向操作的仿真与控制开发。
@@ -238,7 +257,7 @@ python -c "import mujoco, sys; m = mujoco.MjModel.from_xml_path(sys.argv[1]); pr
 
 ## ROS 包（ROS packages）
 
-catkin / colcon 的包清单为 [`package.xml`](package.xml)。ROS 包名为 **`robot_description`**。通过提供的 [`CMakeLists.txt`](CMakeLists.txt) 将 `tron2` 资产树安装到工作空间的 share 目录。
+catkin / colcon 的包清单为 [`package.xml`](package.xml)。ROS 包名为 **`robot_description`**。通过提供的 [`CMakeLists.txt`](CMakeLists.txt) 将 `tron2a` / `tron2b` 资产树安装到工作空间的 share 目录。
 
 **ROS 1（Noetic）：**
 
@@ -260,30 +279,30 @@ colcon build --packages-select robot_description
 source install/setup.bash
 ```
 
-资产将安装至 `$(ros2 pkg prefix robot_description)/share/robot_description/tron2a/<VARIANT>/`。
+资产将安装至 `$(ros2 pkg prefix robot_description)/share/robot_description/tron2a/<VARIANT>/` 与 `.../tron2b/<VARIANT>/`；`CMakeLists.txt` 会同时安装两棵目录树。
 
 ---
 
 ## 校验（Verification）
 
-以下命令与 CI 所运行的一致（见 [`.github/workflows/ci.yml`](.github/workflows/ci.yml)）；在提 PR 前先在本地跑一遍可以省去多次评审往返。
+以下命令即 CI 所运行的内容（见 [`.github/workflows/ci.yml`](.github/workflows/ci.yml)），并在此基础上额外覆盖了 `tron2b/` —— CI 本身目前只校验 `tron2a/` 目录树。在提 PR 前先在本地跑一遍可以省去多次评审往返。
 
 ```bash
 # 1. URDF well-formed
-for u in tron2a/*/urdf/*.urdf; do check_urdf "$u"; done
+for u in tron2a/*/urdf/*.urdf tron2b/*/urdf/*.urdf; do check_urdf "$u"; done
 
 # 2. MuJoCo can load every XML
 pip install "mujoco>=2.3"
-for x in tron2a/*/xml/*.xml; do
+for x in tron2a/*/xml/*.xml tron2b/*/xml/*.xml; do
   python -c "import mujoco, sys; mujoco.MjModel.from_xml_path(sys.argv[1])" "$x"
 done
 
-# 3. xacro expands cleanly
+# 3. xacro expands cleanly (TRON2A only — TRON2B ships no xacro)
 pip install xacro
 for x in tron2a/*/xacro/robot.xacro; do xacro "$x" > /dev/null; done
 
 # 4. Generic XML sanity
-xmllint --noout tron2a/*/urdf/*.urdf tron2a/*/xml/*.xml
+xmllint --noout tron2a/*/urdf/*.urdf tron2b/*/urdf/*.urdf tron2a/*/xml/*.xml tron2b/*/xml/*.xml
 ```
 
 在 Rviz 中预览某个型号：
