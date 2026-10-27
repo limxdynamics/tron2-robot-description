@@ -42,6 +42,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `*.mcap`, …).
 
 ### Fixed
+- `SFYG` / `WFYG` (TRON2A and TRON2B): `arm6_Link` inertia corrected to
+  principal moments (7.6e-7, 7.6e-7, 1.4e-6) kg·m², matching its
+  38 × 38 × 12 mm mesh and 7 g mass. The previous value (~1.5e-3 kg·m²)
+  was geometrically impossible for this part and was present in the
+  TRON2A `robot.urdf` / xacro and in every TRON2B format (MJCF, URDF,
+  `robot_rl.urdf`, USD physics layer); all formats now agree (#3).
 - CI license / provenance marker scan no longer fails on reviewed,
   legitimate uses of flagged words (e.g. the Isaac Sim EULA row in
   `THIRD_PARTY_NOTICES.md`); such lines are listed verbatim in
