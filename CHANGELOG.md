@@ -40,8 +40,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and an explicit deny-list for run-time artifacts that must not be
   committed here (`*.onnx`, `*.pt`, `*.so`, `*.dll`, `*.whl`, `*.bag`,
   `*.mcap`, …).
+- `README.md` / `README_zh-CN.md`: consolidated duplicated content
+  without dropping information. The knees-forward / 180° hip-yaw
+  explanation now lives only in "Joint zero convention"; "Scope" and
+  "Repository layout" are merged; the per-variant "Models" subsections
+  became a compact "Variant details" table (IMU details moved to the
+  sensors table); "License & attribution" moved to the end, text
+  unchanged. About 336 → 240 lines per language.
+- Repository links in the READMEs, `package.xml`, `CONTRIBUTING.md`,
+  `THIRD_PARTY_NOTICES.md` and the citation now point to
+  `github.com/limxdynamics/tron2-robot-description` instead of the
+  former `limx-tron2` organization.
+
+### Removed
+- README "Distribution" note, which disclosed a private internal Git
+  server address.
+- Discussions links (README and `.github/ISSUE_TEMPLATE/config.yml`):
+  Discussions are not enabled on this repository; questions go to
+  Issues.
 
 ### Fixed
+- README "Joint zero convention": the calibration note stated that
+  every robot's factory zero matches the URDF zero, which contradicted
+  the TRON2B convention in the same section. It now applies to TRON2A
+  only.
 - `SFYG` / `WFYG` (TRON2A and TRON2B): `arm6_Link` inertia corrected to
   principal moments (7.6e-7, 7.6e-7, 1.4e-6) kg·m², matching its
   38 × 38 × 12 mm mesh and 7 g mass. The previous value (~1.5e-3 kg·m²)

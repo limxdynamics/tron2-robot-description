@@ -19,8 +19,8 @@
   <license>Apache-2.0</license>
 
   <url type="website">https://www.limxdynamics.com</url>
-  <url type="repository">https://github.com/limx-tron2/robot-description</url>
-  <url type="bugtracker">https://github.com/limx-tron2/robot-description/issues</url>
+  <url type="repository">https://github.com/limxdynamics/tron2-robot-description</url>
+  <url type="bugtracker">https://github.com/limxdynamics/tron2-robot-description/issues</url>
 
   <buildtool_depend    condition="$ROS_VERSION == 0">ament_cmake</buildtool_depend>
 

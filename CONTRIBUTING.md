@@ -46,8 +46,8 @@ Prerequisites:
 
 ```bash
 # clone
-git clone https://github.com/limx-tron2/robot-description.git
-cd robot-description
+git clone https://github.com/limxdynamics/tron2-robot-description.git
+cd tron2-robot-description
 
 # ROS 1
 catkin_make -DCATKIN_WHITELIST_PACKAGES=robot_description

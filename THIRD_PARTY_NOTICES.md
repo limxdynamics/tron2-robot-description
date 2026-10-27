@@ -108,7 +108,7 @@ independently.
 - No firmware.
 - No customer- or site-specific configuration.
 
-For those, see the sibling repositories in the `limx-tron2` org.
+For those, see the sibling repositories in the `limxdynamics` org.
 
 ---
 
