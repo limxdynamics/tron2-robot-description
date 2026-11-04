@@ -19,6 +19,8 @@
 
 # TRON2 robot description
 
+> **Part of the TRON2 open-source ecosystem.** Where to start and the other TRON2 repositories: [TRON2 quick start](https://github.com/limxdynamics/limxdynamics/blob/main/doc/quickstart.md#tron2).
+
 URDF / xacro, MuJoCo XML, meshes, and optional USD assets for **TRON2A** and **TRON2B** robot variants — the same eight configurations in two hardware revisions, 16 model sets in total. This package is intended for simulation, visualization, and downstream tooling (ROS 1/2, MuJoCo, Isaac Sim, and similar).
 
 ## Variants

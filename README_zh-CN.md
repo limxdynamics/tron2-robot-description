@@ -19,6 +19,8 @@
 
 # TRON2 机器人描述（TRON2 robot description）
 
+> **TRON2 开源生态的一部分。** 上手路线和其他 TRON2 仓库：[TRON2 快速上手](https://github.com/limxdynamics/limxdynamics/blob/main/doc/quickstart_cn.md#tron2)。
+
 面向 **TRON2A** 与 **TRON2B** 机器人各型号的 URDF / xacro、MuJoCo XML、网格（mesh）以及可选的 USD 资产 —— 同一批八个型号的两个硬件版本，共 16 套模型。本仓库用于仿真、可视化以及下游工具链（ROS 1/2、MuJoCo、Isaac Sim 等）。
 
 ## 型号一览（Variants）
