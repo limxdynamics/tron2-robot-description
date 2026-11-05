@@ -9,6 +9,11 @@
 
 **English** | [中文](README_zh-CN.md)
 
+<!-- limx-community:start -->
+<!-- Managed by limxdynamics/limxdynamics/.github/community/sync_community.py; QR code: doc/wechat_qr.png in that repo -->
+<p align="center"><a href="https://github.com/limxdynamics/limxdynamics/blob/main/doc/wechat_qr.png"><img src="https://img.shields.io/badge/Join%20Our%20WeChat%20Community-All%20Projects%20Welcome-07C160?style=for-the-badge&logo=wechat&logoColor=white" alt="WeChat Community"></a></p>
+<!-- limx-community:end -->
+
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![CI](https://github.com/limxdynamics/tron2-robot-description/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/limxdynamics/tron2-robot-description/actions/workflows/ci.yml)
 [![ROS](https://img.shields.io/badge/ROS-1%20%7C%202-22314E?logo=ros)](#ros-packages)
