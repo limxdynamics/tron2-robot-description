@@ -243,4 +243,3 @@ xmllint --noout tron2a/*/urdf/*.urdf tron2b/*/urdf/*.urdf tron2a/*/xml/*.xml tro
 
 - **Bug 反馈、功能需求与集成问题：** [GitHub Issues](https://github.com/limxdynamics/tron2-robot-description/issues)。
 - **安全上报：** 邮件 `contact@limxdynamics.com`；另见 [`SECURITY.md`](SECURITY.md)。
-- **公司 / 商务联系：** <https://www.limxdynamics.com>。

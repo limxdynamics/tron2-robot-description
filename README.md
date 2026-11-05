@@ -243,4 +243,3 @@ If you use this description in academic or public work, please cite the reposito
 
 - **Bug reports, feature requests and integration questions:** [GitHub Issues](https://github.com/limxdynamics/tron2-robot-description/issues).
 - **Security reports:** email `contact@limxdynamics.com`; see [`SECURITY.md`](SECURITY.md).
-- **Company / commercial contact:** <https://www.limxdynamics.com>.
