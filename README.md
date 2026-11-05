@@ -11,6 +11,9 @@
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![WeChat Community](https://img.shields.io/badge/WeChat-Developer%20Community-07C160?logo=wechat&logoColor=white)](https://github.com/limxdynamics/limxdynamics/blob/main/doc/wechat_qr.png)
+
+<p align="center"><sub>For partnership and procurement inquiries, contact <a href="mailto:opensource@limxdynamics.com">opensource@limxdynamics.com</a></sub></p>
+
 [![CI](https://github.com/limxdynamics/tron2-robot-description/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/limxdynamics/tron2-robot-description/actions/workflows/ci.yml)
 [![ROS](https://img.shields.io/badge/ROS-1%20%7C%202-22314E?logo=ros)](#ros-packages)
 [![MuJoCo](https://img.shields.io/badge/MuJoCo-MJCF-0A7BBB)](https://mujoco.org/)
