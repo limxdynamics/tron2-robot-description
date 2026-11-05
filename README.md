@@ -10,6 +10,7 @@
 **English** | [中文](README_zh-CN.md)
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-limxdynamics-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/limxdynamics)
 [![WeChat Community](https://img.shields.io/badge/WeChat-Developer%20Community-07C160?logo=wechat&logoColor=white)](https://github.com/limxdynamics/limxdynamics/blob/main/doc/wechat_qr.png)
 
 <p align="center"><sub>For partnership and procurement inquiries, contact <a href="mailto:opensource@limxdynamics.com">opensource@limxdynamics.com</a></sub></p>
