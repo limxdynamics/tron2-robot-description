@@ -19,6 +19,7 @@
     <color rgba="1.0 0.423 0.039 1.0" />
   </material>
 
+  <!-- tron2-xacro body begin, links and joints mirror the urdf, see the tron2-xacro skill -->
   <!-- IMU Link -->
   <joint name="base_imu_Joint" type="fixed">
     <origin rpy="0. 0. 0." xyz="0. 0. 0." />
@@ -320,7 +321,7 @@
     <origin xyz="-0.00044 0.09178 0.05474" rpy="0 0 0" />
     <parent link="base_Link" />
     <child link="proximal_pitch_L_Link" />
-    <axis xyz="0 0.99619 -0.087155" />
+    <axis xyz="0.0 0.996194726892931 -0.0871554135479712" />
     <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3" />
   </joint>
 
@@ -360,7 +361,7 @@
     <origin xyz="-0.00044 -0.09178 0.05474" rpy="0 0 0" />
     <parent link="base_Link" />
     <child link="proximal_pitch_R_Link" />
-    <axis xyz="0 0.99619 0.087155" />
+    <axis xyz="0.0 0.996194726892931 0.0871554135479712" />
     <limit lower="-3.141592653589793" upper="2.600540585471551" effort="150" velocity="18.3" />
   </joint>
 
@@ -471,10 +472,13 @@
 
   <!-- D435 Camera Links -->
   <link name="d435_Link">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07" />
+    </inertial>
     <visual>
-      <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0.0 -0.0 0" />
       <geometry>
-        <box size="0.01 0.01 0.001" />
+        <box size="0.005 0.005 0.005" />
       </geometry>
       <material name="camera_red">
         <color rgba="1.0 0.0 0.0 1.0" />
@@ -482,18 +486,29 @@
     </visual>
   </link>
 
-  <joint name="d435_joint" type="fixed">
-    <origin rpy="0 1.063778179 0" xyz="0.12213 0.01759 0.00599" />
-    <parent link="base_imu" />
+  <joint name="d435_Joint" type="fixed">
+    <origin xyz="0.0968 0.01759 -0.00409" rpy="0 2.7227 0" />
+    <parent link="base_Link" />
     <child link="d435_Link" />
   </joint>
 
-  <joint name="d435_optical_joint" type="fixed">
+  <link name="d435_optical_frame">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07" />
+    </inertial>
+  </link>
+
+  <joint name="d435_optical_Joint" type="fixed">
     <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0" />
     <parent link="d435_Link" />
     <child link="d435_optical_frame" />
   </joint>
-  <link name="d435_optical_frame" />
+
+  <!-- tron2-xacro body end -->
+
+  <!-- 反射转子惯量，与 ROS 版本无关，取值逐关节对齐 xml armature -->
+  <xacro:rotor_inertia_all />
 
   <!-- Conditional ROS version -->
   <xacro:if value="${ros_version == 1}">

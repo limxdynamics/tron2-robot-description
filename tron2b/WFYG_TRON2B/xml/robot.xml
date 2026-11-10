@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <mujoco model="bipedal_robot">
   <compiler angle="radian" meshdir="../meshes" autolimits="true"/>
-  <option timestep="0.001"/>
+  <option timestep="0.001" cone="elliptic" impratio="10"/>
   <size njmax="5000" nconmax="1000"/>
   <default>
     <light castshadow="false" diffuse="1 1 1"/>
@@ -60,6 +60,7 @@
     <mesh name="antenna_R_Link_collision_1" file="antenna_R_Link_collision_1.STL"/>
     <mesh name="antenna_R_Link_collision_2" file="antenna_R_Link_collision_2.STL"/>
     <mesh name="camera_mount_Link" file="camera_mount_Link.STL"/>
+    <mesh name="camera_mount_Link_collision" file="camera_mount_Link_collision.STL"/>
     <mesh name="radar_Link" file="radar_Link.STL"/>
     <texture name="texplane" type="2d" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.15 0.2" width="100" height="100"/>
     <material name="matplane" reflectance="0." texture="texplane" texrepeat="1 1" texuniform="true"/>
@@ -181,7 +182,7 @@
                     <geom mesh="arm5_Link" class="visual"/>
                     <geom mesh="arm5_Link" class="collision"/>
                     <body name="arm6_Link" pos="0 -0.035 0" quat="0.707107 0.707107 0 0">
-                      <inertial pos="0 0 -0.0035" quat="0.5 0.5 -0.5 0.5" mass="0.007" diaginertia="1.4e-06 7.6e-07 7.6e-07"/>
+                      <inertial pos="0 0 -0.0035" quat="0.999971 -8.01245e-07 -0.00107878 0.00748677" mass="0.007" diaginertia="0.00152116 0.00138623 0.000311514"/>
                       <joint name="arm6_Joint" pos="0 0 0" axis="0 0 1" range="-2.0944 2.0944" actuatorfrcrange="-100 100" armature="0.0110718"/>
                       <geom mesh="arm6_Link" class="visual"/>
                       <geom mesh="arm6_Link" class="collision"/>
@@ -232,7 +233,7 @@
       <body name="camera_mount_Link" pos="0.18058 0 0.23876">
         <inertial pos="-0.019708 0.000381 -0.010581" quat="-0.00524609 0.802967 -2.10081e-05 0.596001" mass="0.288" diaginertia="0.00184131 0.00133133 0.000667704"/>
         <geom mesh="camera_mount_Link" class="visual"/>
-        <geom mesh="camera_mount_Link" class="collision"/>
+        <geom mesh="camera_mount_Link_collision" class="collision"/>
       </body>
 
       <!-- radar Link -->
@@ -247,6 +248,15 @@
         <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
         <camera name="d435_depth" pos="0 0 0" quat="0 -0.707107 0.707107 0" fovy="70.840779"/>
         <body name="d435_optical_frame" quat="0.5 -0.5 0.5 -0.5">
+          <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        </body>
+      </body>
+
+      <!-- d435 camera Link -->
+      <body name="d435_camera_Link" pos="0.22117 0.0175 0.18592" quat="0.422631 0 0.906302 0">
+        <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        <camera name="d435_camera_depth" pos="0 0 0" quat="0 -0.707107 0.707107 0" fovy="70.840779"/>
+        <body name="d435_camera_optical_frame" quat="0.5 -0.5 0.5 -0.5">
           <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
         </body>
       </body>

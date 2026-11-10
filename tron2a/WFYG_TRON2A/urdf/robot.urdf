@@ -346,6 +346,36 @@
     <child link="d435_optical_frame"/>
   </joint>
 
+  <!-- Camera: d435_camera (perception-kit camera, pose = 2B YG Excel CAMERA_Joint; link same as d435) -->
+  <link name="d435_camera_Link">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.005 0.005 0.005"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="d435_camera_Joint" type="fixed">
+    <origin xyz="0.22117 0.0175 0.18592" rpy="0 2.2689 0"/>
+    <parent link="base_Link"/>
+    <child link="d435_camera_Link"/>
+  </joint>
+
+  <link name="d435_camera_optical_frame">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07"/>
+    </inertial>
+  </link>
+  <joint name="d435_camera_optical_Joint" type="fixed">
+    <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0"/>
+    <parent link="d435_camera_Link"/>
+    <child link="d435_camera_optical_frame"/>
+  </joint>
+
   <!-- transition Link -->
   <link name="transition_Link">
     <inertial>
@@ -557,7 +587,7 @@
     <inertial>
       <origin xyz="0.0 0.0 -0.0035" rpy="0.0 0.0 0.0"/>
       <mass value="0.007"/>
-      <inertia ixx="0.00000076" ixy="0.0" ixz="0.0" iyy="0.00000076" iyz="0.0" izz="0.0000014"/>
+      <inertia ixx="0.00152112" ixy="2.02e-06" ixz="2.61e-06" iyy="0.00138626" iyz="2e-08" izz="0.00031152"/>
     </inertial>
     <visual>
       <geometry>
@@ -743,7 +773,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robot_description/tron2a/WFYG_TRON2A/meshes/camera_mount_Link.STL"/>
+        <mesh filename="package://robot_description/tron2a/WFYG_TRON2A/meshes/camera_mount_Link_collision.STL"/>
       </geometry>
     </collision>
   </link>

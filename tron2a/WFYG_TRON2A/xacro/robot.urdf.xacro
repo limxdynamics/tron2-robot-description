@@ -3,11 +3,8 @@
 
   <xacro:arg name="ros_version" default="$(optenv ROS_VERSION 2)" />
   <xacro:arg name="use_primitive_collision" default="false" />
-  <!-- 六轴反射转子惯量，对齐 MJCF 的 armature="0.0110718"；设 0 关闭（见 macros.xacro） -->
-  <xacro:arg name="arm_armature" default="0.0110718" />
   <xacro:property name="ros_version" value="$(arg ros_version)" />
   <xacro:property name="use_primitive" value="$(arg use_primitive_collision)" />
-  <xacro:property name="arm_armature" value="$(arg arm_armature)" />
 
   <xacro:include filename="macros.xacro" />
 
@@ -22,6 +19,7 @@
     <color rgba="1.0 0.423 0.039 1.0" />
   </material>
 
+  <!-- tron2-xacro body begin, links and joints mirror the urdf, see the tron2-xacro skill -->
   <!-- IMU Link -->
   <joint name="base_imu_Joint" type="fixed">
     <origin rpy="0. 0. 0." xyz="0. 0. 0." />
@@ -321,7 +319,7 @@
   <!-- Arm + Gripper + Peripherals (piper-x) -->
   <link name="transition_Link">
     <inertial>
-      <origin xyz="-0.109866 -0.002238 0.012131" rpy="0 0 0" />
+      <origin xyz="-0.109866 -0.002238 0.012131" rpy="0.0 0.0 0.0" />
       <mass value="1.117" />
       <inertia ixx="0.002748897" ixy="-0.000172411" ixz="0.00101041"
         iyy="0.007134041" iyz="3.8511e-05" izz="0.008548272" />
@@ -340,7 +338,7 @@
       </geometry>
     </collision>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
       <geometry>
         <mesh filename="package://robot_description/tron2a/WFYG_TRON2A/meshes/transition_Link_collision_2.STL" />
       </geometry>
@@ -499,10 +497,10 @@
 
   <link name="arm6_Link">
     <inertial>
-      <origin xyz="0.0 0.0 -0.0035" rpy="0 0 0" />
+      <origin xyz="0.0 0.0 -0.0035" rpy="0.0 0.0 0.0" />
       <mass value="0.007" />
-      <inertia ixx="0.00000076" ixy="0.0" ixz="0.0"
-        iyy="0.00000076" iyz="0.0" izz="0.0000014" />
+      <inertia ixx="0.00152112" ixy="2.02e-06" ixz="2.61e-06"
+        iyy="0.00138626" iyz="2e-08" izz="0.00031152" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -511,12 +509,6 @@
       </geometry>
       <material name="grey" />
     </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://robot_description/tron2a/WFYG_TRON2A/meshes/arm6_Link.STL" />
-      </geometry>
-    </collision>
   </link>
 
   <link name="gripper_base_Link">
@@ -593,7 +585,7 @@
 
   <link name="antenna_L_Link">
     <inertial>
-      <origin xyz="0.0 -0.025937 0.00756" rpy="0 0 0" />
+      <origin xyz="0.0 -0.025937 0.00756" rpy="0.0 0.0 0.0" />
       <mass value="0.073" />
       <inertia ixx="9.4062e-05" ixy="-1e-09" ixz="0.0"
         iyy="2.8597e-05" iyz="-2.91e-07" izz="7.7585e-05" />
@@ -612,7 +604,7 @@
       </geometry>
     </collision>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
       <geometry>
         <mesh filename="package://robot_description/tron2a/WFYG_TRON2A/meshes/antenna_L_Link_collision_2.STL" />
       </geometry>
@@ -621,7 +613,7 @@
 
   <link name="antenna_R_Link">
     <inertial>
-      <origin xyz="0.0 0.025937 0.00756" rpy="0 0 0" />
+      <origin xyz="0.0 0.025937 0.00756" rpy="0.0 0.0 0.0" />
       <mass value="0.073" />
       <inertia ixx="9.4062e-05" ixy="-1e-09" ixz="0.0"
         iyy="2.8597e-05" iyz="2.9e-07" izz="7.7584e-05" />
@@ -640,7 +632,7 @@
       </geometry>
     </collision>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
       <geometry>
         <mesh filename="package://robot_description/tron2a/WFYG_TRON2A/meshes/antenna_R_Link_collision_2.STL" />
       </geometry>
@@ -649,7 +641,7 @@
 
   <link name="camera_mount_Link">
     <inertial>
-      <origin xyz="-0.019708 0.000381 -0.010581" rpy="0 0 0" />
+      <origin xyz="-0.019708 0.000381 -0.010581" rpy="0.0 0.0 0.0" />
       <mass value="0.288" />
       <inertia ixx="0.000766135" ixy="-6.264e-06" ixz="0.000325236"
         iyy="0.001331301" iyz="-1.455e-06" izz="0.001742907" />
@@ -664,14 +656,14 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot_description/tron2a/WFYG_TRON2A/meshes/camera_mount_Link.STL" />
+        <mesh filename="package://robot_description/tron2a/WFYG_TRON2A/meshes/camera_mount_Link_collision.STL" />
       </geometry>
     </collision>
   </link>
 
   <link name="radar_Link">
     <inertial>
-      <origin xyz="-0.001188 1e-06 0.037286" rpy="0 0 0" />
+      <origin xyz="-0.001188 1e-06 0.037286" rpy="0.0 0.0 0.0" />
       <mass value="0.406" />
       <inertia ixx="0.000379149" ixy="5.2e-08" ixz="1.011e-06"
         iyy="0.00036962" iyz="-3e-09" izz="0.000353387" />
@@ -692,10 +684,13 @@
   </link>
   <!-- D435 Camera Links -->
   <link name="d435_Link">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07" />
+    </inertial>
     <visual>
-      <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0.0 -0.0 0" />
       <geometry>
-        <box size="0.01 0.01 0.001" />
+        <box size="0.005 0.005 0.005" />
       </geometry>
       <material name="camera_red">
         <color rgba="1.0 0.0 0.0 1.0" />
@@ -703,18 +698,57 @@
     </visual>
   </link>
 
-  <joint name="d435_joint" type="fixed">
-    <origin rpy="0 1.063778179 0" xyz="0.12213 0.01759 0.00599" />
-    <parent link="base_imu" />
+  <joint name="d435_Joint" type="fixed">
+    <origin xyz="0.0968 0.01759 -0.00409" rpy="0 2.7227 0" />
+    <parent link="base_Link" />
     <child link="d435_Link" />
   </joint>
 
-  <joint name="d435_optical_joint" type="fixed">
+  <link name="d435_optical_frame">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07" />
+    </inertial>
+  </link>
+
+  <joint name="d435_optical_Joint" type="fixed">
     <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0" />
     <parent link="d435_Link" />
     <child link="d435_optical_frame" />
   </joint>
-  <link name="d435_optical_frame" />
+
+  <!-- Camera d435_camera. Perception-kit camera, pose from the 2B YG Excel CAMERA_Joint; link same as d435 -->
+  <link name="d435_camera_Link">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07" />
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.005 0.005 0.005" />
+      </geometry>
+      <material name="camera_red" />
+    </visual>
+  </link>
+
+  <joint name="d435_camera_Joint" type="fixed">
+    <origin xyz="0.22117 0.0175 0.18592" rpy="0 2.2689 0" />
+    <parent link="base_Link" />
+    <child link="d435_camera_Link" />
+  </joint>
+
+  <link name="d435_camera_optical_frame">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07" />
+    </inertial>
+  </link>
+
+  <joint name="d435_camera_optical_Joint" type="fixed">
+    <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0" />
+    <parent link="d435_camera_Link" />
+    <child link="d435_camera_optical_frame" />
+  </joint>
 
   <!-- Joints -->
   <joint name="proximal_pitch_L_Joint" type="revolute">
@@ -730,7 +764,7 @@
     <parent link="proximal_pitch_L_Link" />
     <child link="proximal_roll_L_Link" />
     <axis xyz="1 0 0" />
-    <limit lower="-0.2617993877991494" upper="3.2288591161895095" effort="150" velocity="18.3" />
+    <limit lower="-0.2617993877991494" upper="3.193952531149623" effort="150" velocity="18.3" />
   </joint>
 
   <joint name="proximal_yaw_L_Joint" type="revolute">
@@ -770,7 +804,7 @@
     <parent link="proximal_pitch_R_Link" />
     <child link="proximal_roll_R_Link" />
     <axis xyz="1 0 0" />
-    <limit lower="-3.2288591161895095" upper="0.2617993877991494" effort="150" velocity="18.3" />
+    <limit lower="-3.193952531149623" upper="0.2617993877991494" effort="150" velocity="18.3" />
   </joint>
 
   <joint name="proximal_yaw_R_Joint" type="revolute">
@@ -805,7 +839,7 @@
   </joint>
 
   <joint name="arm_base_Joint" type="fixed">
-    <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
     <parent link="transition_Link" />
     <child link="arm_base_Link" />
   </joint>
@@ -881,13 +915,13 @@
   </joint>
 
   <joint name="antenna_L_Joint" type="fixed">
-    <origin xyz="-0.04365 0.1535 0.23765" rpy="0 0 0" />
+    <origin xyz="-0.04365 0.1535 0.23765" rpy="0.0 0.0 0.0" />
     <parent link="base_Link" />
     <child link="antenna_L_Link" />
   </joint>
 
   <joint name="antenna_R_Joint" type="fixed">
-    <origin xyz="-0.04365 -0.1535 0.23765" rpy="0 0 0" />
+    <origin xyz="-0.04365 -0.1535 0.23765" rpy="0.0 0.0 0.0" />
     <parent link="base_Link" />
     <child link="antenna_R_Link" />
   </joint>
@@ -899,7 +933,7 @@
   </joint>
 
   <joint name="radar_Joint" type="fixed">
-    <origin xyz="0.18058 0.0 0.23876" rpy="0 0 0" />
+    <origin xyz="0.18058 0.0 0.23876" rpy="0.0 0.0 0.0" />
     <parent link="base_Link" />
     <child link="radar_Link" />
   </joint>
@@ -1054,10 +1088,10 @@
     <material>Gazebo/White</material>
   </gazebo>
 
-  <!-- 反射转子惯量（MJCF armature 的 URDF 等价物）；arm_armature=0 时不生成 -->
-  <xacro:if value="${arm_armature &gt; 0}">
-    <xacro:arm_rotor_inertia_all armature="${arm_armature}" />
-  </xacro:if>
+  <!-- tron2-xacro body end -->
+
+  <!-- 反射转子惯量，与 ROS 版本无关，取值逐关节对齐 xml armature -->
+  <xacro:rotor_inertia_all />
 
   <!-- Conditional ROS version -->
   <xacro:if value="${ros_version == 1}">

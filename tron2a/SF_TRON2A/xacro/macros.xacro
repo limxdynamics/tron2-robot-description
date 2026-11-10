@@ -1,6 +1,57 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <!-- tron2-xacro helpers begin -->
+  <!-- Helper. One ros2_control joint with position/velocity/effort command and state -->
+  <xacro:macro name="tron2_ctrl_joint" params="name">
+    <joint name="${name}">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+  </xacro:macro>
+
+  <!-- Helper. One ROS1 effort controlled joint -->
+  <xacro:macro name="tron2_transmission" params="name">
+    <transmission name="${name}_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${name}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${name}_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <!-- 反射转子惯量，MuJoCo <joint armature> 的 URDF 等价物（URDF 与 SDF 都没有 armature）。
+       在关节的子连杆上刚性附着一个薄圆盘，izz=armature、ixx=iyy=armature/2，满足刚体惯量
+       三角不等式。rpy 把圆盘 z 轴转到关节轴上，取 0、acos(z)、atan2(y,x)。
+       与原生 armature 的偏差在于转子也会加载上游关节，末端精确，越靠根部偏高越多。
+       依赖 Gazebo 默认的 fixed-joint lumping，转子关节上不要设 disableFixedJointLumping。
+       移动关节不加，其 armature 单位为 kg，复现它等于给连杆加真实质量与重力。
+       规则与推导见 tron2-xacro skill 的 references/armature.md。 -->
+  <xacro:macro name="rotor_inertia" params="joint child armature mass:=1e-4 rpy:='0 0 0'">
+    <link name="${joint}_rotor">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="${mass}"/>
+        <inertia ixx="${armature / 2.0}" iyy="${armature / 2.0}" izz="${armature}"
+                 ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+    </link>
+    <joint name="${joint}_rotor_fixed" type="fixed">
+      <origin xyz="0 0 0" rpy="${rpy}"/>
+      <parent link="${child}"/>
+      <child link="${joint}_rotor"/>
+    </joint>
+  </xacro:macro>
+  <!-- tron2-xacro helpers end -->
+
   <!-- ==================== ROS1 Gazebo Macro ==================== -->
   <xacro:macro name="ros1_gazebo_all">
 
@@ -27,7 +78,7 @@
       </plugin>
     </gazebo>
 
-    <!-- D435 Camera ROS1 Plugin: split into two sensors instead of using
+    <!-- D435 Camera ROS1 Plugin. Split into two sensors instead of using
          libgazebo_ros_openni_kinect.so. The openni_kinect plugin deadlocks
          with gazebo_ros_control on Load() and prevents Tron2HWSim::initSim
          from being called. -->
@@ -96,116 +147,18 @@
       </sensor>
     </gazebo>
 
-    <!-- Transmissions (ROS1) -->
-    <transmission name="proximal_pitch_L_Joint_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="proximal_pitch_L_Joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="proximal_pitch_L_Joint_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="proximal_roll_L_Joint_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="proximal_roll_L_Joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="proximal_roll_L_Joint_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="proximal_yaw_L_Joint_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="proximal_yaw_L_Joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="proximal_yaw_L_Joint_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="knee_L_Joint_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="knee_L_Joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="knee_L_Joint_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="ankle_pitch_L_Joint_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="ankle_pitch_L_Joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="ankle_pitch_L_Joint_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="proximal_pitch_R_Joint_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="proximal_pitch_R_Joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="proximal_pitch_R_Joint_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="proximal_roll_R_Joint_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="proximal_roll_R_Joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="proximal_roll_R_Joint_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="proximal_yaw_R_Joint_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="proximal_yaw_R_Joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="proximal_yaw_R_Joint_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="knee_R_Joint_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="knee_R_Joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="knee_R_Joint_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-
-    <transmission name="ankle_pitch_R_Joint_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="ankle_pitch_R_Joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="ankle_pitch_R_Joint_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
+    <!-- tron2-xacro auto begin ros1-transmissions -->
+    <xacro:tron2_transmission name="proximal_pitch_L_Joint" />  <!-- idx 0 -->
+    <xacro:tron2_transmission name="proximal_roll_L_Joint" />  <!-- idx 1 -->
+    <xacro:tron2_transmission name="proximal_yaw_L_Joint" />  <!-- idx 2 -->
+    <xacro:tron2_transmission name="knee_L_Joint" />  <!-- idx 3 -->
+    <xacro:tron2_transmission name="ankle_pitch_L_Joint" />  <!-- idx 4 -->
+    <xacro:tron2_transmission name="proximal_pitch_R_Joint" />  <!-- idx 5 -->
+    <xacro:tron2_transmission name="proximal_roll_R_Joint" />  <!-- idx 6 -->
+    <xacro:tron2_transmission name="proximal_yaw_R_Joint" />  <!-- idx 7 -->
+    <xacro:tron2_transmission name="knee_R_Joint" />  <!-- idx 8 -->
+    <xacro:tron2_transmission name="ankle_pitch_R_Joint" />  <!-- idx 9 -->
+    <!-- tron2-xacro auto end ros1-transmissions -->
 
   </xacro:macro>
 
@@ -225,95 +178,18 @@
         <plugin>tron2_gazebo/Tron2HWSim</plugin>
       </hardware>
 
-      <joint name="proximal_pitch_L_Joint">
-        <command_interface name="position" />
-        <command_interface name="velocity" />
-        <command_interface name="effort" />
-        <state_interface name="position" />
-        <state_interface name="velocity" />
-        <state_interface name="effort" />
-      </joint>
-
-      <joint name="proximal_roll_L_Joint">
-        <command_interface name="position" />
-        <command_interface name="velocity" />
-        <command_interface name="effort" />
-        <state_interface name="position" />
-        <state_interface name="velocity" />
-        <state_interface name="effort" />
-      </joint>
-
-      <joint name="proximal_yaw_L_Joint">
-        <command_interface name="position" />
-        <command_interface name="velocity" />
-        <command_interface name="effort" />
-        <state_interface name="position" />
-        <state_interface name="velocity" />
-        <state_interface name="effort" />
-      </joint>
-
-      <joint name="knee_L_Joint">
-        <command_interface name="position" />
-        <command_interface name="velocity" />
-        <command_interface name="effort" />
-        <state_interface name="position" />
-        <state_interface name="velocity" />
-        <state_interface name="effort" />
-      </joint>
-
-      <joint name="ankle_pitch_L_Joint">
-        <command_interface name="position" />
-        <command_interface name="velocity" />
-        <command_interface name="effort" />
-        <state_interface name="position" />
-        <state_interface name="velocity" />
-        <state_interface name="effort" />
-      </joint>
-
-      <joint name="proximal_pitch_R_Joint">
-        <command_interface name="position" />
-        <command_interface name="velocity" />
-        <command_interface name="effort" />
-        <state_interface name="position" />
-        <state_interface name="velocity" />
-        <state_interface name="effort" />
-      </joint>
-
-      <joint name="proximal_roll_R_Joint">
-        <command_interface name="position" />
-        <command_interface name="velocity" />
-        <command_interface name="effort" />
-        <state_interface name="position" />
-        <state_interface name="velocity" />
-        <state_interface name="effort" />
-      </joint>
-
-      <joint name="proximal_yaw_R_Joint">
-        <command_interface name="position" />
-        <command_interface name="velocity" />
-        <command_interface name="effort" />
-        <state_interface name="position" />
-        <state_interface name="velocity" />
-        <state_interface name="effort" />
-      </joint>
-
-      <joint name="knee_R_Joint">
-        <command_interface name="position" />
-        <command_interface name="velocity" />
-        <command_interface name="effort" />
-        <state_interface name="position" />
-        <state_interface name="velocity" />
-        <state_interface name="effort" />
-      </joint>
-
-      <joint name="ankle_pitch_R_Joint">
-        <command_interface name="position" />
-        <command_interface name="velocity" />
-        <command_interface name="effort" />
-        <state_interface name="position" />
-        <state_interface name="velocity" />
-        <state_interface name="effort" />
-      </joint>
+      <!-- tron2-xacro auto begin ros2-joints -->
+      <xacro:tron2_ctrl_joint name="proximal_pitch_L_Joint" />  <!-- idx 0 -->
+      <xacro:tron2_ctrl_joint name="proximal_roll_L_Joint" />  <!-- idx 1 -->
+      <xacro:tron2_ctrl_joint name="proximal_yaw_L_Joint" />  <!-- idx 2 -->
+      <xacro:tron2_ctrl_joint name="knee_L_Joint" />  <!-- idx 3 -->
+      <xacro:tron2_ctrl_joint name="ankle_pitch_L_Joint" />  <!-- idx 4 -->
+      <xacro:tron2_ctrl_joint name="proximal_pitch_R_Joint" />  <!-- idx 5 -->
+      <xacro:tron2_ctrl_joint name="proximal_roll_R_Joint" />  <!-- idx 6 -->
+      <xacro:tron2_ctrl_joint name="proximal_yaw_R_Joint" />  <!-- idx 7 -->
+      <xacro:tron2_ctrl_joint name="knee_R_Joint" />  <!-- idx 8 -->
+      <xacro:tron2_ctrl_joint name="ankle_pitch_R_Joint" />  <!-- idx 9 -->
+      <!-- tron2-xacro auto end ros2-joints -->
 
       <sensor name="base_imu_sensor">
         <state_interface name="orientation.x" />
@@ -391,5 +267,20 @@
     </gazebo>
 
   </xacro:macro>
+
+  <!-- tron2-xacro auto begin rotor -->
+  <xacro:macro name="rotor_inertia_all">
+    <xacro:rotor_inertia joint="proximal_pitch_L_Joint" child="proximal_pitch_L_Link" armature="0.0685894" rpy="0 1.65806245894 1.57079632679"/>
+    <xacro:rotor_inertia joint="proximal_roll_L_Joint" child="proximal_roll_L_Link" armature="0.0685894" rpy="0 1.57079632679 0"/>
+    <xacro:rotor_inertia joint="proximal_yaw_L_Joint" child="proximal_yaw_L_Link" armature="0.0169834"/>
+    <xacro:rotor_inertia joint="knee_L_Joint" child="knee_L_Link" armature="0.0685894" rpy="0 1.57079632679 1.57079632679"/>
+    <xacro:rotor_inertia joint="ankle_pitch_L_Joint" child="ankle_pitch_L_Link" armature="0.0169834" rpy="0 1.57079632679 1.57079632679"/>
+    <xacro:rotor_inertia joint="proximal_pitch_R_Joint" child="proximal_pitch_R_Link" armature="0.0685894" rpy="0 1.48353019465 1.57079632679"/>
+    <xacro:rotor_inertia joint="proximal_roll_R_Joint" child="proximal_roll_R_Link" armature="0.0685894" rpy="0 1.57079632679 0"/>
+    <xacro:rotor_inertia joint="proximal_yaw_R_Joint" child="proximal_yaw_R_Link" armature="0.0169834"/>
+    <xacro:rotor_inertia joint="knee_R_Joint" child="knee_R_Link" armature="0.0685894" rpy="0 1.57079632679 1.57079632679"/>
+    <xacro:rotor_inertia joint="ankle_pitch_R_Joint" child="ankle_pitch_R_Link" armature="0.0169834" rpy="0 1.57079632679 1.57079632679"/>
+  </xacro:macro>
+  <!-- tron2-xacro auto end rotor -->
 
 </robot>

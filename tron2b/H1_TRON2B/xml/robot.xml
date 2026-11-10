@@ -1,0 +1,331 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mujoco model="bipedal_robot">
+  <compiler angle="radian" meshdir="../meshes" autolimits="true"/>
+  <option timestep="0.001" cone="elliptic" impratio="10"/>
+  <size njmax="5000" nconmax="1000"/>
+  <default>
+    <light castshadow="false" diffuse="1 1 1"/>
+    <camera fovy="60"/>
+    <default class="visual">
+      <geom contype="0" conaffinity="0" group="1" type="mesh" density="0" rgba="0.8 0.8 0.8 1.0"/>
+    </default>
+    <default class="collision">
+      <geom type="mesh" density="0" rgba="0.8 0.8 0.8 0.3"/>
+    </default>
+    <joint damping="0.01" margin="0.0001" solreflimit="0.002 1"/>
+    <geom contype="1" conaffinity="1" friction="1.0 0.3 0.3" rgba="0.5 0.6 0.7 0.5" margin="0" group="0" solref="0.01 1"/>
+    <equality solref="0.001 1"/>
+  </default>
+  <visual>
+    <rgba com="0.502 1.0 0 1.0" contactpoint="0.5 0.1 0.8 0.4" contactforce="0.2 0.98 0.2 0.8"/>
+    <scale com="0.2" forcewidth="0.05" contactwidth="0.10" contactheight="0.04"/>
+  </visual>
+  <asset>
+    <mesh name="base_Link" file="base_Link.STL"/>
+    <mesh name="proximal_pitch_L_Link" file="proximal_pitch_L_Link.STL"/>
+    <mesh name="proximal_roll_L_Link" file="proximal_roll_L_Link.STL"/>
+    <mesh name="proximal_yaw_L_Link" file="proximal_yaw_L_Link.STL"/>
+    <mesh name="knee_L_Link" file="knee_L_Link.STL"/>
+    <mesh name="ankle_pitch_L_Link" file="ankle_pitch_L_Link.STL"/>
+    <mesh name="proximal_pitch_R_Link" file="proximal_pitch_R_Link.STL"/>
+    <mesh name="proximal_roll_R_Link" file="proximal_roll_R_Link.STL"/>
+    <mesh name="proximal_yaw_R_Link" file="proximal_yaw_R_Link.STL"/>
+    <mesh name="knee_R_Link" file="knee_R_Link.STL"/>
+    <mesh name="ankle_pitch_R_Link" file="ankle_pitch_R_Link.STL"/>
+    <mesh name="radar_compute_frame_Link" file="radar_compute_frame_Link.STL"/>
+    <mesh name="arm_base_Link" file="arm_base_Link.STL"/>
+    <mesh name="arm1_Link" file="arm1_Link.STL"/>
+    <mesh name="arm2_Link" file="arm2_Link.STL"/>
+    <mesh name="arm2_Link_collision_1" file="arm2_Link_collision_1.STL"/>
+    <mesh name="arm2_Link_collision_2" file="arm2_Link_collision_2.STL"/>
+    <mesh name="arm3_Link" file="arm3_Link.STL"/>
+    <mesh name="arm3_Link_collision_1" file="arm3_Link_collision_1.STL"/>
+    <mesh name="arm3_Link_collision_2" file="arm3_Link_collision_2.STL"/>
+    <mesh name="arm4_Link" file="arm4_Link.STL"/>
+    <mesh name="arm5_Link" file="arm5_Link.STL"/>
+    <mesh name="arm5_Link_collision" file="arm5_Link_collision.STL"/>
+    <mesh name="arm6_Link" file="arm6_Link.STL"/>
+    <mesh name="flange_Link" file="flange_Link.STL"/>
+    <mesh name="gripper_base_Link" file="gripper_base_Link.STL"/>
+    <mesh name="gripper_base_Link_collision_1" file="gripper_base_Link_collision_1.STL"/>
+    <mesh name="gripper_base_Link_collision_2" file="gripper_base_Link_collision_2.STL"/>
+    <mesh name="gripper1_Link" file="gripper1_Link.STL"/>
+    <mesh name="gripper2_Link" file="gripper2_Link.STL"/>
+    <texture name="texplane" type="2d" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.15 0.2" width="100" height="100"/>
+    <material name="matplane" reflectance="0." texture="texplane" texrepeat="1 1" texuniform="true"/>
+  </asset>
+  <worldbody>
+    <light directional="true" diffuse="0.4 0.4 0.4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false"/>
+    <light directional="true" diffuse="0.6 0.6 0.6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1" castshadow="false"/>
+    <geom name="ground" type="plane" pos="0 0 0" size="100 100 0.001" quat="1 0 0 0" material="matplane" condim="3" conaffinity="15" margin="0.002"/>
+    <camera name="track" mode="trackcom" pos="0 -2.3 1.6" xyaxes="1 0 0 0 0.707 0.707"/>
+
+    <!-- base -->
+    <body name="base_Link" pos="0.0 0.0 1.0">
+      <inertial pos="0.00241 -0.00022 0.11116" quat="0.688302 -0.161125 -0.160546 0.688843" mass="13.4" diaginertia="0.137791 0.118593 0.10257"/>
+      <joint type="free" stiffness="1e-09" damping="1e-08"/>
+      <geom mesh="base_Link" class="visual"/>
+      <geom mesh="base_Link" class="collision"/>
+      <site name="base_imu" pos="0 0 0"/>
+
+      <!-- proximal pitch L Link -->
+      <body name="proximal_pitch_L_Link" pos="-0.00044 0.09497 0.05446">
+        <inertial pos="0.0033 0.06714 -0.00603" quat="0.756285 0.646116 -0.0968279 -0.0345196" mass="2.05" diaginertia="0.00392745 0.00358052 0.00316517"/>
+        <joint name="proximal_pitch_L_Joint" pos="0 0 0" axis="0 0.996195 -0.0871554" range="-3.14159 2.60054" actuatorfrcrange="-200 200" armature="0.0754"/>
+        <geom mesh="proximal_pitch_L_Link" class="visual"/>
+        <geom mesh="proximal_pitch_L_Link" class="collision"/>
+        <body name="proximal_roll_L_Link" pos="-0.0352 0.07261 -0.00635">
+          <inertial pos="0.03623 0.00056 -0.08095" quat="0.701515 0.00861671 0.0187709 0.712355" mass="1.75" diaginertia="0.00508489 0.0043889 0.00295465"/>
+          <joint name="proximal_roll_L_Joint" pos="0 0 0" axis="1 0 0" range="-0.261799 3.19395" actuatorfrcrange="-200 200" armature="0.0754"/>
+          <geom mesh="proximal_roll_L_Link" class="visual"/>
+          <geom mesh="proximal_roll_L_Link" class="collision"/>
+          <body name="proximal_yaw_L_Link" pos="0.0352 0 -0.1348">
+            <inertial pos="0.00241 -0.00149 -0.10876" quat="0.999881 -0.00904319 0.00941036 -0.00822248" mass="1.6" diaginertia="0.01538 0.0147105 0.00374077"/>
+            <joint name="proximal_yaw_L_Joint" pos="0 0 0" axis="0 0 1" range="-0.523599 4.62512" actuatorfrcrange="-70 70" armature="0.0178"/>
+            <geom mesh="proximal_yaw_L_Link" class="visual"/>
+            <geom mesh="proximal_yaw_L_Link" class="collision"/>
+            <body name="knee_L_Link" pos="-0.004 -0.0319 -0.2152">
+              <inertial pos="0.00239 0.03377 -0.12995" quat="0.713669 0.00577013 -0.0121852 0.700353" mass="4.69" diaginertia="0.112585 0.110512 0.00612579"/>
+              <joint name="knee_L_Joint" pos="0 0 0" axis="0 1 0" range="-0.261799 2.61799" actuatorfrcrange="-200 200" armature="0.0754"/>
+              <geom mesh="knee_L_Link" class="visual"/>
+              <geom mesh="knee_L_Link" class="collision"/>
+              <body name="ankle_pitch_L_Link" pos="0.004 0.07335 -0.35">
+                <inertial pos="0.01503 -0.04184 -0.04849" quat="-0.0048988 0.726714 -0.0110571 0.686833" mass="1.04" diaginertia="0.00403117 0.0035512 0.0014739"/>
+                <joint name="ankle_pitch_L_Joint" pos="0 0 0" axis="0 1 0" range="-1.62316 1.62316" actuatorfrcrange="-70 70" armature="0.0178"/>
+                <geom mesh="ankle_pitch_L_Link" class="visual"/>
+                <geom size="0.07 0.03 0.0125" pos="0.0144255 -0.0414488 -0.0502743" type="box"/>
+                <geom size="0.0025" pos="0.119096 -0.0691431 -0.07124"/>
+                <geom size="0.0025" pos="0.100494 -0.00947358 -0.07124"/>
+                <geom size="0.0025" pos="-0.0750261 -0.0172351 -0.0712375"/>
+                <geom size="0.0025" pos="-0.0750261 -0.0683094 -0.07124"/>
+                <geom size="0.0025" pos="0.0847227 -0.08465 -0.0642492"/>
+                <geom size="0.0025" pos="-0.0356447 -0.081875 -0.0642492"/>
+                <geom size="0.0025" pos="0.0847227 0.00211977 -0.0642492"/>
+                <geom size="0.0025" pos="-0.0356447 -0.000486077 -0.0642492"/>
+                <geom size="0.0025" pos="0.128058 -0.0411 -0.0642461"/>
+                <geom size="0.0025" pos="-0.0886808 -0.0411 -0.0642461"/>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- proximal pitch R Link -->
+      <body name="proximal_pitch_R_Link" pos="-0.00044 -0.09497 0.05446">
+        <inertial pos="0.0033 -0.06714 -0.00603" quat="0.646116 0.756285 0.0345196 0.0968279" mass="2.05" diaginertia="0.00392745 0.00358052 0.00316517"/>
+        <joint name="proximal_pitch_R_Joint" pos="0 0 0" axis="0 0.996195 0.0871554" range="-3.14159 2.60054" actuatorfrcrange="-200 200" armature="0.0754"/>
+        <geom mesh="proximal_pitch_R_Link" class="visual"/>
+        <geom mesh="proximal_pitch_R_Link" class="collision"/>
+        <body name="proximal_roll_R_Link" pos="-0.0352 -0.07261 -0.00635">
+          <inertial pos="0.03623 -0.00056 -0.08095" quat="0.712355 0.0187709 0.00861671 0.701515" mass="1.75" diaginertia="0.00508489 0.0043889 0.00295465"/>
+          <joint name="proximal_roll_R_Joint" pos="0 0 0" axis="1 0 0" range="-3.19395 0.261799" actuatorfrcrange="-200 200" armature="0.0754"/>
+          <geom mesh="proximal_roll_R_Link" class="visual"/>
+          <geom mesh="proximal_roll_R_Link" class="collision"/>
+          <body name="proximal_yaw_R_Link" pos="0.0352 0 -0.1348">
+            <inertial pos="0.00241 0.00149 -0.10876" quat="0.999881 0.00904319 0.00941036 0.00822248" mass="1.6" diaginertia="0.01538 0.0147105 0.00374077"/>
+            <joint name="proximal_yaw_R_Joint" pos="0 0 0" axis="0 0 1" range="-4.62512 0.523599" actuatorfrcrange="-70 70" armature="0.0178"/>
+            <geom mesh="proximal_yaw_R_Link" class="visual"/>
+            <geom mesh="proximal_yaw_R_Link" class="collision"/>
+            <body name="knee_R_Link" pos="-0.004 0.0319 -0.2152">
+              <inertial pos="0.00239 -0.03377 -0.12995" quat="0.700353 -0.0121852 0.00577013 0.713669" mass="4.69" diaginertia="0.112585 0.110512 0.00612579"/>
+              <joint name="knee_R_Joint" pos="0 0 0" axis="0 1 0" range="-0.261799 2.61799" actuatorfrcrange="-200 200" armature="0.0754"/>
+              <geom mesh="knee_R_Link" class="visual"/>
+              <geom mesh="knee_R_Link" class="collision"/>
+              <body name="ankle_pitch_R_Link" pos="0.004 -0.07335 -0.35">
+                <inertial pos="0.01503 0.04184 -0.04849" quat="0.0048988 0.726714 0.0110571 0.686833" mass="1.04" diaginertia="0.00403117 0.0035512 0.0014739"/>
+                <joint name="ankle_pitch_R_Joint" pos="0 0 0" axis="0 1 0" range="-1.62316 1.62316" actuatorfrcrange="-70 70" armature="0.0178"/>
+                <geom mesh="ankle_pitch_R_Link" class="visual"/>
+                <geom size="0.07 0.03 0.0125" pos="0.0144255 0.0414488 -0.0502743" type="box"/>
+                <geom size="0.0025" pos="0.119096 0.0691431 -0.07124"/>
+                <geom size="0.0025" pos="0.100494 0.00947358 -0.07124"/>
+                <geom size="0.0025" pos="-0.0750261 0.0172351 -0.0712375"/>
+                <geom size="0.0025" pos="-0.0750261 0.0683094 -0.07124"/>
+                <geom size="0.0025" pos="0.0847227 0.08465 -0.0642492"/>
+                <geom size="0.0025" pos="-0.0356447 0.081875 -0.0642492"/>
+                <geom size="0.0025" pos="0.0847227 -0.00211977 -0.0642492"/>
+                <geom size="0.0025" pos="-0.0356447 0.000486077 -0.0642492"/>
+                <geom size="0.0025" pos="0.128058 0.0411 -0.0642461"/>
+                <geom size="0.0025" pos="-0.0886808 0.0411 -0.0642461"/>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- radar compute frame Link -->
+      <body name="radar_compute_frame_Link" pos="0.025 0 0.35215">
+        <inertial pos="0.006 0.002 -0.01315" quat="-0.0135706 0.706977 0.0135706 0.706977" mass="2.486" diaginertia="0.035 0.0330384 0.0069616"/>
+        <geom mesh="radar_compute_frame_Link" class="visual"/>
+        <geom mesh="radar_compute_frame_Link" class="collision"/>
+        <body name="arm_base_Link" quat="0.707107 0 0 -0.707107">
+          <inertial pos="-0.00473641 2.56829e-05 0.0414515" quat="0.70428 0.034288 0.0339756 0.708279" mass="1.02" diaginertia="0.00282612 0.00269117 0.000879394"/>
+          <geom mesh="arm_base_Link" class="visual"/>
+          <geom mesh="arm_base_Link" class="collision"/>
+          <body name="arm1_Link" pos="0 0 0.123">
+            <inertial pos="0.00032 -0.00041 -0.00348" quat="0.737007 0.671914 -0.0484837 0.0547877" mass="0.71" diaginertia="0.0005012 0.00045752 0.00040836"/>
+            <joint name="arm1_Joint" pos="0 0 0" axis="0 0 1" range="-2.61799 2.61799" actuatorfrcrange="-100 100" armature="0.0110718"/>
+            <geom mesh="arm1_Link" class="visual"/>
+            <geom mesh="arm1_Link" class="collision"/>
+            <body name="arm2_Link" quat="0.047971 -0.0479709 -0.705478 -0.705478">
+              <inertial pos="0.25852 -0.00861 0.00126" quat="0.479919 0.532436 0.466857 0.517913" mass="1.16" diaginertia="0.0676841 0.0675582 0.00106833"/>
+              <joint name="arm2_Joint" pos="0 0 0" axis="0 0 1" range="0 3.14159" actuatorfrcrange="-100 100" armature="0.0110718"/>
+              <geom mesh="arm2_Link" class="visual"/>
+              <geom mesh="arm2_Link_collision_1" class="collision"/>
+              <geom mesh="arm2_Link_collision_2" class="collision"/>
+              <body name="arm3_Link" pos="0.33823 0 0" quat="0.624016 0 0 -0.781412">
+                <inertial pos="-0.01999 -0.20808 -0.00053" quat="0.70534 0.70619 0.0352022 0.0505251" mass="0.5" diaginertia="0.0136724 0.0136332 0.000267444"/>
+                <joint name="arm3_Joint" pos="0 0 0" axis="0 0 1" range="-2.96706 0" actuatorfrcrange="-100 100" armature="0.0110718"/>
+                <geom mesh="arm3_Link" class="visual"/>
+                <geom mesh="arm3_Link_collision_1" class="collision"/>
+                <geom mesh="arm3_Link_collision_2" class="collision"/>
+                <body name="arm4_Link" pos="-0.02301 -0.32075 0" quat="0.707107 0.707107 0 0">
+                  <inertial pos="0.00013 -0.00076 -0.00394" quat="0.727848 0.0276487 -0.0387803 0.684082" mass="0.38" diaginertia="0.000189565 0.00017841 0.000145735"/>
+                  <joint name="arm4_Joint" pos="0 0 0" axis="0 0 1" range="-2.21657 2.21657" actuatorfrcrange="-100 100" armature="0.0110718"/>
+                  <geom mesh="arm4_Link" class="visual"/>
+                  <geom mesh="arm4_Link" class="collision"/>
+                  <body name="arm5_Link" quat="0.707107 -0.707107 0 0">
+                    <inertial pos="0.00018 -0.06104 -0.00227" quat="0.709375 0.704813 -0.00301298 0.00422225" mass="0.39" diaginertia="0.00172319 0.00171178 0.000179292"/>
+                    <joint name="arm5_Joint" pos="0 0 0" axis="0 0 1" range="-1.56207 1.56207" actuatorfrcrange="-100 100" armature="0.0110718"/>
+                    <geom mesh="arm5_Link" class="visual"/>
+                    <geom mesh="arm5_Link_collision" class="collision"/>
+                    <body name="arm6_Link" pos="0 -0.091 0" quat="0.707107 0.707107 0 0">
+                      <inertial pos="0.00134941 0 -0.00344975" quat="0.518461 0.518461 -0.480831 0.480831" mass="0.0165541" diaginertia="2.85297e-06 1.51721e-06 1.51721e-06"/>
+                      <joint name="arm6_Joint" pos="0 0 0" axis="0 0 1" range="-2.96706 2.96706" actuatorfrcrange="-100 100" armature="0.0110718"/>
+                      <geom mesh="arm6_Link" class="visual"/>
+                      <geom mesh="arm6_Link" class="collision"/>
+                      <body name="flange_Link">
+                        <inertial pos="0.00115169 0.000782428 0.00479805" quat="0 0.707107 0 0.707107" mass="0.04" diaginertia="1.96529e-05 1.0508e-05 9.93539e-06"/>
+                        <geom mesh="flange_Link" class="visual"/>
+                        <geom mesh="flange_Link" class="collision"/>
+                        <body name="gripper_base_Link" pos="0 0 0.0045">
+                          <inertial pos="-0.000183807 8.05033e-05 0.0321437" quat="0.707107 0.707107 0 0" mass="0.45" diaginertia="0.000466573 0.000443518 0.000208672"/>
+                          <geom mesh="gripper_base_Link" class="visual"/>
+                          <geom mesh="gripper_base_Link_collision_1" class="collision"/>
+                          <geom mesh="gripper_base_Link_collision_2" class="collision"/>
+                          <body name="gripper1_Link" pos="0 0 0.138" quat="0.707107 0.707107 0 0">
+                            <inertial pos="0.000651232 -0.049193 0.00972259" quat="0.532983 0.46647 -0.433158 0.557413" mass="0.025" diaginertia="1.45229e-05 1.08509e-05 5.07976e-06"/>
+                            <joint name="gripper1_Joint" pos="0 0 0" axis="0 0 1" type="slide" range="0 0.05" actuatorfrcrange="-10 10" armature="0.0110718"/>
+                            <geom mesh="gripper1_Link" class="visual"/>
+                            <geom mesh="gripper1_Link" class="collision"/>
+                          </body>
+                          <body name="gripper2_Link" pos="0 0 0.138" quat="1.89469e-08 1.89469e-08 -0.707107 -0.707107">
+                            <inertial pos="0.000651232 -0.049193 0.00972259" quat="0.532983 0.46647 -0.433158 0.557413" mass="0.025" diaginertia="1.45229e-05 1.08509e-05 5.07976e-06"/>
+                            <joint name="gripper2_Joint" pos="0 0 0" axis="0 0 1" type="slide" range="0 0.05" actuatorfrcrange="-10 10" armature="0.0110718"/>
+                            <geom mesh="gripper2_Link" class="visual"/>
+                            <geom mesh="gripper2_Link" class="collision"/>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- d435 Link -->
+      <body name="d435_Link" pos="0.0968 0.01759 -0.00409" quat="0.207918 0 0.978146 0">
+        <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        <camera name="d435_depth" pos="0 0 0" quat="0 -0.707107 0.707107 0" fovy="70.840779"/>
+        <body name="d435_optical_frame" quat="0.5 -0.5 0.5 -0.5">
+          <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <contact>
+    <exclude body1="base_Link" body2="proximal_pitch_L_Link"/>
+    <exclude body1="radar_compute_frame_Link" body2="proximal_pitch_L_Link"/>
+    <exclude body1="arm_base_Link" body2="proximal_pitch_L_Link"/>
+    <exclude body1="base_Link" body2="proximal_pitch_R_Link"/>
+    <exclude body1="radar_compute_frame_Link" body2="proximal_pitch_R_Link"/>
+    <exclude body1="arm_base_Link" body2="proximal_pitch_R_Link"/>
+    <exclude body1="base_Link" body2="arm1_Link"/>
+    <exclude body1="radar_compute_frame_Link" body2="arm1_Link"/>
+    <exclude body1="arm_base_Link" body2="arm1_Link"/>
+  </contact>
+  <actuator>
+    <motor name="proximal_pitch_L" joint="proximal_pitch_L_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1"/>
+    <motor name="proximal_roll_L" joint="proximal_roll_L_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1"/>
+    <motor name="proximal_yaw_L" joint="proximal_yaw_L_Joint" ctrllimited="true" ctrlrange="-70 70" gear="1"/>
+    <motor name="knee_L" joint="knee_L_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1"/>
+    <motor name="ankle_pitch_L" joint="ankle_pitch_L_Joint" ctrllimited="true" ctrlrange="-70 70" gear="1"/>
+    <motor name="proximal_pitch_R" joint="proximal_pitch_R_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1"/>
+    <motor name="proximal_roll_R" joint="proximal_roll_R_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1"/>
+    <motor name="proximal_yaw_R" joint="proximal_yaw_R_Joint" ctrllimited="true" ctrlrange="-70 70" gear="1"/>
+    <motor name="knee_R" joint="knee_R_Joint" ctrllimited="true" ctrlrange="-200 200" gear="1"/>
+    <motor name="ankle_pitch_R" joint="ankle_pitch_R_Joint" ctrllimited="true" ctrlrange="-70 70" gear="1"/>
+    <motor name="arm1" joint="arm1_Joint" ctrllimited="true" ctrlrange="-100 100" gear="1"/>
+    <motor name="arm2" joint="arm2_Joint" ctrllimited="true" ctrlrange="-100 100" gear="1"/>
+    <motor name="arm3" joint="arm3_Joint" ctrllimited="true" ctrlrange="-100 100" gear="1"/>
+    <motor name="arm4" joint="arm4_Joint" ctrllimited="true" ctrlrange="-100 100" gear="1"/>
+    <motor name="arm5" joint="arm5_Joint" ctrllimited="true" ctrlrange="-100 100" gear="1"/>
+    <motor name="arm6" joint="arm6_Joint" ctrllimited="true" ctrlrange="-100 100" gear="1"/>
+    <motor name="gripper1" joint="gripper1_Joint" ctrllimited="true" ctrlrange="-10 10" gear="1"/>
+    <motor name="gripper2" joint="gripper2_Joint" ctrllimited="true" ctrlrange="-10 10" gear="1"/>
+  </actuator>
+  <sensor>
+    <framequat objtype="site" objname="base_imu" name="base_imu_quat"/>
+    <gyro site="base_imu" name="base_imu_gyro"/>
+    <accelerometer site="base_imu" name="base_imu_acc"/>
+
+    <jointpos joint="proximal_pitch_L_Joint" name="proximal_pitch_L_pos"/>
+    <jointpos joint="proximal_roll_L_Joint" name="proximal_roll_L_pos"/>
+    <jointpos joint="proximal_yaw_L_Joint" name="proximal_yaw_L_pos"/>
+    <jointpos joint="knee_L_Joint" name="knee_L_pos"/>
+    <jointpos joint="ankle_pitch_L_Joint" name="ankle_pitch_L_pos"/>
+    <jointpos joint="proximal_pitch_R_Joint" name="proximal_pitch_R_pos"/>
+    <jointpos joint="proximal_roll_R_Joint" name="proximal_roll_R_pos"/>
+    <jointpos joint="proximal_yaw_R_Joint" name="proximal_yaw_R_pos"/>
+    <jointpos joint="knee_R_Joint" name="knee_R_pos"/>
+    <jointpos joint="ankle_pitch_R_Joint" name="ankle_pitch_R_pos"/>
+    <jointpos joint="arm1_Joint" name="arm1_pos"/>
+    <jointpos joint="arm2_Joint" name="arm2_pos"/>
+    <jointpos joint="arm3_Joint" name="arm3_pos"/>
+    <jointpos joint="arm4_Joint" name="arm4_pos"/>
+    <jointpos joint="arm5_Joint" name="arm5_pos"/>
+    <jointpos joint="arm6_Joint" name="arm6_pos"/>
+    <jointpos joint="gripper1_Joint" name="gripper1_pos"/>
+    <jointpos joint="gripper2_Joint" name="gripper2_pos"/>
+
+    <jointvel joint="proximal_pitch_L_Joint" name="proximal_pitch_L_vel"/>
+    <jointvel joint="proximal_roll_L_Joint" name="proximal_roll_L_vel"/>
+    <jointvel joint="proximal_yaw_L_Joint" name="proximal_yaw_L_vel"/>
+    <jointvel joint="knee_L_Joint" name="knee_L_vel"/>
+    <jointvel joint="ankle_pitch_L_Joint" name="ankle_pitch_L_vel"/>
+    <jointvel joint="proximal_pitch_R_Joint" name="proximal_pitch_R_vel"/>
+    <jointvel joint="proximal_roll_R_Joint" name="proximal_roll_R_vel"/>
+    <jointvel joint="proximal_yaw_R_Joint" name="proximal_yaw_R_vel"/>
+    <jointvel joint="knee_R_Joint" name="knee_R_vel"/>
+    <jointvel joint="ankle_pitch_R_Joint" name="ankle_pitch_R_vel"/>
+    <jointvel joint="arm1_Joint" name="arm1_vel"/>
+    <jointvel joint="arm2_Joint" name="arm2_vel"/>
+    <jointvel joint="arm3_Joint" name="arm3_vel"/>
+    <jointvel joint="arm4_Joint" name="arm4_vel"/>
+    <jointvel joint="arm5_Joint" name="arm5_vel"/>
+    <jointvel joint="arm6_Joint" name="arm6_vel"/>
+    <jointvel joint="gripper1_Joint" name="gripper1_vel"/>
+    <jointvel joint="gripper2_Joint" name="gripper2_vel"/>
+
+    <jointactuatorfrc joint="proximal_pitch_L_Joint" name="proximal_pitch_L_frc"/>
+    <jointactuatorfrc joint="proximal_roll_L_Joint" name="proximal_roll_L_frc"/>
+    <jointactuatorfrc joint="proximal_yaw_L_Joint" name="proximal_yaw_L_frc"/>
+    <jointactuatorfrc joint="knee_L_Joint" name="knee_L_frc"/>
+    <jointactuatorfrc joint="ankle_pitch_L_Joint" name="ankle_pitch_L_frc"/>
+    <jointactuatorfrc joint="proximal_pitch_R_Joint" name="proximal_pitch_R_frc"/>
+    <jointactuatorfrc joint="proximal_roll_R_Joint" name="proximal_roll_R_frc"/>
+    <jointactuatorfrc joint="proximal_yaw_R_Joint" name="proximal_yaw_R_frc"/>
+    <jointactuatorfrc joint="knee_R_Joint" name="knee_R_frc"/>
+    <jointactuatorfrc joint="ankle_pitch_R_Joint" name="ankle_pitch_R_frc"/>
+    <jointactuatorfrc joint="arm1_Joint" name="arm1_frc"/>
+    <jointactuatorfrc joint="arm2_Joint" name="arm2_frc"/>
+    <jointactuatorfrc joint="arm3_Joint" name="arm3_frc"/>
+    <jointactuatorfrc joint="arm4_Joint" name="arm4_frc"/>
+    <jointactuatorfrc joint="arm5_Joint" name="arm5_frc"/>
+    <jointactuatorfrc joint="arm6_Joint" name="arm6_frc"/>
+    <jointactuatorfrc joint="gripper1_Joint" name="gripper1_frc"/>
+    <jointactuatorfrc joint="gripper2_Joint" name="gripper2_frc"/>
+  </sensor>
+</mujoco>
