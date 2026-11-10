@@ -17,6 +17,7 @@
     <color rgba="1.0 0.423 0.039 1.0" />
   </material>
 
+  <!-- tron2-xacro body begin, links and joints mirror the urdf, see the tron2-xacro skill -->
   <!-- IMU Link -->
   <joint name="base_imu_Joint" type="fixed">
     <origin rpy="0. 0. 0." xyz="0. 0. 0." />
@@ -168,9 +169,69 @@
       <material name="grey" />
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin rpy="0 0 0" xyz="-0.014425463037384678 0.035848761272903706 -0.05027431354942169"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2a/SF_TRON2A/meshes/ankle_pitch_L_Link.STL" />
+        <box size="0.14 0.06 0.025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.11909570195246066 0.06354314585176701 -0.07124"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.10049390971791083 0.0038735829813696387 -0.07124"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.07502612984116563 0.011635070405830783 -0.07123754260807935"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.07502612984116541 0.06270942031820081 -0.07124"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.08472274114731804 0.07904998982922917 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.03564470406430653 0.07627499491461442 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.08472274114731826 -0.007719774188539752 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.03564470406430653 -0.0051139227977490265 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.12805773805226417 0.0355 -0.06424607954803907"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.08868077416023412 0.03550000000000009 -0.06424607954803907"/>
+      <geometry>
+         <sphere radius="0.0025"/>
       </geometry>
     </collision>
   </link>
@@ -277,19 +338,82 @@
       <material name="grey" />
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin rpy="0 0 0" xyz="-0.014425463037384678 -0.035848761272903706 -0.05027431354942169"/>
       <geometry>
-        <mesh filename="package://robot_description/tron2a/SF_TRON2A/meshes/ankle_pitch_R_Link.STL" />
+        <box size="0.14 0.06 0.025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.11909570195246066 -0.06354314585176701 -0.07124"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.10049390971791083 -0.0038735829813696387 -0.07124"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.07502612984116563 -0.011635070405830783 -0.07123754260807935"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.07502612984116541 -0.06270942031820081 -0.07124"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.08472274114731804 -0.07904998982922917 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.03564470406430653 -0.07627499491461442 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.08472274114731826 0.007719774188539752 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.03564470406430653 0.0051139227977490265 -0.06424918850744032"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.12805773805226417 -0.0355 -0.06424607954803907"/>
+      <geometry>
+         <sphere radius="0.0025"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.08868077416023412 -0.03550000000000009 -0.06424607954803907"/>
+      <geometry>
+         <sphere radius="0.0025"/>
       </geometry>
     </collision>
   </link>
 
   <!-- D435 Camera Links -->
   <link name="d435_Link">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07" />
+    </inertial>
     <visual>
-      <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0.0 -0.0 0" />
       <geometry>
-        <box size="0.01 0.01 0.001" />
+        <box size="0.005 0.005 0.005" />
       </geometry>
       <material name="camera_red">
         <color rgba="1.0 0.0 0.0 1.0" />
@@ -297,18 +421,24 @@
     </visual>
   </link>
 
-  <joint name="d435_joint" type="fixed">
-    <origin rpy="0 1.063778179 0" xyz="0.12213 0.01759 0.00599" />
-    <parent link="base_imu" />
+  <joint name="d435_Joint" type="fixed">
+    <origin xyz="0.0968 0.01759 -0.00409" rpy="0 2.7227 0" />
+    <parent link="base_Link" />
     <child link="d435_Link" />
   </joint>
 
-  <joint name="d435_optical_joint" type="fixed">
+  <link name="d435_optical_frame">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0.0" ixz="0.0" iyy="1e-07" iyz="0.0" izz="1e-07" />
+    </inertial>
+  </link>
+
+  <joint name="d435_optical_Joint" type="fixed">
     <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0" />
     <parent link="d435_Link" />
     <child link="d435_optical_frame" />
   </joint>
-  <link name="d435_optical_frame" />
 
   <!-- Joints -->
   <joint name="proximal_pitch_L_Joint" type="revolute">
@@ -463,6 +593,11 @@
     <kp value="1000000.0" />
     <kd value="100.0" />
   </gazebo>
+
+  <!-- tron2-xacro body end -->
+
+  <!-- 反射转子惯量，与 ROS 版本无关，取值逐关节对齐 xml armature -->
+  <xacro:rotor_inertia_all />
 
   <!-- Conditional ROS version -->
   <xacro:if value="${ros_version == 1}">

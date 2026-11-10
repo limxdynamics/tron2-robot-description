@@ -29,8 +29,8 @@
   <link name="base_imu">
     <inertial>
       <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-      <mass value="0.01"/>
-      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-08" ixy="0.0" ixz="0.0" iyy="1e-08" iyz="0.0" izz="1e-08"/>
     </inertial>
   </link>
   <joint name="base_imu_Joint" type="fixed">
@@ -867,8 +867,8 @@
   <link name="base_imu_B">
     <inertial>
       <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-      <mass value="0.01"/>
-      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-08" ixy="0.0" ixz="0.0" iyy="1e-08" iyz="0.0" izz="1e-08"/>
     </inertial>
   </link>
   <joint name="base_imu_B_Joint" type="fixed">
@@ -1352,9 +1352,9 @@
   </joint>
   <link name="head_pitch_Link">
     <inertial>
-      <origin xyz="0.00697 -0.03028 0.03063" rpy="0.0 0.0 0.0"/>
-      <mass value="0.61"/>
-      <inertia ixx="0.00145537" ixy="1.122e-05" ixz="1.582e-05" iyy="0.00171054" iyz="3.71e-06" izz="0.00235442"/>
+      <origin xyz="-0.00469 -0.02957 0.02678" rpy="0.0 0.0 0.0"/>
+      <mass value="0.46"/>
+      <inertia ixx="0.00122942" ixy="3.7e-07" ixz="0.00010434" iyy="0.00139833" iyz="7.47e-06" izz="0.0019056"/>
     </inertial>
     <visual>
       <geometry>
@@ -1373,6 +1373,35 @@
     <child link="head_pitch_Link"/>
     <axis xyz="0.0 1.0 0.0"/>
     <limit lower="-0.7853981633974483" upper="1.0471975511965976" effort="15.0" velocity="14.4513"/>
+  </joint>
+  <link name="d455_Link">
+    <inertial>
+      <origin xyz="-8e-05 -0.04732 -0.01308" rpy="0.0 0.0 0.0"/>
+      <mass value="0.15"/>
+      <inertia ixx="0.00015238478" ixy="-4.493e-08" ixz="-8.749e-08" iyy="1.481043e-05" iyz="-3.4889e-07" izz="0.00015547099"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="../meshes/d455_Link.STL"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="d455_Joint" type="fixed">
+    <origin xyz="0.05745 0.0175 0.0444" rpy="0.0 1.5707963267948966 0.0"/>
+    <parent link="head_pitch_Link"/>
+    <child link="d455_Link"/>
+  </joint>
+  <link name="d455_optical_frame">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-08" ixy="0.0" ixz="0.0" iyy="1e-08" iyz="0.0" izz="1e-08"/>
+    </inertial>
+  </link>
+  <joint name="d455_optical_Joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267948966 0.0 -1.5707963267948966"/>
+    <parent link="d455_Link"/>
+    <child link="d455_optical_frame"/>
   </joint>
   <link name="d435_H_Link">
     <inertial>
@@ -1401,8 +1430,8 @@
   <link name="base_imu_H">
     <inertial>
       <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-      <mass value="0.01"/>
-      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-08" ixy="0.0" ixz="0.0" iyy="1e-08" iyz="0.0" izz="1e-08"/>
     </inertial>
   </link>
   <joint name="base_imu_H_Joint" type="fixed">

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <mujoco model="DASF2_TRON2B">
   <compiler angle="radian" meshdir="../meshes" autolimits="true"/>
-  <option timestep="0.001"/>
+  <option timestep="0.001" cone="elliptic" impratio="10"/>
   <size njmax="5000" nconmax="1000"/>
   <default>
     <light castshadow="false" diffuse="1 1 1"/>
@@ -33,7 +33,7 @@
     <mesh name="knee_R_F_Link" file="knee_R_F_Link.STL"/>
     <mesh name="ankle_pitch_R_F_Link" file="ankle_pitch_R_F_Link.STL"/>
     <mesh name="transition_middle_Link" file="transition_middle_Link.STL"/>
-    <mesh name="back_base_Link" content_type="model/stl" file="back_base_Link.STL"/>
+    <mesh name="back_base_Link" file="back_base_Link.STL"/>
     <mesh name="proximal_pitch_L_B_Link" file="proximal_pitch_L_B_Link.STL"/>
     <mesh name="proximal_roll_L_B_Link" file="proximal_roll_L_B_Link.STL"/>
     <mesh name="proximal_yaw_L_B_Link" file="proximal_yaw_L_B_Link.STL"/>
@@ -41,11 +41,11 @@
     <mesh name="ankle_pitch_L_B_Link" file="ankle_pitch_L_B_Link.STL"/>
     <mesh name="proximal_pitch_R_B_Link" file="proximal_pitch_R_B_Link.STL"/>
     <mesh name="proximal_roll_R_B_Link" file="proximal_roll_R_B_Link.STL"/>
-    <mesh name="proximal_yaw_R_B_Link" content_type="model/stl" file="proximal_yaw_R_B_Link.STL"/>
+    <mesh name="proximal_yaw_R_B_Link" file="proximal_yaw_R_B_Link.STL"/>
     <mesh name="knee_R_B_Link" file="knee_R_B_Link.STL"/>
     <mesh name="ankle_pitch_R_B_Link" file="ankle_pitch_R_B_Link.STL"/>
     <mesh name="transition_upper_Link" file="transition_upper_Link.STL"/>
-    <mesh name="upper_base_Link" content_type="model/stl" file="upper_base_Link.STL"/>
+    <mesh name="upper_base_Link" file="upper_base_Link.STL"/>
     <mesh name="proximal_pitch_L_H_Link" file="proximal_pitch_L_H_Link.STL"/>
     <mesh name="proximal_roll_L_H_Link" file="proximal_roll_L_H_Link.STL"/>
     <mesh name="proximal_yaw_L_H_Link" file="proximal_yaw_L_H_Link.STL"/>
@@ -55,20 +55,21 @@
     <mesh name="wrist_pitch_L_Link" file="wrist_pitch_L_Link.STL"/>
     <mesh name="wrist_roll_L_Link" file="wrist_roll_L_Link.STL"/>
     <mesh name="wrist_roll_L_Link_collision" file="wrist_roll_L_Link_collision.STL"/>
-    <mesh name="grasper_L_Link" content_type="model/stl" file="grasper_L_Link.STL"/>
-    <mesh name="proximal_pitch_R_H_Link" content_type="model/stl" file="proximal_pitch_R_H_Link.STL"/>
-    <mesh name="proximal_roll_R_H_Link" content_type="model/stl" file="proximal_roll_R_H_Link.STL"/>
-    <mesh name="proximal_yaw_R_H_Link" content_type="model/stl" file="proximal_yaw_R_H_Link.STL"/>
+    <mesh name="grasper_L_Link" file="grasper_L_Link.STL"/>
+    <mesh name="proximal_pitch_R_H_Link" file="proximal_pitch_R_H_Link.STL"/>
+    <mesh name="proximal_roll_R_H_Link" file="proximal_roll_R_H_Link.STL"/>
+    <mesh name="proximal_yaw_R_H_Link" file="proximal_yaw_R_H_Link.STL"/>
     <mesh name="proximal_yaw_R_H_Link_collision" file="proximal_yaw_R_H_Link_collision.STL"/>
-    <mesh name="elbow_R_Link" content_type="model/stl" file="elbow_R_Link.STL"/>
-    <mesh name="wrist_yaw_R_Link" content_type="model/stl" file="wrist_yaw_R_Link.STL"/>
+    <mesh name="elbow_R_Link" file="elbow_R_Link.STL"/>
+    <mesh name="wrist_yaw_R_Link" file="wrist_yaw_R_Link.STL"/>
     <mesh name="wrist_pitch_R_Link" file="wrist_pitch_R_Link.STL"/>
-    <mesh name="wrist_roll_R_Link" content_type="model/stl" file="wrist_roll_R_Link.STL"/>
-    <mesh name="wrist_roll_R_Link_collision" content_type="model/stl" file="wrist_roll_R_Link_collision.STL"/>
-    <mesh name="grasper_R_Link" content_type="model/stl" file="grasper_R_Link.STL"/>
-    <mesh name="head_base_Link" content_type="model/stl" file="head_base_Link.STL"/>
-    <mesh name="head_yaw_Link" content_type="model/stl" file="head_yaw_Link.STL"/>
-    <mesh name="head_pitch_Link" content_type="model/stl" file="head_pitch_Link.STL"/>
+    <mesh name="wrist_roll_R_Link" file="wrist_roll_R_Link.STL"/>
+    <mesh name="wrist_roll_R_Link_collision" file="wrist_roll_R_Link_collision.STL"/>
+    <mesh name="grasper_R_Link" file="grasper_R_Link.STL"/>
+    <mesh name="head_base_Link" file="head_base_Link.STL"/>
+    <mesh name="head_yaw_Link" file="head_yaw_Link.STL"/>
+    <mesh name="head_pitch_Link" file="head_pitch_Link.STL"/>
+    <mesh name="d455_Link" file="d455_Link.STL"/>
     <texture name="texplane" type="2d" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.15 0.2" width="100" height="100"/>
     <material name="matplane" reflectance="0." texture="texplane" texrepeat="1 1" texuniform="true"/>
   </asset>
@@ -393,10 +394,18 @@
               <geom mesh="head_yaw_Link" class="visual"/>
               <geom mesh="head_yaw_Link" class="collision"/>
               <body name="head_pitch_Link" pos="0.051 0.03 0.097">
-                <inertial pos="0.00697 -0.03028 0.03063" quat="0.0176578 0.713106 -0.0130977 0.700712" mass="0.61" diaginertia="0.00235472 0.001711 0.00145461"/>
+                <inertial pos="-0.00469 -0.02957 0.02678" quat="0.00310304 0.757979 0.00671289 0.652237" mass="0.46" diaginertia="0.00192144 0.00139823 0.00121368"/>
                 <joint name="head_pitch_Joint" pos="0 0 0" axis="0 1 0" range="-0.785398 1.0472" actuatorfrcrange="-15 15" armature="0.0164"/>
                 <geom mesh="head_pitch_Link" class="visual"/>
                 <geom mesh="head_pitch_Link" class="collision"/>
+                <body name="d455_Link" pos="0.05745 0.0175 0.0444" quat="0.707107 0 0.707107 0">
+                  <inertial pos="-8e-05 -0.04732 -0.01308" quat="0.492353 0.49341 -0.507728 0.506308" mass="0.15" diaginertia="0.000155474 0.000152382 1.48095e-05"/>
+                  <geom mesh="d455_Link" class="visual"/>
+                  <camera name="d455_depth" pos="0 0 0" quat="0 -0.707107 0.707107 0" fovy="70.840779"/>
+                  <body name="d455_optical_frame" quat="0.5 -0.5 0.5 -0.5">
+                    <inertial pos="0 0 0" mass="0.001" diaginertia="1e-08 1e-08 1e-08"/>
+                  </body>
+                </body>
               </body>
             </body>
           </body>

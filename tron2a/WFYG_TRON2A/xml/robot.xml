@@ -56,6 +56,7 @@
     <mesh name="antenna_R_Link_collision_1" file="antenna_R_Link_collision_1.STL"/>
     <mesh name="antenna_R_Link_collision_2" file="antenna_R_Link_collision_2.STL"/>
     <mesh name="camera_mount_Link" file="camera_mount_Link.STL"/>
+    <mesh name="camera_mount_Link_collision" file="camera_mount_Link_collision.STL"/>
     <mesh name="radar_Link" file="radar_Link.STL"/>
     <texture name="texplane" type="2d" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.15 0.2" width="100" height="100" />
     <material name="matplane" reflectance="0." texture="texplane" texrepeat="1 1" texuniform="true" />
@@ -142,6 +143,14 @@
       <body name="d435_Link" pos="0.0968 0.01759 -0.00409" quat="0.207918 0 0.978146 0">
         <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
         <body name="d435_optical_frame" pos="0 0 0" quat="0.5 -0.5 0.5 -0.5">
+          <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        </body>
+      </body>
+
+      <!-- d435_camera (perception-kit camera, pose = 2B YG Excel CAMERA_Joint) -->
+      <body name="d435_camera_Link" pos="0.22117 0.0175 0.18592" quat="0.422631 0 0.906302 0">
+        <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
+        <body name="d435_camera_optical_frame" pos="0 0 0" quat="0.5 -0.5 0.5 -0.5">
           <inertial pos="0 0 0" mass="0.001" diaginertia="1e-07 1e-07 1e-07"/>
         </body>
       </body>
@@ -239,7 +248,7 @@
       <body name="camera_mount_Link" pos="0.18058 0 0.23876">
         <inertial pos="-0.019708 0.000381 -0.010581" quat="-0.00524609 0.802967 -2.10081e-05 0.596001" mass="0.288" diaginertia="0.00184131 0.00133133 0.000667704"/>
         <geom mesh="camera_mount_Link" class="visual"/>
-        <geom mesh="camera_mount_Link" class="collision"/>
+        <geom mesh="camera_mount_Link_collision" class="collision"/>
       </body>
 
       <!-- radar Link -->
