@@ -14,7 +14,7 @@
     </default>
   </default>
   <compiler angle="radian" meshdir="../meshes" />
-  <option timestep="0.001" />
+  <option timestep="0.001" cone="elliptic" impratio="10"/>
   <size njmax="5000" nconmax="1000" />
   <asset>
     <material name="default_material" rgba="0.7 0.7 0.7 1" />
@@ -67,6 +67,7 @@
     <mesh name="head_base_Link.STL" file="head_base_Link.STL" />
     <mesh name="head_yaw_Link.STL" file="head_yaw_Link.STL" />
     <mesh name="head_pitch_Link.STL" file="head_pitch_Link.STL" />
+    <mesh name="d455_Link.STL" file="d455_Link.STL" />
     <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072" />
     <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
     <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2" />
@@ -94,6 +95,7 @@
         <body name="d435_F_Link" pos="0.00409 0.01759 0.0968" quat="0.8386742804868575 0.0 0.5446333181598898 0.0">
           <inertial mass="0.001" diaginertia="1e-07 1e-07 1e-07" pos="0 0 0" />
           <geom name="d435_F_Link_visual" pos="0 0 0" quat="1 0 0 0" material="default_material" type="box" size="0.0025 0.0025 0.0025" class="visual" />
+          <camera name="d435_depth_F" pos="0 0 0" quat="0 -0.707107 0.707107 0" fovy="70.840779" />
           <body name="d435_optical_frame_F" pos="0 0 0" quat="0.5000000000000001 -0.5 0.4999999999999999 -0.5">
             <inertial mass="0.001" diaginertia="1e-07 1e-07 1e-07" pos="0 0 0" />
           </body>
@@ -193,6 +195,7 @@
             <body name="d435_B_Link" pos="-0.00409 -0.01759 0.0968" quat="-8.672861027185768e-14 -0.5446333181598898 -5.632137754878719e-14 0.8386742804868575">
               <inertial mass="0.001" diaginertia="1e-07 1e-07 1e-07" pos="0 0 0" />
               <geom name="d435_B_Link_visual" pos="0 0 0" quat="1 0 0 0" material="default_material" type="box" size="0.0025 0.0025 0.0025" class="visual" />
+              <camera name="d435_depth_B" pos="0 0 0" quat="0 -0.707107 0.707107 0" fovy="70.840779" />
               <body name="d435_optical_frame_B" pos="0 0 0" quat="0.5000000000000001 -0.5 0.4999999999999999 -0.5">
                 <inertial mass="0.001" diaginertia="1e-07 1e-07 1e-07" pos="0 0 0" />
               </body>
@@ -294,17 +297,18 @@
             <body name="d435_H_Link" pos="0.0968 -0.01759 0.00409" quat="-1.0115161643657616e-13 -0.20791835841051304 2.1501160455858748e-14 -0.9781461834694636">
               <inertial mass="0.001" diaginertia="1e-07 1e-07 1e-07" pos="0 0 0" />
               <geom name="d435_H_Link_visual" pos="0 0 0" quat="1 0 0 0" material="default_material" type="box" size="0.0025 0.0025 0.0025" class="visual" />
+              <camera name="d435_depth_H" pos="0 0 0" quat="0 -0.707107 0.707107 0" fovy="70.840779" />
               <body name="d435_optical_frame_H" pos="0 0 0" quat="0.5000000000000001 -0.5 0.4999999999999999 -0.5">
                 <inertial mass="0.001" diaginertia="1e-07 1e-07 1e-07" pos="0 0 0" />
               </body>
             </body>
             <body name="proximal_pitch_L_H_Link" pos="-0.00044 -0.09178 -0.05474" quat="-1.0341155355510722e-13 -1.0 -0.0 0.0">
-              <joint name="proximal_pitch_L_H_Joint" type="hinge" ref="0.0" class="motor" armature="0.0685894" range="-2.600540585471551 3.141592653589793" axis="0.0 -0.9961947268929313 0.0871554135479712" />
+              <joint name="proximal_pitch_L_H_Joint" type="hinge" ref="0.0" class="motor" armature="0.0685894" range="-3.141592653589793 2.600540585471551" axis="0.0 0.9961947268929313 -0.0871554135479712" />
               <inertial pos="-0.00547 0.07014 -0.00611" quat="1.0 0.0 0.0 0.0" mass="2.21" diaginertia="0.00438539 0.00308183 0.00349504" />
               <geom name="proximal_pitch_L_H_Link_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="proximal_pitch_L_H_Link.STL" class="collision" />
               <geom name="proximal_pitch_L_H_Link_visual" pos="0 0 0" quat="1 0 0 0" material="default_material" type="mesh" mesh="proximal_pitch_L_H_Link.STL" class="visual" />
-              <body name="proximal_roll_L_H_Link" pos="-0.032 0.0758 -0.00663" quat="0.16996714290024104 0.9854497299884601 0.0 0.0">
-                <joint name="proximal_roll_L_H_Joint" type="hinge" ref="0.0" class="motor" armature="0.0685894" range="-3.06179938779915 0.393952478789746" axis="1.0 0.0 0.0" />
+              <body name="proximal_roll_L_H_Link" pos="-0.032 0.0758 -0.00663" quat="1.0 0.0 0.0 0.0">
+                <joint name="proximal_roll_L_H_Joint" type="hinge" ref="0.0" class="motor" armature="0.0685894" range="-0.2617993877991494 3.193952531149623" axis="1.0 0.0 0.0" />
                 <inertial pos="0.03124 0.00035 -0.08414" quat="1.0 0.0 0.0 0.0" mass="1.74" diaginertia="0.00476933 0.00545584 0.00305316" />
                 <geom name="proximal_roll_L_H_Link_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="proximal_roll_L_H_Link.STL" class="collision" />
                 <geom name="proximal_roll_L_H_Link_visual" pos="0 0 0" quat="1 0 0 0" material="default_material" type="mesh" mesh="proximal_roll_L_H_Link.STL" class="visual" />
@@ -346,12 +350,12 @@
               </body>
             </body>
             <body name="proximal_pitch_R_H_Link" pos="-0.00044 0.09178 -0.05474" quat="-1.0341155355510722e-13 -1.0 -0.0 0.0">
-              <joint name="proximal_pitch_R_H_Joint" type="hinge" ref="0.0" class="motor" armature="0.0685894" range="-2.600540585471551 3.141592653589793" axis="0.0 -0.9961947268929313 -0.0871554135479712" />
+              <joint name="proximal_pitch_R_H_Joint" type="hinge" ref="0.0" class="motor" armature="0.0685894" range="-3.141592653589793 2.600540585471551" axis="0.0 0.9961947268929313 0.0871554135479712" />
               <inertial pos="-0.00547 -0.07014 -0.00611" quat="1.0 0.0 0.0 0.0" mass="2.21" diaginertia="0.00438539 0.00308183 0.00349504" />
               <geom name="proximal_pitch_R_H_Link_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="proximal_pitch_R_H_Link.STL" class="collision" />
               <geom name="proximal_pitch_R_H_Link_visual" pos="0 0 0" quat="1 0 0 0" material="default_material" type="mesh" mesh="proximal_pitch_R_H_Link.STL" class="visual" />
-              <body name="proximal_roll_R_H_Link" pos="-0.032 -0.0758 -0.00663" quat="0.16996714290024104 -0.9854497299884601 0.0 0.0">
-                <joint name="proximal_roll_R_H_Joint" type="hinge" ref="0.0" class="motor" armature="0.0685894" range="-0.393952478789746 3.06179938779915" axis="1.0 0.0 0.0" />
+              <body name="proximal_roll_R_H_Link" pos="-0.032 -0.0758 -0.00663" quat="1.0 0.0 0.0 0.0">
+                <joint name="proximal_roll_R_H_Joint" type="hinge" ref="0.0" class="motor" armature="0.0685894" range="-3.193952531149623 0.2617993877991494" axis="1.0 0.0 0.0" />
                 <inertial pos="0.03124 -0.00035 -0.08414" quat="1.0 0.0 0.0 0.0" mass="1.74" diaginertia="0.00476933 0.00545584 0.00305316" />
                 <geom name="proximal_roll_R_H_Link_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="proximal_roll_R_H_Link.STL" class="collision" />
                 <geom name="proximal_roll_R_H_Link_visual" pos="0 0 0" quat="1 0 0 0" material="default_material" type="mesh" mesh="proximal_roll_R_H_Link.STL" class="visual" />
@@ -402,9 +406,17 @@
                 <geom name="head_yaw_Link_visual" pos="0 0 0" quat="1 0 0 0" material="default_material" type="mesh" mesh="head_yaw_Link.STL" class="visual" />
                 <body name="head_pitch_Link" pos="0.051 0.03 0.097" quat="1.0 0.0 0.0 0.0">
                   <joint name="head_pitch_Joint" type="hinge" ref="0.0" class="motor" armature="0.0166082" range="-0.7853981633974483 1.0471975511965976" axis="0.0 1.0 0.0" />
-                  <inertial pos="0.00697 -0.03028 0.03063" quat="1.0 0.0 0.0 0.0" mass="0.61" diaginertia="0.00145537 0.00171054 0.00235442" />
+                  <inertial pos="-0.00469 -0.02957 0.02678" quat="0.00310304 0.757979 0.00671289 0.652237" mass="0.46" diaginertia="0.00192144 0.00139823 0.00121368" />
                   <geom name="head_pitch_Link_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="head_pitch_Link.STL" class="collision" />
                   <geom name="head_pitch_Link_visual" pos="0 0 0" quat="1 0 0 0" material="default_material" type="mesh" mesh="head_pitch_Link.STL" class="visual" />
+                  <body name="d455_Link" pos="0.05745 0.0175 0.0444" quat="0.707107 0 0.707107 0">
+                    <inertial pos="-8e-05 -0.04732 -0.01308" quat="0.492353 0.49341 -0.507728 0.506308" mass="0.15" diaginertia="0.000155474 0.000152382 1.48095e-05" />
+                    <geom name="d455_Link_visual" pos="0 0 0" quat="1 0 0 0" material="default_material" type="mesh" mesh="d455_Link.STL" class="visual" />
+                    <camera name="d455_depth" pos="0 0 0" quat="0 -0.707107 0.707107 0" fovy="70.840779" />
+                    <body name="d455_optical_frame" pos="0 0 0" quat="0.5 -0.5 0.5 -0.5">
+                      <inertial mass="0.001" diaginertia="1e-08 1e-08 1e-08" pos="0 0 0" />
+                    </body>
+                  </body>
                 </body>
               </body>
             </body>

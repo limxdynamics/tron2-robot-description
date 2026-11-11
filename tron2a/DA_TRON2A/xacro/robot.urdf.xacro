@@ -4,6 +4,7 @@
   <xacro:property name="ros_version" value="$(arg ros_version)" />
   <xacro:include filename="macros.xacro" />
 
+  <!-- tron2-xacro body begin, links and joints mirror the urdf, see the tron2-xacro skill -->
   <link name="base_Link">
     <inertial>
       <origin xyz="0.00385 -0.00011 0.11254" rpy="0.0 0.0 0.0"/>
@@ -532,8 +533,8 @@
     </visual>
   </link>
   <joint name="d435_Joint" type="fixed">
-    <origin xyz="0.058 0.0308 0.0408" rpy="0 0 0" />
-    <parent link="head_pitch_Link" />
+    <origin xyz="0.0968 0.01759 -0.00409" rpy="0 2.7227 0" />
+    <parent link="base_Link" />
     <child link="d435_Link" />
   </joint>
   <link name="d435_optical_frame">
@@ -547,6 +548,11 @@
     <parent link="d435_Link" />
     <child link="d435_optical_frame" />
   </joint>
+
+  <!-- tron2-xacro body end -->
+
+  <!-- 反射转子惯量，与 ROS 版本无关，取值逐关节对齐 xml armature -->
+  <xacro:rotor_inertia_all />
 
   <xacro:if value="${ros_version == 1}">
     <xacro:ros1_gazebo_all />

@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- tron2-xacro helpers begin -->
+  <!-- Helper. One ros2_control joint with position/velocity/effort command and state -->
+  <xacro:macro name="tron2_ctrl_joint" params="name">
+    <joint name="${name}">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <command_interface name="effort" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+  </xacro:macro>
+
+  <!-- Helper. One ROS1 effort controlled joint -->
+  <xacro:macro name="tron2_transmission" params="name">
+    <transmission name="${name}_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${name}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${name}_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <!-- 反射转子惯量，MuJoCo <joint armature> 的 URDF 等价物（URDF 与 SDF 都没有 armature）。
+       在关节的子连杆上刚性附着一个薄圆盘，izz=armature、ixx=iyy=armature/2，满足刚体惯量
+       三角不等式。rpy 把圆盘 z 轴转到关节轴上，取 0、acos(z)、atan2(y,x)。
+       与原生 armature 的偏差在于转子也会加载上游关节，末端精确，越靠根部偏高越多。
+       依赖 Gazebo 默认的 fixed-joint lumping，转子关节上不要设 disableFixedJointLumping。
+       移动关节不加，其 armature 单位为 kg，复现它等于给连杆加真实质量与重力。
+       规则与推导见 tron2-xacro skill 的 references/armature.md。 -->
+  <xacro:macro name="rotor_inertia" params="joint child armature mass:=1e-4 rpy:='0 0 0'">
+    <link name="${joint}_rotor">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="${mass}"/>
+        <inertia ixx="${armature / 2.0}" iyy="${armature / 2.0}" izz="${armature}"
+                 ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+    </link>
+    <joint name="${joint}_rotor_fixed" type="fixed">
+      <origin xyz="0 0 0" rpy="${rpy}"/>
+      <parent link="${child}"/>
+      <child link="${joint}_rotor"/>
+    </joint>
+  </xacro:macro>
+  <!-- tron2-xacro helpers end -->
+
+  <!-- ==================== Collision Geometry Macro ==================== -->
+  <xacro:macro name="collision_mesh" params="mesh_filename">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_filename}" />
+      </geometry>
+    </collision>
+  </xacro:macro>
+
+  <xacro:macro name="collision_box" params="prim_origin_xyz prim_origin_rpy prim_size">
+    <collision>
+      <origin xyz="${prim_origin_xyz}" rpy="${prim_origin_rpy}" />
+      <geometry>
+        <box size="${prim_size}" />
+      </geometry>
+    </collision>
+  </xacro:macro>
+
+  <!-- ==================== ROS1 Gazebo Macro ==================== -->
+  <xacro:macro name="ros1_gazebo_all">
+
+    <!-- ros_control plugin -->
+    <gazebo>
+      <plugin filename="libtron2_hw_sim.so" name="gazebo_ros_control">
+        <robotNamespace>/</robotNamespace>
+        <robotParam>robot_description</robotParam>
+        <robotSimType>tron2_gazebo/Tron2HWSim</robotSimType>
+      </plugin>
+    </gazebo>
+
+    <!-- Ground truth pose plugin (ROS1 camelCase) -->
+    <gazebo>
+      <plugin filename="libgazebo_ros_p3d.so" name="p3d_base_controller">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>1000.0</updateRate>
+        <bodyName>base_Link</bodyName>
+        <topicName>ground_truth/state</topicName>
+        <gaussianNoise>0</gaussianNoise>
+        <frameName>world</frameName>
+        <xyzOffsets>0 0 0</xyzOffsets>
+        <rpyOffsets>0 0 0</rpyOffsets>
+      </plugin>
+    </gazebo>
+
+    <!-- D435 Camera ROS1 Plugin. Split into two sensors instead of using
+         libgazebo_ros_openni_kinect.so. The openni_kinect plugin deadlocks
+         with gazebo_ros_control on Load() and prevents Tron2HWSim::initSim
+         from being called. -->
+    <gazebo reference="d435_Link">
+      <sensor type="camera" name="d435_color_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>60</update_rate>
+        <visualize>false</visualize>
+        <camera>
+          <horizontal_fov>1.5177</horizontal_fov>
+          <image>
+            <format>B8G8R8</format>
+            <width>64</width>
+            <height>48</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>1.8</far>
+          </clip>
+        </camera>
+        <plugin name="d435_color_controller" filename="libgazebo_ros_camera.so">
+          <robotNamespace>d435</robotNamespace>
+          <cameraName>color</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>d435_optical_frame</frameName>
+        </plugin>
+      </sensor>
+
+      <sensor type="depth" name="d435_depth_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>60</update_rate>
+        <visualize>false</visualize>
+        <camera>
+          <horizontal_fov>1.5177</horizontal_fov>
+          <image>
+            <format>R8G8B8</format>
+            <width>64</width>
+            <height>48</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>1.8</far>
+          </clip>
+        </camera>
+        <plugin name="d435_depth_controller" filename="libgazebo_ros_depth_camera.so">
+          <robotNamespace>d435</robotNamespace>
+          <!-- cameraName must differ from the color sensor; otherwise both
+               plugins share the same set_camera_info / set_parameters
+               services and Gazebo logs "Tried to advertise a service that
+               is already advertised" on the second one. -->
+          <cameraName>depth</cameraName>
+          <!-- imageTopicName / cameraInfoTopicName publish the IR/grayscale
+               frame from libgazebo_ros_depth_camera.so. Route them under
+               infra/ so they don't collide with depthImageTopicName /
+               depthImageCameraInfoTopicName (the real depth stream). -->
+          <imageTopicName>infra/image_raw</imageTopicName>
+          <cameraInfoTopicName>infra/camera_info</cameraInfoTopicName>
+          <depthImageTopicName>image_raw</depthImageTopicName>
+          <depthImageCameraInfoTopicName>camera_info</depthImageCameraInfoTopicName>
+          <pointCloudTopicName>points</pointCloudTopicName>
+          <frameName>d435_optical_frame</frameName>
+          <pointCloudCutoff>0.1</pointCloudCutoff>
+          <pointCloudCutoffMax>1.8</pointCloudCutoffMax>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+    <!-- tron2-xacro auto begin ros1-transmissions -->
+    <xacro:tron2_transmission name="proximal_pitch_L_Joint" />  <!-- idx 0 -->
+    <xacro:tron2_transmission name="proximal_roll_L_Joint" />  <!-- idx 1 -->
+    <xacro:tron2_transmission name="proximal_yaw_L_Joint" />  <!-- idx 2 -->
+    <xacro:tron2_transmission name="knee_L_Joint" />  <!-- idx 3 -->
+    <xacro:tron2_transmission name="wheel_L_Joint" />  <!-- idx 4 -->
+    <xacro:tron2_transmission name="proximal_pitch_R_Joint" />  <!-- idx 5 -->
+    <xacro:tron2_transmission name="proximal_roll_R_Joint" />  <!-- idx 6 -->
+    <xacro:tron2_transmission name="proximal_yaw_R_Joint" />  <!-- idx 7 -->
+    <xacro:tron2_transmission name="knee_R_Joint" />  <!-- idx 8 -->
+    <xacro:tron2_transmission name="wheel_R_Joint" />  <!-- idx 9 -->
+    <!-- tron2-xacro auto end ros1-transmissions -->
+
+  </xacro:macro>
+
+  <!-- ==================== ROS2 Gazebo Macro ==================== -->
+  <xacro:macro name="ros2_gazebo_all">
+
+    <!-- ros2_control plugin -->
+    <gazebo>
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <parameters>$(find tron2_gazebo)/config/default_tron2.yaml</parameters>
+      </plugin>
+    </gazebo>
+
+    <!-- ros2_control block -->
+    <ros2_control name="Tron2GazeboSystem" type="system">
+      <hardware>
+        <plugin>tron2_gazebo/Tron2HWSim</plugin>
+      </hardware>
+
+      <!-- tron2-xacro auto begin ros2-joints -->
+      <xacro:tron2_ctrl_joint name="proximal_pitch_L_Joint" />  <!-- idx 0 -->
+      <xacro:tron2_ctrl_joint name="proximal_roll_L_Joint" />  <!-- idx 1 -->
+      <xacro:tron2_ctrl_joint name="proximal_yaw_L_Joint" />  <!-- idx 2 -->
+      <xacro:tron2_ctrl_joint name="knee_L_Joint" />  <!-- idx 3 -->
+      <xacro:tron2_ctrl_joint name="wheel_L_Joint" />  <!-- idx 4 -->
+      <xacro:tron2_ctrl_joint name="proximal_pitch_R_Joint" />  <!-- idx 5 -->
+      <xacro:tron2_ctrl_joint name="proximal_roll_R_Joint" />  <!-- idx 6 -->
+      <xacro:tron2_ctrl_joint name="proximal_yaw_R_Joint" />  <!-- idx 7 -->
+      <xacro:tron2_ctrl_joint name="knee_R_Joint" />  <!-- idx 8 -->
+      <xacro:tron2_ctrl_joint name="wheel_R_Joint" />  <!-- idx 9 -->
+      <!-- tron2-xacro auto end ros2-joints -->
+
+      <sensor name="base_imu_sensor">
+        <state_interface name="orientation.x" />
+        <state_interface name="orientation.y" />
+        <state_interface name="orientation.z" />
+        <state_interface name="orientation.w" />
+        <state_interface name="angular_velocity.x" />
+        <state_interface name="angular_velocity.y" />
+        <state_interface name="angular_velocity.z" />
+        <state_interface name="linear_acceleration.x" />
+        <state_interface name="linear_acceleration.y" />
+        <state_interface name="linear_acceleration.z" />
+      </sensor>
+    </ros2_control>
+
+    <!-- IMU Gazebo sensor plugin (ROS2) -->
+    <gazebo reference="base_imu">
+      <sensor type="imu" name="base_imu_sensor">
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <visualize>true</visualize>
+        <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+          <ros>
+            <namespace></namespace>
+            <remapping>~/out:=imu</remapping>
+          </ros>
+          <initial_orientation_as_reference>false</initial_orientation_as_reference>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+    <!-- Ground truth pose plugin (ROS2 snake_case) -->
+    <gazebo>
+      <plugin filename="libgazebo_ros_p3d.so" name="p3d_base_controller">
+        <ros>
+          <remapping>odom:=ground_truth/state</remapping>
+        </ros>
+        <update_rate>1000.0</update_rate>
+        <body_name>base_Link</body_name>
+        <frame_name>world</frame_name>
+        <gaussian_noise>0.0</gaussian_noise>
+        <xyz_offset>0 0 0</xyz_offset>
+        <rpy_offset>0 0 0</rpy_offset>
+      </plugin>
+    </gazebo>
+
+    <!-- D435 Camera ROS2 Plugin -->
+    <gazebo reference="d435_Link">
+      <sensor type="depth" name="d435_camera_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>60</update_rate>
+        <visualize>false</visualize>
+        <camera>
+          <horizontal_fov>1.5177</horizontal_fov>
+          <image>
+            <format>B8G8R8</format>
+            <width>64</width>
+            <height>48</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>1.8</far>
+          </clip>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <ros>
+            <namespace>d435</namespace>
+          </ros>
+          <camera_name>d435_camera</camera_name>
+          <frame_name>d435_optical_frame</frame_name>
+          <min_depth>0.1</min_depth>
+          <max_depth>1.8</max_depth>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+  </xacro:macro>
+
+  <!-- tron2-xacro auto begin rotor -->
+  <xacro:macro name="rotor_inertia_all">
+    <xacro:rotor_inertia joint="proximal_pitch_L_Joint" child="proximal_pitch_L_Link" armature="0.0754" rpy="0 1.65806245894 1.57079632679"/>
+    <xacro:rotor_inertia joint="proximal_roll_L_Joint" child="proximal_roll_L_Link" armature="0.0754" rpy="0 1.57079632679 0"/>
+    <xacro:rotor_inertia joint="proximal_yaw_L_Joint" child="proximal_yaw_L_Link" armature="0.0178"/>
+    <xacro:rotor_inertia joint="knee_L_Joint" child="knee_L_Link" armature="0.0754" rpy="0 1.57079632679 1.57079632679"/>
+    <xacro:rotor_inertia joint="wheel_L_Joint" child="wheel_L_Link" armature="0.0110718" rpy="0 1.57079632679 1.57079632679"/>
+    <xacro:rotor_inertia joint="proximal_pitch_R_Joint" child="proximal_pitch_R_Link" armature="0.0754" rpy="0 1.48353019465 1.57079632679"/>
+    <xacro:rotor_inertia joint="proximal_roll_R_Joint" child="proximal_roll_R_Link" armature="0.0754" rpy="0 1.57079632679 0"/>
+    <xacro:rotor_inertia joint="proximal_yaw_R_Joint" child="proximal_yaw_R_Link" armature="0.0178"/>
+    <xacro:rotor_inertia joint="knee_R_Joint" child="knee_R_Link" armature="0.0754" rpy="0 1.57079632679 1.57079632679"/>
+    <xacro:rotor_inertia joint="wheel_R_Joint" child="wheel_R_Link" armature="0.0110718" rpy="0 1.57079632679 1.57079632679"/>
+  </xacro:macro>
+  <!-- tron2-xacro auto end rotor -->
+
+</robot>

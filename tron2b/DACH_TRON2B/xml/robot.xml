@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <mujoco model="bipedal_robot">
   <compiler angle="radian" meshdir="../meshes" autolimits="true"/>
-  <option timestep="0.001"/>
+  <option timestep="0.001" cone="elliptic" impratio="10"/>
   <size njmax="5000" nconmax="1000"/>
   <default>
     <light castshadow="false" diffuse="1 1 1"/>
@@ -45,6 +45,7 @@
     <mesh name="head_base_Link" file="head_base_Link.STL"/>
     <mesh name="head_yaw_Link" file="head_yaw_Link.STL"/>
     <mesh name="head_pitch_Link" file="head_pitch_Link.STL"/>
+    <mesh name="d455_Link" file="d455_Link.STL"/>
     <mesh name="base_2_Link" file="base_2_Link.STL"/>
     <mesh name="base_3_Link" file="base_3_Link.STL"/>
     <texture name="texplane" type="2d" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.15 0.2" width="100" height="100"/>
@@ -172,10 +173,18 @@
           <geom mesh="head_yaw_Link" class="visual"/>
           <geom mesh="head_yaw_Link" class="collision"/>
           <body name="head_pitch_Link" pos="0.051 0.03 0.097">
-            <inertial pos="0.00697 -0.03028 0.03063" quat="0.0176578 0.713106 -0.0130977 0.700712" mass="0.61" diaginertia="0.00235472 0.001711 0.00145461"/>
+            <inertial pos="-0.00469 -0.02957 0.02678" quat="0.00310304 0.757979 0.00671289 0.652237" mass="0.46" diaginertia="0.00192144 0.00139823 0.00121368"/>
             <joint name="head_pitch_Joint" pos="0 0 0" axis="0 1 0" range="-0.785398 1.0472" actuatorfrcrange="-15 15" armature="0.0164"/>
             <geom mesh="head_pitch_Link" class="visual"/>
             <geom mesh="head_pitch_Link" class="collision"/>
+            <body name="d455_Link" pos="0.05745 0.0175 0.0444" quat="0.707107 0 0.707107 0">
+              <inertial pos="-8e-05 -0.04732 -0.01308" quat="0.492353 0.49341 -0.507728 0.506308" mass="0.15" diaginertia="0.000155474 0.000152382 1.48095e-05"/>
+              <geom mesh="d455_Link" class="visual"/>
+              <camera name="d455_depth" pos="0 0 0" quat="0 -0.707107 0.707107 0" fovy="70.840779"/>
+              <body name="d455_optical_frame" quat="0.5 -0.5 0.5 -0.5">
+                <inertial pos="0 0 0" mass="0.001" diaginertia="1e-08 1e-08 1e-08"/>
+              </body>
+            </body>
           </body>
         </body>
       </body>
