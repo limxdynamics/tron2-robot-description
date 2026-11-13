@@ -133,14 +133,16 @@ Total mass of the robot body in each MuJoCo model (`xml/robot.xml`), i.e. the su
 | `SF` | 34.812 kg | 35.662 kg |
 | `WFYG` | 41.677 kg | 42.306 kg |
 | `SFYG` | 41.577 kg | 42.426 kg |
-| `DA` | 59.712 kg | 60.242 kg |
-| `DACH` | 61.292 kg | 61.822 kg |
+| `DA` | 59.712 kg ¹ | 60.242 kg ¹ |
+| `DACH` | 61.292 kg ¹ | 61.822 kg ¹ |
 | `DASF` | 66.843 kg | 68.205 kg |
 | `DASF2` | 104.675 kg | 106.875 kg |
 
+¹ `DA` and `DACH` are mounted on a fixed stand, and the stand is part of the model: `base_2_Link`, the column of about 1 m under the torso, at a nominal 10 kg, and `base_3_Link`, the 0.72 × 0.72 m base plate, at a nominal 20 kg. Without these 30 kg the dual-arm robot itself is 29.712 / 30.242 kg (`DA`, TRON2A / TRON2B) and 31.292 / 31.822 kg (`DACH`).
+
 - **URDF vs MJCF:** the URDF of the same variant is typically heavier by 0.01 kg per IMU, because each IMU is a separate `base_imu` link (0.01 kg) in URDF but a massless site in MJCF.
 - **Grasper models:** `robot_grasper.*` keeps the same total mass; the lumped gripper mass is redistributed over the articulated gripper links.
-- **These are simulation model values, not hardware specifications.** The physical robot includes components that are not modeled here (cabling, fasteners, optional peripherals, etc.). For the weight of a shipped robot, refer to the official [TRON 2 specifications](https://limxdynamics.com/en/products/tron2/spec) or contact our sales team.
+- **These are simulation model values, not hardware specifications.** The physical robot includes components that are not modeled here (cabling, fasteners, optional peripherals, and the roll cage of the legged variants, etc.). For hardware figures, see the official [TRON 2 specifications](https://limxdynamics.com/en/products/tron2/spec); for the weight of a shipped robot, contact our sales team.
 
 Reproduce with MuJoCo:
 
