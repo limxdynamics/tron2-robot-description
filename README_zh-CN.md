@@ -133,14 +133,16 @@ python -m mujoco.viewer --mjcf=tron2a/DACH_TRON2A/xml/robot.xml
 | `SF` | 34.812 kg | 35.662 kg |
 | `WFYG` | 41.677 kg | 42.306 kg |
 | `SFYG` | 41.577 kg | 42.426 kg |
-| `DA` | 59.712 kg | 60.242 kg |
-| `DACH` | 61.292 kg | 61.822 kg |
+| `DA` | 59.712 kg ¹ | 60.242 kg ¹ |
+| `DACH` | 61.292 kg ¹ | 61.822 kg ¹ |
 | `DASF` | 66.843 kg | 68.205 kg |
 | `DASF2` | 104.675 kg | 106.875 kg |
 
+¹ `DA` 和 `DACH` 安装在固定支架上，模型里包含这个支架：躯干下方约 1 m 高的立柱 `base_2_Link`（名义质量 10 kg）和 0.72 × 0.72 m 的底板 `base_3_Link`（名义质量 20 kg）。去掉这 30 kg，双臂机器人本体为 29.712 / 30.242 kg（`DA`，TRON2A / TRON2B）和 31.292 / 31.822 kg（`DACH`）。
+
 - **URDF 与 MJCF：** 同一型号的 URDF 通常每个 IMU 多 0.01 kg。原因是 URDF 将 IMU 建为独立的 `base_imu` 链接（0.01 kg），而 MJCF 中为无质量的 site。
 - **夹爪模型：** `robot_grasper.*` 总质量不变，只是把集总的夹爪质量分配到了各个铰接夹爪链接上。
-- **以上为仿真模型质量，不是实机规格。** 实机包含本仓库未建模的部件（线缆、紧固件、选配外设等）。实机重量请以官方 [TRON 2 产品参数](https://limxdynamics.com/tron2/spec) 为准，或咨询公司销售。
+- **以上为仿真模型质量，不是实机规格。** 实机包含本仓库未建模的部件（线缆、紧固件、选配外设，以及足式型号的防滚架等）。硬件参数见官方 [TRON 2 产品参数](https://limxdynamics.com/tron2/spec)；实机重量请咨询公司销售。
 
 使用 MuJoCo 复算：
 

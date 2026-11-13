@@ -60,6 +60,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Issues.
 
 ### Fixed
+- README "Model mass": `DA` / `DACH` totals include the fixed stand
+  (`base_2_Link` column, 10 kg, and `base_3_Link` base plate, 20 kg),
+  which made the dual-arm robot read as about 60 kg. A footnote now says
+  so and gives the robot mass without the stand; the roll cage of the
+  legged variants is listed among the parts not modeled.
 - README "Joint zero convention": the calibration note stated that
   every robot's factory zero matches the URDF zero, which contradicted
   the TRON2B convention in the same section. It now applies to TRON2A
