@@ -16,14 +16,15 @@ claims and for the CI license / provenance scans.
 | Variant | URDF | xacro | MuJoCo XML | STL | USD | Notes |
 |---------|:----:|:-----:|:----------:|:---:|:---:|-------|
 | `DA_TRON2A`    | 1 | ≥1 | 1 | 23 | 5 | Dual arms + parallel grippers. |
-| `DACH_TRON2A`  | 1 | ≥1 | 1 | 44 | 5 | Dual arms + 2-DoF head. |
+| `DACH_TRON2A`  | 1 | ≥1 | 2 | 48 | 5 | Dual arms + 2-DoF head; `xml/robot_vis.xml` (convex decomposition) for reference-motion collision checks. |
 | `WF_TRON2A`    | 1 | ≥1 | 1 | 11 | 5 | Wheeled ankles. |
 | `SF_TRON2A`    | 1 | ≥1 | 1 | 11 | 5 | Ankle-pitch feet. |
 | `WFYG_TRON2A`  | 1 | ≥1 | 1 | 40 | 5 | WF + YG mast peripherals. |
 | `SFYG_TRON2A`  | 1 | ≥1 | 1 | 40 | 5 | SF + YG mast peripherals. |
 | `DASF_TRON2A`  | 1 | ≥1 | 1 | 36 | 5 | Top-bottom combined humanoid: SF legs + DACH upper body. |
 | `DASF2_TRON2A` | 1 | 0  | 1 | 48 | 5 | "Centaur" combined design: front/back leg pairs + upper body. |
-| **TRON2A total** | 8 |  | 8 | **253** | **40** | 8 JPG in `docs/images/`. |
+| `DAM_TRON2A`   | 2 | ≥1 | 1 | 42 | 5 | DACH upper body on a lift stand and an AgileX Ranger Air mobile chassis. |
+| **TRON2A total** | 10 |  | 10 | **299** | **45** | 8 JPG in `docs/images/`. |
 | `DA_TRON2B`    | 1 | 0  | 1 | 23 | 5 | Dual arms + parallel grippers (TRON2B hardware rev). |
 | `DACH_TRON2B`  | 2 | 0  | 1 | 42 | 5 | Dual arms + 2-DoF head (TRON2B hardware rev). |
 | `WF_TRON2B`    | 1 | 0  | 1 | 11 | 5 | Wheeled ankles (TRON2B hardware rev). |
@@ -32,7 +33,8 @@ claims and for the CI license / provenance scans.
 | `SFYG_TRON2B`  | 1 | 0  | 1 | 40 | 5 | SF + YG mast peripherals, updated 2B sensor kit. |
 | `DASF_TRON2B`  | 1 | 0  | 1 | 36 | 5 | Top-bottom combined humanoid (TRON2B hardware rev). |
 | `DASF2_TRON2B` | 1 | 0  | 1 | 48 | 5 | "Centaur" combined design (TRON2B hardware rev). |
-| **TRON2B total** | 9 |  | 8 | **251** | **40** | No xacro sources shipped for this family (URDF/XML authored directly). |
+| `DAM_TRON2B`   | 2 | ≥1 | 1 | 42 | 5 | DACH upper body on a lift stand and an AgileX Ranger Air mobile chassis (TRON2B hardware rev). |
+| **TRON2B total** | 11 |  | 9 | **293** | **45** | No xacro sources shipped for this family (URDF/XML authored directly). |
 | **Grand total** | 17 |  | 16 | **504** | **80** | |
 
 Counts are produced by:

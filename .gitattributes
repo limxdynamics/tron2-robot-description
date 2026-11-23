@@ -2,3 +2,5 @@
 tron2a/DASF_TRON2A/usd/configuration/robot_base.usd filter=lfs diff=lfs merge=lfs -text
 tron2b/DASF_TRON2B/usd/configuration/robot_base.usd filter=lfs diff=lfs merge=lfs -text
 tron2b/DASF2_TRON2B/usd/configuration/robot_base.usd filter=lfs diff=lfs merge=lfs -text
+tron2a/DAM_TRON2A/usd/configuration/robot_base.usd filter=lfs diff=lfs merge=lfs -text
+tron2b/DAM_TRON2B/usd/configuration/robot_base.usd filter=lfs diff=lfs merge=lfs -text
