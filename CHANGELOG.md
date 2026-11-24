@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `README.md` / `README_zh-CN.md`: document the `DAM` variant (variants table
+  with render, sensors, model mass, variant details); `docs/images/render_DAM_TRON2A.jpg`.
 - `DAM_TRON2A` / `DAM_TRON2B`: new variants, a `DACH` upper body on a
   lift stand and an AgileX Ranger Air mobile chassis (URDF, xacro, MJCF,
   USD, meshes); listed in `ASSETS.md` and `THIRD_PARTY_NOTICES.md`.

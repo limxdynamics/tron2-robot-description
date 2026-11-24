@@ -26,7 +26,7 @@
 
 > **Part of the TRON2 open-source ecosystem.** Where to start and the other TRON2 repositories: [TRON2 quick start](https://github.com/limxdynamics/limxdynamics/blob/main/doc/quickstart.md#tron2).
 
-URDF / xacro, MuJoCo XML, meshes, and optional USD assets for **TRON2A** and **TRON2B** robot variants — the same eight configurations in two hardware revisions, 16 model sets in total. This package is intended for simulation, visualization, and downstream tooling (ROS 1/2, MuJoCo, Isaac Sim, and similar).
+URDF / xacro, MuJoCo XML, meshes, and optional USD assets for **TRON2A** and **TRON2B** robot variants — the same nine configurations in two hardware revisions, 18 model sets in total. This package is intended for simulation, visualization, and downstream tooling (ROS 1/2, MuJoCo, Isaac Sim, and similar).
 
 ## Variants
 
@@ -42,19 +42,20 @@ Each image is rendered from the variant's MuJoCo model in this repository with t
 | <img src="docs/images/render_SFYG_TRON2A.jpg" width="320" alt="SFYG_TRON2A"> | `SFYG_TRON2A` | SF base plus the same **upper-body peripheral** stack as `WFYG_TRON2A`. | 18 | URDF · Xacro · MJCF · USD |
 | <img src="docs/images/render_DASF_TRON2A.jpg" width="320" alt="DASF_TRON2A"> | `DASF_TRON2A` | **Top-bottom combined humanoid** — `SF` ankle-pitch legs joined to a `DACH` dual-arm + 2-DoF head upper body via `transition_upper_Link`. | 26 | URDF · Xacro · MJCF · USD |
 | <img src="docs/images/render_DASF2_TRON2A.jpg" width="320" alt="DASF2_TRON2A"> | `DASF2_TRON2A` | **Centaur-style** variant — two `SF`-style leg pairs (front `_F` and back `_B`) under a `DACH` dual-arm + head upper body. | 36 | URDF · MJCF · USD |
+| <img src="docs/images/render_DAM_TRON2A.jpg" width="320" alt="DAM_TRON2A"> | `DAM_TRON2A` | **Dual-arm mobile manipulator** — a `DACH` dual-arm + 2-DoF head upper body on a motorized lift column, mounted on a four-wheel-steering mobile chassis. | 25 | URDF · Xacro · MJCF · USD |
 
 The suffix **YG** denotes the richer upper-body / mast peripheral layout (arms, hands, and accessory links—see [External sensors by variant](#external-sensors-by-variant)). The **DASF** / **DASF2** variants combine previously separate lower-body (`SF`) and upper-body (`DACH`) descriptions into a single stacked (“上下拼接”) humanoid, each with its own IMU per body segment.
 
 ### TRON2A vs TRON2B
 
-The table above shows the **TRON2A** family under `tron2a/`. `tron2b/` holds the **TRON2B** hardware revision of the same eight configurations, with the same assemblies and file layout.
+The table above shows the **TRON2A** family under `tron2a/`. `tron2b/` holds the **TRON2B** hardware revision of the same nine configurations, with the same assemblies and file layout.
 
 | | TRON2A (`tron2a/`) | TRON2B (`tron2b/`) |
 |---|---|---|
-| Variants | 8 | 8 — same list |
+| Variants | 9 | 9 — same list |
 | Formats shipped | URDF · Xacro · MJCF · USD (`DASF2` has no xacro) | URDF · MJCF · USD — **no xacro**; URDF/MJCF are authored directly |
-| STL meshes | 253 | 251 |
-| USD files | 40 | 40 |
+| STL meshes | 299 | 293 |
+| USD files | 45 | 45 |
 | URDF zero | real robot's factory-calibrated zero | knees-forward pose (see [Joint zero convention](#joint-zero-convention)) |
 | Model mass | see [Model mass](#model-mass) | see [Model mass](#model-mass) |
 
@@ -119,6 +120,7 @@ Summary of **torso-mounted and mast-mounted peripherals** as represented in this
 | `WFYG_TRON2A` | Yes | Yes — same chest D435 as WF | **URDF (meshes / kinematics):** `transition_Link` (转接件), `camera_mount_Link`, `radar_Link`, `antenna_L_Link`, `antenna_R_Link`. **Physical hardware** (on `transition_Link`): LiDAR **RoboSense Fairy96** (速腾 Fairy96); dual arms **AgileX Piper X** (松灵 PiperX); RTK **Huace M722** (华测 M722); compute **NVIDIA Jetson Orin NX**. **Simulation note:** URDF provides geometry/collision only; **no** Gazebo radar/RF sensor plugins in this package. | |
 | `SFYG_TRON2A` | Yes | Yes | **Same YG stack as `WFYG_TRON2A`** — same URDF link set, same hardware (Fairy96, Piper X, M722, Orin NX on `transition_Link`) and the same simulation caveats. |  |
 | `DASF_TRON2A` | Two — lower body `base_imu`, upper body `upper_base_imu` | Yes — `d435_U_Link` + `d435_optical_frame_U` on the upper body | — | Stacked `SF` legs + `DACH` arms/head joined at `transition_upper_Link`; MuJoCo IMU sensors on both `base_imu` and `upper_base_imu` sites. |
+| `DAM_TRON2A` | Yes — link `base_imu` | Yes — head `d455_Link` + `d455_optical_frame`, chassis-mounted `d435_Link` + `d435_optical_frame` (MuJoCo cameras `d455_depth`, `d435_depth`) | — | Mobile manipulator: front / rear chassis LiDAR (`lidar_F_Link`, `lidar_B_Link`) and a chassis camera (`chassis_camera_Link`), geometry only. MuJoCo IMU at site `base_imu`. |
 | `DASF2_TRON2A` | Three — `limx_F_imu` (front legs), `limx_B_imu` (back legs), `limx_H_imu` (head/upper body) | Yes — `d435_F_Link`, `d435_B_Link`, `d435_H_Link` (front / back / head cameras) | — | Centaur-style: two `SF`-style leg pairs (`transition_middle_Link` to front legs, direct to back legs) plus `DACH` upper body via `transition_upper_Link`. |
 
 **Legend:** “RGB-D / depth” follows the Intel RealSense **D435**-style optical frame and Gazebo `depth` sensor naming (`d435_camera_sensor`) where present. Add your own drivers or Gazebo plugins if you need simulated radar or extra cameras.
@@ -137,6 +139,7 @@ Total mass of the robot body in each MuJoCo model (`xml/robot.xml`), i.e. the su
 | `DACH` | 61.292 kg ¹ | 61.822 kg ¹ |
 | `DASF` | 66.843 kg | 68.205 kg |
 | `DASF2` | 104.675 kg | 106.875 kg |
+| `DAM` | 83.757 kg | 84.287 kg |
 
 ¹ `DA` and `DACH` are mounted on a fixed stand, and the stand is part of the model: `base_2_Link`, the column of about 1 m under the torso, at a nominal 10 kg, and `base_3_Link`, the 0.72 × 0.72 m base plate, at a nominal 20 kg. Without these 30 kg the dual-arm robot itself is 29.712 / 30.242 kg (`DA`, TRON2A / TRON2B) and 31.292 / 31.822 kg (`DACH`).
 
@@ -163,6 +166,7 @@ Details specific to each variant that are not covered above. Paths are given for
 | `WFYG_TRON2A` | `WF` base plus **dual arms**, grippers and **mast-mounted accessory geometry** (`camera_mount_Link`, nested `radar_Link`, paired `antenna_*` links). A fixed `gripper_pick` body in the MuJoCo model marks the gripper pick point for grasp planning. | `urdf/robot.urdf`, `xml/robot.xml` |
 | `SFYG_TRON2A` | `SF` legs with the same **YG** upper body, mast peripherals and `gripper_pick` body as `WFYG`. | `urdf/robot.urdf`, `xml/robot.xml` |
 | `DASF_TRON2A` | `SF` legs joined via `transition_upper_Link` to a `DACH`-style dual-arm + 2-DoF head upper body: a biped + dual-arm assembly stacked into a single humanoid. | `urdf/robot_rl.urdf`, `xml/robot.xml` |
+| `DAM_TRON2A` | `DACH`-style dual arms + 2-DoF head on a **prismatic lift** (`lift_Joint`, 0–0.611 m) and a **four-wheel-steering mobile chassis** (`steering_{L,R}_{F,B}_Joint` + `wheel_{L,R}_{F,B}_Joint`, 8 joints); chassis geometry from the AgileX Ranger Air (see [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)). 25 actuators: 14 arm, 2 head, 1 lift, 4 steering, 4 wheel. | `urdf/robot.urdf`, `urdf/robot_rl.urdf`, `xml/robot.xml`, `usd/`, `meshes/` |
 | `DASF2_TRON2A` | Two `SF`-style leg pairs joined front-to-back (`front_base_Link` and `back_base_Link` via `transition_middle_Link`), with a `DACH`-style upper body on the front legs via `transition_upper_Link`. | `urdf/robot.urdf`, `xml/robot.xml`, `xml/default_pose.xml` (standing keyframe, TRON2A only) |
 
 ## ROS packages

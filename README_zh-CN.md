@@ -26,7 +26,7 @@
 
 > **TRON2 开源生态的一部分。** 上手路线和其他 TRON2 仓库：[TRON2 快速上手](https://github.com/limxdynamics/limxdynamics/blob/main/doc/quickstart_cn.md#tron2)。
 
-面向 **TRON2A** 与 **TRON2B** 机器人各型号的 URDF / xacro、MuJoCo XML、网格（mesh）以及可选的 USD 资产 —— 同一批八个型号的两个硬件版本，共 16 套模型。本仓库用于仿真、可视化以及下游工具链（ROS 1/2、MuJoCo、Isaac Sim 等）。
+面向 **TRON2A** 与 **TRON2B** 机器人各型号的 URDF / xacro、MuJoCo XML、网格（mesh）以及可选的 USD 资产 —— 同一批九个型号的两个硬件版本，共 18 套模型。本仓库用于仿真、可视化以及下游工具链（ROS 1/2、MuJoCo、Isaac Sim 等）。
 
 ## 型号一览（Variants）
 
@@ -42,19 +42,20 @@
 | <img src="docs/images/render_SFYG_TRON2A.jpg" width="320" alt="SFYG_TRON2A"> | `SFYG_TRON2A` | SF 基础上加装与 `WFYG_TRON2A` 相同的 **上肢外设** 组件。 | 18 | URDF · Xacro · MJCF · USD |
 | <img src="docs/images/render_DASF_TRON2A.jpg" width="320" alt="DASF_TRON2A"> | `DASF_TRON2A` | **上下拼接式人形** — `SF` 踝俯仰腿型通过 `transition_upper_Link` 与 `DACH` 双臂 + 2 自由度头部上肢拼接。 | 26 | URDF · Xacro · MJCF · USD |
 | <img src="docs/images/render_DASF2_TRON2A.jpg" width="320" alt="DASF2_TRON2A"> | `DASF2_TRON2A` | **半人马式** 变体 — 两组 `SF` 式腿型（前 `_F`、后 `_B`）搭配 `DACH` 双臂 + 头部上肢。 | 36 | URDF · MJCF · USD |
+| <img src="docs/images/render_DAM_TRON2A.jpg" width="320" alt="DAM_TRON2A"> | `DAM_TRON2A` | **双臂移动操作机器人** — `DACH` 双臂 + 2 自由度头部上肢，安装在电动升降立柱上，下接四轮转向移动底盘。 | 25 | URDF · Xacro · MJCF · USD |
 
 **YG** 后缀表示更丰富的上肢 / 塔杆外设布局（手臂、手部及配件结构，详见 [各型号外部传感器](#各型号外部传感器external-sensors-by-variant)）。**DASF** / **DASF2** 变体将此前独立的下肢（`SF`）与上肢（`DACH`）描述拼接为单一人形，每个身体分段各配一路 IMU。
 
 ### TRON2A 与 TRON2B 的区别
 
-上表为 `tron2a/` 下的 **TRON2A** 系列。`tron2b/` 是同样八个型号的 **TRON2B** 硬件版本，装配体与文件布局相同。
+上表为 `tron2a/` 下的 **TRON2A** 系列。`tron2b/` 是同样九个型号的 **TRON2B** 硬件版本，装配体与文件布局相同。
 
 | | TRON2A（`tron2a/`） | TRON2B（`tron2b/`） |
 |---|---|---|
-| 型号数量 | 8 | 8 —— 型号相同 |
+| 型号数量 | 9 | 9 —— 型号相同 |
 | 提供的格式 | URDF · Xacro · MJCF · USD（`DASF2` 无 xacro） | URDF · MJCF · USD —— **无 xacro**，URDF/MJCF 直接编写 |
-| STL 网格 | 253 | 251 |
-| USD 文件 | 40 | 40 |
+| STL 网格 | 299 | 293 |
+| USD 文件 | 45 | 45 |
 | URDF 零位 | 实机出厂标定零位 | 膝盖前倾姿态（见 [关节零位约定](#关节零位约定joint-zero-convention)） |
 | 模型质量 | 见 [模型质量](#模型质量model-mass) | 见 [模型质量](#模型质量model-mass) |
 
@@ -119,6 +120,7 @@ python -m mujoco.viewer --mjcf=tron2a/DACH_TRON2A/xml/robot.xml
 | `WFYG_TRON2A` | 有 | 有 — 与 WF 相同的胸前 D435 | **URDF（网格 / 运动学）：** `transition_Link`（转接件）、`camera_mount_Link`、`radar_Link`、`antenna_L_Link`、`antenna_R_Link`。**实物硬件**（安装在 `transition_Link` 上）：LiDAR **RoboSense Fairy96**（速腾 Fairy96）；双臂 **AgileX Piper X**（松灵 PiperX）；RTK **Huace M722**（华测 M722）；计算单元 **NVIDIA Jetson Orin NX**。**仿真说明：** URDF 仅提供几何 / 碰撞；本包 **不** 提供 Gazebo 雷达 / RF 传感器插件。 | |
 | `SFYG_TRON2A` | 有 | 有 | **与 `WFYG_TRON2A` 相同的 YG 组件** — 相同的 URDF 链接集合、相同的实物硬件（`transition_Link` 上的 Fairy96、Piper X、M722、Orin NX），以及相同的仿真注意事项。 |  |
 | `DASF_TRON2A` | 两路 — 下肢 `base_imu`，上肢 `upper_base_imu` | 有 — 上肢 `d435_U_Link` + `d435_optical_frame_U` | — | `SF` 腿型与 `DACH` 双臂 / 头部通过 `transition_upper_Link` 拼接；MuJoCo 在 `base_imu` 与 `upper_base_imu` 两个站点均配置 IMU 传感器。 |
+| `DAM_TRON2A` | 有 — 链接 `base_imu` | 有 — 头部 `d455_Link` + `d455_optical_frame`，底盘 `d435_Link` + `d435_optical_frame`（MuJoCo 相机 `d455_depth`、`d435_depth`） | — | 移动操作机器人：底盘前 / 后激光雷达（`lidar_F_Link`、`lidar_B_Link`）与底盘相机（`chassis_camera_Link`），仅几何。MuJoCo IMU 位于 site `base_imu`。 |
 | `DASF2_TRON2A` | 三路 — `limx_F_imu`（前腿）、`limx_B_imu`（后腿）、`limx_H_imu`（头部 / 上肢） | 有 — `d435_F_Link`、`d435_B_Link`、`d435_H_Link`（前 / 后 / 头部相机） | — | 半人马式：两组 `SF` 式腿型（经 `transition_middle_Link` 连接前腿，后腿直连）加上通过 `transition_upper_Link` 拼接的 `DACH` 上肢。 |
 
 **图例：** “RGB-D / depth” 沿用 Intel RealSense **D435** 风格的光学坐标系与 Gazebo `depth` 传感器命名（如存在，为 `d435_camera_sensor`）。如需仿真雷达或额外相机，请自行添加驱动或 Gazebo 插件。
@@ -137,6 +139,7 @@ python -m mujoco.viewer --mjcf=tron2a/DACH_TRON2A/xml/robot.xml
 | `DACH` | 61.292 kg ¹ | 61.822 kg ¹ |
 | `DASF` | 66.843 kg | 68.205 kg |
 | `DASF2` | 104.675 kg | 106.875 kg |
+| `DAM` | 83.757 kg | 84.287 kg |
 
 ¹ `DA` 和 `DACH` 安装在固定支架上，模型里包含这个支架：躯干下方约 1 m 高的立柱 `base_2_Link`（名义质量 10 kg）和 0.72 × 0.72 m 的底板 `base_3_Link`（名义质量 20 kg）。去掉这 30 kg，双臂机器人本体为 29.712 / 30.242 kg（`DA`，TRON2A / TRON2B）和 31.292 / 31.822 kg（`DACH`）。
 
@@ -163,6 +166,7 @@ python -c "import mujoco, sys; m = mujoco.MjModel.from_xml_path(sys.argv[1]); pr
 | `WFYG_TRON2A` | `WF` 底座加装 **双臂**、夹爪以及 **塔杆挂载的附属几何**（`camera_mount_Link`、嵌套的 `radar_Link`、成对的 `antenna_*` 链接）。MuJoCo 模型中有一个固定的 `gripper_pick` 刚体，标记抓取规划用的夹爪拾取点。 | `urdf/robot.urdf`、`xml/robot.xml` |
 | `SFYG_TRON2A` | `SF` 腿型，配与 `WFYG` 相同的 **YG** 上肢、塔杆外设和 `gripper_pick` 刚体。 | `urdf/robot.urdf`、`xml/robot.xml` |
 | `DASF_TRON2A` | `SF` 腿型通过 `transition_upper_Link` 与 `DACH` 式双臂 + 2 自由度头部上肢拼接，即把双足腿部与双臂组件上下拼成一个完整人形。 | `urdf/robot_rl.urdf`、`xml/robot.xml` |
+| `DAM_TRON2A` | `DACH` 式双臂 + 2 自由度头部，安装在 **直线升降轴**（`lift_Joint`，0–0.611 m）和 **四轮转向移动底盘**（`steering_{L,R}_{F,B}_Joint` + `wheel_{L,R}_{F,B}_Joint`，共 8 个关节）上；底盘几何来自 AgileX Ranger Air（见 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)）。共 25 个执行器：手臂 14、头部 2、升降 1、转向 4、轮 4。 | `urdf/robot.urdf`、`urdf/robot_rl.urdf`、`xml/robot.xml`、`usd/`、`meshes/` |
 | `DASF2_TRON2A` | 两组 `SF` 式腿型前后拼接（`front_base_Link` 与 `back_base_Link` 经 `transition_middle_Link` 连接），并在前腿上方通过 `transition_upper_Link` 拼接 `DACH` 式上肢。 | `urdf/robot.urdf`、`xml/robot.xml`、`xml/default_pose.xml`（站立关键帧，仅 TRON2A） |
 
 ## ROS 包（ROS packages）
