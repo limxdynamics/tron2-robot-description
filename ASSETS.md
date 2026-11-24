@@ -24,7 +24,7 @@ claims and for the CI license / provenance scans.
 | `DASF_TRON2A`  | 1 | ≥1 | 1 | 36 | 5 | Top-bottom combined humanoid: SF legs + DACH upper body. |
 | `DASF2_TRON2A` | 1 | 0  | 1 | 48 | 5 | "Centaur" combined design: front/back leg pairs + upper body. |
 | `DAM_TRON2A`   | 2 | ≥1 | 1 | 42 | 5 | DACH upper body on a lift stand and an AgileX Ranger Air mobile chassis. |
-| **TRON2A total** | 10 |  | 10 | **299** | **45** | 8 JPG in `docs/images/`. |
+| **TRON2A total** | 10 |  | 10 | **299** | **45** | 9 JPG in `docs/images/`. |
 | `DA_TRON2B`    | 1 | 0  | 1 | 23 | 5 | Dual arms + parallel grippers (TRON2B hardware rev). |
 | `DACH_TRON2B`  | 2 | 0  | 1 | 42 | 5 | Dual arms + 2-DoF head (TRON2B hardware rev). |
 | `WF_TRON2B`    | 1 | 0  | 1 | 11 | 5 | Wheeled ankles (TRON2B hardware rev). |
@@ -236,7 +236,7 @@ non-public products visible?) — a check that cannot be automated.
 
 - **Owner:** Content / marketing lead.
 
-### 3.7 README renders (`docs/images/render_*.jpg`) — **11 files**
+### 3.7 README renders (`docs/images/render_*.jpg`) — **12 files**
 
 Rendered with MuJoCo from the `tron2a/<VARIANT>/xml/` models in this
 repository, using the repository's own STL meshes and no third-party
@@ -246,7 +246,7 @@ comparison.
 | File | Depicts | Provenance |
 |------|---------|------------|
 | `render_banner.jpg` | README banner: `WF`, `DASF`, `DASF2` | Rendered from this repository's MuJoCo models |
-| `render_<VARIANT>_TRON2A.jpg` (8 files) | One per TRON2A variant, nominal zero pose (`DASF` with arms lowered, `DASF2` in its `default_pose.xml` keyframe) | Rendered from this repository's MuJoCo models |
+| `render_<VARIANT>_TRON2A.jpg` (9 files) | One per TRON2A variant, nominal zero pose (`DASF` with arms lowered, `DASF2` in its `default_pose.xml` keyframe) | Rendered from this repository's MuJoCo models |
 | `render_SF_TRON2A_zero.jpg` | SF, nominal zero with a small hip / knee / ankle bend | Rendered from this repository's MuJoCo models |
 | `render_SF_TRON2A_knees_forward.jpg` | SF, same bend plus 180° hip-yaw offset | Rendered from this repository's MuJoCo models |
 
