@@ -84,7 +84,7 @@ Each variant lives under `tron2a/<VARIANT>/` (TRON2A) or `tron2b/<VARIANT>/` (TR
 |------|-----------|
 | `urdf/` | Generated or hand-maintained URDF |
 | `xacro/` | Source xacro (macro includes, collision options) — TRON2A only |
-| `xml/` | MuJoCo model (`robot.xml`) with IMU sites |
+| `xml/` | MuJoCo model (`robot.xml`) with IMU sites; `DACH_TRON2A` also ships `robot_vis.xml` (see [Variant details](#variant-details)) |
 | `meshes/` | Binary STL meshes (visual + collision) referenced by the models |
 | `usd/` | USD assets for Isaac Sim / Omniverse workflows |
 
@@ -160,7 +160,7 @@ Details specific to each variant that are not covered above. Paths are given for
 | Variant | What is specific | Typical files |
 |---|---|---|
 | `DA_TRON2A` | Biped with **dual arms** and **parallel grippers**, for manipulation-focused simulation and control. Arms end in `grasper_L_Link` / `grasper_R_Link` (fixed in the default `robot.urdf`). | `urdf/robot.urdf`, `xml/robot.xml` |
-| `DACH_TRON2A` | Same dual-arm stack as `DA` plus a **2-DoF head** (`head_yaw_Joint`, `head_pitch_Joint`) for perception. | `urdf/robot.urdf`, `xml/robot.xml`, `usd/`, `meshes/` |
+| `DACH_TRON2A` | Same dual-arm stack as `DA` plus a **2-DoF head** (`head_yaw_Joint`, `head_pitch_Joint`) for perception. `xml/robot_vis.xml` is the same robot with convex-decomposed collision geometry, including dedicated wrist collision meshes, for collision checks on reference motions; it loads with the same 16 actuators as `robot.xml`. TRON2A only. | `urdf/robot.urdf`, `xml/robot.xml`, `xml/robot_vis.xml`, `usd/`, `meshes/` |
 | `WF_TRON2A` | Locomotion-oriented: **powered wheels** at the ankles (`wheel_L_Link` / `wheel_R_Link`) and knee joints (`knee_*`). | `urdf/robot.urdf`, `xml/robot.xml` |
 | `SF_TRON2A` | **Ankle pitch** links instead of wheels; same hip/knee topology as `WF`. | `urdf/robot.urdf`, `xml/robot.xml` |
 | `WFYG_TRON2A` | `WF` base plus **dual arms**, grippers and **mast-mounted accessory geometry** (`camera_mount_Link`, nested `radar_Link`, paired `antenna_*` links). A fixed `gripper_pick` body in the MuJoCo model marks the gripper pick point for grasp planning. | `urdf/robot.urdf`, `xml/robot.xml` |
@@ -229,7 +229,7 @@ xmllint --noout tron2a/*/urdf/*.urdf tron2b/*/urdf/*.urdf tron2a/*/xml/*.xml tro
 This project is licensed under the **Apache License, Version 2.0** (January 2004). See the [`LICENSE`](LICENSE) file for the full text. SPDX identifier: `Apache-2.0`.
 
 - [`NOTICE`](NOTICE) — required attribution notice.
-- [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — per-asset provenance and any external hardware referenced by the YG variants.
+- [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — per-asset provenance and the external hardware referenced by the YG and DAM variants.
 - [`SECURITY.md`](SECURITY.md) — how to report a vulnerability.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — regeneration workflow, mesh policy, DCO sign-off.
 - [`ASSETS.md`](ASSETS.md) — asset manifest and generation pipeline.

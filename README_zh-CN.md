@@ -84,7 +84,7 @@ python -m mujoco.viewer --mjcf=tron2a/DACH_TRON2A/xml/robot.xml
 |------|-----------|
 | `urdf/` | 生成的或手工维护的 URDF |
 | `xacro/` | xacro 源文件（宏 include、碰撞选项）—— 仅 TRON2A |
-| `xml/` | 带 IMU site 的 MuJoCo 模型（`robot.xml`） |
+| `xml/` | 带 IMU site 的 MuJoCo 模型（`robot.xml`）；`DACH_TRON2A` 另有 `robot_vis.xml`（见[型号细节](#型号细节variant-details)） |
 | `meshes/` | 模型引用的二进制 STL 网格（视觉 + 碰撞） |
 | `usd/` | 用于 Isaac Sim / Omniverse 工作流的 USD 资产 |
 
@@ -160,7 +160,7 @@ python -c "import mujoco, sys; m = mujoco.MjModel.from_xml_path(sys.argv[1]); pr
 | 型号 | 特有内容 | 典型文件 |
 |---|---|---|
 | `DA_TRON2A` | 双足机器人，配 **双臂** 与 **平行夹爪**，适用于面向操作的仿真与控制开发。手臂末端为 `grasper_L_Link` / `grasper_R_Link`（在默认 `robot.urdf` 中固定连接）。 | `urdf/robot.urdf`、`xml/robot.xml` |
-| `DACH_TRON2A` | 与 `DA` 相同的双臂组件，另配 **2 自由度头部**（`head_yaw_Joint`、`head_pitch_Joint`）用于感知。 | `urdf/robot.urdf`、`xml/robot.xml`、`usd/`、`meshes/` |
+| `DACH_TRON2A` | 与 `DA` 相同的双臂组件，另配 **2 自由度头部**（`head_yaw_Joint`、`head_pitch_Joint`）用于感知。`xml/robot_vis.xml` 是同一台机器人的凸分解碰撞模型，含专用的手腕碰撞网格，用于参考动作的碰撞检测；与 `robot.xml` 一样有 16 个执行器。仅 TRON2A 提供。 | `urdf/robot.urdf`、`xml/robot.xml`、`xml/robot_vis.xml`、`usd/`、`meshes/` |
 | `WF_TRON2A` | 面向移动：踝部配 **驱动轮**（`wheel_L_Link` / `wheel_R_Link`），并带膝关节（`knee_*`）。 | `urdf/robot.urdf`、`xml/robot.xml` |
 | `SF_TRON2A` | 采用 **踝关节俯仰** 而非车轮；髋 / 膝层级的拓扑与 `WF` 相同。 | `urdf/robot.urdf`、`xml/robot.xml` |
 | `WFYG_TRON2A` | `WF` 底座加装 **双臂**、夹爪以及 **塔杆挂载的附属几何**（`camera_mount_Link`、嵌套的 `radar_Link`、成对的 `antenna_*` 链接）。MuJoCo 模型中有一个固定的 `gripper_pick` 刚体，标记抓取规划用的夹爪拾取点。 | `urdf/robot.urdf`、`xml/robot.xml` |
@@ -229,7 +229,7 @@ xmllint --noout tron2a/*/urdf/*.urdf tron2b/*/urdf/*.urdf tron2a/*/xml/*.xml tro
 本项目基于 **Apache License, Version 2.0**（2004 年 1 月）发布。完整许可文本请参见 [`LICENSE`](LICENSE) 文件。SPDX 标识符：`Apache-2.0`。
 
 - [`NOTICE`](NOTICE) — 必要的署名声明。
-- [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — 各资产的出处，以及 YG 型号所引用的外部硬件说明。
+- [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — 各资产的出处，以及 YG 和 DAM 型号所引用的外部硬件说明。
 - [`SECURITY.md`](SECURITY.md) — 如何上报安全漏洞。
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — 再生成流程、网格策略、DCO 签署说明。
 - [`ASSETS.md`](ASSETS.md) — 资产清单与生成流水线。
