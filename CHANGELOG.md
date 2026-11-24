@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `DAM_TRON2A` / `DAM_TRON2B`: new variants, a `DACH` upper body on a
+  lift stand and an AgileX Ranger Air mobile chassis (URDF, xacro, MJCF,
+  USD, meshes); listed in `ASSETS.md` and `THIRD_PARTY_NOTICES.md`.
+- `DACH_TRON2A`: `xml/robot_vis.xml` (convex decomposition) and its wrist
+  collision meshes for reference-motion collision checks.
 - `README.md` / `README_zh-CN.md`: "Model mass" section listing the
   simulation model mass of every TRON2A / TRON2B variant, with a
   reproduce command and a note that these are not hardware specs

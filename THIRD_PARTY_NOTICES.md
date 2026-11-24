@@ -39,6 +39,7 @@ SDKs, drivers, or precision CAD.
 |----------|---------------|--------|------------------------|----------------------|
 | RoboSense Fairy96 LiDAR | mesh on `transition_Link`, `radar_Link` | RoboSense | ⚠ TO CONFIRM (LimX-authored placeholder vs. vendor CAD) | ⚠ TO CONFIRM |
 | AgileX Piper X arm | arm chain meshes on `WFYG` / `SFYG` / `DA` / `DACH` | AgileX Robotics | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
+| AgileX Ranger Air mobile chassis | chassis, steering and wheel meshes on `DAM_TRON2A` / `DAM_TRON2B` | AgileX Robotics | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
 | Huace M722 RTK | antenna / RTK box meshes on `antenna_*_Link` | Huace Navigation | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
 | NVIDIA Jetson Orin NX (compute) | compute box mesh on `transition_Link` | NVIDIA | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
 | Intel RealSense D435 | chest camera link `d435_Link` + optical frame | Intel | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
