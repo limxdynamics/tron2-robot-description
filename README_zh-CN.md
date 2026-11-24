@@ -5,7 +5,7 @@
 
 <div align="center">
 
-<img src="docs/images/render_banner.jpg" alt="TRON2 机器人描述：由 MuJoCo 模型渲染的 TRON2A 各型号" width="100%">
+<img src="docs/images/render_banner.jpg" alt="TRON2 机器人描述：由 MuJoCo 模型渲染的 TRON2A WF、DASF、DAM 和 DASF2 型号" width="100%">
 
 [English](README.md) | **中文**
 

@@ -245,7 +245,7 @@ comparison.
 
 | File | Depicts | Provenance |
 |------|---------|------------|
-| `render_banner.jpg` | README banner: `WF`, `DASF`, `DASF2` | Rendered from this repository's MuJoCo models |
+| `render_banner.jpg` | README banner: `WF` crouching, `DASF` waving, `DAM` reaching, `DASF2` stepping | Rendered from this repository's MuJoCo models |
 | `render_<VARIANT>_TRON2A.jpg` (9 files) | One per TRON2A variant, nominal zero pose (`DASF` with arms lowered, `DASF2` in its `default_pose.xml` keyframe) | Rendered from this repository's MuJoCo models |
 | `render_SF_TRON2A_zero.jpg` | SF, nominal zero with a small hip / knee / ankle bend | Rendered from this repository's MuJoCo models |
 | `render_SF_TRON2A_knees_forward.jpg` | SF, same bend plus 180° hip-yaw offset | Rendered from this repository's MuJoCo models |

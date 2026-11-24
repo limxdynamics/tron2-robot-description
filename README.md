@@ -5,7 +5,7 @@
 
 <div align="center">
 
-<img src="docs/images/render_banner.jpg" alt="TRON2 robot description: TRON2A variants rendered from the MuJoCo models" width="100%">
+<img src="docs/images/render_banner.jpg" alt="TRON2 robot description: the WF, DASF, DAM and DASF2 TRON2A variants rendered from the MuJoCo models" width="100%">
 
 **English** | [中文](README_zh-CN.md)
 
