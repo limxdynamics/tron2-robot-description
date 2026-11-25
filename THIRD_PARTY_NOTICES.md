@@ -38,8 +38,8 @@ SDKs, drivers, or precision CAD.
 | Hardware | Referenced as | Vendor | Provenance of geometry | License / permission |
 |----------|---------------|--------|------------------------|----------------------|
 | RoboSense Fairy96 LiDAR | mesh on `transition_Link`, `radar_Link` | RoboSense | ⚠ TO CONFIRM (LimX-authored placeholder vs. vendor CAD) | ⚠ TO CONFIRM |
-| AgileX Piper X arm | arm and gripper meshes on `WFYG` / `SFYG` (TRON2A and TRON2B) | AgileX Robotics | Partly derived from AgileX's public [`piper_ros`](https://github.com/agilexrobotics/piper_ros) (`src/piper_description/meshes`, commit `ac41fcb`), see §2.1. Remaining arm meshes ⚠ TO CONFIRM | MIT for the meshes in §2.1; ⚠ TO CONFIRM for the rest |
-| AgileX Ranger Air mobile chassis | chassis, steering and wheel meshes on `DAM_TRON2A` / `DAM_TRON2B` | AgileX Robotics | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
+| AgileX Piper X arm | arm and gripper meshes on `WFYG` / `SFYG` (TRON2A and TRON2B) | AgileX Robotics | AgileX's public [`piper_ros`](https://github.com/agilexrobotics/piper_ros): `piper_x_description` (arm) and `piper_description` (gripper fingers), see §2.1. `gripper_base_Link` ⚠ TO CONFIRM | MIT (§2.1); `gripper_base_Link` ⚠ TO CONFIRM |
+| AgileX Ranger Air mobile chassis | chassis, steering, wheel, camera and LiDAR meshes on `DAM_TRON2A` / `DAM_TRON2B` | AgileX Robotics | AgileX's public [`ugv_gazebo_sim`](https://github.com/agilexrobotics/ugv_gazebo_sim) (`ranger_air/ranger_air_description/meshes`), see §2.2 | BSD (§2.2) |
 | Huace M722 RTK | antenna / RTK box meshes on `antenna_*_Link` | Huace Navigation | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
 | NVIDIA Jetson Orin NX (compute) | compute box mesh on `transition_Link` | NVIDIA | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
 | Intel RealSense D435 | chest camera link `d435_Link` + optical frame | Intel | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
@@ -57,26 +57,31 @@ following and update this file:
   release and update this row.
 
 
-### 2.1 AgileX Piper meshes (MIT)
+### 2.1 AgileX Piper X arm meshes (MIT)
 
-These meshes in `tron2a/WFYG_TRON2A`, `tron2a/SFYG_TRON2A`,
-`tron2b/WFYG_TRON2B` and `tron2b/SFYG_TRON2B` come from AgileX's public
-[`piper_ros`](https://github.com/agilexrobotics/piper_ros) repository
-(`src/piper_description/meshes`, commit
-`ac41fcbcdda598f01b51cf6175ed9a24d0dacadc`):
+The arm and gripper-finger meshes in `tron2a/WFYG_TRON2A`,
+`tron2a/SFYG_TRON2A`, `tron2b/WFYG_TRON2B` and `tron2b/SFYG_TRON2B` come
+from AgileX's public [`piper_ros`](https://github.com/agilexrobotics/piper_ros)
+repository:
 
 | Mesh in this repository | Upstream mesh | Relation |
 |---|---|---|
-| `meshes/gripper1_Link.STL` | `link7.STL` | Identical file |
-| `meshes/gripper2_Link.STL` | `link8.STL` | Identical file |
-| `meshes/arm_base_Link.STL` | `base_link.STL` | Same geometry, re-meshed |
-| `meshes/arm1_Link.STL` | `link1.STL` | Same geometry, re-meshed |
-| `meshes/arm2_Link.STL` | `link2.STL` | Same geometry, re-meshed |
+| `meshes/arm_base_Link.STL` | `piper_x_description/meshes/base_link.STL` | Identical file |
+| `meshes/arm1_Link.STL` | `piper_x_description/meshes/Link1.STL` | Same geometry, re-meshed |
+| `meshes/arm2_Link.STL` | `piper_x_description/meshes/Link2.STL` | Same geometry, re-meshed |
+| `meshes/arm3_Link.STL` | `piper_x_description/meshes/Link3.STL` | Same geometry, re-meshed |
+| `meshes/arm4_Link.STL` | `piper_x_description/meshes/Link4.STL` | Identical file |
+| `meshes/arm5_Link.STL` | `piper_x_description/meshes/Link5.STL` | Same geometry, re-meshed |
+| `meshes/arm6_Link.STL` | `piper_x_description/meshes/Link6.STL` | Same geometry, re-meshed |
+| `meshes/gripper1_Link.STL` | `piper_description/meshes/link7.STL` | Identical file |
+| `meshes/gripper2_Link.STL` | `piper_description/meshes/link8.STL` | Identical file |
 
-`arm3_Link` to `arm6_Link` and `gripper_base_Link` do not match the public
-Piper meshes (Piper X differs from Piper from the third link on), so their
-provenance is still ⚠ TO CONFIRM. The arms of `DA`, `DACH` and `DAM` do not
-use Piper meshes.
+`piper_x_description` is under `src/robot_description/` on the
+`humble_beta1` branch (commit `2dc30fca68cbf4e04d1d0bc15c123d026380ece7`);
+`piper_description` is under `src/` on the default branch (commit
+`ac41fcbcdda598f01b51cf6175ed9a24d0dacadc`).
+`gripper_base_Link` matches neither and is still ⚠ TO CONFIRM.
+The arms of `DA`, `DACH` and `DAM` do not use Piper meshes.
 
 `piper_ros` is distributed under the MIT License:
 
@@ -102,6 +107,57 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
+
+### 2.2 AgileX Ranger Air meshes (BSD)
+
+The chassis meshes in `tron2a/DAM_TRON2A` and `tron2b/DAM_TRON2B` come
+from AgileX's public
+[`ugv_gazebo_sim`](https://github.com/agilexrobotics/ugv_gazebo_sim)
+repository (`ranger_air/ranger_air_description/meshes`, commit
+`27633a956c845903ee630538afeb17fe70afdd84`):
+
+| Mesh in this repository | Upstream mesh | Relation |
+|---|---|---|
+| `meshes/chassis_Link.STL` | `base_link.STL` | Identical file |
+| `meshes/steering_{L,R}_{F,B}_Link.STL` | `dae/*_steering_link.dae` | Same geometry, converted to STL |
+| `meshes/wheel_{L,R}_{F,B}_Link.STL` | `dae/*_wheel_link.dae` | Same geometry, converted to STL |
+| `meshes/chassis_camera_Link.STL` | `dae/camera_link.dae` | Same geometry, converted to STL |
+| `meshes/lidar_{F,B}_Link.STL` | `dae/{front,back}_lidar_link.dae` | Same geometry, converted to STL |
+
+`ranger_air_description/package.xml` declares the package license as
+`BSD`; the repository has no license file or copyright line. These
+meshes are redistributed under the BSD 3-Clause terms below, with
+AgileX Robotics as the copyright holder:
+
+```
+Copyright (c) AgileX Robotics. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
 ```
 
 ---
