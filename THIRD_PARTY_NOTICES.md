@@ -38,7 +38,7 @@ SDKs, drivers, or precision CAD.
 | Hardware | Referenced as | Vendor | Provenance of geometry | License / permission |
 |----------|---------------|--------|------------------------|----------------------|
 | RoboSense Fairy96 LiDAR | mesh on `transition_Link`, `radar_Link` | RoboSense | ⚠ TO CONFIRM (LimX-authored placeholder vs. vendor CAD) | ⚠ TO CONFIRM |
-| AgileX Piper X arm | arm chain meshes on `WFYG` / `SFYG` / `DA` / `DACH` | AgileX Robotics | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
+| AgileX Piper X arm | arm and gripper meshes on `WFYG` / `SFYG` (TRON2A and TRON2B) | AgileX Robotics | Partly derived from AgileX's public [`piper_ros`](https://github.com/agilexrobotics/piper_ros) (`src/piper_description/meshes`, commit `ac41fcb`), see §2.1. Remaining arm meshes ⚠ TO CONFIRM | MIT for the meshes in §2.1; ⚠ TO CONFIRM for the rest |
 | AgileX Ranger Air mobile chassis | chassis, steering and wheel meshes on `DAM_TRON2A` / `DAM_TRON2B` | AgileX Robotics | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
 | Huace M722 RTK | antenna / RTK box meshes on `antenna_*_Link` | Huace Navigation | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
 | NVIDIA Jetson Orin NX (compute) | compute box mesh on `transition_Link` | NVIDIA | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
@@ -55,6 +55,54 @@ following and update this file:
   terms, and any attribution requirement.
 - **(C)** Neither. → Replace the mesh with an approved placeholder before
   release and update this row.
+
+
+### 2.1 AgileX Piper meshes (MIT)
+
+These meshes in `tron2a/WFYG_TRON2A`, `tron2a/SFYG_TRON2A`,
+`tron2b/WFYG_TRON2B` and `tron2b/SFYG_TRON2B` come from AgileX's public
+[`piper_ros`](https://github.com/agilexrobotics/piper_ros) repository
+(`src/piper_description/meshes`, commit
+`ac41fcbcdda598f01b51cf6175ed9a24d0dacadc`):
+
+| Mesh in this repository | Upstream mesh | Relation |
+|---|---|---|
+| `meshes/gripper1_Link.STL` | `link7.STL` | Identical file |
+| `meshes/gripper2_Link.STL` | `link8.STL` | Identical file |
+| `meshes/arm_base_Link.STL` | `base_link.STL` | Same geometry, re-meshed |
+| `meshes/arm1_Link.STL` | `link1.STL` | Same geometry, re-meshed |
+| `meshes/arm2_Link.STL` | `link2.STL` | Same geometry, re-meshed |
+
+`arm3_Link` to `arm6_Link` and `gripper_base_Link` do not match the public
+Piper meshes (Piper X differs from Piper from the third link on), so their
+provenance is still ⚠ TO CONFIRM. The arms of `DA`, `DACH` and `DAM` do not
+use Piper meshes.
+
+`piper_ros` is distributed under the MIT License:
+
+```
+MIT License
+
+Copyright (c) 2024 RosenYin
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 ---
 

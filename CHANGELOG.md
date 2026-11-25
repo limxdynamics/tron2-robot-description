@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `THIRD_PARTY_NOTICES.md`: record that the YG gripper finger meshes and
+  the first arm links come from AgileX's MIT-licensed `piper_ros`, with the
+  upstream commit and license text (§2.1); the Piper row no longer lists
+  `DA` / `DACH`, whose arms do not use Piper meshes.
 - `README.md` / `README_zh-CN.md`: document the `DAM` variant (variants table
   with render, sensors, model mass, variant details); `docs/images/render_DAM_TRON2A.jpg`.
 - `DAM_TRON2A` / `DAM_TRON2B`: new variants, a `DACH` upper body on a
