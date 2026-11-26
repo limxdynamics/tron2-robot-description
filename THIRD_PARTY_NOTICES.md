@@ -38,7 +38,7 @@ SDKs, drivers, or precision CAD.
 | Hardware | Referenced as | Vendor | Provenance of geometry | License / permission |
 |----------|---------------|--------|------------------------|----------------------|
 | RoboSense Fairy96 LiDAR | mesh on `transition_Link`, `radar_Link` | RoboSense | ⚠ TO CONFIRM (LimX-authored placeholder vs. vendor CAD) | ⚠ TO CONFIRM |
-| AgileX Piper X arm | arm and gripper meshes on `WFYG` / `SFYG` (TRON2A and TRON2B) | AgileX Robotics | AgileX's public [`piper_ros`](https://github.com/agilexrobotics/piper_ros): `piper_x_description` (arm) and `piper_description` (gripper fingers), see §2.1. `gripper_base_Link` ⚠ TO CONFIRM | MIT (§2.1); `gripper_base_Link` ⚠ TO CONFIRM |
+| AgileX Piper X arm | arm and gripper meshes on `WFYG` / `SFYG` (TRON2A and TRON2B) | AgileX Robotics | AgileX's public [`piper_ros`](https://github.com/agilexrobotics/piper_ros): `piper_x_description` (arm) and `piper_description` (gripper base and fingers), see §2.1 | MIT (§2.1) |
 | AgileX Ranger Air mobile chassis | chassis, steering, wheel, camera and LiDAR meshes on `DAM_TRON2A` / `DAM_TRON2B` | AgileX Robotics | AgileX's public [`ugv_gazebo_sim`](https://github.com/agilexrobotics/ugv_gazebo_sim) (`ranger_air/ranger_air_description/meshes`), see §2.2 | BSD (§2.2) |
 | Huace M722 RTK | antenna / RTK box meshes on `antenna_*_Link` | Huace Navigation | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
 | NVIDIA Jetson Orin NX (compute) | compute box mesh on `transition_Link` | NVIDIA | ⚠ TO CONFIRM | ⚠ TO CONFIRM |
@@ -75,12 +75,16 @@ repository:
 | `meshes/arm6_Link.STL` | `piper_x_description/meshes/Link6.STL` | Same geometry, re-meshed |
 | `meshes/gripper1_Link.STL` | `piper_description/meshes/link7.STL` | Identical file |
 | `meshes/gripper2_Link.STL` | `piper_description/meshes/link8.STL` | Identical file |
+| `meshes/gripper_base_Link.STL` | `piper_description/meshes/gripper_base_100_v2.dae` | Same part (AgileX 100 mm gripper base), exported to STL |
 
 `piper_x_description` is under `src/robot_description/` on the
 `humble_beta1` branch (commit `2dc30fca68cbf4e04d1d0bc15c123d026380ece7`);
 `piper_description` is under `src/` on the default branch (commit
 `ac41fcbcdda598f01b51cf6175ed9a24d0dacadc`).
-`gripper_base_Link` matches neither and is still ⚠ TO CONFIRM.
+`gripper_base_Link` is AgileX's 100 mm gripper base, used without
+modification (confirmed by the LimX hardware team). Its footprint matches
+the upstream mesh (75 × 164 mm); the exported height differs slightly
+(67 mm vs 72.5 mm).
 The arms of `DA`, `DACH` and `DAM` do not use Piper meshes.
 
 `piper_ros` is distributed under the MIT License:

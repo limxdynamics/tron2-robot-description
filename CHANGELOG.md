@@ -14,7 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `THIRD_PARTY_NOTICES.md`: record where the AgileX meshes come from, with
   upstream commits and license texts: the YG Piper X arm and gripper fingers
   from `piper_ros` (MIT, §2.1) and the DAM Ranger Air chassis from
-  `ugv_gazebo_sim` (BSD, §2.2). Only `gripper_base_Link` stays TO CONFIRM.
+  `ugv_gazebo_sim` (BSD, §2.2). The YG `gripper_base_Link` is AgileX's
+  100 mm gripper base (`piper_description/meshes/gripper_base_100_v2.dae`),
+  also covered by the `piper_ros` MIT notice.
   The Piper row no longer lists `DA` / `DACH`, whose arms do not use Piper
   meshes.
 - `README.md` / `README_zh-CN.md`: document the `DAM` variant (variants table
