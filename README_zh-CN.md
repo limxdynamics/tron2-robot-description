@@ -10,7 +10,8 @@
 [English](README.md) | **中文**
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-limxdynamics-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/limxdynamics)
+[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-tron2--robot--description-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/limxdynamics/tron2-robot-description)
+[![在线体验](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-TRON2%20Teleop-FF9D00?logo=huggingface&logoColor=white)](https://huggingface.co/spaces/limxdynamics/tron2-teleop)
 [![微信开发者社区](https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1-%E5%BC%80%E5%8F%91%E8%80%85%E7%A4%BE%E5%8C%BA-07C160?logo=wechat&logoColor=white)](https://github.com/limxdynamics/limxdynamics/blob/main/doc/wechat_qr.png)
 
 <p align="center"><sub>合作采购请联系 <a href="mailto:opensource@limxdynamics.com">opensource@limxdynamics.com</a></sub></p>

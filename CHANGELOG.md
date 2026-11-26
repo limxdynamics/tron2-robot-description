@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `README.md` / `README_zh-CN.md`: the Hugging Face badge now points to the
+  `limxdynamics/tron2-robot-description` mirror, and a new badge opens the
+  TRON2 Teleop browser demo on Hugging Face Spaces.
 - `THIRD_PARTY_NOTICES.md`: record where the AgileX meshes come from, with
   upstream commits and license texts: the YG Piper X arm and gripper fingers
   from `piper_ros` (MIT, §2.1) and the DAM Ranger Air chassis from
