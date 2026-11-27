@@ -16,7 +16,7 @@ jobs:
     name: Lint / license & TODO scan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: XML well-formedness (URDF + MuJoCo)
         run: |
@@ -89,7 +89,7 @@ jobs:
     name: URDF check_urdf
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install urdfdom
         run: |
           sudo apt-get update
@@ -110,7 +110,7 @@ jobs:
     name: xacro expansion
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install xacro
         run: |
           python -m pip install --upgrade pip
@@ -157,7 +157,7 @@ jobs:
     name: MuJoCo XML smoke test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install MuJoCo
         run: |
           python -m pip install --upgrade pip
